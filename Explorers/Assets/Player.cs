@@ -74,6 +74,7 @@ public class Player : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        _rb.velocity = new Vector3(_movement.x * Speed, _movement.y*Speed, 0);
+       // _rb.velocity = new Vector3(_movement.x * Speed, _movement.y*Speed, 0);
+        _rb.transform.Translate(new Vector3(_movement.x, _movement.y,0 ).normalized * Time.deltaTime * Speed, Space.World);
     }
 }
