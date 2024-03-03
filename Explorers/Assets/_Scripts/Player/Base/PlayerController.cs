@@ -30,7 +30,7 @@ public class PlayerController : MonoBehaviour
         _playerInput = transform.parent.GetComponent<PlayerInput>();
         _playerInputSetting = transform.parent.GetComponent<PlayerInputSetting>();
         myIndex = _playerInput.playerIndex;
-        Debug.Log(transform.name+": "+myIndex);
+        Debug.Log(transform.name+" Index: "+myIndex);
     }
     
     

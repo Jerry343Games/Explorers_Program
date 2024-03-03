@@ -3,9 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+/// <summary>
+/// 负责统一处理玩家的输入数据接收，并控制对应的玩家模块开启
+/// </summary>
 public class PlayerInputSetting : MonoBehaviour
 {
     private PlayerInput _playerInput;
+    
     [Header("玩家模块")]
     public GameObject batteryCarrier;
     public GameObject shooter;
@@ -17,18 +21,20 @@ public class PlayerInputSetting : MonoBehaviour
     private void Awake()
     {
         _playerInput = GetComponent<PlayerInput>();
+        
+        //读取玩家序号，分配对应的模块
         switch (_playerInput.playerIndex)
         {
-            case 0:
+            case (int)PlayerType.BatteryCarrier:
                 batteryCarrier.SetActive(true);
                 break;
-            case 1:
+            case (int)PlayerType.Shooter:
                 shooter.SetActive(true);
                 break;
-            case 2:
+            case (int)PlayerType.Healer:
                 healer.SetActive(true);
                 break;
-            case 3:
+            case (int)PlayerType.Fighter:
                 fighter.SetActive(true);
                 break;
         }
@@ -42,7 +48,5 @@ public class PlayerInputSetting : MonoBehaviour
     {
         inputDir = value0.ReadValue<Vector2>();
     }
-    
-    
 
 }
