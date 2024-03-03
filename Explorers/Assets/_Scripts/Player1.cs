@@ -1,8 +1,13 @@
 using Obi;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class Player1 : MonoBehaviour
 {
+    //ªÒ»°ActionMap
+    public InputActionAsset inputActionAsset;
+    private Vector2 _inputDir;
+    
     public float Speed;
 
     private Vector3 _movement;
@@ -30,13 +35,14 @@ public class Player1 : MonoBehaviour
         _originalPos = transform.position;
         Debug.Log(_originalPos);
     }
+    
 
     // Update is called once per frame
     void Update()
     {
-        _movement.x = Input.GetAxisRaw("Vertical");
+        _movement.x = 0;// Input.GetAxisRaw("Vertical");
 
-        _movement.y = Input.GetAxisRaw("Horizontal");
+        _movement.y = 0; //Input.GetAxisRaw("Horizontal");
 
 
         CheckDistanceToBattery();

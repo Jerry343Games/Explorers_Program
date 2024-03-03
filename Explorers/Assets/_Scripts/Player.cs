@@ -37,9 +37,9 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        _movement.x = Input.GetAxisRaw("Horizontal");
+        _movement.x = 0;//Input.GetAxisRaw("Horizontal");
 
-        _movement.y = Input.GetAxisRaw("Vertical");
+        _movement.y = 0;//Input.GetAxisRaw("Vertical");
 
 
         CheckDistanceToBattery();

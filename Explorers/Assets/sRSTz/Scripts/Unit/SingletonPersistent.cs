@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// 持久化的泛型单例基类
+/// 鎸佷箙鍖栫殑娉涘瀷鍗曚緥鍩虹被
 /// </summary>
 /// <typeparam name="T"></typeparam>
 public class SingletonPersistent<T> : MonoBehaviour where T : MonoBehaviour  

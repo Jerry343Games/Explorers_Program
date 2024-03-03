@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// ÆÕÍ¨·ºĞÍµ¥Àı»ùÀà
+/// æ™®é€šæ³›å‹å•ä¾‹åŸºç±»
 /// </summary>
 /// <typeparam name="T"></typeparam>
 public class Singleton<T> : MonoBehaviour  where T : MonoBehaviour
