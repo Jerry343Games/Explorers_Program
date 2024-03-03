@@ -20,7 +20,7 @@ public class Player : MonoBehaviour
 
     public GameObject Solver;
 
-    public bool hasRope = true;
+    public bool HasRope = true;
 
     private Vector3 _originalPos;
     private void Awake()
@@ -49,18 +49,24 @@ public class Player : MonoBehaviour
     {
         if(other.tag=="BatteryTrigger")
         {
-            if(!hasRope && Input.GetKeyDown(KeyCode.E))
+            if(!HasRope && Input.GetKeyDown(KeyCode.E))
             {
-                hasRope = true;
-                GameObject newRopeHanger = Instantiate(Resources.Load<GameObject>("Hanger"), transform.position, Quaternion.identity);
+                HasRope = true;
+                //计算当前绳子应该旋转的角度
+                float rotationZ = Vector3.Angle((transform.position - _batteryTransform.position).normalized, Vector3.right) * (transform.position.y < _batteryTransform.position.y ? -1 : 1);
+                Quaternion rotation = Quaternion.Euler(new Vector3(0, 0, rotationZ));
+                //生成绳子预制体
+                GameObject newRopeHanger = Instantiate(Resources.Load<GameObject>("Hanger"), (transform.position + _batteryTransform.position) / 2, rotation);
+                //根据标准的绳子长度 改变当前的scale
+                newRopeHanger.transform.localScale = new Vector3(Vector3.Distance(transform.position, _batteryTransform.position) / 4.2f, 1, 1);
+                //设置父物体以实现绳子功能
                 newRopeHanger.transform.SetParent(Solver.transform);
-                
                 Rope = newRopeHanger;
                 GameObject rope = Rope.transform.GetChild(0).gameObject;
                 ObiParticleAttachment[] attachment = rope.GetComponents<ObiParticleAttachment>();
-                attachment[0].target = transform;
-                attachment[1].target = _batteryTransform;
-                ObiRope obiRope = rope.GetComponent<ObiRope>();
+                //设置绳子两边的牵引对象
+                attachment[0].target = _batteryTransform;
+                attachment[1].target = transform;
             }
         }
     }
@@ -69,7 +75,7 @@ public class Player : MonoBehaviour
         if(Vector3.Distance(_batteryTransform.position,transform.position)>DistanceThreshold)
         {
             Destroy(Rope,2f);
-            hasRope = false;
+            HasRope = false;
         }
     }
     private void FixedUpdate()
