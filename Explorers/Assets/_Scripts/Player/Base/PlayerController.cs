@@ -12,14 +12,15 @@ public class PlayerController : MonoBehaviour
     /// <summary>
     /// 玩家所分配到的唯一序列号,类型区分见枚举类
     /// </summary>
-    private float myIndex;
-    
-    private Vector2 _inputDir;//输入方向
-    private Vector3 _moveDir;//移动方向
+    [HideInInspector]
+    public int myIndex;
 
     private Rigidbody _rigidbody;
-
+    
+    [Header("移动")]
     public float speed;
+    private Vector2 _inputDir;//输入方向
+    private Vector3 _moveDir;//移动方向
 
     /// <summary>
     /// 初始化方法
@@ -35,7 +36,7 @@ public class PlayerController : MonoBehaviour
     
     
     /// <summary>
-    /// 通过获取PlayerInputSetting中接受到的方向，合并输入向量获得移动方向
+    /// 通过获取PlayerInputSetting中接受到的方向，合并输入向量获得移动方向_moveDir
     /// </summary>
     public void MovementCombination()
     {
