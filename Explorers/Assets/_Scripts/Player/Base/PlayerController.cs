@@ -6,7 +6,13 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
-    public InputActionAsset inputActionAsset;
+    private PlayerInput _playerInput;
+    private PlayerInputSetting _playerInputSetting;
+    
+    /// <summary>
+    /// 玩家所分配到的唯一序列号,类型区分见枚举类
+    /// </summary>
+    private float myIndex;
     
     private Vector2 _inputDir;//输入方向
     private Vector3 _moveDir;//移动方向
@@ -21,23 +27,19 @@ public class PlayerController : MonoBehaviour
     public void PlayerInit()
     {
         _rigidbody = GetComponent<Rigidbody>();
-    }
-
-    /// <summary>
-    /// 用于接收InputAction返回的玩家输入数据,玩家每次输入会被Call一次
-    /// </summary>
-    /// <param name="value0">输入数据</param>
-    public void OnMovement(InputAction.CallbackContext value0)
-    {
-        _inputDir = value0.ReadValue<Vector2>();
+        _playerInput = transform.parent.GetComponent<PlayerInput>();
+        _playerInputSetting = transform.parent.GetComponent<PlayerInputSetting>();
+        myIndex = _playerInput.playerIndex;
+        Debug.Log(transform.name+": "+myIndex);
     }
     
+    
     /// <summary>
-    /// 合并输入向量获得移动方向
+    /// 通过获取PlayerInputSetting中接受到的方向，合并输入向量获得移动方向
     /// </summary>
     public void MovementCombination()
     {
-        _moveDir=new Vector3(_inputDir.x, _inputDir.y,0).normalized;
+        _moveDir=new Vector3(_playerInputSetting.inputDir.x, _playerInputSetting.inputDir.y,0).normalized;
     }
     
     /// <summary>

@@ -2,9 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Shooter : PlayerController
+public class BatteryCarrier : PlayerController
 {
-    // Start is called before the first frame update
     void Start()
     {
         PlayerInit();
@@ -13,7 +12,6 @@ public class Shooter : PlayerController
     // Update is called once per frame
     void Update()
     {
-        
         CharacterMove();
     }
 }
