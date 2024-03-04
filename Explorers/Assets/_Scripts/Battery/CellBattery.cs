@@ -30,6 +30,7 @@ public class CellBattery : Battery
     /// </summary>
     private void Init()
     {
+        isConnected = true;
         currentPower = maxPower;
         _mainBattery = GameObject.Find("BatteryCarrier").GetComponent<MainBattery>();
         if (!_mainBattery)
