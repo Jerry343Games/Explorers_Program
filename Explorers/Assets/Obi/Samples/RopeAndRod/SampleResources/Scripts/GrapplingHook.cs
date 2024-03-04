@@ -4,7 +4,7 @@ using UnityEngine;
 using Obi;
 
 /**
- * Sample component that shows how to use Obi Rope to create a grappling hook for a 2.5D game.
+ * Sample component that shows how to use Obi RopeHanger to create a grappling hook for a 2.5D game.
  * 95% of the code is the grappling hook logic (user input, scene raycasting, launching, attaching the hook, etc) and parameter setup,
  * to show how to use Obi completely at runtime. This might not be practical for real-world scenarios,
  * but illustrates how to do it.

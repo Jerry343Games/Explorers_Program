@@ -16,33 +16,37 @@ public class Player : MonoBehaviour
 
     public float DistanceThreshold = 10;
 
-    public GameObject Rope;
+    public GameObject RopeHanger;
+
+    private ObiRope _obiRope;
 
     public GameObject Solver;
 
     public bool HasRope = true;
 
-    private Vector3 _originalPos;
+    public float OrigianalDistanceToBattery = 4.1f;//初始与电池的距离
     private void Awake()
     {
         _rb = GetComponent<Rigidbody>();
+        _obiRope = RopeHanger.transform.GetChild(0).GetComponent<ObiRope>();
     }
     void Start()
     {
         _batteryTransform = GameObject.Find("Battery").transform;
-        _originalPos = transform.position;
-        Debug.Log(_originalPos);
     }
 
     // Update is called once per frame
     void Update()
     {
-        _movement.x = 0;//Input.GetAxisRaw("Horizontal");
+        /*_movement.x = 0;*/
+        _movement.x = Input.GetAxisRaw("Horizontal");
 
-        _movement.y = 0;//Input.GetAxisRaw("Vertical");
+        /*_movement.y = 0;*/
+        _movement.y = Input.GetAxisRaw("Vertical");
 
 
         CheckDistanceToBattery();
+        DynamicChangeLengthOfRope();
     }
 
     private void OnTriggerStay(Collider other)
@@ -61,8 +65,9 @@ public class Player : MonoBehaviour
                 newRopeHanger.transform.localScale = new Vector3(Vector3.Distance(transform.position, _batteryTransform.position) / 4.2f, 1, 1);
                 //设置父物体以实现绳子功能
                 newRopeHanger.transform.SetParent(Solver.transform);
-                Rope = newRopeHanger;
-                GameObject rope = Rope.transform.GetChild(0).gameObject;
+                RopeHanger = newRopeHanger;
+                GameObject rope = RopeHanger.transform.GetChild(0).gameObject;
+                _obiRope = rope.GetComponent<ObiRope>();
                 ObiParticleAttachment[] attachment = rope.GetComponents<ObiParticleAttachment>();
                 //设置绳子两边的牵引对象
                 attachment[0].target = _batteryTransform;
@@ -70,13 +75,26 @@ public class Player : MonoBehaviour
             }
         }
     }
+
+    /// <summary>
+    /// 检测与电池的距离
+    /// </summary>
     private void CheckDistanceToBattery()
     {
         if(Vector3.Distance(_batteryTransform.position,transform.position)>DistanceThreshold)
         {
-            Destroy(Rope,2f);
+            Destroy(RopeHanger,2f);
             HasRope = false;
         }
+    }
+
+    /// <summary>
+    /// 实时动态更改绳子长度
+    /// </summary>
+    private void DynamicChangeLengthOfRope()
+    {
+        if (_obiRope == null || gameObject.name =="Battery") return;
+        _obiRope.stretchingScale = Vector3.Distance(transform.position, _batteryTransform.position) / 4.2f;
     }
     private void FixedUpdate()
     {
