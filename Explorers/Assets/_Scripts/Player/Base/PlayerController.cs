@@ -1,6 +1,8 @@
+using Obi;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Rendering;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -22,6 +24,11 @@ public class PlayerController : MonoBehaviour
     private Vector2 _inputDir;//输入方向
     private Vector3 _moveDir;//移动方向
 
+    [Header("绳子")]
+    public float DistanceThreshold = 10;//绳子最大长度
+    protected bool _hasConnected;//是否处于连接状态
+    protected ObiRope _obiRope;
+
     /// <summary>
     /// 初始化方法
     /// </summary>
@@ -34,7 +41,12 @@ public class PlayerController : MonoBehaviour
         Debug.Log(transform.name+" Index: "+myIndex);
     }
     
-    
+    public void SetRope(ObiRope rope = null)
+    {
+        _obiRope = rope;
+        _hasConnected = true;
+    }
+
     /// <summary>
     /// 通过获取PlayerInputSetting中接受到的方向，合并输入向量获得移动方向_moveDir
     /// </summary>
@@ -52,4 +64,44 @@ public class PlayerController : MonoBehaviour
         transform.Translate(_moveDir * Time.deltaTime * speed, Space.World);
     }
     
+    /// <summary>
+    /// 绳子重连方法
+    /// </summary>
+    public void ReconnectRope()
+    {
+        float rotationZ = Vector3.Angle((transform.position - SceneManager.Instance.BatteryTransform.position).normalized, Vector3.right) * (transform.position.y < SceneManager.Instance.BatteryTransform.position.y ? -1 : 1);
+        Quaternion rotation = Quaternion.Euler(new Vector3(0, 0, rotationZ));
+        GameObject newRopeHanger = Instantiate(Resources.Load<GameObject>("Hanger"), (transform.position + SceneManager.Instance.BatteryTransform.position) / 2, rotation);
+        //根据标准的绳子长度 改变当前的scale
+        newRopeHanger.transform.localScale = new Vector3(Vector3.Distance(transform.position, SceneManager.Instance.BatteryTransform.position) / 4.2f, 1, 1);
+        //设置父物体以实现绳子功能
+        newRopeHanger.transform.SetParent(SceneManager.Instance.Slover.transform);
+        GameObject rope = newRopeHanger.transform.GetChild(0).gameObject;
+        _obiRope = rope.GetComponent<ObiRope>();
+        ObiParticleAttachment[] attachment = rope.GetComponents<ObiParticleAttachment>();
+        //设置绳子两边的牵引对象
+        attachment[0].target = SceneManager.Instance.BatteryTransform;
+        attachment[1].target = transform;
+    }
+
+    /// <summary>
+    /// 判断绳子长度是否超出阈值
+    /// </summary>
+    public void CheckDistanceToBattery()
+    {
+        if (Vector3.Distance(SceneManager.Instance.BatteryTransform.position, transform.position) > DistanceThreshold && _hasConnected)
+        {
+            Destroy(_obiRope.transform.parent.gameObject, 0.5f);
+            _hasConnected = false;
+        }
+    }
+    
+    /// <summary>
+    /// 动态根据距离改变绳子长度
+    /// </summary>
+    public void DynamicChangeLengthOfRope()
+    {
+        if (_obiRope == null) return;
+        _obiRope.stretchingScale = Vector3.Distance(transform.position, SceneManager.Instance.BatteryTransform.position) / 4f;
+    }
 }

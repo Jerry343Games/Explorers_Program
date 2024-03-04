@@ -14,14 +14,17 @@ public class GetPlayerInformation : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        string name = other.name;
-        int index = other.GetComponent<PlayerController>().myIndex;
-        float batteryPower;
-        
-        int value = 10;
-        other.GetComponent<Battery>().ChangePower(-value);
-        batteryPower = other.GetComponent<Battery>().currentPower;
-        Debug.Log("减少"+name+"电量："+value+"; 当前电量："+batteryPower);
+        if(other.transform.parent.tag=="Player")
+        {
+            string name = other.name;
+            int index = other.GetComponent<PlayerController>().myIndex;
+            float batteryPower;
+
+            int value = 10;
+            other.GetComponent<Battery>().ChangePower(-value);
+            batteryPower = other.GetComponent<Battery>().currentPower;
+            Debug.Log("减少" + name + "电量：" + value + "; 当前电量：" + batteryPower);
+        }
         
     }
 }

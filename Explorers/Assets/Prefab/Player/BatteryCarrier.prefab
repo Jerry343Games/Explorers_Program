@@ -101,7 +101,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   myIndex: 0
   speed: 3
-  maxPower: 300
+  DistanceThreshold: 10
 --- !u!114 &-9115326595532701369
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -116,6 +116,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxPower: 300
   decayValue: 1
+  currentPower: 0
 --- !u!54 &8306476347045371623
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -124,13 +125,13 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7275268073146635424}
   serializedVersion: 2
-  m_Mass: 1
+  m_Mass: 20
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!136 &6158627512019707472
 CapsuleCollider:

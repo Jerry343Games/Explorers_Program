@@ -1964,6 +1964,75 @@ MonoBehaviour:
   filter: -65535
   m_SourceCollider: {fileID: 531108262}
   m_DistanceField: {fileID: 0}
+--- !u!1001 &539317316
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1754431430841722059, guid: 0d622bc15209ebf4cbb4c233579dcf6e,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1754431430841722059, guid: 0d622bc15209ebf4cbb4c233579dcf6e,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1754431430841722059, guid: 0d622bc15209ebf4cbb4c233579dcf6e,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1754431430841722059, guid: 0d622bc15209ebf4cbb4c233579dcf6e,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1754431430841722059, guid: 0d622bc15209ebf4cbb4c233579dcf6e,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1754431430841722059, guid: 0d622bc15209ebf4cbb4c233579dcf6e,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1754431430841722059, guid: 0d622bc15209ebf4cbb4c233579dcf6e,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1754431430841722059, guid: 0d622bc15209ebf4cbb4c233579dcf6e,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1754431430841722059, guid: 0d622bc15209ebf4cbb4c233579dcf6e,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1754431430841722059, guid: 0d622bc15209ebf4cbb4c233579dcf6e,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1754431430841722059, guid: 0d622bc15209ebf4cbb4c233579dcf6e,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1754431430841722062, guid: 0d622bc15209ebf4cbb4c233579dcf6e,
+        type: 3}
+      propertyPath: m_Name
+      value: Solver
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 0d622bc15209ebf4cbb4c233579dcf6e, type: 3}
 --- !u!1 &553278775
 GameObject:
   m_ObjectHideFlags: 0
@@ -3332,6 +3401,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxPlayer: 2
   isMaxPlayer: 0
+  BatteryTransform: {fileID: 0}
+  Slover: {fileID: 0}
 --- !u!4 &1023615100
 Transform:
   m_ObjectHideFlags: 0

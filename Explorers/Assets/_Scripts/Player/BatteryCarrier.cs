@@ -8,7 +8,6 @@ public class BatteryCarrier : PlayerController
     {
         PlayerInit();
     }
-    
     // Update is called once per frame
     void Update()
     {
