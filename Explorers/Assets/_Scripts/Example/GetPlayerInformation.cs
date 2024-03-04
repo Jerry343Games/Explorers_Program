@@ -22,8 +22,8 @@ public class GetPlayerInformation : MonoBehaviour
         if (index==(int)PlayerType.BatteryCarrier)
         {
             int value = 20;
-            other.GetComponent<MainBattery>().ChangePower(-value);
-            batteryPower = other.GetComponent<MainBattery>().GetCurrentPower;
+            other.GetComponent<Battery>().ChangePower(-value);
+            batteryPower = other.GetComponent<Battery>().currentPower;
             Debug.Log("减少电量："+value+"当前电量："+batteryPower);
         }
 

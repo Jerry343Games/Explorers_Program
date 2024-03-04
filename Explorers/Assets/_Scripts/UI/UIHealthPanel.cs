@@ -7,36 +7,55 @@ using DG.Tweening;
 
 public class UIHealthPanel : MonoBehaviour
 {
+    private SceneManager sceneManager;
     public Image Inner;
-    private CellBattery _cellBattery;
-    private MainBattery _mainBattery;
+    private Battery _battery;
 
+    private bool hasInit;
+    
     private void Awake()
     {
-        switch (transform.name)
-        {
-            case "ShooterPanel":
-                _cellBattery = GameObject.Find("Shooter").GetComponent<CellBattery>();
-                break;
-            case "HealerPanel":
-                _cellBattery = GameObject.Find("Healer").GetComponent<CellBattery>();
-                break;
-            case "BatteryCarrier":
-                //_cellBattery = GameObject.Find("BatteryCarrier").GetComponent<>();
-                break;
-            case "Fighter":
-                _cellBattery = GameObject.Find("Fighter").GetComponent<CellBattery>();
-                break;
-        }
+        sceneManager = GameObject.FindWithTag("SceneManager").GetComponent<SceneManager>();
     }
 
     private void Update()
     {
+        if (sceneManager.isMaxPlayer&&!hasInit)
+        {
+            Init();
+            hasInit = true;
+        }
         
+        
+        SetHealthUI();
     }
 
+    private void Init()
+    {
+        switch (transform.name)
+        {
+            case "BatteryCarrierPanel":
+                _battery = GameObject.Find("BatteryCarrier").GetComponent<Battery>();
+                Debug.Log(_battery.transform.name);
+                break;
+            case "ShooterPanel":
+                _battery = GameObject.Find("Shooter").GetComponent<Battery>();
+                Debug.Log(_battery.transform.name);
+                break;
+            // case "HealerPanel":
+            //     _battery = GameObject.Find("Healer").GetComponent<Battery>();
+            //     break;
+            // case "FighterPanel":
+            //     _battery = GameObject.Find("Fighter").GetComponent<Battery>();
+            //     break;
+        }
+    }
+    
     private void SetHealthUI()
     {
-        
+        if (_battery)
+        {
+            Inner.DOFillAmount((float)_battery.currentPower / _battery.maxPower, 0.2f);
+        }
     }
 }
