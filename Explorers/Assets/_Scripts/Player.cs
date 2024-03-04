@@ -29,6 +29,7 @@ public class Player : MonoBehaviour
     {
         _rb = GetComponent<Rigidbody>();
         _obiRope = RopeHanger.transform.GetChild(0).GetComponent<ObiRope>();
+        
     }
     void Start()
     {

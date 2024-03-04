@@ -42,7 +42,7 @@ public class Enemy : MonoBehaviour
         
         GameObject closestPlayer = null;
         float closestDistance = Mathf.Infinity;
-        if (EnemyManager.Instance.players.Length == 0) return null;
+        if (EnemyManager.Instance.players.Count == 0) return null;
         foreach (var character in EnemyManager.Instance.players)
         {
             //if (character.CompareTag("Enemy")) continue;

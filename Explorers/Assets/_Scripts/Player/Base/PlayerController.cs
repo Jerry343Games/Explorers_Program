@@ -39,6 +39,8 @@ public class PlayerController : MonoBehaviour
         _playerInputSetting = transform.parent.GetComponent<PlayerInputSetting>();
         myIndex = _playerInput.playerIndex;
         Debug.Log(transform.name+" Index: "+myIndex);
+        EnemyManager.Instance.players.Add(gameObject);
+        if (gameObject.CompareTag("Battery")) EnemyManager.Instance.battery = gameObject;
     }
     
     public void SetRope(ObiRope rope = null)
@@ -89,11 +91,11 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     public void CheckDistanceToBattery()
     {
-        if (Vector3.Distance(SceneManager.Instance.BatteryTransform.position, transform.position) > DistanceThreshold && _hasConnected)
+       /* if (Vector3.Distance(SceneManager.Instance.BatteryTransform.position, transform.position) > DistanceThreshold && _hasConnected)
         {
             Destroy(_obiRope.transform.parent.gameObject, 0.5f);
             _hasConnected = false;
-        }
+        }*/
     }
     
     /// <summary>

@@ -20,6 +20,7 @@ public class PlayerInputSetting : MonoBehaviour
     public Vector2 inputDir;
     private void Awake()
     {
+        transform.position = Vector3.zero;
         _playerInput = GetComponent<PlayerInput>();
         
         //读取玩家序号，分配对应的模块

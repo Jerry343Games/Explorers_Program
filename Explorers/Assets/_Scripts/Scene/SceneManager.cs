@@ -41,7 +41,7 @@ public class SceneManager : Singleton<SceneManager>
 
     private void CountPlayer()
     {
-        _players = GameObject.FindGameObjectsWithTag("Player");
+        _players = GameObject.FindGameObjectsWithTag("BasePlayer");
         if (_players.Length==maxPlayer)
         {
             isMaxPlayer = true;

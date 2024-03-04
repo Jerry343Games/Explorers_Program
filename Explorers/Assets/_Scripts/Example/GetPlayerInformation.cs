@@ -14,7 +14,8 @@ public class GetPlayerInformation : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.transform.parent.tag=="Player")
+        if (other.transform.parent == null) return;
+        if(other.transform.parent.tag=="BasePlayer")
         {
             string name = other.name;
             int index = other.GetComponent<PlayerController>().myIndex;
