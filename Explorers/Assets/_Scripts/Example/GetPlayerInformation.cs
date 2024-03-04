@@ -17,15 +17,11 @@ public class GetPlayerInformation : MonoBehaviour
         string name = other.name;
         int index = other.GetComponent<PlayerController>().myIndex;
         float batteryPower;
-        //如果是电池机器人读取其电量并减少
-        if (index==(int)PlayerType.BatteryCarrier)
-        {
-            int value = 20;
-            other.GetComponent<BatteryCarrier>().ChangePower(-value);
-            batteryPower = other.GetComponent<BatteryCarrier>().CurrentPower;
-            Debug.Log("减少电量："+value+"当前电量："+batteryPower);
-        }
-
-        Debug.Log("玩家名称：" + name + ", 玩家索引：" + index );
+        
+        int value = 10;
+        other.GetComponent<Battery>().ChangePower(-value);
+        batteryPower = other.GetComponent<Battery>().currentPower;
+        Debug.Log("减少"+name+"电量："+value+"; 当前电量："+batteryPower);
+        
     }
 }
