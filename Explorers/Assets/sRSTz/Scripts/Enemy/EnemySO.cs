@@ -8,6 +8,8 @@ using UnityEngine;
 public abstract class EnemySO : ScriptableObject
 {
 
+
+
     public abstract void Move(Enemy enemy);
 
     public abstract void Attack(Enemy enemy);

@@ -28,7 +28,6 @@ public class Fighter : PlayerController
             case "ReconnectArea":
                 if(_hasConnected /*&& 按下重连键*/)
                 {
-                    _hasConnected = true;
                     ReconnectRope();
                 }
 

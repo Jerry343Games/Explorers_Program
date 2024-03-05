@@ -25,7 +25,6 @@ public class Shooter : PlayerController
             case "ReconnectArea":
                 if (!_hasConnected && Input.GetKeyDown(KeyCode.E))
                 {
-                    _hasConnected = true;
                     ReconnectRope();
                 }
 

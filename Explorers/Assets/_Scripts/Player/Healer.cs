@@ -23,7 +23,6 @@ public class Healer : PlayerController
             case "ReconnectArea":
                 if (_hasConnected /*&& 按下重连键*/)
                 {
-                    _hasConnected = true;
                     ReconnectRope();
                 }
 

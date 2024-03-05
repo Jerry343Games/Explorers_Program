@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 using UnityEngine;
 
 public class CellBattery : Battery
@@ -50,6 +51,15 @@ public class CellBattery : Battery
             _mainBattery.ChangePower(-difference);
             ChangePower(difference);
         }
+    }
+
+    /// <summary>
+    /// …Ë÷√¡¨Ω”◊¥Ã¨
+    /// </summary>
+    /// <param name="newState"></param>
+    public void ChangeConnectState(bool newState)
+    {
+        isConnected = newState;
     }
     
 }
