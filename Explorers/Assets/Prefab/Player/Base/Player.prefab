@@ -49,6 +49,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 351bd6d13093cab479001085cc5e42e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  inputActionAsset: {fileID: -944628639613478452, guid: cec157f197c081640835571d375f4a76,
+    type: 3}
   batteryCarrier: {fileID: 1035551819873504977}
   shooter: {fileID: 7564652996621964968}
   healer: {fileID: 1113326784236556676}
@@ -100,7 +102,15 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 428fbfe6-9ef9-45f3-8bba-9a28e422f0fa
     m_ActionName: Player/Reconnect[/Keyboard/e,/XInputControllerWindows/buttonNorth]
-  m_NeverAutoSwitchControlSchemes: 0
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: e7f0ae73-1bcc-46d0-b00a-3914a9cc76f0
+    m_ActionName: Player/Accelerate[/Keyboard/space,/XInputControllerWindows/buttonEast]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: d342a6fc-71dc-430c-9d2d-153658fbcede
+    m_ActionName: Player/CableSetting[/XInputControllerWindows/leftTrigger,/Keyboard/f]
+  m_NeverAutoSwitchControlSchemes: 1
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1

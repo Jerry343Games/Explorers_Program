@@ -15,9 +15,45 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "Reconnect",
+                    "name": "Interact",
                     "type": "Button",
                     "id": "428fbfe6-9ef9-45f3-8bba-9a28e422f0fa",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Accelerate",
+                    "type": "Button",
+                    "id": "e7f0ae73-1bcc-46d0-b00a-3914a9cc76f0",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "CableSetting",
+                    "type": "Button",
+                    "id": "d342a6fc-71dc-430c-9d2d-153658fbcede",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Attack",
+                    "type": "Button",
+                    "id": "6dfb8128-cafc-401a-b567-445c86d84cad",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Aim",
+                    "type": "Button",
+                    "id": "0e3a07b8-59a4-4e36-b473-9bccc142d5a6",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -26,19 +62,8 @@
             ],
             "bindings": [
                 {
-                    "name": "",
-                    "id": "ce48bc8e-fbcf-445e-a4f4-f9dd6e5b88bb",
-                    "path": "<Gamepad>/leftStick",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Shooter",
-                    "action": "Move",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
                     "name": "WASD",
-                    "id": "bd638d08-dd25-43e1-9dff-311f7cbb73ac",
+                    "id": "38cda7fe-0dad-4410-b133-9a76fa248374",
                     "path": "2DVector",
                     "interactions": "",
                     "processors": "",
@@ -48,96 +73,172 @@
                     "isPartOfComposite": false
                 },
                 {
-                    "name": "up",
-                    "id": "0c3b4c75-5eb4-4b7c-ae6f-28a2b17d3856",
+                    "name": "Up",
+                    "id": "8b726460-501f-4c5d-87db-1bdc88bac3e5",
                     "path": "<Keyboard>/w",
                     "interactions": "",
                     "processors": "",
-                    "groups": "BatteryCarrier",
+                    "groups": "",
                     "action": "Move",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
                 {
-                    "name": "down",
-                    "id": "15de9420-ff10-457d-8b32-5a319b99ed3e",
+                    "name": "Down",
+                    "id": "e9c9675d-7add-4df1-865a-21eaea7be11f",
                     "path": "<Keyboard>/s",
                     "interactions": "",
                     "processors": "",
-                    "groups": "BatteryCarrier",
+                    "groups": "",
                     "action": "Move",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
                 {
-                    "name": "left",
-                    "id": "27f2d8f2-f285-4217-803f-111e111bbe75",
+                    "name": "Left",
+                    "id": "0db8dade-0161-4dc8-b526-b5e5bb26b972",
                     "path": "<Keyboard>/a",
                     "interactions": "",
                     "processors": "",
-                    "groups": "BatteryCarrier",
+                    "groups": "",
                     "action": "Move",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
                 {
-                    "name": "right",
-                    "id": "3b37f515-b6ae-4d6b-b0a3-1ba08c31118b",
+                    "name": "Right",
+                    "id": "5408223f-2512-44c3-a247-cf90ccb2cbff",
                     "path": "<Keyboard>/d",
                     "interactions": "",
                     "processors": "",
-                    "groups": "BatteryCarrier",
+                    "groups": "",
                     "action": "Move",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
                 {
                     "name": "",
-                    "id": "63ff4d73-8163-4f59-955c-1e7a11c58c89",
-                    "path": "<Keyboard>/e",
+                    "id": "91f30c66-3cf8-455e-8981-a5f2bb94f70a",
+                    "path": "<Gamepad>/leftStick",
                     "interactions": "",
                     "processors": "",
-                    "groups": "BatteryCarrier",
-                    "action": "Reconnect",
+                    "groups": "",
+                    "action": "Move",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
-                    "id": "f2680319-22f3-489f-85e5-bb704d4fb819",
+                    "id": "5316c9c7-1151-45e8-9391-f6af08c791b4",
                     "path": "<Gamepad>/buttonNorth",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Shooter",
-                    "action": "Reconnect",
+                    "groups": "",
+                    "action": "Interact",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "8843b39b-ed67-455a-93a4-17d659201869",
+                    "path": "<Keyboard>/e",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Interact",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "65be4a4b-89e1-4b1a-b6d5-d6b9dd5a54a4",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Accelerate",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "8173d054-03e6-4f6b-a81b-e839b245e57b",
+                    "path": "<Gamepad>/buttonEast",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Accelerate",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "a230df19-7c46-4c0c-b7d5-6cfabc955ef4",
+                    "path": "<Gamepad>/leftTrigger",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "CableSetting",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "5a630fea-bf32-4c1e-ac59-ab42fa18aaf6",
+                    "path": "<Keyboard>/f",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "CableSetting",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "9b1f6676-eec3-4575-9d9c-08d63909e528",
+                    "path": "<Gamepad>/buttonWest",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Attack",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "87a02b0c-cfdd-4cd4-ae5d-1e415da848c5",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Attack",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "cfc2580c-15f9-4d25-b10a-6a4f44e122f2",
+                    "path": "<Gamepad>/rightTrigger",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Aim",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "32d5b069-e6ef-4d91-99ba-10f0d9b7806b",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Aim",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
             ]
         }
     ],
-    "controlSchemes": [
-        {
-            "name": "BatteryCarrier",
-            "bindingGroup": "BatteryCarrier",
-            "devices": [
-                {
-                    "devicePath": "<Keyboard>",
-                    "isOptional": false,
-                    "isOR": false
-                }
-            ]
-        },
-        {
-            "name": "Shooter",
-            "bindingGroup": "Shooter",
-            "devices": [
-                {
-                    "devicePath": "<Gamepad>",
-                    "isOptional": false,
-                    "isOR": false
-                }
-            ]
-        }
-    ]
+    "controlSchemes": []
 }

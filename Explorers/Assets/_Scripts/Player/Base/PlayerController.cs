@@ -21,9 +21,10 @@ public class PlayerController : MonoBehaviour
     
     [Header("移动")]
     public float speed;
+    public float accelerateFactor;//加速移速系数
+    private float _speedFactor;//总控移速系数，通过修改它改变角色移速
     private Vector2 _inputDir;//输入方向
     private Vector3 _moveDir;//移动方向
-
 
     [Header("护盾")]
     public int maxDefence;//电池护盾量
@@ -64,6 +65,7 @@ public class PlayerController : MonoBehaviour
         _restoreTimer = restoreCD;
         _skillTimer = skillCD;
         canUseSkill = false;
+        _speedFactor = 1;
     }
     
     public void SetRope(ObiRope rope = null)
@@ -86,7 +88,17 @@ public class PlayerController : MonoBehaviour
     public void CharacterMove()
     {
         MovementCombination();
-        transform.Translate(_moveDir * Time.deltaTime * speed, Space.World);
+        transform.Translate(_moveDir * Time.deltaTime * speed * _speedFactor, Space.World);
+        
+        //主动加速判断
+        if (_playerInputSetting.GetAccelerateButtonDown())
+        {
+            _speedFactor = accelerateFactor;
+        }
+        if (_playerInputSetting.GetAccelerateButtonRelease())
+        {
+            _speedFactor = 1;
+        }
     }
     
     /// <summary>
