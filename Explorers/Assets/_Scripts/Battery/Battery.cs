@@ -9,11 +9,15 @@ public class Battery : MonoBehaviour
     
     //[HideInInspector]
     public int currentPower;
-    
+
+    public Battery(int initialPower)
+    {
+        this.maxPower = initialPower;
+    }
     /// <summary>
     /// 电量修改方法
     /// </summary>
-    public void ChangePower(int value)
+    public virtual void ChangePower(int value)
     {
         currentPower += value;
     }
@@ -23,6 +27,6 @@ public class Battery : MonoBehaviour
     /// </summary>
     private void PowerDecayPreSecond()
     {
-        currentPower -= decayValue;
+        ChangePower(-1);
     }
 }

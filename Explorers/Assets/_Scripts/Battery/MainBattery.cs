@@ -5,6 +5,9 @@ using UnityEngine;
 
 public class MainBattery : Battery
 {
+    public MainBattery(int initialPower) : base(initialPower)
+    {
+    }
     private void Awake()
     {
         currentPower = maxPower;

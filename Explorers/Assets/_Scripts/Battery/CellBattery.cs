@@ -10,6 +10,10 @@ public class CellBattery : Battery
     private int myPower;
     public bool isConnected;
 
+    public CellBattery(int initialPower) : base(initialPower)
+    {
+    }
+
     private void Awake()
     {
         Init();
@@ -19,11 +23,7 @@ public class CellBattery : Battery
 
     private void Update()
     {
-        //如果为链接状态则立刻补满
-        if (isConnected)
-        {
-            FullChargeBattery();
-        }
+
     }
     
     /// <summary>
@@ -39,17 +39,16 @@ public class CellBattery : Battery
             Debug.LogWarning("CellBattery need a MainBattery");
         }
     }
-    
-    /// <summary>
-    /// 从主电池补满电量
-    /// </summary>
-    public void FullChargeBattery()
+
+    public override void ChangePower(int value)
     {
-        if (currentPower<maxPower)
+        if (this.isConnected&&this._mainBattery)
         {
-            int difference = maxPower - currentPower;
-            _mainBattery.ChangePower(-difference);
-            ChangePower(difference);
+            this._mainBattery.ChangePower(value);
+        }
+        else
+        {
+            base.ChangePower(value);
         }
     }
 
