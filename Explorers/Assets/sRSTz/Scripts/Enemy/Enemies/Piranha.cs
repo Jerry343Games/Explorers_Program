@@ -46,10 +46,7 @@ public class Piranha:Enemy
         }
     }
 
-    public  void TakeDamage()
-    {
-        
-    }
+    
 
   
     

@@ -10,7 +10,7 @@ using UnityEngine.InputSystem.XR;
 public class PlayerController : MonoBehaviour
 {
     private PlayerInput _playerInput;
-    private PlayerInputSetting _playerInputSetting;
+    public PlayerInputSetting playerInputSetting;
     
     /// <summary>
     /// 玩家所分配到的唯一序列号,类型区分见枚举类
