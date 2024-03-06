@@ -31,8 +31,8 @@ public class PlayerController : MonoBehaviour
     private bool _canMove = true;//是否能移动
 
     [Header("护盾")]
-    public int maxDefence;//电池护盾量
-    protected int currentDefence;//电池护盾量
+    public int maxArmor;//电池护盾量
+    protected int currentArmor;//电池护盾量
     public int restoreAmount;//单次护盾修复量
     public float restoreCD;//修复冷却
     private float _restoreTimer;
@@ -42,10 +42,16 @@ public class PlayerController : MonoBehaviour
     private float _skillTimer;
     private bool canUseSkill;
 
+    [Header("武器")]
+    public WeaponDataSO mainWeapon;//主武器
+    public WeaponDataSO secondaryWeapons;//副武器
+    [HideInInspector]
+    public WeaponDataSO currentWeapon;//当前使用的武器
+    private int _currentMainAmmunition, _currentSecondaryAmmunition;//主副武器当前子弹数
+    private float _mainAttackTimer, _secondaryAttackTimer;
+    private bool canMainAttack, canSecondaryAttack;
+
     [Header("通用")]
-    public int attack;//攻击力
-    public float attackRange;//攻击范围
-    public float attackCD;//攻击冷却
     public bool hasDead;
 
     [Header("绳子")]
@@ -66,9 +72,10 @@ public class PlayerController : MonoBehaviour
         EnemyManager.Instance.players.Add(gameObject);
         if (gameObject.CompareTag("Battery")) EnemyManager.Instance.battery = gameObject;
 
-        currentDefence = maxDefence;
-        _restoreTimer = restoreCD;
-        _skillTimer = skillCD;
+        currentArmor = maxArmor;
+        currentWeapon = mainWeapon;
+        _currentMainAmmunition = mainWeapon.initAmmunition;
+        _currentSecondaryAmmunition = secondaryWeapons.initAmmunition;
         canUseSkill = false;
         hasDead = false;
         _speedFactor = 1;
@@ -176,15 +183,15 @@ public class PlayerController : MonoBehaviour
     /// <param name="damage">伤害量</param>
     public void TakeDamage(int damage)
     {
-        if(damage < currentDefence)
+        if(damage < currentArmor)
         {
-            currentDefence -= damage;
+            currentArmor -= damage;
         }
         else
         {
-            int damageToBattery = damage - currentDefence;
+            int damageToBattery = damage - currentArmor;
             GetComponent<Battery>().ChangePower(-damageToBattery);
-            currentDefence = maxDefence;
+            currentArmor = maxArmor;
         }
     }
 
@@ -196,8 +203,8 @@ public class PlayerController : MonoBehaviour
         if(_restoreTimer<0)
         {
             _restoreTimer = restoreCD;
-            GetComponent<CellBattery>().currentPower -= maxDefence;//消耗相应电量修复
-            currentDefence += restoreAmount;
+            GetComponent<CellBattery>().currentPower -= maxArmor;//消耗相应电量修复
+            currentArmor += restoreAmount;
         }
         else
         {
@@ -250,4 +257,63 @@ public class PlayerController : MonoBehaviour
         hasDead = newState;
     }
 
+    /// <summary>
+    /// 更新武器CD
+    /// </summary>
+    public void UpdateAttackState()
+    {
+        if(_mainAttackTimer<0)
+        {
+            canMainAttack = true;
+        }
+        else
+        {
+            _mainAttackTimer -= Time.deltaTime;
+        }
+        if (_secondaryAttackTimer < 0)
+        {
+            canSecondaryAttack = true;
+        }
+        else
+        {
+            _secondaryAttackTimer -= Time.deltaTime;
+        }
+    }
+
+    /// <summary>
+    /// 切换武器
+    /// </summary>
+    public void ChangeWeapon()
+    {
+        currentWeapon = (currentWeapon == mainWeapon ? secondaryWeapons : mainWeapon);
+    }
+
+    /// <summary>
+    /// 攻击方法
+    /// </summary>
+    public void Attack()
+    {
+        if(currentWeapon==mainWeapon)
+        {
+            canMainAttack = false;
+            _mainAttackTimer = currentWeapon.attackCD;
+            MainAttack();
+        }
+        else if(currentWeapon==secondaryWeapons)
+        {
+            canSecondaryAttack = false;
+            _secondaryAttackTimer = currentWeapon.attackCD;
+            SecondaryAttack();
+        }
+    }
+
+    /// <summary>
+    /// 主武器攻击方法 请子类重写
+    /// </summary>
+    public virtual void MainAttack() { }
+
+    /// <summary>
+    /// 副武器攻击方法 请子类重写
+    /// </summary>
+    public virtual void SecondaryAttack() { }
 }
