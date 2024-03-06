@@ -38,7 +38,7 @@ public class AttackBatteryFish : Enemy
 
     public void Move()
     {
-        if (EnemyManager.Instance.battery != null) // 确保玩家存在
+        if (EnemyManager.Instance.battery != null && canMove) // 确保玩家存在
         {
             Vector2 direction = (EnemyManager.Instance.battery.transform.position - transform.position).normalized; // 获取朝向玩家的单位向量
             rb.velocity = direction * moveSpeed; // 沿着朝向玩家的方向移动

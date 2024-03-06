@@ -49,7 +49,7 @@ public class DashFish : Enemy
 
     public  void Move()
     {
-        if (target == null) return; // 确保玩家存在
+        if (target == null && canMove) return; // 确保玩家存在
         Vector2 distance = (target.transform.position - transform.position);
         Vector2 direction =distance. normalized; // 获取朝向玩家的单位向量
         if (prepareTimer==0&& Mathf.Pow(distance.x, 2) + Mathf.Pow(distance.y, 2) >= Mathf.Pow(detectionRadius, 2)){

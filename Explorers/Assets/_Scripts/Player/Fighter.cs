@@ -9,7 +9,7 @@ public class Fighter : PlayerController
     public LayerMask enemyLayer;
     private List<GameObject> _enemyInArea=new();
     private bool isLeft = false;
-    public float force = 10f;
+    public float force = 5f;
     // Start is called before the first frame update
     void Awake()
     {
@@ -23,7 +23,6 @@ public class Fighter : PlayerController
         if (playerInputSetting.GetAttackButtonDown())
         {           
             PerformAttack();
-
         }
         if (hasDead) return;
         CharacterMove();
