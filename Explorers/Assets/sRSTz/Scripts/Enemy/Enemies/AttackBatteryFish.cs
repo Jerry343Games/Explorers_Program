@@ -47,10 +47,7 @@ public class AttackBatteryFish : Enemy
             gameObject.transform.right = direction;
         }
     }
-    public  void TakeDamage()
-    {
-        throw new System.NotImplementedException();
-    }
+    
 
     
 }

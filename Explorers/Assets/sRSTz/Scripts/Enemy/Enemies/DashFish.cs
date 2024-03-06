@@ -108,10 +108,7 @@ public class DashFish : Enemy
 
     }
 
-    public  void TakeDamage()
-    {
-        throw new System.NotImplementedException();
-    }
+  
 
     
 
