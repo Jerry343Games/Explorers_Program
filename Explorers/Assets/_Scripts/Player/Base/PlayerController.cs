@@ -28,6 +28,7 @@ public class PlayerController : MonoBehaviour
     public float vertigoTime = 0.3f;//被攻击后眩晕的时间（不能操作）
     private float _vertigoTimer = 0;
     private bool _canMove = true;//是否能移动
+
     [Header("护盾")]
     public int maxDefence;//电池护盾量
     protected int currentDefence;//电池护盾量
@@ -44,6 +45,7 @@ public class PlayerController : MonoBehaviour
     public int attack;//攻击力
     public float attackRange;//攻击范围
     public float attackCD;//攻击冷却
+    public bool hasDead;
 
     [Header("绳子")]
     public float DistanceThreshold = 10;//绳子最大长度
@@ -67,6 +69,7 @@ public class PlayerController : MonoBehaviour
         _restoreTimer = restoreCD;
         _skillTimer = skillCD;
         canUseSkill = false;
+        hasDead = false;
         _speedFactor = 1;
     }
     
@@ -154,11 +157,11 @@ public class PlayerController : MonoBehaviour
     /// <summary>
     /// 动态根据距离改变绳子长度
     /// </summary>
-    public void DynamicChangeLengthOfRope()
-    {
-        if (_obiRope == null) return;
-        _obiRope.stretchingScale = Vector3.Distance(transform.position, SceneManager.Instance.BatteryTransform.position) / 4f;
-    }
+    //public void DynamicChangeLengthOfRope()
+    //{
+    //    if (_obiRope == null) return;
+    //    _obiRope.stretchingScale = Vector3.Distance(transform.position, SceneManager.Instance.BatteryTransform.position) / 4f;
+    //}
 
     /// <summary>
     /// 受伤方法
@@ -173,6 +176,7 @@ public class PlayerController : MonoBehaviour
         else
         {
             int damageToBattery = damage - currentDefence;
+            GetComponent<Battery>().ChangePower(-damageToBattery);
             currentDefence = maxDefence;
         }
     }
@@ -228,6 +232,15 @@ public class PlayerController : MonoBehaviour
     {
         _canMove = false;
         _rigidbody.AddForce(force, ForceMode.Impulse);
+    }
+
+    /// <summary>
+    /// 设置死亡状态
+    /// </summary>
+    /// <param name="newState"></param>
+    public void SetDeadState(bool newState)
+    {
+        hasDead = newState;
     }
 
 }

@@ -11,6 +11,7 @@ public class Healer : PlayerController
     }
     void Update()
     {
+        if (hasDead) return;
         CharacterMove();
         CheckDistanceToBattery();
 
@@ -21,7 +22,7 @@ public class Healer : PlayerController
         {
             //进入可重连绳子区域
             case "ReconnectArea":
-                if (_hasConnected /*&& 按下重连键*/)
+                if (!_hasConnected /*&& 按下重连键*/)
                 {
                     ReconnectRope();
                 }

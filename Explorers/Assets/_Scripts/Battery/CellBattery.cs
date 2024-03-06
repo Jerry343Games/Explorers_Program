@@ -12,6 +12,7 @@ public class CellBattery : Battery
 
     public CellBattery(int initialPower) : base(initialPower)
     {
+
     }
 
     private void Awake()
@@ -23,7 +24,10 @@ public class CellBattery : Battery
 
     private void Update()
     {
-
+        if(myPower<=0 && !GetComponent<PlayerController>().hasDead)
+        {
+            GetComponent<PlayerController>().SetDeadState(true);
+        }
     }
     
     /// <summary>

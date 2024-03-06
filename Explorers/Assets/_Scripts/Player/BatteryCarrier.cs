@@ -11,6 +11,7 @@ public class BatteryCarrier : PlayerController
     // Update is called once per frame
     void Update()
     {
+        if (hasDead) return;
         CharacterMove();
     }
     

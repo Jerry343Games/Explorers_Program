@@ -12,6 +12,7 @@ public class Shooter : PlayerController
     // Update is called once per frame
     void Update()
     {
+        if (hasDead) return;
         CharacterMove();
         CheckDistanceToBattery();
         //DynamicChangeLengthOfRope();
@@ -23,7 +24,7 @@ public class Shooter : PlayerController
         {
             //进入可重连绳子区域
             case "ReconnectArea":
-                if (_hasConnected /*&& 按下重连键*/)
+                if (!_hasConnected /*&& 按下重连键*/)
                 {
                     ReconnectRope();
                 }
