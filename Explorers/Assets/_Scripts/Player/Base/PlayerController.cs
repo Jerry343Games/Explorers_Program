@@ -52,6 +52,8 @@ public class PlayerController : MonoBehaviour
     private bool canMainAttack, canSecondaryAttack;
 
     [Header("Í¨ÓÃ")]
+    public int attackRange;
+    public int attack;
     public bool hasDead;
 
     [Header("Éþ×Ó")]
