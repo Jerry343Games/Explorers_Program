@@ -36,7 +36,7 @@ public class Piranha:Enemy
 
     public void Move()
     {
-        if (target != null) // 确保玩家存在
+        if (target != null&&canMove) // 确保玩家存在
         {
             Vector2 direction = (target.transform.position - transform.position).normalized; // 获取朝向玩家的单位向量
             rb.velocity = direction * moveSpeed; // 沿着朝向玩家的方向移动

@@ -8,7 +8,8 @@ public class Fighter : PlayerController
     public float attackAngle = 90f;
     public LayerMask enemyLayer;
     private List<GameObject> _enemyInArea=new();
-    
+    private bool isLeft = false;
+    public float force = 10f;
     // Start is called before the first frame update
     void Awake()
     {
@@ -22,16 +23,19 @@ public class Fighter : PlayerController
         if (playerInputSetting.GetAttackButtonDown())
         {           
             PerformAttack();
+
         }
         if (hasDead) return;
         CharacterMove();
         if (playerInputSetting.inputDir.x < 0)
         {
-            transform.rotation = Quaternion.Euler(0, 180, 0);
+            transform.localScale = new(-1, 1, 1);
+            isLeft = true;
         }
         else
         {
-            transform.rotation = Quaternion.Euler(0, 0, 0);
+            isLeft = false;
+            transform.localScale = new(1, 1, 1);
         }
         CheckDistanceToBattery();
         
@@ -61,8 +65,16 @@ public class Fighter : PlayerController
         if (_enemyInArea.Count == 0) return;
         for(int i = 0; i < _enemyInArea.Count; i++)
         {
-            _enemyInArea[i].gameObject.GetComponent<Enemy>().TakeDamage(attack);
-            _enemyInArea[i].gameObject.GetComponent<Enemy>().Vertigo(transform.right);
+            _enemyInArea[i].GetComponent<Enemy>().TakeDamage(attack);
+            if (isLeft)
+            {
+                _enemyInArea[i].GetComponent<Enemy>().Vertigo(-transform.right * force);
+            }
+            else
+            {
+                _enemyInArea[i].GetComponent<Enemy>().Vertigo(transform.right *force);
+            }
+           
         }
     }
 

@@ -17,14 +17,30 @@ public class Enemy : MonoBehaviour
     public Collision touchedCollision;
     public int HP = 10;
     public int damage = 10;
-
-    
+    public bool canMove = true;
+    public float vertigoTIme = 0.2f;
+    private float vertigoTimer = 0;
     protected virtual void Awake()
     {
         rb = GetComponent<Rigidbody>();
     }
+    private void Update()
+    {
+        if (!canMove)
+        {
+            if (vertigoTimer >= vertigoTIme)
+            {
+                canMove = true;
+                vertigoTimer = 0;
+            }
+            else
+            {
+                vertigoTimer += Time.deltaTime;
 
-    
+            }
+        }
+    }
+
     // 获取与自己距离最近的玩家
     public GameObject GetClosestPlayer()
     {
@@ -55,7 +71,6 @@ public class Enemy : MonoBehaviour
     {
         
         HP -= damage;
-        Debug.Log(HP);
         if (HP <= 0) Dead();
     }
     public virtual void Dead()
@@ -64,6 +79,7 @@ public class Enemy : MonoBehaviour
     }
     public virtual void Vertigo(Vector3 force)
     {
+        canMove = false;
         rb.AddForce(force, ForceMode.Impulse);
     }
 }
