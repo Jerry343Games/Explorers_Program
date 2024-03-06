@@ -30,7 +30,10 @@ public class Fighter : PlayerController
                 {
                     ReconnectRope();
                 }
-
+                break;
+            //收集到场景物品
+            case "Item":
+                other.GetComponent<Item>().Apply(gameObject);
                 break;
             default:
                 break;
