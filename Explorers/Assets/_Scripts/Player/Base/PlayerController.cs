@@ -60,7 +60,7 @@ public class PlayerController : MonoBehaviour
     {
         _rigidbody = GetComponent<Rigidbody>();
         _playerInput = transform.parent.GetComponent<PlayerInput>();
-        _playerInputSetting = transform.parent.GetComponent<PlayerInputSetting>();
+        playerInputSetting = transform.parent.GetComponent<PlayerInputSetting>();
         myIndex = _playerInput.playerIndex;
         Debug.Log(transform.name+" Index: "+myIndex);
         EnemyManager.Instance.players.Add(gameObject);
@@ -86,7 +86,7 @@ public class PlayerController : MonoBehaviour
     public void MovementCombination()
     {
         
-        _moveDir=new Vector3(_playerInputSetting.inputDir.x, _playerInputSetting.inputDir.y,0).normalized;
+        _moveDir=new Vector3(playerInputSetting.inputDir.x, playerInputSetting.inputDir.y,0).normalized;
     }
     
     /// <summary>
@@ -110,11 +110,11 @@ public class PlayerController : MonoBehaviour
         transform.Translate(_moveDir * Time.deltaTime * speed * _speedFactor, Space.World);
         
         //主动加速判断
-        if (_playerInputSetting.GetAccelerateButtonDown())
+        if (playerInputSetting.GetAccelerateButtonDown())
         {
             _speedFactor = accelerateFactor;
         }
-        if (_playerInputSetting.GetAccelerateButtonRelease())
+        if (playerInputSetting.GetAccelerateButtonRelease())
         {
             _speedFactor = 1;
         }
