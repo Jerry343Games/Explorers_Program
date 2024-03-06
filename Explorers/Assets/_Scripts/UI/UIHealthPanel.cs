@@ -38,16 +38,16 @@ public class UIHealthPanel : MonoBehaviour
                 _battery = GameObject.Find("BatteryCarrier").GetComponent<Battery>();
                 Debug.Log(_battery.transform.name+"完成配置UI");
                 break;
-            case "ShooterPanel":
-                _battery = GameObject.Find("Shooter").GetComponent<Battery>();
-                Debug.Log(_battery.transform.name+"完成配置UI");
-                break;
+            //case "ShooterPanel":
+            //    _battery = GameObject.Find("Shooter").GetComponent<Battery>();
+            //    Debug.Log(_battery.transform.name+"完成配置UI");
+            //    break;
             // case "HealerPanel":
             //     _battery = GameObject.Find("Healer").GetComponent<Battery>();
             //     break;
-            // case "FighterPanel":
-            //     _battery = GameObject.Find("Fighter").GetComponent<Battery>();
-            //     break;
+             case "FighterPanel":
+                 _battery = GameObject.Find("Fighter").GetComponent<Battery>();
+                 break;
         }
     }
     

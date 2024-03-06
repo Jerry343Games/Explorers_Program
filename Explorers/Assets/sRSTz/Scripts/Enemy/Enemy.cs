@@ -53,11 +53,17 @@ public class Enemy : MonoBehaviour
 
     public virtual void TakeDamage(int damage)
     {
+        
         HP -= damage;
+        Debug.Log(HP);
         if (HP <= 0) Dead();
     }
     public virtual void Dead()
     {
         gameObject.SetActive(false);
+    }
+    public virtual void Vertigo(Vector3 force)
+    {
+        rb.AddForce(force, ForceMode.Impulse);
     }
 }

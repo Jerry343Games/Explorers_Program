@@ -7,7 +7,7 @@ public class Fighter : PlayerController
     
     public float attackAngle = 90f;
     public LayerMask enemyLayer;
-
+    private List<GameObject> _enemyInArea=new();
     
     // Start is called before the first frame update
     void Awake()
@@ -19,13 +19,22 @@ public class Fighter : PlayerController
     // Update is called once per frame
     void Update()
     {
-        if (hasDead) return;
-        CharacterMove();
-        CheckDistanceToBattery();
         if (playerInputSetting.GetAttackButtonDown())
-        {
+        {           
             PerformAttack();
         }
+        if (hasDead) return;
+        CharacterMove();
+        if (playerInputSetting.inputDir.x < 0)
+        {
+            transform.rotation = Quaternion.Euler(0, 180, 0);
+        }
+        else
+        {
+            transform.rotation = Quaternion.Euler(0, 0, 0);
+        }
+        CheckDistanceToBattery();
+        
     }
 
     private void OnTriggerStay(Collider other)
@@ -49,46 +58,31 @@ public class Fighter : PlayerController
     }
     public void PerformAttack()
     {
-        // 获取玩家朝向
-        Vector3 playerDirection = transform.right;
-
-        // 发射射线以检测前方的敌人
-        RaycastHit2D[] hits = Physics2D.RaycastAll(transform.position, playerDirection, attackRange, enemyLayer);
-
-        foreach (RaycastHit2D hit in hits)
+        if (_enemyInArea.Count == 0) return;
+        for(int i = 0; i < _enemyInArea.Count; i++)
         {
-            GameObject enemy = hit.collider.gameObject;
-            float distanceToEnemy = Vector2.Distance(transform.position, enemy.transform.position);
-
-            if (distanceToEnemy <= attackRange)
-            {
-                Vector3 directionToEnemy = (enemy.transform.position - transform.position).normalized;
-                float angle = Vector2.Angle(playerDirection, directionToEnemy);
-
-                if (angle < attackAngle / 2)
-                {
-                    // 在攻击范围和角度内的敌人受到攻击
-                    enemy.GetComponent<Enemy>().TakeDamage(attack); // 假设敌人有一个名为"EnemyHealth"的脚本来处理伤害
-                }
-            }
+            _enemyInArea[i].gameObject.GetComponent<Enemy>().TakeDamage(attack);
+            _enemyInArea[i].gameObject.GetComponent<Enemy>().Vertigo(transform.right);
         }
     }
 
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.red;
-
-        Vector3 forwardVector = transform.right;
-        Vector3 arcStart = Quaternion.Euler(0, 0, -attackAngle / 2) * forwardVector;
-        float stepSize = 5f; // 每条线段之间的角度间隔
-
-        for (float angle = -attackAngle / 2; angle <= attackAngle / 2; angle += stepSize)
+    private void OnTriggerEnter(Collider other)
+    {       
+        if (other.gameObject.CompareTag("Enemy"))
         {
-            Vector3 nextPoint = Quaternion.Euler(0, 0, angle) * forwardVector;
-            Gizmos.DrawLine(transform.position, transform.position + nextPoint * attackRange);
+            _enemyInArea.Add(other.gameObject);
         }
-
-        // 绘制最后一条线段，连接到扇形的起点，以完整显示扇形范围
-        Gizmos.DrawLine(transform.position, transform.position + arcStart * attackRange);
+    }
+    private void OnTriggerExit(Collider other)
+    {
+        
+        if (other.gameObject.CompareTag("Enemy")&&_enemyInArea.Contains(other.gameObject))
+        {
+            _enemyInArea.Remove(other.gameObject);
+        }
+    }
+    public override void Vertigo(Vector3 force)
+    {
+        
     }
 }

@@ -244,7 +244,7 @@ public class PlayerController : MonoBehaviour
     /// <summary>
     /// ±ª—£‘Œ
     /// </summary>
-    public void Vertigo(Vector3 force)
+    public virtual void Vertigo(Vector3 force)
     {
         _canMove = false;
         _rigidbody.AddForce(force, ForceMode.Impulse);
