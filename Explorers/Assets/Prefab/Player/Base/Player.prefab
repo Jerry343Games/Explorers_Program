@@ -110,6 +110,14 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: d342a6fc-71dc-430c-9d2d-153658fbcede
     m_ActionName: Player/CableSetting[/XInputControllerWindows/leftTrigger,/Keyboard/f]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 6dfb8128-cafc-401a-b567-445c86d84cad
+    m_ActionName: Player/Attack[/Mouse/leftButton]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 0e3a07b8-59a4-4e36-b473-9bccc142d5a6
+    m_ActionName: Player/Aim[/Mouse/rightButton]
   m_NeverAutoSwitchControlSchemes: 1
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -225,12 +233,12 @@ PrefabInstance:
     - target: {fileID: 3522222548290628291, guid: 661a6ab58b0cae94c9a854b0adcdf737,
         type: 3}
       propertyPath: m_Drag
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3522222548290628291, guid: 661a6ab58b0cae94c9a854b0adcdf737,
         type: 3}
       propertyPath: m_Mass
-      value: 6
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3522222548290628291, guid: 661a6ab58b0cae94c9a854b0adcdf737,
         type: 3}
@@ -309,12 +317,12 @@ PrefabInstance:
     - target: {fileID: 1833284877928412793, guid: 9644debdbcef5aa4697ef57db70c48dc,
         type: 3}
       propertyPath: m_Drag
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1833284877928412793, guid: 9644debdbcef5aa4697ef57db70c48dc,
         type: 3}
       propertyPath: m_Mass
-      value: 6
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1833284877928412793, guid: 9644debdbcef5aa4697ef57db70c48dc,
         type: 3}
@@ -538,12 +546,12 @@ PrefabInstance:
     - target: {fileID: 8306476347045371623, guid: 3d73830816f1a1647ab4f60936645d49,
         type: 3}
       propertyPath: m_Drag
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8306476347045371623, guid: 3d73830816f1a1647ab4f60936645d49,
         type: 3}
       propertyPath: m_Mass
-      value: 15
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8306476347045371623, guid: 3d73830816f1a1647ab4f60936645d49,
         type: 3}
@@ -610,12 +618,12 @@ PrefabInstance:
     - target: {fileID: 1563091077241915775, guid: b53a680214faa4d40b7b704146a8c4de,
         type: 3}
       propertyPath: m_Drag
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1563091077241915775, guid: b53a680214faa4d40b7b704146a8c4de,
         type: 3}
       propertyPath: m_Mass
-      value: 6
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1563091077241915775, guid: b53a680214faa4d40b7b704146a8c4de,
         type: 3}

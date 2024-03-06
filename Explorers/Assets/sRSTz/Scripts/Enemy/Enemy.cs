@@ -8,7 +8,6 @@ public class Enemy : MonoBehaviour
 {
     // 可以之后加个存数据的结构体
     public int moveSpeed;
-    public EnemySO enemySO;
     public float force;
     [HideInInspector]
     public GameObject target=null;
@@ -16,26 +15,16 @@ public class Enemy : MonoBehaviour
     public Rigidbody rb;
     [HideInInspector]
     public Collision touchedCollision;
-    private void FixedUpdate()
-    {
-        GetClosestPlayer();
-        enemySO.Move(this);
-    }
-    private void Awake()
+    public int HP = 10;
+    public int damage = 10;
+
+    
+    protected virtual void Awake()
     {
         rb = GetComponent<Rigidbody>();
     }
 
-    private void OnCollisionEnter(Collision collision)
-    {
-        
-        if (collision.gameObject.CompareTag("Player"))
-        {
-            
-            touchedCollision = collision;
-            enemySO.Attack(this);
-        }
-    }
+    
     // 获取与自己距离最近的玩家
     public GameObject GetClosestPlayer()
     {
@@ -62,6 +51,13 @@ public class Enemy : MonoBehaviour
         return closestPlayer;
     }
 
-    
-
+    public virtual void TakeDamage(int damage)
+    {
+        HP -= damage;
+        if (HP <= 0) Dead();
+    }
+    public virtual void Dead()
+    {
+        gameObject.SetActive(false);
+    }
 }

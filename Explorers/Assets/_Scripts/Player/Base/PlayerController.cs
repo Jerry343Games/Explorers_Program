@@ -25,7 +25,9 @@ public class PlayerController : MonoBehaviour
     private float _speedFactor;//总控移速系数，通过修改它改变角色移速
     private Vector2 _inputDir;//输入方向
     private Vector3 _moveDir;//移动方向
-
+    public float vertigoTime = 0.3f;//被攻击后眩晕的时间（不能操作）
+    private float _vertigoTimer = 0;
+    private bool _canMove = true;//是否能移动
     [Header("护盾")]
     public int maxDefence;//电池护盾量
     protected int currentDefence;//电池护盾量
@@ -79,6 +81,7 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     public void MovementCombination()
     {
+        
         _moveDir=new Vector3(_playerInputSetting.inputDir.x, _playerInputSetting.inputDir.y,0).normalized;
     }
     
@@ -87,6 +90,18 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     public void CharacterMove()
     {
+        //判断是否不能移动，如果不能，就计时眩晕时长，到达上限回复移动
+        if (!_canMove)
+        {
+            _vertigoTimer += Time.deltaTime;
+            if (_vertigoTimer >= vertigoTime)
+            {
+                _canMove = true;
+                _vertigoTimer = 0;
+                _rigidbody.velocity = new(0, 0, 0);
+            }
+            return;
+        }
         MovementCombination();
         transform.Translate(_moveDir * Time.deltaTime * speed * _speedFactor, Space.World);
         
@@ -206,4 +221,13 @@ public class PlayerController : MonoBehaviour
             canUseSkill = false;
         }
     }
+    /// <summary>
+    /// 被眩晕
+    /// </summary>
+    public void Vertigo(Vector3 force)
+    {
+        _canMove = false;
+        _rigidbody.AddForce(force, ForceMode.Impulse);
+    }
+
 }

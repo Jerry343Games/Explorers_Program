@@ -48,7 +48,7 @@ public class SceneManager : Singleton<SceneManager>
             //获得电池玩家的位置 因为绳子都需要连到他身上
             BatteryTransform = _players.ToList().Find(x =>x.transform.GetChild(0).gameObject.activeInHierarchy).transform.GetChild(0);
             //暂时满人了直接开始 后面可能添加倒计时之类的
-            EventCenter.CallGameStartedEvent();
+            EventCenter.CallGameStartedEvent();     
         }
     }
 
