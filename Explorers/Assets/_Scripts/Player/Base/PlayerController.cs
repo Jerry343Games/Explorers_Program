@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using UnityEditor.Rendering;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.XR;
 
 public class PlayerController : MonoBehaviour
 {
@@ -148,8 +149,14 @@ public class PlayerController : MonoBehaviour
     {
         if (Vector3.Distance(SceneManager.Instance.BatteryTransform.position, transform.position) > DistanceThreshold && _hasConnected)
         {
-            Destroy(_obiRope.transform.parent.gameObject, 0.5f);
+            //Destroy(_obiRope.transform.parent.gameObject, 0.5f);
+            ObiParticleAttachment[] attachment = _obiRope.GetComponents<ObiParticleAttachment>();
+            //设置绳子两边的牵引对象
+            attachment[0].enabled = false;
+            attachment[1].enabled = false;
+
             _hasConnected = false;
+            //溶解效果
             GetComponent<CellBattery>().ChangeConnectState(_hasConnected);
         }
     }

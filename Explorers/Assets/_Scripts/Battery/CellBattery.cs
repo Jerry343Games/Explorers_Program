@@ -24,7 +24,7 @@ public class CellBattery : Battery
 
     private void Update()
     {
-        if(myPower<=0 && !GetComponent<PlayerController>().hasDead)
+        if(currentPower <=0 && !GetComponent<PlayerController>().hasDead)
         {
             GetComponent<PlayerController>().SetDeadState(true);
         }

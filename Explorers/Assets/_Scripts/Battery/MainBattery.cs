@@ -21,6 +21,7 @@ public class MainBattery : Battery
         if(currentPower<=0 && !GetComponent<PlayerController>().hasDead)
         {
             GetComponent<PlayerController>().SetDeadState(true);
+            //ÅÐ¸º
         }
     }
 
