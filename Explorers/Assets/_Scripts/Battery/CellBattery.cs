@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Security.Cryptography;
 using UnityEngine;
+using static UnityEngine.Rendering.DebugUI;
 
 public class CellBattery : Battery
 {
@@ -67,6 +68,20 @@ public class CellBattery : Battery
     public void ChangeConnectState(bool newState)
     {
         isConnected = newState;
+        if(isConnected)
+        {
+            GetLackPowerFromMain();
+        }
     }
-    
+
+
+    /// <summary>
+    /// 从主电池那里获得当前缺少的电
+    /// </summary>
+    public void GetLackPowerFromMain()
+    {
+        int power = maxPower - currentPower;
+        currentPower = maxPower;
+        this._mainBattery.ChangePower(-power);
+    }
 }

@@ -166,7 +166,7 @@ public class PlayerController : MonoBehaviour
 
             _hasConnected = false;
             //ÈÜ½âÐ§¹û
-            GetComponent<CellBattery>().ChangeConnectState(_hasConnected);
+            GetComponent<CellBattery>().ChangeConnectState(!_hasConnected);
         }
     }
     
