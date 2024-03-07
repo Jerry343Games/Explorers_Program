@@ -20,7 +20,7 @@ public class Bullet : MonoBehaviour
     {
         _damage = data.attackDamage;
         _speed = data.attackSpeed;
-        _destoryTime = data.attackRange / 60f;
+        _destoryTime = data.attackRange / data.attackSpeed;
         _dir = dir;
 
         Destroy(gameObject, _destoryTime);//根据射程计算
