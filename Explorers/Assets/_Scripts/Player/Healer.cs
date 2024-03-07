@@ -29,7 +29,7 @@ public class Healer : PlayerController
             transform.localScale = new(1, 1, 1);
         }
         CheckDistanceToBattery();
-
+        CheckKeys();
     }
     private void OnTriggerStay(Collider other)
     {

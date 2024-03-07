@@ -612,6 +612,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4138879642823132348, guid: 661a6ab58b0cae94c9a854b0adcdf737,
         type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4138879642823132348, guid: 661a6ab58b0cae94c9a854b0adcdf737,
+        type: 3}
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
@@ -634,6 +639,11 @@ PrefabInstance:
         type: 3}
       propertyPath: attack
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4797302563098779745, guid: 661a6ab58b0cae94c9a854b0adcdf737,
+        type: 3}
+      propertyPath: maxArmor
+      value: 1000
       objectReference: {fileID: 0}
     - target: {fileID: 4797302563098779745, guid: 661a6ab58b0cae94c9a854b0adcdf737,
         type: 3}
@@ -751,6 +761,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5338948758665226377, guid: 9644debdbcef5aa4697ef57db70c48dc,
         type: 3}
+      propertyPath: maxArmor
+      value: 1000
+      objectReference: {fileID: 0}
+    - target: {fileID: 5338948758665226377, guid: 9644debdbcef5aa4697ef57db70c48dc,
+        type: 3}
       propertyPath: mainWeapon
       value: 
       objectReference: {fileID: 11400000, guid: 26b10320b0a849c479c35af25f4c8db1,
@@ -759,7 +774,7 @@ PrefabInstance:
         type: 3}
       propertyPath: secondaryWeapons
       value: 
-      objectReference: {fileID: 11400000, guid: 19e482ec8dcc115479a7ad3a26d79d83,
+      objectReference: {fileID: 11400000, guid: 5c896a5fadf9b244f817015269b81025,
         type: 2}
     - target: {fileID: 5338948758665226377, guid: 9644debdbcef5aa4697ef57db70c48dc,
         type: 3}
@@ -828,6 +843,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7951266776005374219, guid: 9644debdbcef5aa4697ef57db70c48dc,
         type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7951266776005374219, guid: 9644debdbcef5aa4697ef57db70c48dc,
+        type: 3}
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
@@ -893,10 +913,20 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2541206623591261561}
     m_Modifications:
+    - target: {fileID: -9115326595532701369, guid: 3d73830816f1a1647ab4f60936645d49,
+        type: 3}
+      propertyPath: maxPower
+      value: 10000
+      objectReference: {fileID: 0}
     - target: {fileID: 2212072781666433573, guid: 3d73830816f1a1647ab4f60936645d49,
         type: 3}
       propertyPath: speed
       value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 2212072781666433573, guid: 3d73830816f1a1647ab4f60936645d49,
+        type: 3}
+      propertyPath: maxArmor
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2212072781666433573, guid: 3d73830816f1a1647ab4f60936645d49,
         type: 3}
@@ -979,6 +1009,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: BatteryCarrier
+      objectReference: {fileID: 0}
+    - target: {fileID: 7275268073146635424, guid: 3d73830816f1a1647ab4f60936645d49,
+        type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 7275268073146635424, guid: 3d73830816f1a1647ab4f60936645d49,
         type: 3}
@@ -1084,6 +1119,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6905893616000494438, guid: b53a680214faa4d40b7b704146a8c4de,
         type: 3}
+      propertyPath: maxArmor
+      value: 1000
+      objectReference: {fileID: 0}
+    - target: {fileID: 6905893616000494438, guid: b53a680214faa4d40b7b704146a8c4de,
+        type: 3}
       propertyPath: mainWeapon
       value: 
       objectReference: {fileID: 11400000, guid: fe7b4ae7510e5334d8dd901dab5e27cc,
@@ -1158,6 +1198,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Healer
+      objectReference: {fileID: 0}
+    - target: {fileID: 9010808815923592971, guid: b53a680214faa4d40b7b704146a8c4de,
+        type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 9010808815923592971, guid: b53a680214faa4d40b7b704146a8c4de,
         type: 3}

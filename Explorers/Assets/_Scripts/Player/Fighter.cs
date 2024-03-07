@@ -65,7 +65,7 @@ public class Fighter : PlayerController
         if (_enemyInArea.Count == 0) return;
         for (int i = 0; i < _enemyInArea.Count; i++)
         {
-            _enemyInArea[i].GetComponent<Enemy>().TakeDamage(attack);
+            _enemyInArea[i].GetComponent<Enemy>().TakeDamage(currentWeapon.attackDamage);
             if (isLeft)
             {
                 _enemyInArea[i].GetComponent<Enemy>().Vertigo(-transform.right * force);
@@ -77,23 +77,6 @@ public class Fighter : PlayerController
 
         }
     }
-    //public void PerformAttack()
-    //{
-    //    if (_enemyInArea.Count == 0) return;
-    //    for(int i = 0; i < _enemyInArea.Count; i++)
-    //    {
-    //        _enemyInArea[i].GetComponent<Enemy>().TakeDamage(attack);
-    //        if (isLeft)
-    //        {
-    //            _enemyInArea[i].GetComponent<Enemy>().Vertigo(-transform.right * force);
-    //        }
-    //        else
-    //        {
-    //            _enemyInArea[i].GetComponent<Enemy>().Vertigo(transform.right *force);
-    //        }
-           
-    //    }
-    //}
 
     private void OnTriggerEnter(Collider other)
     {       

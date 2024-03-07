@@ -8,9 +8,9 @@ using UnityEngine;
 public enum PlayerType
 {
     BatteryCarrier=0,
-    Shooter=1,
+    Shooter=2,
     Healer=3,
-    Fighter=2,
+    Fighter=1,
 }
 
 
@@ -26,9 +26,19 @@ public enum ItemType
 }
 
 /// <summary>
-/// 收集物类型
+/// 零件类型
 /// </summary>
 public enum ResourceType
 {
     Gold,
+}
+
+
+/// <summary>
+/// 道具类型
+/// </summary>
+public enum PropType
+{
+
+
 }

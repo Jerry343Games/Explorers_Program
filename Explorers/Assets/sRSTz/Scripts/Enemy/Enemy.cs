@@ -68,8 +68,7 @@ public class Enemy : MonoBehaviour
     }
 
     public virtual void TakeDamage(int damage)
-    {
-        
+    { 
         HP -= damage;
         if (HP <= 0) Dead();
     }

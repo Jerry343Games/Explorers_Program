@@ -82,7 +82,7 @@ public class PlayerController : MonoBehaviour
         if (gameObject.CompareTag("Battery")) EnemyManager.Instance.battery = gameObject;
 
         currentArmor = maxArmor;
-        currentWeapon = mainWeapon;
+        currentWeapon = secondaryWeapons;
         _currentMainAmmunition = mainWeapon.initAmmunition;
         _currentSecondaryAmmunition = secondaryWeapons.initAmmunition;
         canUseSkill = false;
@@ -167,6 +167,7 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     public void CheckDistanceToBattery()
     {
+        if (!SceneManager.Instance.BatteryTransform) return;
         if (Vector3.Distance(SceneManager.Instance.BatteryTransform.position, transform.position) > DistanceThreshold && _hasConnected)
         {
             //Destroy(_obiRope.transform.parent.gameObject, 0.5f);
@@ -306,13 +307,14 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     public void Attack()
     {
-        if(currentWeapon==mainWeapon)
+        
+        if(currentWeapon==mainWeapon && canMainAttack)
         {
             canMainAttack = false;
             _mainAttackTimer = currentWeapon.attackCD;
             MainAttack();
         }
-        else if(currentWeapon==secondaryWeapons)
+        else if(currentWeapon== secondaryWeapons && canSecondaryAttack)
         {
             canSecondaryAttack = false;
             _secondaryAttackTimer = currentWeapon.attackCD;
