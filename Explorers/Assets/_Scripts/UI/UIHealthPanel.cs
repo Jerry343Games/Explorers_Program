@@ -35,19 +35,33 @@ public class UIHealthPanel : MonoBehaviour
         switch (transform.name)
         {
             case "BatteryCarrierPanel":
-                _battery = GameObject.Find("BatteryCarrier").GetComponent<Battery>();
-                Debug.Log(_battery.transform.name+"完成配置UI");
+                GameObject BatteryCarrier= GameObject.Find("BatteryCarrier");
+                if (BatteryCarrier)
+                {
+                    _battery = BatteryCarrier.GetComponent<Battery>();
+                }
                 break;
-            //case "ShooterPanel":
-            //    _battery = GameObject.Find("Shooter").GetComponent<Battery>();
-            //    Debug.Log(_battery.transform.name+"完成配置UI");
-            //    break;
-            // case "HealerPanel":
-            //     _battery = GameObject.Find("Healer").GetComponent<Battery>();
-            //     break;
+            case "ShooterPanel":
+                GameObject Shooter = GameObject.Find("Shooter");
+                if (Shooter)
+                {
+                    _battery = Shooter.GetComponent<Battery>();
+                }
+                break;
+             case "HealerPanel":
+                GameObject Healer = GameObject.Find("Healer");
+                if (Healer)
+                {
+                    _battery = Healer.GetComponent<Battery>();
+                }
+                break;
              case "FighterPanel":
-                 _battery = GameObject.Find("Fighter").GetComponent<Battery>();
-                 break;
+                GameObject Fighter = GameObject.Find("Fighter");
+                if (Fighter)
+                {
+                    _battery = Fighter.GetComponent<Battery>();
+                }
+                break;
         }
     }
     

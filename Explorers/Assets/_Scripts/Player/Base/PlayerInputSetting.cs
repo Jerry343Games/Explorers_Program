@@ -74,34 +74,80 @@ public class PlayerInputSetting : MonoBehaviour
     /// 当前帧是否按下交互键：E，North
     /// </summary>
     /// <returns></returns>
-    public bool GetInteractButtonDown() => _interact.WasPressedThisFrame();
-    public bool GetInteractButtonRelease() => _interact.WasReleasedThisFrame();
-    
+    private bool _isPressInteract;
+    public void OnInteract(InputAction.CallbackContext context)
+    {
+        // 检测按键被按下
+        if (context.started)
+        {
+            _isPressInteract = true;
+        }
+        // 检测按键被抬起
+        else if (context.canceled)
+        {
+            _isPressInteract = false;
+        }
+    }
+    public bool GetInteractButtonDown() => _isPressInteract;
+
     /// <summary>
     /// 当前帧是否按下加速键：Space，East
     /// </summary>
     /// <returns></returns>
-    public bool GetAccelerateButtonDown() => _accelerate.WasPressedThisFrame();
-    public bool GetAccelerateButtonRelease() => _accelerate.WasReleasedThisFrame();
-    
+    private bool _isPressAccelerate;
+    public void OnAccelerate(InputAction.CallbackContext context)
+    {
+        // 检测按键被按下
+        if (context.started)
+        {
+            _isPressAccelerate = true;
+        }
+        // 检测按键被抬起
+        else if (context.canceled)
+        {
+            _isPressAccelerate = false;
+        }
+    }
+    public bool GetAccelerateButtonDown() => _isPressAccelerate;
+
     /// <summary>
     /// 当前帧是否按下绳索键：F，LT
     /// </summary>
     /// <returns></returns>
-    public bool GetCableButtonDown() => _cableSetting.WasPressedThisFrame();
-    public bool GetCableButtonRelease() => _cableSetting.WasReleasedThisFrame();
-    
+    private bool _isPressCable;
+    public void OnCable(InputAction.CallbackContext context)
+    {
+        // 检测按键被按下
+        if (context.started)
+        {
+            _isPressCable = true;
+        }
+        // 检测按键被抬起
+        else if (context.canceled)
+        {
+            _isPressCable = false;
+        }
+    }
+    public bool GetCableButtonDown() => _isPressCable;
+
     /// <summary>
     /// 当前帧是否按下攻击键：鼠标左键，X
     /// </summary>
     /// <returns></returns>
-    public bool GetAttackButtonDown() => _attack.WasPressedThisFrame();
-    public bool GetAttackButtonRelease() => _attack.WasReleasedThisFrame();
+    private bool _isPressAttack;
+    public void OnAttack (InputAction.CallbackContext context)
+    {
+        // 检测按键被按下
+        if (context.started)
+        {
+            _isPressAttack = true;
+        }
+        // 检测按键被抬起
+        else if (context.canceled)
+        {
+            _isPressAttack = false;
+        }
+    }
+    public bool GetAttackButtonDown() => _isPressAttack;
     
-    /// <summary>
-    /// 当前帧是否按下瞄准键：鼠标右键，RT
-    /// </summary>
-    /// <returns></returns>
-    public bool GetAimButtonDown() => _aim.WasPressedThisFrame();
-    public bool GetAimButtonRelease() => _aim.WasReleasedThisFrame();
 }
