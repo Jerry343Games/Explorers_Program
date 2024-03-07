@@ -135,6 +135,7 @@ public class PlayerController : MonoBehaviour
     public void ReconnectRope()
     {
         _hasConnected = true;
+        GetComponent<CellBattery>().ChangeConnectState(_hasConnected);
         float rotationZ = Vector3.Angle((transform.position - SceneManager.Instance.BatteryTransform.position).normalized, Vector3.right) * (transform.position.y < SceneManager.Instance.BatteryTransform.position.y ? -1 : 1);
         Quaternion rotation = Quaternion.Euler(new Vector3(0, 0, rotationZ));
         GameObject newRopeHanger = Instantiate(Resources.Load<GameObject>("Hanger"), (transform.position + SceneManager.Instance.BatteryTransform.position) / 2, rotation);
@@ -148,7 +149,6 @@ public class PlayerController : MonoBehaviour
         //设置绳子两边的牵引对象
         attachment[0].target = SceneManager.Instance.BatteryTransform;
         attachment[1].target = transform;
-        GetComponent<CellBattery>().ChangeConnectState(_hasConnected);
     }
 
     /// <summary>
@@ -166,7 +166,7 @@ public class PlayerController : MonoBehaviour
 
             _hasConnected = false;
             //溶解效果
-            GetComponent<CellBattery>().ChangeConnectState(!_hasConnected);
+            GetComponent<CellBattery>().ChangeConnectState(_hasConnected);
         }
     }
     

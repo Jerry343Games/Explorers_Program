@@ -46,7 +46,7 @@ public class Fighter : PlayerController
         {
             //进入可重连绳子区域
             case "ReconnectArea":
-                if(!_hasConnected /*&& 按下重连键*/)
+                if(!_hasConnected && playerInputSetting.GetCableButtonDown())
                 {
                     ReconnectRope();
                 }
