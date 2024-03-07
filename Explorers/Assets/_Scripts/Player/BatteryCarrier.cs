@@ -13,6 +13,5 @@ public class BatteryCarrier : PlayerController
     {
         if (hasDead) return;
         CharacterMove();
-        CheckKeys();
     }
 }

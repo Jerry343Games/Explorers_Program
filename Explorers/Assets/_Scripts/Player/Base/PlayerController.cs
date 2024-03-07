@@ -128,10 +128,6 @@ public class PlayerController : MonoBehaviour
         {
             _speedFactor = accelerateFactor;
         }
-        if (playerInputSetting.GetAccelerateButtonRelease())
-        {
-            _speedFactor = 1;
-        }
     }
     
     /// <summary>
