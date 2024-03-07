@@ -32,7 +32,8 @@ public class PlayerController : MonoBehaviour
 
     [Header("护盾")]
     public int maxArmor;//电池护盾量
-    protected int currentArmor;//电池护盾量
+    [HideInInspector]
+    public int currentArmor;//电池护盾量
     public int restoreAmount;//单次护盾修复量
     public float restoreCD;//修复冷却
     private float _restoreTimer;
@@ -60,6 +61,10 @@ public class PlayerController : MonoBehaviour
     public float DistanceThreshold = 10;//绳子最大长度
     protected bool _hasConnected;//是否处于连接状态
     protected ObiRope _obiRope;
+
+    [HideInInspector]
+    public Vector3 mouseWorldPS => Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0));
+
 
     /// <summary>
     /// 初始化方法

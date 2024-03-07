@@ -16,15 +16,15 @@ public class Fighter : PlayerController
         
         PlayerInit();   
     }
-
-    // Update is called once per frame
     void Update()
     {
+        if (hasDead) return;
+        UpdateAttackState();
         if (playerInputSetting.GetAttackButtonDown())
         {           
-            PerformAttack();
+            //PerformAttack();
+            Attack();
         }
-        if (hasDead) return;
         CharacterMove();
         if (playerInputSetting.inputDir.x < 0)
         {
@@ -59,10 +59,11 @@ public class Fighter : PlayerController
                 break;
         }
     }
-    public void PerformAttack()
+
+    public override void MainAttack()
     {
         if (_enemyInArea.Count == 0) return;
-        for(int i = 0; i < _enemyInArea.Count; i++)
+        for (int i = 0; i < _enemyInArea.Count; i++)
         {
             _enemyInArea[i].GetComponent<Enemy>().TakeDamage(attack);
             if (isLeft)
@@ -71,11 +72,28 @@ public class Fighter : PlayerController
             }
             else
             {
-                _enemyInArea[i].GetComponent<Enemy>().Vertigo(transform.right *force);
+                _enemyInArea[i].GetComponent<Enemy>().Vertigo(transform.right * force);
             }
-           
+
         }
     }
+    //public void PerformAttack()
+    //{
+    //    if (_enemyInArea.Count == 0) return;
+    //    for(int i = 0; i < _enemyInArea.Count; i++)
+    //    {
+    //        _enemyInArea[i].GetComponent<Enemy>().TakeDamage(attack);
+    //        if (isLeft)
+    //        {
+    //            _enemyInArea[i].GetComponent<Enemy>().Vertigo(-transform.right * force);
+    //        }
+    //        else
+    //        {
+    //            _enemyInArea[i].GetComponent<Enemy>().Vertigo(transform.right *force);
+    //        }
+           
+    //    }
+    //}
 
     private void OnTriggerEnter(Collider other)
     {       

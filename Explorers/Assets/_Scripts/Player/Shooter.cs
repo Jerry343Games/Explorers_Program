@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Shooter : PlayerController
 {
-
+    private bool isLeft;
     void Awake()
     {
         PlayerInit();
@@ -13,9 +13,23 @@ public class Shooter : PlayerController
     void Update()
     {
         if (hasDead) return;
+        UpdateAttackState();
+        if (playerInputSetting.GetAttackButtonDown())
+        {
+            Attack();
+        }
         CharacterMove();
+        if (playerInputSetting.inputDir.x < 0)
+        {
+            transform.localScale = new(-1, 1, 1);
+            isLeft = true;
+        }
+        else
+        {
+            isLeft = false;
+            transform.localScale = new(1, 1, 1);
+        }
         CheckDistanceToBattery();
-        //DynamicChangeLengthOfRope();
 
     }
     private void OnTriggerStay(Collider other)

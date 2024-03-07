@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Healer : PlayerController
 {
-
+    private bool isLeft = false;
     void Awake()
     {
         PlayerInit();
@@ -12,7 +12,22 @@ public class Healer : PlayerController
     void Update()
     {
         if (hasDead) return;
+        UpdateAttackState();
+        if (playerInputSetting.GetAttackButtonDown())
+        {
+            Attack();
+        }
         CharacterMove();
+        if (playerInputSetting.inputDir.x < 0)
+        {
+            transform.localScale = new(-1, 1, 1);
+            isLeft = true;
+        }
+        else
+        {
+            isLeft = false;
+            transform.localScale = new(1, 1, 1);
+        }
         CheckDistanceToBattery();
 
     }
@@ -33,6 +48,17 @@ public class Healer : PlayerController
                 break;
             default:
                 break;
+        }
+    }
+    //“医者”
+    public override void MainAttack()
+    {
+        foreach(var player in EnemyManager.Instance.players)
+        {
+            if (player.name == "BatteryCarrier") continue;
+            //非电池角色回复护盾
+            PlayerController controller = player.GetComponent<PlayerController>();
+            controller.currentArmor = Mathf.Min(controller.currentArmor + mainWeapon.attackDamage, controller.maxArmor);
         }
     }
 
