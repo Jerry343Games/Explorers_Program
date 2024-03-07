@@ -62,4 +62,11 @@ public class Healer : PlayerController
         }
     }
 
+    //±‡÷Ø
+    public override void SecondaryAttack()
+    {
+        GameObject bullet = Instantiate(Resources.Load<GameObject>("Bullet"), transform.position, Quaternion.identity);
+        bullet.GetComponent<Bullet>().Init(secondaryWeapons, new Vector3(transform.localScale.x, 0, 0));
+    }
+
 }

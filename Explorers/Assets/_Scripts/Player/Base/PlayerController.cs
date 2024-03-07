@@ -2,6 +2,7 @@ using Obi;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEditor.Rendering;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -88,6 +89,8 @@ public class PlayerController : MonoBehaviour
         hasDead = false;
         _speedFactor = 1;
         _outSpeedFactor = 1;
+
+        transform.position = SceneManager.Instance.bornTransform.position;
     }
     
     public void SetRope(ObiRope rope = null)
@@ -135,7 +138,8 @@ public class PlayerController : MonoBehaviour
             _speedFactor = 1;
         }
     }
-    
+
+
     /// <summary>
     /// 绳子重连方法
     /// </summary>

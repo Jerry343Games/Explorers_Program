@@ -232,7 +232,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &360218600954822578
 Transform:
   m_ObjectHideFlags: 0
@@ -316,7 +316,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &864131195154521881
 Transform:
   m_ObjectHideFlags: 0
@@ -400,7 +400,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &6932338388524800376
 Transform:
   m_ObjectHideFlags: 0
@@ -751,6 +751,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5338948758665226377, guid: 9644debdbcef5aa4697ef57db70c48dc,
         type: 3}
+      propertyPath: mainWeapon
+      value: 
+      objectReference: {fileID: 11400000, guid: 26b10320b0a849c479c35af25f4c8db1,
+        type: 2}
+    - target: {fileID: 5338948758665226377, guid: 9644debdbcef5aa4697ef57db70c48dc,
+        type: 3}
+      propertyPath: secondaryWeapons
+      value: 
+      objectReference: {fileID: 11400000, guid: 19e482ec8dcc115479a7ad3a26d79d83,
+        type: 2}
+    - target: {fileID: 5338948758665226377, guid: 9644debdbcef5aa4697ef57db70c48dc,
+        type: 3}
       propertyPath: DistanceThreshold
       value: 9
       objectReference: {fileID: 0}
@@ -1070,6 +1082,18 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6905893616000494438, guid: b53a680214faa4d40b7b704146a8c4de,
+        type: 3}
+      propertyPath: mainWeapon
+      value: 
+      objectReference: {fileID: 11400000, guid: fe7b4ae7510e5334d8dd901dab5e27cc,
+        type: 2}
+    - target: {fileID: 6905893616000494438, guid: b53a680214faa4d40b7b704146a8c4de,
+        type: 3}
+      propertyPath: secondaryWeapons
+      value: 
+      objectReference: {fileID: 11400000, guid: d446be3765078364ab2d44f0af5e3988,
+        type: 2}
     - target: {fileID: 6905893616000494438, guid: b53a680214faa4d40b7b704146a8c4de,
         type: 3}
       propertyPath: DistanceThreshold

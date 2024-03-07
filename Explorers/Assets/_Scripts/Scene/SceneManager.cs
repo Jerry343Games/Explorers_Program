@@ -1,10 +1,20 @@
 using Obi;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.Serialization;
 
+
+[Serializable]
+public struct CollectionTask
+{
+    public ResourceType type;
+    public int amount;
+    public GameObject taskUI;
+    public bool hasFinshed;
+}
 public class SceneManager : Singleton<SceneManager>
 {
     public int maxPlayer=2;
@@ -14,9 +24,9 @@ public class SceneManager : Singleton<SceneManager>
     public Transform BatteryTransform;//电池坐标（本地坐标）
     [HideInInspector]
     public GameObject Slover;//使得绳子生效的父物体
+    public Transform bornTransform;
 
-
-
+    public List<CollectionTask> tasks = new List<CollectionTask>();
     private void OnEnable()
     {
         EventCenter.GameStartedEvent += GameInit;

@@ -8,9 +8,9 @@ using UnityEngine;
 public enum PlayerType
 {
     BatteryCarrier=0,
-    Shooter=3,
-    Healer=2,
-    Fighter=1
+    Shooter=1,
+    Healer=3,
+    Fighter=2,
 }
 
 
@@ -20,7 +20,7 @@ public enum PlayerType
 
 public enum ItemType
 {
-    Collections,//收集物
+    Resource,//收集物
     Battery,//场景中的电池
     Boost,//属性提升？
 }
@@ -28,7 +28,7 @@ public enum ItemType
 /// <summary>
 /// 收集物类型
 /// </summary>
-public enum CollectionType
+public enum ResourceType
 {
     Gold,
 }

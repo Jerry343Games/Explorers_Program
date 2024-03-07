@@ -7,20 +7,16 @@ using DG.Tweening;
 
 public class UIHealthPanel : MonoBehaviour
 {
-    private SceneManager sceneManager;
+    //private SceneManager sceneManager;
     public Image Inner;
     private Battery _battery;
 
     private bool hasInit;
     
-    private void Awake()
-    {
-        sceneManager = GameObject.FindWithTag("SceneManager").GetComponent<SceneManager>();
-    }
 
     private void Update()
     {
-        if (sceneManager.isMaxPlayer&&!hasInit)
+        if (SceneManager.Instance.isMaxPlayer&&!hasInit)
         {
             Init();
             hasInit = true;

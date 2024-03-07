@@ -51,4 +51,18 @@ public class Shooter : PlayerController
                 break;
         }
     }
+
+    //¼ßÃðÕß
+    public override void MainAttack()
+    {
+        GameObject bullet = Instantiate(Resources.Load<GameObject>("Bullet"), transform.position, Quaternion.identity);
+        bullet.GetComponent<Bullet>().Init(mainWeapon, new Vector3(transform.localScale.x, 0, 0));
+    }
+
+    //Óã²æ
+    public override void SecondaryAttack()
+    {
+        GameObject bullet = Instantiate(Resources.Load<GameObject>("Bullet"), transform.position, Quaternion.identity);
+        bullet.GetComponent<Bullet>().Init(secondaryWeapons, new Vector3(transform.localScale.x, 0, 0));
+    }
 }
