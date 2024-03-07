@@ -22,8 +22,9 @@ public class PlayerController : MonoBehaviour
     
     [Header("移动")]
     public float speed;
-    public float accelerateFactor;//加速移速系数
-    private float _speedFactor;//总控移速系数，通过修改它改变角色移速
+    public float accelerateFactor;//加速移速设置系数
+    private float _speedFactor;//加速移动计算系数
+    private float _outSpeedFactor;//外界移速系数
     private Vector2 _inputDir;//输入方向
     private Vector3 _moveDir;//移动方向
     public float vertigoTime = 0.3f;//被攻击后眩晕的时间（不能操作）
@@ -86,6 +87,7 @@ public class PlayerController : MonoBehaviour
         canUseSkill = false;
         hasDead = false;
         _speedFactor = 1;
+        _outSpeedFactor = 1;
     }
     
     public void SetRope(ObiRope rope = null)
@@ -121,12 +123,16 @@ public class PlayerController : MonoBehaviour
             return;
         }
         MovementCombination();
-        transform.Translate(_moveDir * Time.deltaTime * speed * _speedFactor, Space.World);
+        transform.Translate(_moveDir * Time.deltaTime * speed * _speedFactor*_outSpeedFactor, Space.World);
         
         //主动加速判断
         if (playerInputSetting.GetAccelerateButtonDown())
         {
             _speedFactor = accelerateFactor;
+        }
+        else
+        {
+            _speedFactor = 1;
         }
     }
     
