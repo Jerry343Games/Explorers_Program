@@ -144,19 +144,67 @@ MonoBehaviour:
     m_ActionId: 286b8520-5b03-4d79-9223-e330bb2700bb
     m_ActionName: Player/Move[/XInputControllerWindows/leftStick,/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d]
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 7042558557124252667}
+        m_TargetAssemblyTypeName: PlayerInputSetting, Assembly-CSharp
+        m_MethodName: OnInteract
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: 428fbfe6-9ef9-45f3-8bba-9a28e422f0fa
     m_ActionName: Player/Reconnect[/Keyboard/e,/XInputControllerWindows/buttonNorth]
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 7042558557124252667}
+        m_TargetAssemblyTypeName: PlayerInputSetting, Assembly-CSharp
+        m_MethodName: OnAccelerate
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: e7f0ae73-1bcc-46d0-b00a-3914a9cc76f0
     m_ActionName: Player/Accelerate[/Keyboard/space,/XInputControllerWindows/buttonEast]
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 7042558557124252667}
+        m_TargetAssemblyTypeName: PlayerInputSetting, Assembly-CSharp
+        m_MethodName: OnCable
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: d342a6fc-71dc-430c-9d2d-153658fbcede
     m_ActionName: Player/CableSetting[/XInputControllerWindows/leftTrigger,/Keyboard/f]
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 7042558557124252667}
+        m_TargetAssemblyTypeName: PlayerInputSetting, Assembly-CSharp
+        m_MethodName: OnAttack
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: 6dfb8128-cafc-401a-b567-445c86d84cad
     m_ActionName: Player/Attack[/Mouse/leftButton]
   - m_PersistentCalls:
@@ -796,6 +844,19 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 478394019225102243}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &5909638852487930072
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7564652996621964968}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62359d80fdc0e4315ab6331b78ec5b90, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  kinematicForParticles: 0
 --- !u!114 &9081566840665714264
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -813,19 +874,6 @@ MonoBehaviour:
   filter: -65535
   m_SourceCollider: {fileID: 3275456429002365309}
   m_DistanceField: {fileID: 0}
---- !u!114 &5909638852487930072
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7564652996621964968}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 62359d80fdc0e4315ab6331b78ec5b90, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  kinematicForParticles: 0
 --- !u!1001 &7685943761095137905
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1111,6 +1159,19 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 8250460581762199183}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &3367283132265754748
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1113326784236556676}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62359d80fdc0e4315ab6331b78ec5b90, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  kinematicForParticles: 0
 --- !u!114 &8674944174995849446
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1128,19 +1189,6 @@ MonoBehaviour:
   filter: -65535
   m_SourceCollider: {fileID: 7506257279700418044}
   m_DistanceField: {fileID: 0}
---- !u!114 &3367283132265754748
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1113326784236556676}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 62359d80fdc0e4315ab6331b78ec5b90, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  kinematicForParticles: 0
 --- !u!136 &7506257279700418044 stripped
 CapsuleCollider:
   m_CorrespondingSourceObject: {fileID: 1897162330059821939, guid: b53a680214faa4d40b7b704146a8c4de,

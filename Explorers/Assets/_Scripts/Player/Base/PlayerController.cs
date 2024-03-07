@@ -319,4 +319,48 @@ public class PlayerController : MonoBehaviour
     /// 副武器攻击方法 请子类重写
     /// </summary>
     public virtual void SecondaryAttack() { }
+    
+    public void CheckKeys()
+
+    {
+
+        if (playerInputSetting.GetAccelerateButtonDown())
+
+        {
+
+            Debug.Log(name+" Press Accelerate");
+
+        }
+
+
+
+        if (playerInputSetting.GetCableButtonDown())
+
+        {
+
+            Debug.Log(name+" Press Cable");
+
+        }
+
+
+
+        if (playerInputSetting.GetAttackButtonDown())
+
+        {
+
+            Debug.Log(name+" Press Attack");
+
+        }
+
+
+
+        if (playerInputSetting.GetInteractButtonDown())
+
+        {
+
+            Debug.Log(name+ " Press Interact");
+
+        }
+
+    }
 }
