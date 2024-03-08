@@ -62,6 +62,7 @@ public class Enemy : MonoBehaviour
         if (EnemyManager.Instance.players.Count == 0) return null;
         foreach (var character in EnemyManager.Instance.players)
         {
+            if (character.GetComponent<PlayerController>()==null|| character.GetComponent<PlayerController>().hasDead) continue;
             //if (character.CompareTag("Enemy")) continue;
             float distanceToPlayer = Vector3.Distance(transform.position, character.transform.position);
             if (distanceToPlayer < closestDistance)
