@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 public class DashFish : Enemy
 {
-    public float detectionRadius = 5f; // 检测半径
+    public float dashDetectionRadius = 5f; // 冲刺的检测半径
     private bool isDashing=false;
     public float prepareTime = 2f;
     private float prepareTimer = 0;
@@ -49,10 +49,15 @@ public class DashFish : Enemy
 
     public  void Move()
     {
-        if (target == null && canMove) return; // 确保玩家存在
+        if (target == null) return; // 确保玩家存在
         Vector2 distance = (target.transform.position - transform.position);
-        Vector2 direction =distance. normalized; // 获取朝向玩家的单位向量
-        if (prepareTimer==0&& Mathf.Pow(distance.x, 2) + Mathf.Pow(distance.y, 2) >= Mathf.Pow(detectionRadius, 2)){
+        Vector2 direction = distance.normalized; // 获取朝向玩家的单位向量
+        if (distance.magnitude > detectionRange && canMove)//如果丢失玩家并且能移动
+        {
+            ReturnSpawnpoint();
+        }
+        else
+        if (prepareTimer==0&& Mathf.Pow(distance.x, 2) + Mathf.Pow(distance.y, 2) >= Mathf.Pow(dashDetectionRadius, 2)){
             rb.velocity = direction * moveSpeed; // 沿着朝向玩家的方向移动
 
             // 将人物的方向设置为计算得到的方向

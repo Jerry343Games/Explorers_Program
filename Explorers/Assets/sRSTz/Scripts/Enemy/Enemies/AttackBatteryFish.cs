@@ -38,13 +38,18 @@ public class AttackBatteryFish : Enemy
 
     public void Move()
     {
-        if (EnemyManager.Instance.battery != null && canMove) // 确保玩家存在
+        if (EnemyManager.Instance.battery != null && canMove&& (target.transform.position - transform.position).magnitude < detectionRange) // 确保玩家存在
         {
+            
             Vector2 direction = (EnemyManager.Instance.battery.transform.position - transform.position).normalized; // 获取朝向玩家的单位向量
             rb.velocity = direction * moveSpeed; // 沿着朝向玩家的方向移动
 
             // 将人物的方向设置为计算得到的方向
             gameObject.transform.right = direction;
+        }
+        else if (canMove) //如果丢失玩家并且能移动，那么回到出生点
+        {
+            ReturnSpawnpoint();
         }
     }
     

@@ -7,28 +7,40 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     // 可以之后加个存数据的结构体
+    
     public int moveSpeed;
     public float force;
+    public int HP = 10;
+    public int damage = 10;
+    public bool canMove = true;
+    public float vertigoTime = 0.2f;
+    private float vertigoTimer = 0;
+    public float detectionRange = 5f;
+    public float stayTime = 4f;//如果丢失目标，原地等待的时间
+    [HideInInspector]
+    public bool isReturning = false;
+    [HideInInspector]
+    public float stayTimer = 0;
     [HideInInspector]
     public GameObject target=null;
     [HideInInspector]
     public Rigidbody rb;
     [HideInInspector]
     public Collision touchedCollision;
-    public int HP = 10;
-    public int damage = 10;
-    public bool canMove = true;
-    public float vertigoTIme = 0.2f;
-    private float vertigoTimer = 0;
+
+    [HideInInspector]
+    public Vector3 spawnerPoint;
+
     protected virtual void Awake()
     {
         rb = GetComponent<Rigidbody>();
+        spawnerPoint = gameObject.transform.position;
     }
     private void Update()
     {
         if (!canMove)
         {
-            if (vertigoTimer >= vertigoTIme)
+            if (vertigoTimer >= vertigoTime)
             {
                 canMove = true;
                 vertigoTimer = 0;
@@ -80,5 +92,35 @@ public class Enemy : MonoBehaviour
     {
         canMove = false;
         rb.AddForce(force, ForceMode.Impulse);
+    }
+    public virtual void ReturnSpawnpoint()
+    {
+        if ( stayTimer < stayTime)
+        {
+            stayTimer += Time.fixedDeltaTime;
+        }
+        else
+        {
+            isReturning = true;
+
+        }
+        if ((spawnerPoint - transform.position).magnitude < 0.2f)
+        {
+            isReturning = false;
+            stayTimer = 0;
+            rb.velocity = Vector3.zero;
+            rb.angularVelocity = Vector3.zero;
+            return;
+        }
+
+        if (isReturning)
+        {
+            Vector2 direction = (spawnerPoint - transform.position).normalized;
+
+            rb.velocity = direction * moveSpeed;
+
+            // 将人物的方向设置为计算得到的方向
+            gameObject.transform.right = direction;
+        }
     }
 }

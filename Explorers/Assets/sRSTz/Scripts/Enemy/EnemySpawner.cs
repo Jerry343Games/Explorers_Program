@@ -36,7 +36,7 @@ public class EnemySpawner : MonoBehaviour
         {
             Debug.Log("22");
             Instantiate(enemyPrefab);
-            Debug.Log(enemyPrefab);
+            
             enemyPrefab = null;
             return true;
         }
