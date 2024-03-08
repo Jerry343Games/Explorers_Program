@@ -99,17 +99,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1500d0132b7e4a94f8011215e26090b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerInputSetting: {fileID: 0}
   myIndex: 0
   speed: 3
   accelerateFactor: 1.5
   vertigoTime: 0.3
-  maxDefence: 0
-  restoreAmount: 0
-  restoreCD: 0
+  maxArmor: 9
+  currentArmor: 0
+  restoreAmount: 1
+  restoreCD: 2
   skillCD: 0
-  attack: 0
+  mainWeapon: {fileID: 0}
+  secondaryWeapons: {fileID: 0}
+  currentWeapon: {fileID: 0}
   attackRange: 0
-  attackCD: 0
+  attack: 0
+  hasDead: 0
   DistanceThreshold: 10
 --- !u!114 &6178675029094448507
 MonoBehaviour:
