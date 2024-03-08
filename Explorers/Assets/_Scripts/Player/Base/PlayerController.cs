@@ -7,6 +7,7 @@ using UnityEditor.Rendering;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.XR;
+using UnityEngine.Serialization;
 
 public class PlayerController : MonoBehaviour
 {
@@ -53,6 +54,8 @@ public class PlayerController : MonoBehaviour
     private int _currentMainAmmunition, _currentSecondaryAmmunition;//主副武器当前子弹数
     private float _mainAttackTimer, _secondaryAttackTimer;
     private bool canMainAttack, canSecondaryAttack;
+    [HideInInspector]
+    public Vector3 myAimPos;//瞄准方向
 
     [Header("通用")]
     public int attackRange;
@@ -313,6 +316,27 @@ public class PlayerController : MonoBehaviour
         currentWeapon = (currentWeapon == mainWeapon ? secondaryWeapons : mainWeapon);
     }
 
+    /// <summary>
+    /// 使weapon的前向始终朝向_aimDirection
+    /// </summary>
+    /// <param name="weapon">武器</param>
+    public void Aim(GameObject weapon)
+    {
+        if (!playerInputSetting.isStick)
+        {
+            myAimPos = new Vector3(playerInputSetting.aimPos.x, playerInputSetting.aimPos.y, 0);
+            weapon.transform.LookAt(myAimPos);
+        }
+        else
+        {
+            if (playerInputSetting.aimPos!=Vector2.zero)
+            {
+                myAimPos = new Vector3(playerInputSetting.aimPos.x, playerInputSetting.aimPos.y, 0)+transform.position;
+                weapon.transform.LookAt(myAimPos);
+            }
+        }
+    }
+    
     /// <summary>
     /// 攻击方法
     /// </summary>

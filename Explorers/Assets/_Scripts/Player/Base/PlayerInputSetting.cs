@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Serialization;
+using Vector2 = UnityEngine.Vector2;
 
 /// <summary>
 /// 负责统一处理玩家的输入数据接收，并控制对应的玩家模块开启
@@ -25,6 +27,13 @@ public class PlayerInputSetting : MonoBehaviour
 
     [HideInInspector]
     public Vector2 inputDir;
+    [HideInInspector]
+    public Vector2 aimPos;//最终瞄准位置，用于获取
+    private Vector2 _inputAimDir;
+    private RaycastHit _hit;
+    public LayerMask mouseRayLayer;
+    private GameObject _player;
+    public bool isStick;
     private void Awake()
     {
         Init();
@@ -34,15 +43,19 @@ public class PlayerInputSetting : MonoBehaviour
         {
             case (int)PlayerType.BatteryCarrier:
                 batteryCarrier.SetActive(true);
+                _player = batteryCarrier;
                 break;
             case (int)PlayerType.Shooter:
                 shooter.SetActive(true);
+                _player = shooter;
                 break;
             case (int)PlayerType.Healer:
                 healer.SetActive(true);
+                _player = healer;
                 break;
             case (int)PlayerType.Fighter:
                 fighter.SetActive(true);
+                _player = fighter;
                 break;
         }
     }
@@ -57,7 +70,6 @@ public class PlayerInputSetting : MonoBehaviour
         _interact = inputActionAsset["Interact"];
         _cableSetting = inputActionAsset["CableSetting"];
         _accelerate = inputActionAsset["Accelerate"];
-        _aim = inputActionAsset["Aim"];
         _attack = inputActionAsset["Attack"];
     }
 
@@ -149,5 +161,25 @@ public class PlayerInputSetting : MonoBehaviour
         }
     }
     public bool GetAttackButtonDown() => _isPressAttack;
-    
+
+    public void OnStickAim(InputAction.CallbackContext value)
+    {
+        isStick = true;
+        _inputAimDir = value.ReadValue<Vector2>().normalized;
+        aimPos = _inputAimDir;
+    }
+
+    public void OnMouseAim(InputAction.CallbackContext value)
+    {
+        _inputAimDir = value.ReadValue<Vector2>();
+        
+        Ray ray = Camera.main.ScreenPointToRay(_inputAimDir);
+        Vector2 _hitPos=Vector2.zero;
+        if (Physics.Raycast(ray, out _hit, 50, mouseRayLayer)) //如果碰撞检测到物体
+        {
+            _hitPos = new Vector2(_hit.point.x, _hit.point.y);
+        }
+
+        aimPos = _hitPos;
+    }
 }

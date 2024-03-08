@@ -5,6 +5,7 @@ using UnityEngine;
 public class Shooter : PlayerController
 {
     private bool isLeft;
+    public GameObject gun;
     void Awake()
     {
         PlayerInit();
@@ -14,6 +15,7 @@ public class Shooter : PlayerController
     {
         if (hasDead) return;
         UpdateAttackState();
+        Aim(gun);
         if (playerInputSetting.GetAttackButtonDown())
         {
             Attack();
@@ -57,13 +59,13 @@ public class Shooter : PlayerController
     public override void MainAttack()
     {
         GameObject bullet = Instantiate(Resources.Load<GameObject>("Bullet"), transform.position, Quaternion.identity);
-        bullet.GetComponent<Bullet>().Init(mainWeapon, new Vector3(transform.localScale.x, 0, 0));
+        bullet.GetComponent<Bullet>().Init(mainWeapon, gun.transform.forward);
     }
 
     //”„≤Ê
     public override void SecondaryAttack()
     {
         GameObject bullet = Instantiate(Resources.Load<GameObject>("Bullet"), transform.position, Quaternion.identity);
-        bullet.GetComponent<Bullet>().Init(secondaryWeapons, new Vector3(transform.localScale.x, 0, 0));
+        bullet.GetComponent<Bullet>().Init(secondaryWeapons,gun.transform.forward);
     }
 }
