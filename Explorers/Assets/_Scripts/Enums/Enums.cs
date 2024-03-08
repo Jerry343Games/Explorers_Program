@@ -8,9 +8,9 @@ using UnityEngine;
 public enum PlayerType
 {
     BatteryCarrier=0,
-    Shooter=2,
+    Shooter=1,
     Healer=3,
-    Fighter=1,
+    Fighter=2,
 }
 
 

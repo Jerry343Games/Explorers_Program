@@ -19,6 +19,7 @@ public class Shooter : PlayerController
             Attack();
         }
         CharacterMove();
+        RestroeDefence();
         if (playerInputSetting.inputDir.x < 0)
         {
             transform.localScale = new(-1, 1, 1);

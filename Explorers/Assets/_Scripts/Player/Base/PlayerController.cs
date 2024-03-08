@@ -197,6 +197,7 @@ public class PlayerController : MonoBehaviour
     /// <param name="damage">伤害量</param>
     public void TakeDamage(int damage)
     {
+        if (hasDead) return;
         if(damage < currentArmor)
         {
             currentArmor -= damage;
@@ -217,8 +218,18 @@ public class PlayerController : MonoBehaviour
         if(_restoreTimer<0)
         {
             _restoreTimer = restoreCD;
-            GetComponent<CellBattery>().currentPower -= maxArmor;//消耗相应电量修复
-            currentArmor += restoreAmount;
+            if(currentArmor<maxArmor)
+            {
+                if(_hasConnected)
+                {
+                    SceneManager.Instance.BatteryTransform.GetComponent<MainBattery>().ChangePower(-restoreAmount);//消耗主电池相应电量修复
+                }
+                else
+                {
+                    GetComponent<CellBattery>().ChangePower(-restoreAmount);
+                }
+                currentArmor = Mathf.Min(maxArmor, currentArmor+restoreAmount);
+            }
         }
         else
         {

@@ -8,8 +8,10 @@ using DG.Tweening;
 public class UIHealthPanel : MonoBehaviour
 {
     //private SceneManager sceneManager;
-    public Image Inner;
+    public Image HealthInner;
+    public Image ArmorInner;
     private Battery _battery;
+    private PlayerController _playerController;
 
     private bool hasInit;
     
@@ -35,6 +37,7 @@ public class UIHealthPanel : MonoBehaviour
                 if (BatteryCarrier)
                 {
                     _battery = BatteryCarrier.GetComponent<Battery>();
+                    _playerController = BatteryCarrier.GetComponent<PlayerController>();
                 }
                 break;
             case "ShooterPanel":
@@ -42,6 +45,7 @@ public class UIHealthPanel : MonoBehaviour
                 if (Shooter)
                 {
                     _battery = Shooter.GetComponent<Battery>();
+                    _playerController = Shooter.GetComponent<PlayerController>();
                 }
                 break;
              case "HealerPanel":
@@ -49,6 +53,7 @@ public class UIHealthPanel : MonoBehaviour
                 if (Healer)
                 {
                     _battery = Healer.GetComponent<Battery>();
+                    _playerController = Healer.GetComponent<PlayerController>();
                 }
                 break;
              case "FighterPanel":
@@ -56,6 +61,7 @@ public class UIHealthPanel : MonoBehaviour
                 if (Fighter)
                 {
                     _battery = Fighter.GetComponent<Battery>();
+                    _playerController = Fighter.GetComponent<PlayerController>();
                 }
                 break;
         }
@@ -65,7 +71,9 @@ public class UIHealthPanel : MonoBehaviour
     {
         if (_battery)
         {
-            Inner.DOFillAmount((float)_battery.currentPower / _battery.maxPower, 0.2f);
+            HealthInner.DOFillAmount((float)_battery.currentPower / _battery.maxPower, 0.2f);
+            if(ArmorInner)
+            ArmorInner.DOFillAmount((float)_playerController.currentArmor / _playerController.maxArmor, 0.2f);
         }
     }
 }

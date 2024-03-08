@@ -5,25 +5,46 @@ using UnityEngine;
 public class Bomb : MonoBehaviour
 {
     private Rigidbody _rb;
+    private BoxCollider _coll;
 
     private int _damage;
     private Vector3 _dir;
     private float _speed;
-    private float _destoryTime;
+    private float _destroyTime;
+    private float _destroyTimer;
+
+    private bool hasInit = false;
 
     private void Awake()
     {
         _rb = GetComponent<Rigidbody>();
+        _coll = GetComponent<BoxCollider>();
+        _coll.enabled = false;
     }
 
     public void Init(WeaponDataSO data,Vector3 dir)
     {
         _damage = data.attackDamage;
         _speed = data.attackSpeed;
-        _destoryTime = data.attackRange / 60f;
+        _destroyTime = data.attackRange / 60f;
+        _destroyTimer = _destroyTime;
         _dir = dir;
 
-        Destroy(gameObject, _destoryTime);//根据射程计算
+        hasInit = true;
+    }
+
+    private void Update()
+    {
+        if (!hasInit) return;
+        if (_destroyTimer < 0)
+        {
+            _coll.enabled = true;
+            Destroy(gameObject, 0.3f);
+        }
+        else
+        {
+            _destroyTimer -= Time.deltaTime;
+        }
     }
 
     private void FixedUpdate()

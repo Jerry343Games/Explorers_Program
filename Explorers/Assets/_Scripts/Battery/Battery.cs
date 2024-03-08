@@ -19,7 +19,7 @@ public class Battery : MonoBehaviour
     /// </summary>
     public virtual void ChangePower(int value)
     {
-        currentPower += value;
+        currentPower = Mathf.Clamp(currentPower+value,0, maxPower);
     }
 
     /// <summary>

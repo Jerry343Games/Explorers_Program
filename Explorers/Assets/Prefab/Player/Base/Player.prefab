@@ -76,8 +76,8 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4753905976241763786}
-  - {fileID: 2657161979521500420}
   - {fileID: 7018064043903220045}
+  - {fileID: 2657161979521500420}
   - {fileID: 300701580336662008}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -211,6 +211,10 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 0e3a07b8-59a4-4e36-b473-9bccc142d5a6
     m_ActionName: Player/Aim[/Mouse/rightButton]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 8a2bc410-9d51-41ad-906d-47ebdb9d64de
+    m_ActionName: Player/Join[/Keyboard/anyKey,/XInputControllerWindows/buttonSouth]
   m_NeverAutoSwitchControlSchemes: 1
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -523,7 +527,7 @@ PrefabInstance:
     - target: {fileID: 2879969105352059386, guid: 661a6ab58b0cae94c9a854b0adcdf737,
         type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2879969105352059386, guid: 661a6ab58b0cae94c9a854b0adcdf737,
         type: 3}
@@ -643,7 +647,12 @@ PrefabInstance:
     - target: {fileID: 4797302563098779745, guid: 661a6ab58b0cae94c9a854b0adcdf737,
         type: 3}
       propertyPath: maxArmor
-      value: 1000
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 4797302563098779745, guid: 661a6ab58b0cae94c9a854b0adcdf737,
+        type: 3}
+      propertyPath: restoreCD
+      value: 0.8
       objectReference: {fileID: 0}
     - target: {fileID: 4797302563098779745, guid: 661a6ab58b0cae94c9a854b0adcdf737,
         type: 3}
@@ -660,6 +669,11 @@ PrefabInstance:
         type: 3}
       propertyPath: vertigoTime
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4797302563098779745, guid: 661a6ab58b0cae94c9a854b0adcdf737,
+        type: 3}
+      propertyPath: restoreAmount
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 4797302563098779745, guid: 661a6ab58b0cae94c9a854b0adcdf737,
         type: 3}
@@ -762,7 +776,12 @@ PrefabInstance:
     - target: {fileID: 5338948758665226377, guid: 9644debdbcef5aa4697ef57db70c48dc,
         type: 3}
       propertyPath: maxArmor
-      value: 1000
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 5338948758665226377, guid: 9644debdbcef5aa4697ef57db70c48dc,
+        type: 3}
+      propertyPath: restoreCD
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5338948758665226377, guid: 9644debdbcef5aa4697ef57db70c48dc,
         type: 3}
@@ -770,6 +789,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: 26b10320b0a849c479c35af25f4c8db1,
         type: 2}
+    - target: {fileID: 5338948758665226377, guid: 9644debdbcef5aa4697ef57db70c48dc,
+        type: 3}
+      propertyPath: restoreAmount
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 5338948758665226377, guid: 9644debdbcef5aa4697ef57db70c48dc,
         type: 3}
       propertyPath: secondaryWeapons
@@ -784,7 +808,7 @@ PrefabInstance:
     - target: {fileID: 7477862984688049902, guid: 9644debdbcef5aa4697ef57db70c48dc,
         type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7477862984688049902, guid: 9644debdbcef5aa4697ef57db70c48dc,
         type: 3}
@@ -916,7 +940,7 @@ PrefabInstance:
     - target: {fileID: -9115326595532701369, guid: 3d73830816f1a1647ab4f60936645d49,
         type: 3}
       propertyPath: maxPower
-      value: 10000
+      value: 1000
       objectReference: {fileID: 0}
     - target: {fileID: 2212072781666433573, guid: 3d73830816f1a1647ab4f60936645d49,
         type: 3}
@@ -1120,7 +1144,12 @@ PrefabInstance:
     - target: {fileID: 6905893616000494438, guid: b53a680214faa4d40b7b704146a8c4de,
         type: 3}
       propertyPath: maxArmor
-      value: 1000
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 6905893616000494438, guid: b53a680214faa4d40b7b704146a8c4de,
+        type: 3}
+      propertyPath: restoreCD
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6905893616000494438, guid: b53a680214faa4d40b7b704146a8c4de,
         type: 3}
@@ -1128,6 +1157,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: fe7b4ae7510e5334d8dd901dab5e27cc,
         type: 2}
+    - target: {fileID: 6905893616000494438, guid: b53a680214faa4d40b7b704146a8c4de,
+        type: 3}
+      propertyPath: restoreAmount
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6905893616000494438, guid: b53a680214faa4d40b7b704146a8c4de,
         type: 3}
       propertyPath: secondaryWeapons

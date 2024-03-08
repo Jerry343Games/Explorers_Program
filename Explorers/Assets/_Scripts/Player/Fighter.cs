@@ -26,6 +26,8 @@ public class Fighter : PlayerController
             Attack();
         }
         CharacterMove();
+        RestroeDefence();
+
         if (playerInputSetting.inputDir.x < 0)
         {
             transform.localScale = new(-1, 1, 1);
@@ -76,6 +78,12 @@ public class Fighter : PlayerController
             }
 
         }
+    }
+
+    public override void SecondaryAttack()
+    {
+        GameObject bomb = Instantiate(Resources.Load<GameObject>("Bomb"), transform.position, Quaternion.identity);
+        bomb.GetComponent<Bomb>().Init(secondaryWeapons, new Vector3(transform.localScale.x, 0, 0));
     }
 
     private void OnTriggerEnter(Collider other)
