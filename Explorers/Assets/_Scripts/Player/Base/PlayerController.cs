@@ -82,7 +82,7 @@ public class PlayerController : MonoBehaviour
         if (gameObject.CompareTag("Battery")) EnemyManager.Instance.battery = gameObject;
 
         currentArmor = maxArmor;
-        currentWeapon = secondaryWeapons;
+        currentWeapon = mainWeapon;
         _currentMainAmmunition = mainWeapon.initAmmunition;
         _currentSecondaryAmmunition = secondaryWeapons.initAmmunition;
         canUseSkill = false;
