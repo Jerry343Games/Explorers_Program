@@ -67,6 +67,10 @@ public class PlayerController : MonoBehaviour
     protected bool _hasConnected;//是否处于连接状态
     protected ObiRope _obiRope;
 
+    [Header("开采资源")]
+    public bool isDigging;
+    protected Resource _curDigRes;
+
     [HideInInspector]
     public Vector3 mouseWorldPS => Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0));
 
@@ -90,6 +94,7 @@ public class PlayerController : MonoBehaviour
         _currentSecondaryAmmunition = secondaryWeapons.initAmmunition;
         canUseSkill = false;
         hasDead = false;
+        isDigging = false;
         _speedFactor = 1;
         _outSpeedFactor = 1;
 
@@ -116,6 +121,7 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     public void CharacterMove()
     {
+        
         //判断是否不能移动，如果不能，就计时眩晕时长，到达上限回复移动
         if (!_canMove)
         {
@@ -128,6 +134,7 @@ public class PlayerController : MonoBehaviour
             }
             return;
         }
+        if (isDigging) return;
         MovementCombination();
         transform.Translate(_moveDir * Time.deltaTime * speed * _speedFactor*_outSpeedFactor, Space.World);
         
@@ -201,7 +208,12 @@ public class PlayerController : MonoBehaviour
     public void TakeDamage(int damage)
     {
         if (hasDead) return;
-        if(damage < currentArmor)
+        if(!isDigging)
+        {
+            isDigging = false;//打断状态
+            _curDigRes.GetComponent<Resource>().beDingging = false;
+        }
+        if (damage < currentArmor)
         {
             currentArmor -= damage;
         }
@@ -342,8 +354,8 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     public void Attack()
     {
-        
-        if(currentWeapon==mainWeapon && canMainAttack)
+        if (isDigging) return;
+        if (currentWeapon==mainWeapon && canMainAttack)
         {
             canMainAttack = false;
             _mainAttackTimer = currentWeapon.attackCD;

@@ -50,9 +50,32 @@ public class Shooter : PlayerController
             case "Item":
                 other.GetComponent<Item>().Apply(gameObject);
                 break;
+            case "Resource":
+                if (!isDigging && playerInputSetting.GetInteractButtonDown())
+                {
+                    isDigging = true;
+                    _curDigRes = other.GetComponent<Resource>();
+                    _curDigRes.beDingging = true;
+                }
+                break;
             default:
                 break;
         }
+    }
+    private void OnTriggerExit(Collider other)
+    {
+        switch (other.tag)
+        {
+            case "Resource":
+                if (isDigging)
+                {
+                    isDigging = false;
+                    _curDigRes.beDingging = false;
+                    _curDigRes = null;
+                }
+                break;
+        }
+
     }
 
     //¼ßÃðÕß

@@ -10,7 +10,7 @@ public class UIResPanel : MonoBehaviour
     private Text _resNumText;
     private GameObject _check;
     private bool hasInit;
-    public ResourceType resType;
+    public CollectionType resType;
 
     [HideInInspector]
     public int currentNum;

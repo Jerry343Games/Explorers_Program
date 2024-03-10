@@ -26,13 +26,17 @@ public enum ItemType
 }
 
 /// <summary>
-/// 零件类型
+/// 收集物类型
 /// </summary>
-public enum ResourceType
+public enum CollectionType
 {
     Gold,
 }
 
+public enum ResourceType
+{
+    Stone,
+}
 
 /// <summary>
 /// 道具类型

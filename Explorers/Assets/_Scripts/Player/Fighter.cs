@@ -57,11 +57,42 @@ public class Fighter : PlayerController
             case "Item":
                 other.GetComponent<Item>().Apply(gameObject);
                 break;
+            case "Resource":
+                if(!isDigging&& playerInputSetting.GetInteractButtonDown())
+                {
+                    isDigging = true;
+                    _curDigRes = other.GetComponent<Resource>();
+                    _curDigRes.beDingging = true;
+
+                }
+                break;
             default:
                 break;
         }
     }
+    private void OnTriggerExit(Collider other)
+    {
+        switch (other.tag)
+        {
+            case "Resource":
+                if (isDigging)
+                {
+                    isDigging = false;
+                    _curDigRes.beDingging = false;
+                    _curDigRes = null;
+                }
+                break;
+            case "Enemy":
+                if(_enemyInArea.Contains(other.gameObject))
+                {
+                    _enemyInArea.Remove(other.gameObject);
+                }
+                break;
+            default:
+                break;
+        }
 
+    }
     public override void MainAttack()
     {
         if (_enemyInArea.Count == 0) return;
@@ -91,14 +122,6 @@ public class Fighter : PlayerController
         if (other.gameObject.CompareTag("Enemy"))
         {
             _enemyInArea.Add(other.gameObject);
-        }
-    }
-    private void OnTriggerExit(Collider other)
-    {
-        
-        if (other.gameObject.CompareTag("Enemy")&&_enemyInArea.Contains(other.gameObject))
-        {
-            _enemyInArea.Remove(other.gameObject);
         }
     }
     public override void Vertigo(Vector3 force)

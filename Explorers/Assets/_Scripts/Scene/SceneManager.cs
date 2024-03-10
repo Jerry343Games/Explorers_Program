@@ -10,7 +10,7 @@ using UnityEngine.Serialization;
 [Serializable]
 public struct CollectionTask
 {
-    public ResourceType type;
+    public CollectionType type;
     public int amount;
     public GameObject taskUI;
     public bool hasFinshed;
