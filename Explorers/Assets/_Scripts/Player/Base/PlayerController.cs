@@ -6,6 +6,7 @@ using Unity.VisualScripting;
 using UnityEditor.Rendering;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.iOS;
 using UnityEngine.InputSystem.XR;
 using UnityEngine.Serialization;
 
@@ -13,6 +14,8 @@ public class PlayerController : MonoBehaviour
 {
     private PlayerInput _playerInput;
     public PlayerInputSetting playerInputSetting;
+    [HideInInspector]
+    public UIBubblePanel bubblePanel;
     
     /// <summary>
     /// 玩家所分配到的唯一序列号,类型区分见枚举类
@@ -99,6 +102,7 @@ public class PlayerController : MonoBehaviour
         _outSpeedFactor = 1;
 
         transform.position = SceneManager.Instance.bornTransform.position;
+        bubblePanel = GameObject.Find("BubblePanel").GetComponents<UIBubblePanel>()[0];
     }
     
     public void SetRope(ObiRope rope = null)
@@ -359,6 +363,7 @@ public class PlayerController : MonoBehaviour
         {
             canMainAttack = false;
             _mainAttackTimer = currentWeapon.attackCD;
+            
             MainAttack();
         }
         else if(currentWeapon== secondaryWeapons && canSecondaryAttack)
@@ -378,6 +383,41 @@ public class PlayerController : MonoBehaviour
     /// 副武器攻击方法 请子类重写
     /// </summary>
     public virtual void SecondaryAttack() { }
+
+    /// <summary>
+    /// 按交互物体创建一个气泡UI，记得在退出时删除
+    /// </summary>
+    /// <param name="other"></param>
+    public void CreatBubbleUI(GameObject other)
+    {
+        switch (other.tag)
+        {
+            case "Resource":
+                BubbleInfo resInfo = new BubbleInfo
+                {
+                    Type = BubbleType.ResourceCollectionBubble,
+                    Obj1 = gameObject,
+                    Obj2= other.gameObject,
+                    Content = "采集"
+                };
+                bubblePanel.CreateBubble(resInfo);
+                break;
+            case "ReconnectArea":
+                if (!_hasConnected&&!hasDead){
+                BubbleInfo recInfo = new BubbleInfo
+                {
+                    Type = BubbleType.ReconnectCableBubble,
+                    Obj1 = gameObject,
+                    Obj2= other.gameObject,
+                    Content = "重新连接"
+                };
+                bubblePanel.CreateBubble(recInfo);
+                }
+                break;
+            default:
+                break;
+        }
+    }
     
     public void CheckKeys()
 

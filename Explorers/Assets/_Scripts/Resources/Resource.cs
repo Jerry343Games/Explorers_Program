@@ -16,12 +16,11 @@ public class Resource : MonoBehaviour
 
     public float speed;
 
-    public Image processImg;
+    public Transform bubblePos;
 
     private void Start()
     {
         currentProcess = 0;
-        processImg.DOFillAmount(currentProcess / maxProcess, 0.25f);
     }
 
     private void Update()
@@ -30,7 +29,6 @@ public class Resource : MonoBehaviour
         {
             currentProcess += Time.deltaTime * speed;
             currentProcess = Mathf.Clamp(currentProcess,0, maxProcess);
-            processImg.DOFillAmount(currentProcess / maxProcess, 0.25f);
         }
     }
 }

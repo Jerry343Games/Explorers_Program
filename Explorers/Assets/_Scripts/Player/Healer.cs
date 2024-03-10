@@ -32,6 +32,12 @@ public class Healer : PlayerController
         CheckDistanceToBattery();
         CheckKeys();
     }
+    
+    private void OnTriggerEnter(Collider other)
+    {
+        CreatBubbleUI(other.gameObject);
+    }
+    
     private void OnTriggerStay(Collider other)
     {
         switch (other.tag)
@@ -41,6 +47,8 @@ public class Healer : PlayerController
                 if (!_hasConnected && playerInputSetting.GetCableButtonDown())
                 {
                     ReconnectRope();
+                    //重连后销毁重连提示气泡
+                    bubblePanel.reconnectCableBuffer.GetComponent<UIBubbleItem>().DestoryBubble();
                 }
                 break;
             //收集到场景物品
@@ -48,6 +56,7 @@ public class Healer : PlayerController
                 other.GetComponent<Item>().Apply(gameObject);
                 break;
             case "Resource":
+                
                 if (!isDigging && playerInputSetting.GetInteractButtonDown())
                 {
                     isDigging = true;
@@ -59,7 +68,8 @@ public class Healer : PlayerController
                 break;
         }
     }
-
+    
+    
 
     private void OnTriggerExit(Collider other)
     {
@@ -72,9 +82,18 @@ public class Healer : PlayerController
                     _curDigRes.beDingging = false;
                     _curDigRes = null;
                 }
+                //离开资源区域后销毁交互气泡
+                bubblePanel.interectBubbleBuffer.GetComponent<UIBubbleItem>().DestoryBubble();
+                break;
+            case "ReconnectArea":
+                //离开重连区域后如果有重连气泡就销毁下
+                if (bubblePanel.reconnectCableBuffer)
+                {
+                    bubblePanel.reconnectCableBuffer.GetComponent<UIBubbleItem>().DestoryBubble();    
+                }
                 break;
         }
-
+        
     }
 
     //“医者”

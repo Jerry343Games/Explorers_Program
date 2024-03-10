@@ -1,6 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.InteropServices.ComTypes;
 using UnityEngine;
+using UnityEngine.InputSystem.iOS;
 
 public class Shooter : PlayerController
 {
@@ -35,15 +38,28 @@ public class Shooter : PlayerController
         CheckDistanceToBattery();
         CheckKeys();
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        //视情况创建气泡UI
+        CreatBubbleUI(other.gameObject);
+    }
+
     private void OnTriggerStay(Collider other)
     {
         switch (other.tag)
         {
             //进入可重连绳子区域
             case "ReconnectArea":
-                if (!_hasConnected && playerInputSetting.GetCableButtonDown())
+                if (!_hasConnected)
                 {
-                    ReconnectRope();
+                    if (playerInputSetting.GetCableButtonDown())
+                    {
+                        ReconnectRope();
+                        
+                        //重连后销毁重连提示气泡
+                        bubblePanel.reconnectCableBuffer.GetComponent<UIBubbleItem>().DestoryBubble();
+                    }
                 }
                 break;
             //收集到场景物品
@@ -72,6 +88,15 @@ public class Shooter : PlayerController
                     isDigging = false;
                     _curDigRes.beDingging = false;
                     _curDigRes = null;
+                }
+                //离开资源区域后销毁交互气泡
+                bubblePanel.interectBubbleBuffer.GetComponent<UIBubbleItem>().DestoryBubble();
+                break;
+            case "ReconnectArea":
+                //离开重连区域后如果有重连气泡就销毁下
+                if (bubblePanel.reconnectCableBuffer)
+                {
+                    bubblePanel.reconnectCableBuffer.GetComponent<UIBubbleItem>().DestoryBubble();    
                 }
                 break;
         }

@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Fighter : PlayerController
@@ -41,6 +43,7 @@ public class Fighter : PlayerController
         CheckDistanceToBattery();
         CheckKeys();
     }
+    
 
     private void OnTriggerStay(Collider other)
     {
@@ -48,9 +51,15 @@ public class Fighter : PlayerController
         {
             //进入可重连绳子区域
             case "ReconnectArea":
-                if(!_hasConnected && playerInputSetting.GetCableButtonDown())
+                if (!_hasConnected)
                 {
-                    ReconnectRope();
+                    if (playerInputSetting.GetCableButtonDown())
+                    {
+                        ReconnectRope();
+                        
+                        //重连后销毁重连提示气泡
+                        bubblePanel.reconnectCableBuffer.GetComponent<UIBubbleItem>().DestoryBubble();
+                    }
                 }
                 break;
             //收集到场景物品
@@ -81,11 +90,20 @@ public class Fighter : PlayerController
                     _curDigRes.beDingging = false;
                     _curDigRes = null;
                 }
+                //离开资源区域后销毁交互气泡
+                bubblePanel.interectBubbleBuffer.GetComponent<UIBubbleItem>().DestoryBubble();
                 break;
             case "Enemy":
                 if(_enemyInArea.Contains(other.gameObject))
                 {
                     _enemyInArea.Remove(other.gameObject);
+                }
+                break;
+            case "ReconnectArea":
+                //离开重连区域后如果有重连气泡就销毁下
+                if (bubblePanel.reconnectCableBuffer)
+                {
+                    bubblePanel.reconnectCableBuffer.GetComponent<UIBubbleItem>().DestoryBubble();    
                 }
                 break;
             default:
@@ -119,6 +137,7 @@ public class Fighter : PlayerController
 
     private void OnTriggerEnter(Collider other)
     {       
+        CreatBubbleUI(other.gameObject);
         if (other.gameObject.CompareTag("Enemy"))
         {
             _enemyInArea.Add(other.gameObject);

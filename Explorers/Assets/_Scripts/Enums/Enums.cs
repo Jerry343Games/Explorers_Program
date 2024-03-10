@@ -13,11 +13,15 @@ public enum PlayerType
     Fighter=2,
 }
 
+public enum BubbleType
+{
+    ResourceCollectionBubble,
+    ReconnectCableBubble,
+}
 
 /// <summary>
 /// 场景物品类型
 /// </summary>
-
 public enum ItemType
 {
     Resource,//收集物
@@ -46,3 +50,4 @@ public enum PropType
 
 
 }
+
