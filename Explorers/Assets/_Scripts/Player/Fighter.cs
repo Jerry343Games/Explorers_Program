@@ -143,8 +143,5 @@ public class Fighter : PlayerController
             _enemyInArea.Add(other.gameObject);
         }
     }
-    public override void Vertigo(Vector3 force)
-    {
-        
-    }
+    
 }

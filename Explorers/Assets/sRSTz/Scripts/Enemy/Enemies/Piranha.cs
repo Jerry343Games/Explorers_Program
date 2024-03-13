@@ -22,7 +22,7 @@ public class Piranha:Enemy
     public void Attack()
     {
         
-        if (touchedCollision != null)
+        if (touchedCollision != null&&canAttack)
         {
             
             // 计算弹飞的方向

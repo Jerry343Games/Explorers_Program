@@ -131,11 +131,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 3
   force: 10
-  target: {fileID: 0}
-  rb: {fileID: 0}
   HP: 10
   damage: 10
-  detectionRadius: 8
+  canMove: 1
+  vertigoTime: 0.2
+  detectionRange: 5
+  stayTime: 4
+  isReturning: 0
+  stayTimer: 0
+  target: {fileID: 0}
+  rb: {fileID: 0}
+  spawnerPoint: {x: 0, y: 0, z: 0}
+  canAttack: 1
+  dashDetectionRadius: 5
   prepareTime: 1
   dashTime: 3
   dashForce: 20

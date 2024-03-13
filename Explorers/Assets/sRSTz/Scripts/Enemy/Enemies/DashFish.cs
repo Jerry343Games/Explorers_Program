@@ -34,7 +34,7 @@ public class DashFish : Enemy
     }
     public void Attack()
     {
-        if (touchedCollision != null)
+        if (touchedCollision != null && canAttack)
         {
             // 计算弹飞的方向
             Vector2 direction = (touchedCollision.transform.position - transform.position).normalized;
@@ -49,7 +49,7 @@ public class DashFish : Enemy
 
     public  void Move()
     {
-        if (target == null) return; // 确保玩家存在
+        if (target == null||!canMove) return; // 确保玩家存在
         Vector2 distance = (target.transform.position - transform.position);
         Vector2 direction = distance.normalized; // 获取朝向玩家的单位向量
         if (distance.magnitude > detectionRange && canMove)//如果丢失玩家并且能移动

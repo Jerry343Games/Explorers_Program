@@ -212,7 +212,7 @@ public class PlayerController : MonoBehaviour
     public void TakeDamage(int damage)
     {
         if (hasDead) return;
-        if(!isDigging)
+        if(isDigging)
         {
             isDigging = false;//´ò¶Ï×´Ì¬
             _curDigRes.GetComponent<Resource>().beDingging = false;
@@ -286,10 +286,11 @@ public class PlayerController : MonoBehaviour
     /// <summary>
     /// ±»Ñ£ÔÎ
     /// </summary>
-    public virtual void Vertigo(Vector3 force)
+    public virtual void Vertigo(Vector3 force,ForceMode forceMode=ForceMode.Impulse,float vertigoTime = 0.3f)
     {
+        this.vertigoTime = vertigoTime;
         _canMove = false;
-        _rigidbody.AddForce(force, ForceMode.Impulse);
+        _rigidbody.AddForce(force, forceMode);
     }
 
     /// <summary>

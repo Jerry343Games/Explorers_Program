@@ -30,7 +30,8 @@ public class Enemy : MonoBehaviour
 
     [HideInInspector]
     public Vector3 spawnerPoint;
-
+    [HideInInspector]
+    public bool canAttack = true;
     protected virtual void Awake()
     {
         rb = GetComponent<Rigidbody>();
@@ -89,10 +90,11 @@ public class Enemy : MonoBehaviour
     {
         gameObject.SetActive(false);
     }
-    public virtual void Vertigo(Vector3 force)
+    public virtual void Vertigo(Vector3 force, ForceMode forceMode = ForceMode.Impulse, float vertigoTime = 0.3f)
     {
+        this.vertigoTime = vertigoTime;
         canMove = false;
-        rb.AddForce(force, ForceMode.Impulse);
+        rb.AddForce(force, forceMode);
     }
     public virtual void ReturnSpawnpoint()
     {
