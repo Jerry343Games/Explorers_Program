@@ -8,7 +8,7 @@ public class GravityWell : Item
     public float activeTime = 3f;
     private float activeTimer = 0;
     public bool isUsing = false;
-    public float force = 5f;
+    public float force = 25f;
 
     public override void Apply(GameObject user)
     {
@@ -53,17 +53,17 @@ public class GravityWell : Item
             activeTimer += Time.fixedDeltaTime;
             foreach(var character in characters)
             {
-                Vector3 forceDirection = transform.position - character.transform.position;
+                Vector3 forceDirection = (transform.position - character.transform.position).normalized;
                 if (character.CompareTag("Battery") || character.CompareTag("Player"))
                 {
                     
-                    character.GetComponent<PlayerController>().Vertigo(forceDirection * force, ForceMode.Force, activeTime);
+                    character.GetComponent<Rigidbody>().AddForce(forceDirection * force*10f, ForceMode.Force);
                     
                 }
                 else
                 {
                     
-                    character.GetComponent<Enemy>().Vertigo(forceDirection * force, ForceMode.Force, activeTime);
+                    character.GetComponent<Enemy>().Vertigo(forceDirection * force*10f, ForceMode.Force, activeTime);
                     character.GetComponent<Enemy>().canAttack = false;
                 }
             }

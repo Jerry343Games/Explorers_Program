@@ -112,10 +112,14 @@ public class DashFish : Enemy
 
 
     }
+    public override void Vertigo(Vector3 force, ForceMode forceMode = ForceMode.Impulse, float vertigoTime = 0.3F)
+    {
+        base.Vertigo(force, forceMode, vertigoTime);
+        attackArea.SetActive(false);
+    }
 
-  
 
-    
+
 
 
 }
