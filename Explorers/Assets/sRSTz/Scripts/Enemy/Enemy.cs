@@ -88,6 +88,7 @@ public class Enemy : MonoBehaviour
     }
     public virtual void Dead()
     {
+        Instantiate(Resources.Load<GameObject>("Effect/BloodExplosion"), transform.position, Quaternion.identity);
         gameObject.SetActive(false);
     }
     public virtual void Vertigo(Vector3 force, ForceMode forceMode = ForceMode.Impulse, float vertigoTime = 0.3f)
