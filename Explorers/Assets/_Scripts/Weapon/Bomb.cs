@@ -7,7 +7,7 @@ public class Bomb : MonoBehaviour
     private Rigidbody _rb;
     private BoxCollider _coll;
 
-    private int _damage;
+    private float _damage;
     private Vector3 _dir;
     private float _speed;
     private float _destroyTime;
@@ -58,7 +58,7 @@ public class Bomb : MonoBehaviour
         switch(other.tag)
         {
             case "Enemy":
-                other.GetComponent<Enemy>().TakeDamage(_damage);
+                other.GetComponent<Enemy>().TakeDamage((int)_damage);
                 Destroy(gameObject);
                 break;
             default:

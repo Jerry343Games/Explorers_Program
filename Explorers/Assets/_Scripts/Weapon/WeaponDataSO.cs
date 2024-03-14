@@ -8,7 +8,7 @@ public class WeaponDataSO : ScriptableObject
     public string weaponName;//ÎäÆ÷Ãû
     [TextArea(3,5)]
     public string weaponDescription;//ÎäÆ÷ÃèÊö
-    public int attackDamage;//¹¥»÷Á¦
+    public float attackDamage;//¹¥»÷Á¦
     public float attackRange;//¹¥»÷·¶Î§
     public float attackCD;//¹¥»÷ÀäÈ´
     public float attackSpeed;//×Óµ¯/Í¶ÖÀÎïËÙ¶È

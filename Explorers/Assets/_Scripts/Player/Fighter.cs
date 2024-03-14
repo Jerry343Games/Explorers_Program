@@ -12,7 +12,8 @@ public class Fighter : PlayerController
     private List<GameObject> _enemyInArea=new();
     private bool isLeft = false;
     public float force = 5f;
-    // Start is called before the first frame update
+
+    public int tempArmor;//临时护盾
     void Awake()
     {
         
@@ -24,7 +25,6 @@ public class Fighter : PlayerController
         UpdateAttackState();
         if (playerInputSetting.GetAttackButtonDown())
         {           
-            //PerformAttack();
             Attack();
         }
         CharacterMove();
@@ -116,7 +116,7 @@ public class Fighter : PlayerController
         if (_enemyInArea.Count == 0) return;
         for (int i = 0; i < _enemyInArea.Count; i++)
         {
-            _enemyInArea[i].GetComponent<Enemy>().TakeDamage(currentWeapon.attackDamage);
+            _enemyInArea[i].GetComponent<Enemy>().TakeDamage((int)currentWeapon.attackDamage);
             if (isLeft)
             {
                 _enemyInArea[i].GetComponent<Enemy>().Vertigo(-transform.right * force);
@@ -135,6 +135,38 @@ public class Fighter : PlayerController
         bomb.GetComponent<Bomb>().Init(secondaryWeapons, new Vector3(transform.localScale.x, 0, 0));
     }
 
+    //因为超载可以获得临时护盾 所以重写一下受伤方法
+    public override void TakeDamage(int damage)
+    {
+        if (hasDead) return;
+        if (isDigging)
+        {
+            isDigging = false;//打断状态
+            _curDigRes.GetComponent<Resource>().beDingging = false;
+        }
+        int realDamage = damage;
+        if(damage<=tempArmor)
+        {
+            tempArmor-=damage;
+
+        }
+        else
+        {
+            realDamage = damage - tempArmor;
+            tempArmor = 0;
+        }
+
+        if (realDamage < currentArmor)
+        {
+            currentArmor -= realDamage;
+        }
+        else
+        {
+            int damageToBattery = realDamage - currentArmor;
+            GetComponent<Battery>().ChangePower(-damageToBattery);
+            currentArmor = maxArmor;
+        }
+    }
     private void OnTriggerEnter(Collider other)
     {       
         CreatBubbleUI(other.gameObject);

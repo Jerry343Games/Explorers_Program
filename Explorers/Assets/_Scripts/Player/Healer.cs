@@ -104,7 +104,7 @@ public class Healer : PlayerController
             if (player.name == "BatteryCarrier") continue;
             //非电池角色回复护盾
             PlayerController controller = player.GetComponent<PlayerController>();
-            controller.currentArmor = Mathf.Min(controller.currentArmor + mainWeapon.attackDamage, controller.maxArmor);
+            controller.currentArmor = Mathf.Min(controller.currentArmor + (int)mainWeapon.attackDamage, controller.maxArmor);
         }
     }
 

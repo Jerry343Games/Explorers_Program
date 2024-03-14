@@ -209,7 +209,7 @@ public class PlayerController : MonoBehaviour
     /// 受伤方法
     /// </summary>
     /// <param name="damage">伤害量</param>
-    public void TakeDamage(int damage)
+    public virtual void TakeDamage(int damage)
     {
         if (hasDead) return;
         if(isDigging)
