@@ -43,7 +43,7 @@ public class Shooter : PlayerController
 
     private void OnTriggerEnter(Collider other)
     {
-        //ÊÓÇé¿ö´´½¨ÆøÅÝUI
+        //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½UI
         CreatBubbleUI(other.gameObject);
     }
 
@@ -51,7 +51,7 @@ public class Shooter : PlayerController
     {
         switch (other.tag)
         {
-            //½øÈë¿ÉÖØÁ¬Éþ×ÓÇøÓò
+            //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
             case "ReconnectArea":
                 if (!_hasConnected)
                 {
@@ -59,12 +59,12 @@ public class Shooter : PlayerController
                     {
                         ReconnectRope();
                         
-                        //ÖØÁ¬ºóÏú»ÙÖØÁ¬ÌáÊ¾ÆøÅÝ
+                        //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½ï¿½
                         bubblePanel.reconnectCableBuffer.GetComponent<UIBubbleItem>().DestoryBubble();
                     }
                 }
                 break;
-            //ÊÕ¼¯µ½³¡¾°ÎïÆ·
+            //ï¿½Õ¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ·
             case "Item":
                 other.GetComponent<Item>().Apply(gameObject);
                 break;
@@ -91,11 +91,11 @@ public class Shooter : PlayerController
                     _curDigRes.beDingging = false;
                     _curDigRes = null;
                 }
-                //Àë¿ª×ÊÔ´ÇøÓòºóÏú»Ù½»»¥ÆøÅÝ
+                //ï¿½ë¿ªï¿½ï¿½Ô´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ù½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
                 bubblePanel.interectBubbleBuffer.GetComponent<UIBubbleItem>().DestoryBubble();
                 break;
             case "ReconnectArea":
-                //Àë¿ªÖØÁ¬ÇøÓòºóÈç¹ûÓÐÖØÁ¬ÆøÅÝ¾ÍÏú»ÙÏÂ
+                //ï¿½ë¿ªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ý¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
                 if (bubblePanel.reconnectCableBuffer)
                 {
                     bubblePanel.reconnectCableBuffer.GetComponent<UIBubbleItem>().DestoryBubble();    
@@ -105,16 +105,16 @@ public class Shooter : PlayerController
 
     }
 
-    //¼ßÃðÕß
+    //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     public override void MainAttack()
     {
         GameObject bullet = Instantiate(Resources.Load<GameObject>("Bullet"), transform.position, Quaternion.identity);
-        Instantiate(Resources.Load<GameObject>("Effect/MuzzleFlashSpikyYellow"), shootTransform.position,
+        Instantiate(Resources.Load<GameObject>("Effect/FlashSpiky"), shootTransform.position,
             gun.transform.rotation);
         bullet.GetComponent<Bullet>().Init(mainWeapon, gun.transform.forward);
     }
 
-    //Óã²æ
+    //ï¿½ï¿½ï¿½
     public override void SecondaryAttack()
     {
         GameObject bullet = Instantiate(Resources.Load<GameObject>("Bullet"), transform.position, Quaternion.identity);

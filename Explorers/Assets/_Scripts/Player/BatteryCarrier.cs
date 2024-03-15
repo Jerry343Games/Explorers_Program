@@ -21,13 +21,14 @@ public class BatteryCarrier : PlayerController
 
     [Header("电弧打击")]
     public float lightningAttackCD;//电弧打击冷却时间
+    public int targetNumber;
     private float _lightningAttackTimer;
     public int lightningAttackDamage;//电弧打击伤害
     public float lightningAttackRange;//电弧打击范围
     public int lightningAttackPower;//电弧打击耗电量
     private bool canLightningAttack;
     public LayerMask enemyLayer;
-
+    
 
     void Start()
     {
@@ -108,15 +109,19 @@ public class BatteryCarrier : PlayerController
         if (colliders.Length == 0) return;
         canLightningAttack = false;
         _lightningAttackTimer = lightningAttackCD;
-        GetComponent<MainBattery>().ChangePower(-lightningAttackPower);
+        Instantiate(Resources.Load<GameObject>("Effect/SparkBlue"), transform.position, Quaternion.identity);
+        int attackCount = Mathf.Min(colliders.Length, targetNumber); // 实际攻击的目标数
+        GetComponent<MainBattery>().ChangePower(-lightningAttackPower * attackCount); // 能量消耗根据实际攻击的目标数而定
 
-        int randomEnemyIndex = Random.Range(0, colliders.Length);//随机选取一位敌人攻击
-        float rotationZ = Vector3.Angle((colliders[randomEnemyIndex].transform.position - transform.position).normalized, Vector3.right) * 
-            (colliders[randomEnemyIndex].transform.position.y < transform.position.y ? -1 : 1);
-        Quaternion rotation = Quaternion.Euler(new Vector3(0, 0, rotationZ));
-        GameObject lightning = Instantiate(Resources.Load<GameObject>("Lightning"), 
-            (colliders[randomEnemyIndex].transform.position+transform.position)/2, rotation);
-        lightning.GetComponent<Lightning>().Init(lightningAttackDamage);
+        for (int i = 0; i < attackCount; i++)
+        {
+            GameObject lightning = Instantiate(Resources.Load<GameObject>("Lightning"), 
+                (colliders[i].transform.position + transform.position) / 2, Quaternion.identity);
+            Lightning lightComponent= lightning.GetComponent<Lightning>();
+            lightComponent.startPos=transform;
+            lightComponent.endPos = colliders[i].transform;
+            lightComponent.Init(lightningAttackDamage,colliders[i].gameObject);
+        }
     }
     #endregion
     public void TickTime()

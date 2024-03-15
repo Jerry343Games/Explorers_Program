@@ -14450,8 +14450,9 @@ GameObject:
   - component: {fileID: 457652}
   - component: {fileID: 19866122}
   - component: {fileID: 19961850}
+  - component: {fileID: 2410736256794370081}
   m_Layer: 0
-  m_Name: MuzzleFlashSpikyYellow
+  m_Name: FlashSpiky
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -19216,3 +19217,16 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
+--- !u!114 &2410736256794370081
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 190796}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2408b625138b3ac4bb5a79b9bcf06ff9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lifeTime: 0.3
