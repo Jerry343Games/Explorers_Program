@@ -4,11 +4,13 @@ using System.Collections.Generic;
 using System.Runtime.InteropServices.ComTypes;
 using UnityEngine;
 using UnityEngine.InputSystem.iOS;
+using UnityEngine.Serialization;
 
 public class Shooter : PlayerController
 {
     private bool isLeft;
     public GameObject gun;
+    public Transform shootTransform;
     void Awake()
     {
         PlayerInit();
@@ -107,6 +109,8 @@ public class Shooter : PlayerController
     public override void MainAttack()
     {
         GameObject bullet = Instantiate(Resources.Load<GameObject>("Bullet"), transform.position, Quaternion.identity);
+        Instantiate(Resources.Load<GameObject>("Effect/MuzzleFlashSpikyYellow"), shootTransform.position,
+            gun.transform.rotation,gun.transform);
         bullet.GetComponent<Bullet>().Init(mainWeapon, gun.transform.forward);
     }
 

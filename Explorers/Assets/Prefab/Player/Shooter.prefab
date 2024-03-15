@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3946353639550936320
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3795479232929037764}
+  m_Layer: 6
+  m_Name: ShootTransform
+  m_TagString: Untagged
+  m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3795479232929037764
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3946353639550936320}
+  m_LocalRotation: {x: -0.5, y: -0.5, z: 0.5, w: -0.49999997}
+  m_LocalPosition: {x: 0, y: 0.0005999995, z: 0.01598}
+  m_LocalScale: {x: 0.01, y: 0.01, z: 0.01}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3772413408342098716}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7951266776005374219
 GameObject:
   m_ObjectHideFlags: 0
@@ -103,6 +134,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerInputSetting: {fileID: 0}
+  bubblePanel: {fileID: 0}
   myIndex: 0
   speed: 5
   accelerateFactor: 1.5
@@ -115,11 +147,14 @@ MonoBehaviour:
   mainWeapon: {fileID: 11400000, guid: 26b10320b0a849c479c35af25f4c8db1, type: 2}
   secondaryWeapons: {fileID: 11400000, guid: 5c896a5fadf9b244f817015269b81025, type: 2}
   currentWeapon: {fileID: 0}
+  myAimPos: {x: 0, y: 0, z: 0}
   attackRange: 0
   attack: 0
   hasDead: 0
   DistanceThreshold: 9
+  isDigging: 0
   gun: {fileID: 4544587966547663270}
+  shootTransform: {fileID: 3795479232929037764}
 --- !u!114 &6848803618426024734
 MonoBehaviour:
   m_ObjectHideFlags: 0
