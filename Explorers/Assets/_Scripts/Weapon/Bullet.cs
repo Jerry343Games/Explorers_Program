@@ -38,6 +38,11 @@ public class Bullet : MonoBehaviour
         {
             case "Enemy":
                 other.GetComponent<Enemy>().TakeDamage((int)_damage);
+                Instantiate(Resources.Load<GameObject>("Effect/BulletExplosionYellow"),transform.position,Quaternion.identity);
+                Destroy(gameObject);
+                break;
+            case "Barrier":
+                Instantiate(Resources.Load<GameObject>("Effect/BulletExplosionYellow"),transform.position,Quaternion.identity);
                 Destroy(gameObject);
                 break;
             default:
