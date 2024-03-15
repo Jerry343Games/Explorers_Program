@@ -110,7 +110,7 @@ public class Shooter : PlayerController
     {
         GameObject bullet = Instantiate(Resources.Load<GameObject>("Bullet"), transform.position, Quaternion.identity);
         Instantiate(Resources.Load<GameObject>("Effect/MuzzleFlashSpikyYellow"), shootTransform.position,
-            gun.transform.rotation,gun.transform);
+            gun.transform.rotation);
         bullet.GetComponent<Bullet>().Init(mainWeapon, gun.transform.forward);
     }
 
