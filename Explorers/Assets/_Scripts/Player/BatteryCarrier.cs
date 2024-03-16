@@ -28,8 +28,12 @@ public class BatteryCarrier : PlayerController
     public int lightningAttackPower;//电弧打击耗电量
     private bool canLightningAttack;
     public LayerMask enemyLayer;
-    
 
+    [Header("充能")]
+    public float chargeCD;//充能冷却时间
+    private float _chargeCDTimer;
+    public int chargePower;//充能所需耗电量
+    private bool canCharge;
     void Start()
     {
         PlayerInit();
@@ -124,6 +128,23 @@ public class BatteryCarrier : PlayerController
         }
     }
     #endregion
+
+    #region 充能
+    public void Charge()
+    {
+        if (!canCharge) return;
+        canCharge = false;
+        _chargeCDTimer = chargeCD;
+        GetComponent<MainBattery>().ChangePower(-chargePower);
+        foreach(var player in FindObjectsOfType<PlayerController>())
+        {
+            if (player == this) continue;
+            player.currentArmor = player.maxArmor;
+        }
+
+    }
+    #endregion
+
     public void TickTime()
     {
         if(isOverloading)
@@ -151,5 +172,14 @@ public class BatteryCarrier : PlayerController
                 canLightningAttack = true;
             }
         }
+        if(!canCharge)
+        {
+            _chargeCDTimer -= Time.deltaTime;
+            if(_chargeCDTimer<0)
+            {
+                canCharge = true;
+            }
+        }
+
     }
 }
