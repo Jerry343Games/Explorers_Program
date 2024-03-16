@@ -6,9 +6,6 @@ using Unity.VisualScripting;
 using UnityEditor.Rendering;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.InputSystem.iOS;
-using UnityEngine.InputSystem.XR;
-using UnityEngine.Serialization;
 
 public class PlayerController : MonoBehaviour
 {
