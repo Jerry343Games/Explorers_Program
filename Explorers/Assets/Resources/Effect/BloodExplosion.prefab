@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 477758}
   - component: {fileID: 19835520}
   - component: {fileID: 19990236}
+  - component: {fileID: -7818106104640121231}
   m_Layer: 0
   m_Name: BloodExplosion
   m_TagString: Untagged
@@ -153,8 +154,8 @@ ParticleSystem:
     startSpeed:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 25
-      minScalar: 18.000002
+      scalar: 9
+      minScalar: 4
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -678,7 +679,7 @@ ParticleSystem:
     sphericalDirectionAmount: 0
     randomPositionAmount: 0
     radius:
-      value: 0.01
+      value: 0.57
       mode: 0
       spread: 0
       speed:
@@ -4731,6 +4732,19 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
+--- !u!114 &-7818106104640121231
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 137874}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2408b625138b3ac4bb5a79b9bcf06ff9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lifeTime: 1
 --- !u!1 &176142
 GameObject:
   m_ObjectHideFlags: 0
@@ -9526,8 +9540,8 @@ ParticleSystem:
     startSpeed:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 25
-      minScalar: 7
+      scalar: 12
+      minScalar: 3
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -10280,7 +10294,7 @@ ParticleSystem:
       countCurve:
         serializedVersion: 2
         minMaxState: 0
-        scalar: 35
+        scalar: 15
         minScalar: 35
         maxCurve:
           serializedVersion: 2

@@ -3,12 +3,24 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.InteropServices.ComTypes;
 using UnityEngine;
-using UnityEngine.InputSystem.iOS;
+using UnityEngine.Serialization;
 
 public class Shooter : PlayerController
 {
     private bool isLeft;
     public GameObject gun;
+    public Transform shootTransform;
+    [Header("é½å°„")]
+    public float salvoCD;//é½å°„å†·å´æ—¶é—´
+    private float _salvoCDTimer;
+    public int salveAmount;//é½å°„çš„å¯¼å¼¹æ•°é‡
+    public int salveMissileDamage;//å•æšå¯¼å¼¹ä¼¤å®³
+    public float salvoRange;//é½å°„æ£€æµ‹èŒƒå›´
+    public float salvoMissileSpeed;//å•æšå¯¼å¼¹é€Ÿåº¦
+    private bool canSalvo;
+    public LayerMask enemyLayer;
+    //[Header("")]
+
     void Awake()
     {
         PlayerInit();
@@ -18,10 +30,12 @@ public class Shooter : PlayerController
     {
         if (hasDead) return;
         UpdateAttackState();
+        TimeTick();
         Aim(gun);
         if (playerInputSetting.GetAttackButtonDown())
         {
             Attack();
+            //Salvo();
         }
         CharacterMove();
         RestroeDefence();
@@ -41,7 +55,7 @@ public class Shooter : PlayerController
 
     private void OnTriggerEnter(Collider other)
     {
-        //ÊÓÇé¿ö´´½¨ÆøÅİUI
+        //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½UI
         CreatBubbleUI(other.gameObject);
     }
 
@@ -49,7 +63,7 @@ public class Shooter : PlayerController
     {
         switch (other.tag)
         {
-            //½øÈë¿ÉÖØÁ¬Éş×ÓÇøÓò
+            //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
             case "ReconnectArea":
                 if (!_hasConnected)
                 {
@@ -57,12 +71,12 @@ public class Shooter : PlayerController
                     {
                         ReconnectRope();
                         
-                        //ÖØÁ¬ºóÏú»ÙÖØÁ¬ÌáÊ¾ÆøÅİ
+                        //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½ï¿½
                         bubblePanel.reconnectCableBuffer.GetComponent<UIBubbleItem>().DestoryBubble();
                     }
                 }
                 break;
-            //ÊÕ¼¯µ½³¡¾°ÎïÆ·
+            //ï¿½Õ¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ·
             case "Item":
                 other.GetComponent<Item>().Apply(gameObject);
                 break;
@@ -89,11 +103,11 @@ public class Shooter : PlayerController
                     _curDigRes.beDingging = false;
                     _curDigRes = null;
                 }
-                //Àë¿ª×ÊÔ´ÇøÓòºóÏú»Ù½»»¥ÆøÅİ
+                //ï¿½ë¿ªï¿½ï¿½Ô´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ù½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
                 bubblePanel.interectBubbleBuffer.GetComponent<UIBubbleItem>().DestoryBubble();
                 break;
             case "ReconnectArea":
-                //Àë¿ªÖØÁ¬ÇøÓòºóÈç¹ûÓĞÖØÁ¬ÆøÅİ¾ÍÏú»ÙÏÂ
+                //ï¿½ë¿ªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½İ¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
                 if (bubblePanel.reconnectCableBuffer)
                 {
                     bubblePanel.reconnectCableBuffer.GetComponent<UIBubbleItem>().DestoryBubble();    
@@ -103,17 +117,63 @@ public class Shooter : PlayerController
 
     }
 
-    //¼ßÃğÕß
+    //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     public override void MainAttack()
     {
         GameObject bullet = Instantiate(Resources.Load<GameObject>("Bullet"), transform.position, Quaternion.identity);
+        Instantiate(Resources.Load<GameObject>("Effect/FlashSpiky"), shootTransform.position,
+            gun.transform.rotation);
         bullet.GetComponent<Bullet>().Init(mainWeapon, gun.transform.forward);
     }
 
-    //Óã²æ
+    //ï¿½ï¿½ï¿½
     public override void SecondaryAttack()
     {
         GameObject bullet = Instantiate(Resources.Load<GameObject>("Bullet"), transform.position, Quaternion.identity);
         bullet.GetComponent<Bullet>().Init(secondaryWeapons,gun.transform.forward);
+    }
+
+    #region è‡ªé€‰åŠŸèƒ½
+    //é½å°„ å‘å°„å…­æšå¾®å‹å¯¼å¼¹é”å®šæœ€è¿‘çš„æ•Œäºº
+    public void Salvo()
+    {
+        if (isDigging) return;
+        if (!canSalvo) return;
+        Collider[] colliders = Physics.OverlapSphere(transform.position, salvoRange, enemyLayer);
+        if (colliders.Length == 0) return;
+        canSalvo = false;
+        //æ‰¾æœ€è¿‘çš„æ•Œäºº
+        Collider nearest = colliders[0];
+        foreach (var coll in colliders)
+        {
+            if (Vector3.Distance(coll.transform.position, transform.position) < Vector3.Distance(nearest.transform.position, transform.position))
+            {
+                nearest = coll;
+            }
+        }
+        Debug.Log(salveAmount);
+        for (int i = 0;i<salveAmount;i++)
+        {
+            GameObject missile = Instantiate(Resources.Load<GameObject>("Missile"),
+                transform.position + new Vector3(-2 + (4f / salveAmount) * i,2,0),
+                Quaternion.Euler(new Vector3(0, 0, -45 - (90f / salveAmount) * i)));
+
+            missile.GetComponent<Missile>().Init(salveMissileDamage,salvoMissileSpeed, nearest.gameObject);
+        }
+    }
+
+    #endregion
+
+    public void TimeTick()
+    {
+        if(!canSalvo)
+        {
+            _salvoCDTimer -= Time.deltaTime;
+            if(_salvoCDTimer<0)
+            {
+                canSalvo = true;
+                _salvoCDTimer = salvoCD;
+            }
+        }
     }
 }

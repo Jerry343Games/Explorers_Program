@@ -5,9 +5,32 @@ using UnityEngine;
 public class Healer : PlayerController
 {
     private bool isLeft = false;
+    public GameObject gun;
+    public Transform shootTransform;
+
+
+    [Header("麻醉枪")]
+    public WeaponDataSO tranquilizerWeaponData;//麻醉枪参数
+    private int _currentTranquilizerAmmunition;//麻醉枪当前子弹数
+    public int tranquilizerPower;//每发麻醉子弹耗电量
+    private bool canTranquilizerAttack;
+    private float _tranquilizerAttackTimer;
+    public float tranquilizerEffectTime;//麻醉效果时间
+
+    [Header("浮游炮台")]
+    public WeaponDataSO fortWeaponData;//浮游炮台参数
+    public float fortExitTime;//浮游炮台存在时间
+    private float _fortExitTimer;
+    public int fortPower;
+    public float fortCD;//浮游炮台冷却时间
+    private float _fortCDTimer;
+    private bool hasExited;
+    private bool canCallFort;
     void Awake()
     {
         PlayerInit();
+        _currentTranquilizerAmmunition = tranquilizerWeaponData.initAmmunition;
+        canCallFort = true;
     }
     void Update()
     {
@@ -15,7 +38,8 @@ public class Healer : PlayerController
         UpdateAttackState();
         if (playerInputSetting.GetAttackButtonDown())
         {
-            Attack();
+            //Attack();
+            FloatingFort();
         }
         CharacterMove();
         RestroeDefence();
@@ -69,8 +93,6 @@ public class Healer : PlayerController
         }
     }
     
-    
-
     private void OnTriggerExit(Collider other)
     {
         switch (other.tag)
@@ -114,5 +136,79 @@ public class Healer : PlayerController
         GameObject bullet = Instantiate(Resources.Load<GameObject>("Bullet"), transform.position, Quaternion.identity);
         bullet.GetComponent<Bullet>().Init(secondaryWeapons, new Vector3(transform.localScale.x, 0, 0));
     }
+
+    #region 自选功能
+    //麻醉枪
+    public void TranquilizerGun()
+    {
+        if (isDigging) return;
+        if(currentWeapon== tranquilizerWeaponData)
+        {
+            canTranquilizerAttack = false;
+            _tranquilizerAttackTimer = currentWeapon.attackCD;
+            GetComponent<CellBattery>().ChangePower(-tranquilizerPower);
+            //
+            GameObject bullet = Instantiate(Resources.Load<GameObject>("TranquilizerBullet"), transform.position, Quaternion.identity);
+            bullet.GetComponent<TranquilizerBullet>().Init(mainWeapon, gun.transform.forward,tranquilizerEffectTime);
+
+        }
+    }
+
+
+    //浮游炮台
+    public void FloatingFort()
+    {
+        if (isDigging) return;
+        if (!canCallFort) return;
+        hasExited = true;
+        _fortExitTimer = fortExitTime;
+        canCallFort = false;
+        _fortCDTimer = fortCD;
+
+        //创建浮游炮台
+        GameObject floatingFort = Instantiate(Resources.Load<GameObject>("FloatingFort"), transform.position + new Vector3(0,0.5f,0), Quaternion.identity);
+        floatingFort.transform.SetParent(transform);
+        GetComponent<CellBattery>().ChangePower(-fortPower);
+        floatingFort.GetComponent<FloatingFort>().Init(fortWeaponData);
+
+    }
+
+
+
+    #endregion
+    public override void UpdateAttackState()
+    {
+        base.UpdateAttackState();
+        if (_tranquilizerAttackTimer < 0)
+        {
+            canTranquilizerAttack = true;
+        }
+        else
+        {
+            _tranquilizerAttackTimer -= Time.deltaTime;
+        }
+    }
+
+    public void TimeTick()
+    {
+        if(hasExited)
+        {
+            _fortExitTimer-= Time.deltaTime;
+            if(_fortExitTimer<0)
+            {
+                //销毁
+                hasExited = false;
+            }
+        }
+        if(!canCallFort)
+        {
+            _fortCDTimer -= Time.deltaTime;
+            if(_fortCDTimer<0)
+            {
+                canCallFort = true;
+            }
+        }
+    }
+
 
 }

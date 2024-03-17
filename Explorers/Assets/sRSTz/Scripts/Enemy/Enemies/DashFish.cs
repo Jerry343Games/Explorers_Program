@@ -65,11 +65,11 @@ public class DashFish : Enemy
         }
         else
         {
-            // 将人物的方向设置为计算得到的方向
-            gameObject.transform.right = direction;
+            
             //如果正在冲刺
             if (isDashing)
             {
+                rb.angularVelocity = Vector3.zero;
                 if (dashTimer < dashTime)
                 {
                     dashTimer += Time.deltaTime;
@@ -83,6 +83,8 @@ public class DashFish : Enemy
             }
             else if(!isDashing)//如果还没冲刺
             {
+                // 将人物的方向设置为计算得到的方向
+                gameObject.transform.right = direction;
                 if (prepareTimer < prepareTime)
                 {
                     attackArea.SetActive(true);

@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 using TMPro;
-using UnityEngine.InputSystem.iOS;
 
 public class UIBubbleItem : MonoBehaviour
 {
@@ -26,7 +25,7 @@ public class UIBubbleItem : MonoBehaviour
     }
 
     /// <summary>
-    /// ÔÚÍæ¼ÒºÍĞèÒª½»»¥µÄÎïÆ·µÄÎ»ÖÃ¼äÉèÖÃ¸ÃÆøÅİ
+    /// åœ¨ç©å®¶å’Œéœ€è¦äº¤äº’çš„ç‰©å“çš„ä½ç½®é—´è®¾ç½®è¯¥æ°”æ³¡
     /// </summary>
     /// <param name="obj1"></param>
     /// <param name="obj2"></param>

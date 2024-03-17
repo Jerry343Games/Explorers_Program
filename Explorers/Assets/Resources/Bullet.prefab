@@ -12,7 +12,8 @@ GameObject:
   - component: {fileID: 1880909303393484937}
   - component: {fileID: 1880909303393484938}
   - component: {fileID: 1880909303393484939}
-  - component: {fileID: 1039819034857171360}
+  - component: {fileID: 9029667682075097711}
+  - component: {fileID: 6545672064639789075}
   m_Layer: 0
   m_Name: Bullet
   m_TagString: Untagged
@@ -28,8 +29,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1880909303393484950}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.148, y: 0, z: 0}
-  m_LocalScale: {x: 0.7589686, y: 0.7589686, z: 0.7589686}
+  m_LocalPosition: {x: -0.02, y: -0.0052, z: 0}
+  m_LocalScale: {x: 0.1177156, y: 0.08893024, z: 0.59623325}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 3656309464820191226}
@@ -47,8 +48,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.2768201, y: 0.29262048, z: 0.9832636}
-  m_Center: {x: 0.028403334, y: 0.024028724, z: 0}
+  m_Size: {x: 0.8467233, y: 0.8329636, z: 0.42288134}
+  m_Center: {x: 0.007229037, y: 0.025936877, z: -0.006394946}
 --- !u!54 &1880909303393484938
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -77,27 +78,35 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3466eb513df07d64695b77607e120b6a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!212 &1039819034857171360
-SpriteRenderer:
+--- !u!33 &9029667682075097711
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1880909303393484950}
+  m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!23 &6545672064639789075
+MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1880909303393484950}
   m_Enabled: 1
-  m_CastShadows: 0
-  m_ReceiveShadows: 0
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
   m_DynamicOccludee: 1
   m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 0
+  m_RayTracingMode: 2
   m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: d83b639f2355a6b4087fe582ba7d8de9, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -110,7 +119,7 @@ SpriteRenderer:
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
   m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 0
+  m_SelectedEditorRenderState: 3
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
@@ -118,17 +127,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 830e1560983ff9b4dbd1f5556c38aad1, type: 3}
-  m_Color: {r: 1, g: 0.6097994, b: 0.29019606, a: 1}
-  m_FlipX: 0
-  m_FlipY: 0
-  m_DrawMode: 0
-  m_Size: {x: 0.32, y: 0.32}
-  m_AdaptiveModeThreshold: 0.5
-  m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
-  m_MaskInteraction: 0
-  m_SpriteSortPoint: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!1001 &962814885275312236
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -213,6 +212,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4603040693299621801, guid: 490d04be1897daa4e89f2910342ba22b,
         type: 3}
+      propertyPath: m_Time
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4603040693299621801, guid: 490d04be1897daa4e89f2910342ba22b,
+        type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 254b6af6f39c36b40968652b6f51cc63, type: 2}
@@ -229,7 +233,7 @@ PrefabInstance:
     - target: {fileID: 4603040693299621801, guid: 490d04be1897daa4e89f2910342ba22b,
         type: 3}
       propertyPath: m_Parameters.widthCurve.m_Curve.Array.data[0].value
-      value: 0.15469551
+      value: 0.0815272
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 490d04be1897daa4e89f2910342ba22b, type: 3}
