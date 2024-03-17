@@ -22,7 +22,7 @@ public class GravityWell : Item
         
         
         user.GetComponent<PlayerController>().item = this;
-
+        //Use(user);
     }
     public override void Use(GameObject user)
     {
@@ -30,7 +30,7 @@ public class GravityWell : Item
         //todo ÈÓ³öÈ¥
 
         user.GetComponent<PlayerController>().item = null;
-        Invoke(" GravityChange", 1f);
+        Invoke("GravityChange", 0.5f);
     }
     private void Awake()
     {

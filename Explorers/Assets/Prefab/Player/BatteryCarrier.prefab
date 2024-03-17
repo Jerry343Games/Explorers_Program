@@ -68,7 +68,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &3121189622047813563
 Transform:
   m_ObjectHideFlags: 0
@@ -167,6 +167,7 @@ MonoBehaviour:
   hasDead: 0
   DistanceThreshold: 99999
   isDigging: 0
+  item: {fileID: 0}
   selectedPlayer: {fileID: 0}
   overloadDuration: 8
   overloadCD: 15
@@ -179,6 +180,8 @@ MonoBehaviour:
   enemyLayer:
     serializedVersion: 2
     m_Bits: 8
+  chargeCD: 0
+  chargePower: 0
 --- !u!114 &-9115326595532701369
 MonoBehaviour:
   m_ObjectHideFlags: 0
