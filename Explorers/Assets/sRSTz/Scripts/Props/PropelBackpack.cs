@@ -24,7 +24,7 @@ public class PropelBackpack : Item
         sprite.SetActive(false);
         this.user = user;
         userSpeed = user.GetComponent<PlayerController>().speed;
-
+        sphereCollider.enabled = false;
         user.GetComponent<PlayerController>().item = this;
         Use(user);
     }
@@ -38,10 +38,15 @@ public class PropelBackpack : Item
     }
     public override void Use(GameObject user)
     {
+        user.layer = LayerMask.NameToLayer("PropelBackpackUser");
         attackArea.SetActive(true);
         user.GetComponent<PlayerController>().item = null;
         isUsing = true;
         user.GetComponent<PlayerController>().speed = targetSpeed;
+        // Á¢¼´Ö´ÐÐÅö×²¼ì²â
+        Physics.SyncTransforms();
+        Physics.Simulate(Time.fixedDeltaTime);
+
     }
     private void Update()
     {
@@ -62,6 +67,7 @@ public class PropelBackpack : Item
         isUsing = false;
         activeTimer = 0;
         user.GetComponent<PlayerController>().speed = userSpeed;
+        user.layer = LayerMask.NameToLayer("Player");
         user = null;
         Destroy(gameObject);
     }
