@@ -6,9 +6,6 @@ using Unity.VisualScripting;
 using UnityEditor.Rendering;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.InputSystem.iOS;
-using UnityEngine.InputSystem.XR;
-using UnityEngine.Serialization;
 
 public class PlayerController : MonoBehaviour
 {
@@ -74,6 +71,8 @@ public class PlayerController : MonoBehaviour
     public bool isDigging;
     protected Resource _curDigRes;
 
+    [Header("µÀ¾ß")]
+    public Item item;
     [HideInInspector]
     public Vector3 mouseWorldPS => Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0));
 

@@ -9,22 +9,45 @@ public class GravityWell : Item
     private float activeTimer = 0;
     public bool isUsing = false;
     public float force = 25f;
-
+    public SphereCollider sphereCollider;
+    public GameObject sprite;
+    private Rigidbody rb;
+    public bool isPicked;
     public override void Apply(GameObject user)
     {
+        if (isPicked) return;
+        rb.Sleep();
+        isPicked = true;
+        sprite.SetActive(false);
         
+        
+        user.GetComponent<PlayerController>().item = this;
 
+    }
+    public override void Use(GameObject user)
+    {
+        
+        //todo ÈÓ³öÈ¥
 
-
+        user.GetComponent<PlayerController>().item = null;
+        Invoke(" GravityChange", 1f);
     }
     private void Awake()
     {
         //GravityChange();
+        sprite = transform.GetChild(0).gameObject;
+        sphereCollider = GetComponent<SphereCollider>();
+        rb = GetComponent<Rigidbody>();
         
     }
 
     public void GravityChange()
     {
+        sprite.SetActive(true);
+        rb.WakeUp();
+        sphereCollider.radius = 5f;
+        rb.velocity = Vector3.zero;
+        rb.angularVelocity = Vector3.zero;
         isUsing = true;
         foreach(var character in characters)
         {
@@ -75,7 +98,7 @@ public class GravityWell : Item
     }
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Battery")) GravityChange();
+        
         if (other.CompareTag("Battery") || other.CompareTag("Player") || other.CompareTag("Enemy"))
             characters.Add(other.gameObject);
     }

@@ -79,12 +79,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 3
-  force: 10
+  force: 15
   HP: 22
   damage: 10
   canMove: 1
   vertigoTime: 0.2
-  detectionRange: 5
+  detectionRange: 10
   stayTime: 4
   isReturning: 0
   stayTimer: 0
@@ -92,9 +92,9 @@ MonoBehaviour:
   rb: {fileID: 0}
   spawnerPoint: {x: 0, y: 0, z: 0}
   canAttack: 1
-  dashDetectionRadius: 5
+  dashDetectionRadius: 8
   prepareTime: 1
-  dashTime: 3
+  dashTime: 1.5
   dashForce: 20
 --- !u!33 &7465511782301219571
 MeshFilter:

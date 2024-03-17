@@ -37,7 +37,7 @@ public class PlayerInputSetting : MonoBehaviour
     private void Awake()
     {
         Init();
-        
+        DontDestroyOnLoad(gameObject);
         //读取玩家序号，分配对应的模块
         switch (_playerInput.playerIndex)
         {
