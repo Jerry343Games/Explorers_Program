@@ -35,8 +35,8 @@ public class Shooter : PlayerController
         Aim(gun);
         if (playerInputSetting.GetAttackButtonDown())
         {
-            //Attack();
-            Salvo();
+            Attack();
+            //Salvo();
         }
         CharacterMove();
         RestroeDefence();
@@ -138,6 +138,7 @@ public class Shooter : PlayerController
     //齐射 发射六枚微型导弹锁定最近的敌人
     public void Salvo()
     {
+        if (isDigging) return;
         if (!canSalvo) return;
         Collider[] colliders = Physics.OverlapSphere(transform.position, salvoRange, enemyLayer);
         if (colliders.Length == 0) return;

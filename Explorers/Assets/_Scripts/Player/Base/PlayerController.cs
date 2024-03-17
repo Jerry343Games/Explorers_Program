@@ -305,7 +305,7 @@ public class PlayerController : MonoBehaviour
     /// <summary>
     /// ¸üĞÂÎäÆ÷CD
     /// </summary>
-    public void UpdateAttackState()
+    public virtual void UpdateAttackState()
     {
         if(_mainAttackTimer<0)
         {

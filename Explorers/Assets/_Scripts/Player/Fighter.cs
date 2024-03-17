@@ -12,7 +12,8 @@ public class Fighter : PlayerController
     private List<GameObject> _enemyInArea=new();
     private bool isLeft = false;
     public float force = 5f;
-
+    public GameObject gun;
+    public Transform shootTransform;
     public int tempArmor;//¡Ÿ ±ª§∂‹
     void Awake()
     {

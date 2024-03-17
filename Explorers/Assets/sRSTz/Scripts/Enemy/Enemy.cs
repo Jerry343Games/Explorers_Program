@@ -8,7 +8,7 @@ public class Enemy : MonoBehaviour
 {
     // 可以之后加个存数据的结构体
     
-    public int moveSpeed;
+    public float moveSpeed;
     public float force;
     public int HP = 10;
     public int damage = 10;
@@ -96,6 +96,19 @@ public class Enemy : MonoBehaviour
         this.vertigoTime = vertigoTime;
         canMove = false;
         rb.AddForce(force, forceMode);
+    }
+
+    //麻痹效果
+    public virtual void Paralysis(float continuedTime)
+    {
+        StartCoroutine(ParalysiseEffect(continuedTime));
+    }
+
+    IEnumerator ParalysiseEffect(float continuedTime)
+    {
+        moveSpeed *= 0.1f;
+        yield return new WaitForSeconds(continuedTime);
+        moveSpeed /= 0.1f;
     }
     public virtual void ReturnSpawnpoint()
     {
