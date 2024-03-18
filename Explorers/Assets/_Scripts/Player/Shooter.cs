@@ -19,7 +19,6 @@ public class Shooter : PlayerController
     public float salvoMissileSpeed;//单枚导弹速度
     private bool canSalvo;
     public LayerMask enemyLayer;
-    //[Header("")]
 
     void Awake()
     {

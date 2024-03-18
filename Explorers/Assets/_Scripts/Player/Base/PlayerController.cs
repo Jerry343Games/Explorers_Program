@@ -40,6 +40,8 @@ public class PlayerController : MonoBehaviour
     public int restoreAmount;//单次护盾修复量
     public float restoreCD;//修复冷却
     private float _restoreTimer;
+    private float lastHurtTimer;
+    public float timeToRepairArmor;//脱战多久修复护盾
 
     [Header("功能")]
     public float skillCD;//功能冷却
@@ -91,6 +93,7 @@ public class PlayerController : MonoBehaviour
         if (gameObject.CompareTag("Battery")) EnemyManager.Instance.battery = gameObject;
 
         currentArmor = maxArmor;
+        lastHurtTimer = timeToRepairArmor;
         currentWeapon = mainWeapon;
         _currentMainAmmunition = mainWeapon.initAmmunition;
         _currentSecondaryAmmunition = secondaryWeapons.initAmmunition;
@@ -216,6 +219,7 @@ public class PlayerController : MonoBehaviour
             isDigging = false;//打断状态
             _curDigRes.GetComponent<Resource>().beDingging = false;
         }
+        lastHurtTimer = 0;
         if (damage < currentArmor)
         {
             currentArmor -= damage;
@@ -233,6 +237,12 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     public void RestroeDefence()
     {
+
+        if(lastHurtTimer<timeToRepairArmor)
+        {
+            lastHurtTimer += Time.deltaTime;
+            return;
+        }
         if(_restoreTimer<0)
         {
             _restoreTimer = restoreCD;
