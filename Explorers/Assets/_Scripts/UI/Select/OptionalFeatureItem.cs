@@ -8,6 +8,9 @@ using UnityEngine.UI;
 
 public class OptionalFeatureItem : MonoBehaviour
 {
+    public UISelectPanel uiSelectPanel;
+    private MultiplayerEventSystem myEventsystem;
+    
     public GameObject mainWeapon;
     public GameObject secondaryWeapon;
     public GameObject optionalFeature1;
@@ -22,11 +25,25 @@ public class OptionalFeatureItem : MonoBehaviour
     public Image secondaryWeaponSelectImg;
     public Image optionalFeatureSelectImg;
 
+    public Image optionalFeatureImg;
+    public Image myFeature1Img;
+    public Image myFeature2Img;
+
     private Color _selectColor = new Color(1, 0.8f, 0.5f, 1);
     private Color _unSelectColor = new Color(1, 0.8f, 0.5f, 0);
     
     public event Action FeatureConfirmEvent;
-    
+
+    public TargetType targetType;
+
+    private bool _hasConfirmed;
+    public enum TargetType
+    {
+        BattaryWeapon,
+        ShooterWeapon,
+        FigherWeapon,
+        HealerWeapon,
+    }
     
     void Start()
     {
@@ -38,6 +55,9 @@ public class OptionalFeatureItem : MonoBehaviour
         _secondaryWeaponBtn.onClick.AddListener(ClickSecWeapon);
         _optionalFeature1Btn.onClick.AddListener(ClickFeature1);
         _optionalFeature2Btn.onClick.AddListener(ClickFeature2);
+
+        uiSelectPanel.confirmPlayer += ConfirmPlayer;
+
     }
 
     private void Update()
@@ -57,38 +77,69 @@ public class OptionalFeatureItem : MonoBehaviour
 
     private void SelectWeapon()
     {
-        switch (MultiplayerEventSystem.current.currentSelectedGameObject.name)
+        if (myEventsystem&&!_hasConfirmed)
         {
-            case "MainWeaponInfo":
-                mainWeaponSelectImg.color = _selectColor;
-                secondaryWeaponSelectImg.color = _unSelectColor;
-                optionalFeatureSelectImg.color = _unSelectColor;
-                break;
-            case "SecondaryWeaponInfo":
-                mainWeaponSelectImg.color = _unSelectColor;
-                secondaryWeaponSelectImg.color = _selectColor;
-                optionalFeatureSelectImg.color = _unSelectColor;
-                break;
-            case "OptionalFeature1":
-                mainWeaponSelectImg.color = _unSelectColor;
-                secondaryWeaponSelectImg.color = _unSelectColor;
-                optionalFeatureSelectImg.color = _selectColor;
-                break;
-            case "OptionalFeature2":
-                mainWeaponSelectImg.color = _unSelectColor;
-                secondaryWeaponSelectImg.color = _unSelectColor;
-                optionalFeatureSelectImg.color = _selectColor;
-                break;
+            switch (myEventsystem.currentSelectedGameObject.name)
+            {
+                case "MainWeaponInfo":
+                    mainWeaponSelectImg.color = _selectColor;
+                    secondaryWeaponSelectImg.color = _unSelectColor;
+                    optionalFeatureSelectImg.color = _unSelectColor;
+                    optionalFeatureImg.sprite = null;
+                    break;
+                case "SecondaryWeaponInfo":
+                    mainWeaponSelectImg.color = _unSelectColor;
+                    secondaryWeaponSelectImg.color = _selectColor;
+                    optionalFeatureSelectImg.color = _unSelectColor;
+                    optionalFeatureImg.sprite = null;
+                    break;
+                case "OptionalFeature1":
+                    mainWeaponSelectImg.color = _unSelectColor;
+                    secondaryWeaponSelectImg.color = _unSelectColor;
+                    optionalFeatureSelectImg.color = _selectColor;
+                    optionalFeatureImg.sprite = myFeature1Img.sprite;
+                    break;
+                case "OptionalFeature2":
+                    mainWeaponSelectImg.color = _unSelectColor;
+                    secondaryWeaponSelectImg.color = _unSelectColor;
+                    optionalFeatureSelectImg.color = _selectColor;
+                    optionalFeatureImg.sprite = myFeature2Img.sprite;
+                    break;
+            }
         }
     }
     
     private void ClickFeature1()
     {
         FeatureConfirmEvent?.Invoke();
+        
+        optionalFeatureSelectImg.color = _unSelectColor;
+        _hasConfirmed = true;
     }
 
     private void ClickFeature2()
     {
         FeatureConfirmEvent?.Invoke();
+        optionalFeatureSelectImg.color = _unSelectColor;
+        _hasConfirmed = true;
+    }
+
+    private void ConfirmPlayer()
+    {
+        switch (targetType)
+        {
+            case TargetType.BattaryWeapon:
+                myEventsystem = uiSelectPanel.battaryEventSystem;
+                break;
+            case TargetType.ShooterWeapon:
+                myEventsystem = uiSelectPanel.shooterEventSystem;
+                break;
+            case TargetType.FigherWeapon:
+                myEventsystem = uiSelectPanel.fighterEventSystem;
+                break;
+            case TargetType.HealerWeapon:
+                myEventsystem = uiSelectPanel.healerEventSystem;
+                break;
+        }
     }
 }

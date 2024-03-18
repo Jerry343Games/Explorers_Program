@@ -9,6 +9,8 @@ using UnityEngine.UI;
 
 public class CharacterItem : MonoBehaviour
 {
+    public UISelectPanel uiSelectPanel;
+
     //配装面板起止位置、动画时间
     private float _weaponInfoItemEndTop = 128f;
     private float _weaponInfoItemStartTop = 292f;
@@ -26,7 +28,12 @@ public class CharacterItem : MonoBehaviour
     public GameObject infoItem;
     private Image _infoItemImg;
     public static int playerIndex;
-    
+
+    [Header("指示灯")]
+    public Image confirmLightImg;
+    public Color unSelectColor;
+    public Color selectedColor;
+    public Color confirmedColor;
     // Start is called before the first frame update
     void Start()
     {
@@ -35,6 +42,7 @@ public class CharacterItem : MonoBehaviour
         _weaponSelectItem = transform.GetChild(0).GetComponent<Image>();
         _characterBtn.onClick.AddListener(ClickCharacterBtn);
         weaponInfoItem.GetComponent<OptionalFeatureItem>().FeatureConfirmEvent += CloseWeaponInfoItem;
+        confirmLightImg.color = unSelectColor;
     }
     
     /// <summary>
@@ -44,6 +52,7 @@ public class CharacterItem : MonoBehaviour
     {
         if (!isSelected)
         {
+            confirmLightImg.color = selectedColor;
             isSelected = true;
             weaponInfoItem.transform.GetChild(0).GetComponent<Button>().Select();
             MultiplayerEventSystem eventSystem = playerEventCollection.transform.GetChild(playerIndex)
@@ -58,7 +67,7 @@ public class CharacterItem : MonoBehaviour
             
             //允许添加下一个输入设备
             playerIndex++;
-            if (playerIndex < 4)
+            if (playerIndex < uiSelectPanel.sceneManager.maxPlayer)
             {
                 playerEventCollection.transform.GetChild(playerIndex).gameObject.SetActive(true);
             }
@@ -66,10 +75,11 @@ public class CharacterItem : MonoBehaviour
     }
     
     /// <summary>
-    /// 
+    /// 关闭武器选择
     /// </summary>
     private void CloseWeaponInfoItem()
     {
+        confirmLightImg.color = confirmedColor;
         //处理动画
         Sequence q = DOTween.Sequence();
         q.Append(HideWeaponItem);
