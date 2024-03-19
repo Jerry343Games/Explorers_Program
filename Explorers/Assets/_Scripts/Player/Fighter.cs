@@ -15,6 +15,8 @@ public class Fighter : PlayerController
     public GameObject gun;
     public Transform shootTransform;
     public int tempArmor;//临时护盾
+    public bool canDash = true;
+    public bool canFusionBomb = true;
     void Awake()
     {
         
@@ -30,7 +32,7 @@ public class Fighter : PlayerController
         }
         CharacterMove();
         RestroeDefence();
-
+        
         if (playerInputSetting.inputDir.x < 0)
         {
             transform.localScale = new(-1, 1, 1);
@@ -41,8 +43,10 @@ public class Fighter : PlayerController
             isLeft = false;
             transform.localScale = new(1, 1, 1);
         }
+        UseItem();
         CheckDistanceToBattery();
         CheckKeys();
+        
     }
     
 
@@ -72,8 +76,7 @@ public class Fighter : PlayerController
                 {
                     isDigging = true;
                     _curDigRes = other.GetComponent<Resource>();
-                    _curDigRes.SetDiager(this);
-                    _curDigRes.beDigging = true;
+                   
 
                 }
                 break;
@@ -89,8 +92,7 @@ public class Fighter : PlayerController
                 if (isDigging)
                 {
                     isDigging = false;
-                    _curDigRes.beDigging = false;
-                    _curDigRes.SetDiager(null);
+                   
                     _curDigRes = null;
                 }
                 //离开资源区域后销毁交互气泡
@@ -145,7 +147,7 @@ public class Fighter : PlayerController
         if (isDigging)
         {
             isDigging = false;//打断状态
-            _curDigRes.GetComponent<Resource>().beDigging = false;
+           
         }
         int realDamage = damage;
         if(damage<=tempArmor)
@@ -178,5 +180,17 @@ public class Fighter : PlayerController
             _enemyInArea.Add(other.gameObject);
         }
     }
+    
+    //自选功能
+    public void Dash()
+    {
+
+    }
+
+    public void FusionBomb()
+    {
+
+    }
+
     
 }

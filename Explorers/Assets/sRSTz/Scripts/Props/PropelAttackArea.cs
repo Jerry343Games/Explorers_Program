@@ -5,7 +5,7 @@ using UnityEngine;
 public class PropelAttackArea : MonoBehaviour
 {
     public PropelBackpack backpack;
-    private void OnCollisionStay(Collision collision)
+    private void OnCollisionEnter(Collision collision)
     {
         Debug.Log(collision.gameObject.name);
         if (collision.gameObject.CompareTag("Enemy"))

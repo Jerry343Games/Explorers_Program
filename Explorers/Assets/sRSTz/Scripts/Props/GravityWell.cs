@@ -13,6 +13,8 @@ public class GravityWell : Item
     public GameObject sprite;
     private Rigidbody rb;
     public bool isPicked;
+    public float throwPower=8f;
+    private Vector3 userAimPos;
     public override void Apply(GameObject user)
     {
         if (isPicked) return;
@@ -26,11 +28,14 @@ public class GravityWell : Item
     }
     public override void Use(GameObject user)
     {
-        
-        //todo 扔出去
-
+        sprite.SetActive(true);
+        transform.position = user.transform.position;
+        userAimPos = new Vector3(user.GetComponent<PlayerController>(). playerInputSetting.aimPos.x, user.GetComponent<PlayerController>().playerInputSetting.aimPos.y, 0);
+        // 计算扔出的方向
+        Vector2 direction = (userAimPos - transform.position).normalized;
+        rb.AddForce(direction * throwPower, ForceMode.Impulse);
         user.GetComponent<PlayerController>().item = null;
-        Invoke("GravityChange", 0.5f);
+        Invoke("GravityChange", 1f);
     }
     private void Awake()
     {
@@ -43,7 +48,7 @@ public class GravityWell : Item
 
     public void GravityChange()
     {
-        sprite.SetActive(true);
+        
         rb.WakeUp();
         sphereCollider.radius = 5f;
         rb.velocity = Vector3.zero;
@@ -70,6 +75,7 @@ public class GravityWell : Item
                     character.GetComponent<Enemy>().canAttack = true;
                 }
             }
+            Destroy(gameObject);
         }
         else
         {

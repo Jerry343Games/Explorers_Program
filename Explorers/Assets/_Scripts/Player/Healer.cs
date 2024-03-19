@@ -56,6 +56,7 @@ public class Healer : PlayerController
             isLeft = false;
             transform.localScale = new(1, 1, 1);
         }
+        UseItem();
         CheckDistanceToBattery();
         CheckKeys();
     }

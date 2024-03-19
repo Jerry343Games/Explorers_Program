@@ -467,4 +467,14 @@ public class PlayerController : MonoBehaviour
             Debug.Log(name+ "Press Attack Secondary");
         }
     }
+    public void UseItem()
+    {
+        if (item != null && playerInputSetting.GetOptionalFeatureDown())
+        {
+            Debug.Log("use" + item.name);
+            item.Use(gameObject);
+            
+        }
+    }
+
 }
