@@ -432,44 +432,29 @@ public class PlayerController : MonoBehaviour
     public void CheckKeys()
 
     {
-
         if (playerInputSetting.GetAccelerateButtonDown())
-
         {
-
             Debug.Log(name+" Press Accelerate");
-
         }
-
-
-
         if (playerInputSetting.GetCableButtonDown())
-
         {
-
             Debug.Log(name+" Press Cable");
-
         }
-
-
-
         if (playerInputSetting.GetAttackButtonDown())
-
         {
-
             Debug.Log(name+" Press Attack");
-
         }
-
-
-
         if (playerInputSetting.GetInteractButtonDown())
-
         {
-
             Debug.Log(name+ " Press Interact");
-
         }
-
+        if (playerInputSetting.GetOptionalFeatureDown())
+        {
+            Debug.Log(name+ "Press Optional");
+        }
+        if (playerInputSetting.GetAttackSecondaryDown())
+        {
+            Debug.Log(name+ "Press Attack Secondary");
+        }
     }
 }

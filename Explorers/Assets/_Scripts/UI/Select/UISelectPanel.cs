@@ -104,6 +104,7 @@ public class UISelectPanel : MonoBehaviour
     private void ClickBattary()
     {
         battaryEventSystem = MultiplayerEventSystem.current.gameObject.GetComponent<MultiplayerEventSystem>();
+        
         confirmPlayer?.Invoke();
     }
 
