@@ -8,9 +8,9 @@ using UnityEngine;
 public enum PlayerType
 {
     BatteryCarrier=0,
-    Shooter=2,
+    Shooter=1,
     Healer=2,
-    Fighter=1,
+    Fighter=3,
 }
 
 public enum BubbleType
