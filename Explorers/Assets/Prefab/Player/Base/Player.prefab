@@ -203,6 +203,38 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 6c4eb6c4-2b68-4df9-8912-36337ec9e2b9
     m_ActionName: Player/MouseAim[/Mouse/position]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7042558557124252667}
+        m_TargetAssemblyTypeName: PlayerInputSetting, Assembly-CSharp
+        m_MethodName: OnAttackSecondary
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: a6da711e-259f-425e-97dd-01b38a9bd541
+    m_ActionName: Player/AttackSecondary[/XInputControllerWindows/leftShoulder,/Mouse/rightButton]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7042558557124252667}
+        m_TargetAssemblyTypeName: PlayerInputSetting, Assembly-CSharp
+        m_MethodName: OnOptionalFeeatureDown
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 07fdd07a-6406-4102-b306-40dacbfd400e
+    m_ActionName: Player/OptionalFeature[/XInputControllerWindows/rightTrigger,/Keyboard/q]
   m_NeverAutoSwitchControlSchemes: 1
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player

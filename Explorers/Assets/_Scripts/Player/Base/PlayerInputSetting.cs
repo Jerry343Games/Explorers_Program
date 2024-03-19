@@ -143,7 +143,7 @@ public class PlayerInputSetting : MonoBehaviour
     public bool GetCableButtonDown() => _isPressCable;
 
     /// <summary>
-    /// 当前帧是否按下攻击键：鼠标左键，X
+    /// 当前帧是否按下攻击键：鼠标左键，右肩键
     /// </summary>
     /// <returns></returns>
     private bool _isPressAttack;
@@ -162,6 +162,41 @@ public class PlayerInputSetting : MonoBehaviour
     }
     public bool GetAttackButtonDown() => _isPressAttack;
 
+    /// <summary>
+    /// 副武器攻击：鼠标右键，左肩键
+    /// </summary>
+    private bool _isAttackSecondary;
+
+    public void OnAttackSecondary(InputAction.CallbackContext context)
+    {
+        if (context.started)
+        {
+            _isAttackSecondary = true;
+        }
+        else if (context.canceled)
+        {
+            _isAttackSecondary = false;
+        }
+    }
+    public bool GetAttackSecondaryDown() => _isAttackSecondary;
+
+    /// <summary>
+    /// 自选功能 键盘Q，手柄右扳机键
+    /// </summary>
+    private bool _isOptionalFeature;
+    public void OnOptionalFeeatureDown(InputAction.CallbackContext context)
+    {
+        if (context.started)
+        {
+            _isOptionalFeature = true;
+        }
+        else if (context.canceled)
+        {
+            _isOptionalFeature = false;
+        }
+    }
+    public bool GetOptionalFeatureDown() => _isOptionalFeature;
+    
     public void OnStickAim(InputAction.CallbackContext value)
     {
         isStick = true;
