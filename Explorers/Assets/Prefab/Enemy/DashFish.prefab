@@ -78,13 +78,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2eb22505766ddc648b2b38152e91bef8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 3
+  moveSpeed: 10
   force: 15
   HP: 22
   damage: 10
   canMove: 1
   vertigoTime: 0.2
-  detectionRange: 10
+  detectionRange: 20
   stayTime: 4
   isReturning: 0
   stayTimer: 0
@@ -92,10 +92,10 @@ MonoBehaviour:
   rb: {fileID: 0}
   spawnerPoint: {x: 0, y: 0, z: 0}
   canAttack: 1
-  dashDetectionRadius: 8
-  prepareTime: 1
-  dashTime: 1.5
-  dashForce: 20
+  dashDetectionRadius: 15
+  prepareTime: 4
+  dashTime: 3
+  dashForce: 30
 --- !u!33 &7465511782301219571
 MeshFilter:
   m_ObjectHideFlags: 0
