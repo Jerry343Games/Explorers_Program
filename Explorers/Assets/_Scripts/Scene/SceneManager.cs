@@ -38,6 +38,8 @@ public class SceneManager : Singleton<SceneManager>
     public List<CollectionTask> collectionTasks = new List<CollectionTask>();//采集物收集任务列表
 
     public List<ResTask> resTasks = new List<ResTask>();//资源收集任务列表
+    
+    private List<GameObject> players = new List<GameObject>();//玩家列表
 
     private void OnEnable()
     {
@@ -104,9 +106,25 @@ public class SceneManager : Singleton<SceneManager>
             controller.SetRope(obiRope);
         }
     }
-
-    //private void InitUI()
-    //{
-
-    //}
+    
+    /// <summary>
+    /// 注册玩家
+    /// </summary>
+    /// <param name="player"></param>
+    public void RegisterPlayer(GameObject player)
+    {
+        players.Add(player);
+        EventCenter.CallPlayerRegisteredEvent();
+    }
+    
+    /// <summary>
+    /// 获得最后一个注册的玩家
+    /// </summary>
+    /// <returns></returns>
+    public GameObject GetLatestPlayer()
+    {
+        if (players.Count > 0)
+            return players[players.Count - 1];
+        return null;
+    }
 }

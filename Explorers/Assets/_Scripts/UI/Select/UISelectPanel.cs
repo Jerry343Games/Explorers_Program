@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using DG.Tweening;
 using TMPro;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.UI;
 using UnityEngine.UI;
 
@@ -34,7 +35,7 @@ public class UISelectPanel : MonoBehaviour
     public MultiplayerEventSystem fighterEventSystem;
     [HideInInspector]
     public MultiplayerEventSystem healerEventSystem;
-
+    
     private OptionalFeatureItem _battaryFeature;
     private OptionalFeatureItem _shooterFeature;
     private OptionalFeatureItem _fighterFeature;
@@ -61,6 +62,8 @@ public class UISelectPanel : MonoBehaviour
          _shooterFeature.FeatureConfirmEvent += LaunchPlayer;
          _fighterFeature.FeatureConfirmEvent += LaunchPlayer;
          _healerFeature.FeatureConfirmEvent += LaunchPlayer;
+
+         EventCenter.PlayerRegistered += UIModuleSet;
     }
 
     private void Update()
@@ -101,10 +104,12 @@ public class UISelectPanel : MonoBehaviour
         }
     }
     
+    /// <summary>
+    /// 按下按钮时获得当前操作按下按钮的事件系统，并将其UI模式给创建的玩家
+    /// </summary>
     private void ClickBattary()
     {
         battaryEventSystem = MultiplayerEventSystem.current.gameObject.GetComponent<MultiplayerEventSystem>();
-        
         confirmPlayer?.Invoke();
     }
 
@@ -124,6 +129,11 @@ public class UISelectPanel : MonoBehaviour
     {
         healerEventSystem = MultiplayerEventSystem.current.gameObject.GetComponent<MultiplayerEventSystem>();
         confirmPlayer?.Invoke();
+    }
+
+    private void UIModuleSet()
+    {
+   
     }
     
 }

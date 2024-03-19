@@ -9,7 +9,7 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
-    private PlayerInput _playerInput;
+    public PlayerInput playerInput;
     public PlayerInputSetting playerInputSetting;
     [HideInInspector]
     public UIBubblePanel bubblePanel;
@@ -85,9 +85,9 @@ public class PlayerController : MonoBehaviour
     public void PlayerInit()
     {
         _rigidbody = GetComponent<Rigidbody>();
-        _playerInput = transform.parent.GetComponent<PlayerInput>();
+        playerInput = transform.parent.GetComponent<PlayerInput>();
         playerInputSetting = transform.parent.GetComponent<PlayerInputSetting>();
-        myIndex = _playerInput.playerIndex;
+        myIndex = playerInput.playerIndex;
         Debug.Log(transform.name+" Index: "+myIndex);
         EnemyManager.Instance.players.Add(gameObject);
         if (gameObject.CompareTag("Battery")) EnemyManager.Instance.battery = gameObject;
@@ -104,7 +104,18 @@ public class PlayerController : MonoBehaviour
         _outSpeedFactor = 1;
 
         transform.position = SceneManager.Instance.bornTransform.position;
+        SceneManager.Instance.RegisterPlayer(gameObject);
         bubblePanel = GameObject.Find("BubblePanel").GetComponents<UIBubblePanel>()[0];
+        
+        //选择关卡时使用UI键位映射，反之则用Player映射
+        if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name=="SelectScene")
+        {
+            playerInput.SwitchCurrentActionMap("UI");
+        }
+        else
+        {
+            playerInput.SwitchCurrentActionMap("Player");
+        }
     }
     
     public void SetRope(ObiRope rope = null)
