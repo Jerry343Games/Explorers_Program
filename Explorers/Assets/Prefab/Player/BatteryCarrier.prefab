@@ -150,7 +150,7 @@ MonoBehaviour:
   playerInputSetting: {fileID: 0}
   bubblePanel: {fileID: 0}
   myIndex: 0
-  speed: 8
+  speed: 2
   accelerateFactor: 1.5
   vertigoTime: 0.5
   maxArmor: 0
@@ -181,8 +181,8 @@ MonoBehaviour:
   enemyLayer:
     serializedVersion: 2
     m_Bits: 8
-  chargeCD: 0
-  chargePower: 0
+  chargeCD: 10
+  chargePower: 20
 --- !u!114 &-9115326595532701369
 MonoBehaviour:
   m_ObjectHideFlags: 0

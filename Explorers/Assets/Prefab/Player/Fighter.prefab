@@ -182,14 +182,14 @@ MonoBehaviour:
   playerInputSetting: {fileID: 0}
   bubblePanel: {fileID: 0}
   myIndex: 0
-  speed: 5
+  speed: 3
   accelerateFactor: 1.5
   vertigoTime: 0
-  maxArmor: 30
+  maxArmor: 12
   currentArmor: 0
-  restoreAmount: 5
-  restoreCD: 0.8
-  timeToRepairArmor: 0
+  restoreAmount: 1
+  restoreCD: 1
+  timeToRepairArmor: 5
   skillCD: 0
   mainWeapon: {fileID: 11400000, guid: e619acaa6d7b194419d154af202ddefd, type: 2}
   secondaryWeapons: {fileID: 11400000, guid: 19e482ec8dcc115479a7ad3a26d79d83, type: 2}
@@ -198,7 +198,7 @@ MonoBehaviour:
   attackRange: 3
   attack: 2
   hasDead: 0
-  DistanceThreshold: 9
+  DistanceThreshold: 15
   isDigging: 0
   item: {fileID: 0}
   attackAngle: 90
@@ -206,7 +206,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   force: 5
-  gun: {fileID: 3781820328637868405}
   shootTransform: {fileID: 5971270936727361518}
   tempArmor: 0
   canFusionBomb: 1
@@ -357,12 +356,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 18553e63fb0f9f04f8131cc192ebe3b8, type: 3}
---- !u!1 &3781820328637868405 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 18553e63fb0f9f04f8131cc192ebe3b8,
-    type: 3}
-  m_PrefabInstance: {fileID: 4087808708179039268}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &4553254817325118415 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 18553e63fb0f9f04f8131cc192ebe3b8,

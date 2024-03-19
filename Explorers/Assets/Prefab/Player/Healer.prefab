@@ -136,14 +136,14 @@ MonoBehaviour:
   playerInputSetting: {fileID: 0}
   bubblePanel: {fileID: 0}
   myIndex: 0
-  speed: 3
+  speed: 4
   accelerateFactor: 1.5
   vertigoTime: 0.3
-  maxArmor: 10
+  maxArmor: 9
   currentArmor: 0
   restoreAmount: 1
-  restoreCD: 1
-  timeToRepairArmor: 0
+  restoreCD: 2
+  timeToRepairArmor: 6
   skillCD: 0
   mainWeapon: {fileID: 11400000, guid: fe7b4ae7510e5334d8dd901dab5e27cc, type: 2}
   secondaryWeapons: {fileID: 11400000, guid: d446be3765078364ab2d44f0af5e3988, type: 2}
@@ -152,19 +152,19 @@ MonoBehaviour:
   attackRange: 0
   attack: 0
   hasDead: 0
-  DistanceThreshold: 9
+  DistanceThreshold: 15
   isDigging: 0
   item: {fileID: 0}
   gun: {fileID: 6229381822876281269}
   shootTransform: {fileID: 8433754189295913192}
   tranquilizerWeaponData: {fileID: 11400000, guid: 254fbacfad0c50843a7a84c293145892,
     type: 2}
-  tranquilizerPower: 0
-  tranquilizerEffectTime: 0
+  tranquilizerPower: 5
+  tranquilizerEffectTime: 5
   fortWeaponData: {fileID: 11400000, guid: b222a02e453ca884c8a2015c98227c66, type: 2}
-  fortExitTime: 8
-  fortPower: 2
-  fortCD: 15
+  fortExitTime: 15
+  fortPower: 9
+  fortCD: 20
   fortPoint: {fileID: 0}
 --- !u!114 &6178675029094448507
 MonoBehaviour:

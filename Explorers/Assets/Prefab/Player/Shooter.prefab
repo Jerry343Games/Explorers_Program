@@ -136,14 +136,14 @@ MonoBehaviour:
   playerInputSetting: {fileID: 0}
   bubblePanel: {fileID: 0}
   myIndex: 0
-  speed: 5
+  speed: 6
   accelerateFactor: 1.5
   vertigoTime: 0.3
-  maxArmor: 20
+  maxArmor: 7
   currentArmor: 0
-  restoreAmount: 2
-  restoreCD: 1
-  timeToRepairArmor: 0
+  restoreAmount: 1
+  restoreCD: 2
+  timeToRepairArmor: 8
   skillCD: 0
   mainWeapon: {fileID: 11400000, guid: 26b10320b0a849c479c35af25f4c8db1, type: 2}
   secondaryWeapons: {fileID: 11400000, guid: 5c896a5fadf9b244f817015269b81025, type: 2}
@@ -152,16 +152,16 @@ MonoBehaviour:
   attackRange: 0
   attack: 0
   hasDead: 0
-  DistanceThreshold: 9
+  DistanceThreshold: 15
   isDigging: 0
   item: {fileID: 0}
   gun: {fileID: 4544587966547663270}
   shootTransform: {fileID: 3795479232929037764}
-  salvoCD: 1
+  salvoCD: 9
   salveAmount: 6
   salveMissileDamage: 8
-  salvoRange: 2
-  salvoMissileSpeed: 5
+  salvoRange: 1
+  salvoMissileSpeed: 30
   enemyLayer:
     serializedVersion: 2
     m_Bits: 8
