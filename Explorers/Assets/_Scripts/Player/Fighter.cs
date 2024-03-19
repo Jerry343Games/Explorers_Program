@@ -12,11 +12,11 @@ public class Fighter : PlayerController
     private List<GameObject> _enemyInArea=new();
     private bool isLeft = false;
     public float force = 5f;
-    public GameObject gun;
+    
     public Transform shootTransform;
     public int tempArmor;//临时护盾
-    public bool canDash = true;
     public bool canFusionBomb = true;
+    private Rigidbody _rb;
     void Awake()
     {
         
@@ -30,7 +30,8 @@ public class Fighter : PlayerController
         {           
             Attack();
         }
-        CharacterMove();
+        if(!isDashing) CharacterMove();
+
         RestroeDefence();
         
         if (playerInputSetting.inputDir.x < 0)
@@ -38,7 +39,7 @@ public class Fighter : PlayerController
             transform.localScale = new(-1, 1, 1);
             isLeft = true;
         }
-        else
+        else if(playerInputSetting.inputDir.x > 0)
         {
             isLeft = false;
             transform.localScale = new(1, 1, 1);
@@ -46,9 +47,33 @@ public class Fighter : PlayerController
         UseItem();
         CheckDistanceToBattery();
         CheckKeys();
-        
+        //冲刺相关
+        if (isDashing)
+        {
+            _rb.angularVelocity = Vector3.zero;
+            if (dashTimer < dashTime)
+            {
+                dashTimer += Time.deltaTime;
+            }
+            else
+            {
+                dashTimer = 0;
+                isDashing = false;
+                
+            }
+        }
+        UpdatSkillState();
+        if (playerInputSetting.GetOptionalFeatureDown())
+        {
+            Skill();
+        }
+
     }
-    
+    public override void Skill()
+    {
+        base.Skill();
+        Dash();
+    }
 
     private void OnTriggerStay(Collider other)
     {
@@ -86,6 +111,7 @@ public class Fighter : PlayerController
     }
     private void OnTriggerExit(Collider other)
     {
+
         switch (other.tag)
         {
             case "Resource":
@@ -143,7 +169,7 @@ public class Fighter : PlayerController
     //因为超载可以获得临时护盾 所以重写一下受伤方法
     public override void TakeDamage(int damage)
     {
-        if (hasDead) return;
+        if (hasDead||isDashing) return;
         if (isDigging)
         {
             isDigging = false;//打断状态
@@ -180,11 +206,16 @@ public class Fighter : PlayerController
             _enemyInArea.Add(other.gameObject);
         }
     }
-    
+
     //自选功能
+    private bool isDashing = false;
+    public float dashTime = 3f;
+    private float dashTimer = 0;
+    public float dashForce = 3f;
     public void Dash()
     {
-
+        isDashing = true;        
+        _rb .AddForce(transform.GetChild(0).transform.forward * dashForce, ForceMode.Impulse);
     }
 
     public void FusionBomb()

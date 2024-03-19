@@ -61,7 +61,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2879969105352059386}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!135 &6108430732605259037
 SphereCollider:
@@ -112,8 +112,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 8221443135605128328}
   - {fileID: 4553254817325118415}
+  - {fileID: 8221443135605128328}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -189,6 +189,7 @@ MonoBehaviour:
   currentArmor: 0
   restoreAmount: 5
   restoreCD: 0.8
+  timeToRepairArmor: 0
   skillCD: 0
   mainWeapon: {fileID: 11400000, guid: e619acaa6d7b194419d154af202ddefd, type: 2}
   secondaryWeapons: {fileID: 11400000, guid: 19e482ec8dcc115479a7ad3a26d79d83, type: 2}
@@ -208,6 +209,9 @@ MonoBehaviour:
   gun: {fileID: 3781820328637868405}
   shootTransform: {fileID: 5971270936727361518}
   tempArmor: 0
+  canFusionBomb: 1
+  dashTime: 3
+  dashForce: 3
 --- !u!114 &5846404614376303450
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -294,7 +298,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 18553e63fb0f9f04f8131cc192ebe3b8,
         type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 18553e63fb0f9f04f8131cc192ebe3b8,
         type: 3}
@@ -314,7 +318,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 18553e63fb0f9f04f8131cc192ebe3b8,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: -0.49999997
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 18553e63fb0f9f04f8131cc192ebe3b8,
         type: 3}
@@ -329,7 +333,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 18553e63fb0f9f04f8131cc192ebe3b8,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.5
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 18553e63fb0f9f04f8131cc192ebe3b8,
         type: 3}
@@ -339,12 +343,12 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 18553e63fb0f9f04f8131cc192ebe3b8,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
+      value: 90
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 18553e63fb0f9f04f8131cc192ebe3b8,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
+      value: 90
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 18553e63fb0f9f04f8131cc192ebe3b8,
         type: 3}

@@ -32,7 +32,8 @@ public class GravityWell : Item
         transform.position = user.transform.position;
         userAimPos = new Vector3(user.GetComponent<PlayerController>(). playerInputSetting.aimPos.x, user.GetComponent<PlayerController>().playerInputSetting.aimPos.y, 0);
         // 计算扔出的方向
-        Vector2 direction = (userAimPos - transform.position).normalized;
+
+        Vector2 direction = user.transform.GetChild(0).transform.forward;  /*(userAimPos - transform.position).normalized;*/
         rb.AddForce(direction * throwPower, ForceMode.Impulse);
         user.GetComponent<PlayerController>().item = null;
         Invoke("GravityChange", 1f);
