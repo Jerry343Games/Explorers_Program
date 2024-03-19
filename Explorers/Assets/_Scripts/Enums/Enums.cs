@@ -9,8 +9,8 @@ public enum PlayerType
 {
     BatteryCarrier=0,
     Shooter=1,
-    Healer=3,
-    Fighter=2,
+    Healer=2,
+    Fighter=3,
 }
 
 public enum BubbleType
@@ -35,12 +35,16 @@ public enum ItemType
 /// </summary>
 public enum CollectionType
 {
-    Gold,
+    Screw,//ÂÝË¿
+    Tin,//ÌúÆ¤
+    //and so on
 }
 
 public enum ResourceType
 {
-    Stone,
+    Gold,
+    Nickel,
+    RareEarth,
 }
 
 /// <summary>

@@ -208,6 +208,37 @@ MonoBehaviour:
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!1 &7420216820852202195
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8980228794720753743}
+  m_Layer: 6
+  m_Name: FortPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8980228794720753743
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7420216820852202195}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.821, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 300701580336662008}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &222811742786710782
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -480,6 +511,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 6905893616000494438, guid: b53a680214faa4d40b7b704146a8c4de,
         type: 3}
+      propertyPath: fortPoint
+      value: 
+      objectReference: {fileID: 8980228794720753743}
+    - target: {fileID: 6905893616000494438, guid: b53a680214faa4d40b7b704146a8c4de,
+        type: 3}
       propertyPath: timeToRepairArmor
       value: 5
       objectReference: {fileID: 0}
@@ -542,6 +578,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Healer
+      objectReference: {fileID: 0}
+    - target: {fileID: 9010808815923592971, guid: b53a680214faa4d40b7b704146a8c4de,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b53a680214faa4d40b7b704146a8c4de, type: 3}

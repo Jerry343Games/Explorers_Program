@@ -26,6 +26,8 @@ public class Healer : PlayerController
     private float _fortCDTimer;
     private bool hasExited;
     private bool canCallFort;
+    public Transform fortPoint;
+    private GameObject _curFort;
     void Awake()
     {
         PlayerInit();
@@ -36,6 +38,7 @@ public class Healer : PlayerController
     {
         if (hasDead) return;
         UpdateAttackState();
+        TimeTick();
         if (playerInputSetting.GetAttackButtonDown())
         {
             //Attack();
@@ -85,7 +88,8 @@ public class Healer : PlayerController
                 {
                     isDigging = true;
                     _curDigRes = other.GetComponent<Resource>();
-                    _curDigRes.beDingging = true;
+                    _curDigRes.SetDiager(this);
+                    _curDigRes.beDigging = true;
                 }
                 break;
             default:
@@ -101,7 +105,8 @@ public class Healer : PlayerController
                 if (isDigging)
                 {
                     isDigging = false;
-                    _curDigRes.beDingging = false;
+                    _curDigRes.beDigging = false;
+                    _curDigRes.SetDiager(null);
                     _curDigRes = null;
                 }
                 //离开资源区域后销毁交互气泡
@@ -169,7 +174,8 @@ public class Healer : PlayerController
         GameObject floatingFort = Instantiate(Resources.Load<GameObject>("FloatingFort"), transform.position + new Vector3(0,0.5f,0), Quaternion.identity);
         floatingFort.transform.SetParent(transform);
         GetComponent<CellBattery>().ChangePower(-fortPower);
-        floatingFort.GetComponent<FloatingFort>().Init(fortWeaponData);
+        floatingFort.GetComponent<FloatingFort>().Init(fortWeaponData, fortPoint);
+        _curFort = floatingFort;
 
     }
 
@@ -197,6 +203,7 @@ public class Healer : PlayerController
             if(_fortExitTimer<0)
             {
                 //销毁
+                Destroy(_curFort);
                 hasExited = false;
             }
         }

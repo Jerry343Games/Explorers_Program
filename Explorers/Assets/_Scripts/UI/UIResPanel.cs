@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,13 +7,12 @@ using UnityEngine.UI;
 public class UIResPanel : MonoBehaviour
 {
     private SceneManager sceneManager;
-    private Image _resIconImg;
-    private Text _resNumText;
-    private GameObject _check;
+    private Image _resIconImg;//资源图标
+    private Image _resProcessInner;//资源收集进度条
     private bool hasInit;
-    public CollectionType resType;
+    public ResourceType resType;
 
-    [HideInInspector]
+    //[HideInInspector]
     public int currentNum;
     [HideInInspector]
     public int maxNum;
@@ -22,8 +22,7 @@ public class UIResPanel : MonoBehaviour
         sceneManager = GameObject.FindWithTag("SceneManager").GetComponent<SceneManager>();
 
         _resIconImg = transform.GetChild(0).GetComponent<Image>();
-        _resNumText = transform.GetChild(1).GetComponent<Text>();
-        _check = transform.GetChild(2).gameObject;
+        _resProcessInner = transform.GetChild(1).GetChild(0).GetComponent<Image>();
 
     }
     private void Update()
@@ -39,17 +38,11 @@ public class UIResPanel : MonoBehaviour
     private void Init()
     {
         currentNum = 0;
-        maxNum = sceneManager.tasks.Find(x => x.type == resType).amount;
-        _resNumText.text = currentNum.ToString()+"/"+ maxNum.ToString();
-        _check.SetActive(false);
+        maxNum = sceneManager.resTasks.Find(x => x.type == resType).amount;
     }
 
     private void SetResUI()
     {
-        _resNumText.text = currentNum.ToString() + "/" + maxNum.ToString();
-        if (currentNum >= maxNum)
-        {
-            _check.SetActive(true);
-        }
+        _resProcessInner.fillAmount = (float)currentNum / maxNum;
     }
 }

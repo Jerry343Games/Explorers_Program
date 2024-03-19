@@ -217,7 +217,9 @@ public class PlayerController : MonoBehaviour
         if(isDigging)
         {
             isDigging = false;//´ò¶Ï×´Ì¬
-            _curDigRes.GetComponent<Resource>().beDingging = false;
+            _curDigRes.GetComponent<Resource>().beDigging = false;
+            _curDigRes.SetDiager(null);
+            _curDigRes = null;
         }
         lastHurtTimer = 0;
         if (damage < currentArmor)
@@ -427,6 +429,14 @@ public class PlayerController : MonoBehaviour
             default:
                 break;
         }
+    }
+
+
+    public void DiggingOver()
+    {
+        isDigging = false;
+        _curDigRes = null;
+        bubblePanel.interectBubbleBuffer.GetComponent<UIBubbleItem>().DestoryBubble();
     }
     
     public void CheckKeys()

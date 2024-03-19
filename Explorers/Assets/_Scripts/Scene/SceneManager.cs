@@ -7,10 +7,19 @@ using UnityEngine;
 using UnityEngine.Serialization;
 
 
+
 [Serializable]
-public struct CollectionTask
+public struct CollectionTask//收集物任务
 {
     public CollectionType type;
+    public int amount;
+    public GameObject taskUI;
+    public bool hasFinshed;
+}
+[Serializable]
+public struct ResTask//采集资源任务
+{
+    public ResourceType type;
     public int amount;
     public GameObject taskUI;
     public bool hasFinshed;
@@ -26,7 +35,10 @@ public class SceneManager : Singleton<SceneManager>
     public GameObject Slover;//使得绳子生效的父物体
     public Transform bornTransform;
 
-    public List<CollectionTask> tasks = new List<CollectionTask>();
+    public List<CollectionTask> collectionTasks = new List<CollectionTask>();//采集物收集任务列表
+
+    public List<ResTask> resTasks = new List<ResTask>();//资源收集任务列表
+
     private void OnEnable()
     {
         EventCenter.GameStartedEvent += GameInit;
@@ -48,7 +60,6 @@ public class SceneManager : Singleton<SceneManager>
             CountPlayer();
         }
     }
-
     private void CountPlayer()
     {
         _players = GameObject.FindGameObjectsWithTag("BasePlayer");
@@ -93,4 +104,9 @@ public class SceneManager : Singleton<SceneManager>
             controller.SetRope(obiRope);
         }
     }
+
+    //private void InitUI()
+    //{
+
+    //}
 }

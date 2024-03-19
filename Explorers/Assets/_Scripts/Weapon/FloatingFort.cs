@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class FloatingFort : MonoBehaviour
@@ -12,23 +13,25 @@ public class FloatingFort : MonoBehaviour
     private WeaponDataSO _data;
     public LayerMask enemyLayer;
     private float attackTimer;
-
+    private Transform _followPoint;
     private void Awake()
     {
         _rb = GetComponent<Rigidbody>();
     }
 
-    public void Init(WeaponDataSO data)
+    public void Init(WeaponDataSO data, Transform point)
     {
         _data = data;
         _damage = data.attackDamage;
         _speed = data.attackSpeed;
-
+        _followPoint = point;
         attackTimer = 0;
     }
 
     private void Update()
     {
+        transform.position = Vector3.Lerp(transform.position, _followPoint.position, 0.9f);
+
         Collider[] colls = Physics.OverlapSphere(transform.position, _data.attackRange, enemyLayer);
         if(colls.Length==0)
         {

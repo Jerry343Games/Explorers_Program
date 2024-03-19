@@ -84,7 +84,8 @@ public class Shooter : PlayerController
                 {
                     isDigging = true;
                     _curDigRes = other.GetComponent<Resource>();
-                    _curDigRes.beDingging = true;
+                    _curDigRes.SetDiager(this);
+                    _curDigRes.beDigging = true;
                 }
                 break;
             default:
@@ -99,14 +100,14 @@ public class Shooter : PlayerController
                 if (isDigging)
                 {
                     isDigging = false;
-                    _curDigRes.beDingging = false;
+                    _curDigRes.beDigging = false;
+                    _curDigRes.SetDiager(null);
                     _curDigRes = null;
+
                 }
-                //�뿪��Դ��������ٽ�������
                 bubblePanel.interectBubbleBuffer.GetComponent<UIBubbleItem>().DestoryBubble();
                 break;
             case "ReconnectArea":
-                //�뿪���������������������ݾ�������
                 if (bubblePanel.reconnectCableBuffer)
                 {
                     bubblePanel.reconnectCableBuffer.GetComponent<UIBubbleItem>().DestoryBubble();    
