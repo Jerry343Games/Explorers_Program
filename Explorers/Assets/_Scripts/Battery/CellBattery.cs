@@ -11,6 +11,8 @@ public class CellBattery : Battery
     private int myPower;
     public bool isConnected;
 
+    private bool _findMainbattary;
+
     public CellBattery(int initialPower) : base(initialPower)
     {
 
@@ -21,7 +23,6 @@ public class CellBattery : Battery
         Init();
         //启用每秒电量衰减
         InvokeRepeating("PowerDecayPreSecond", 1f, 1f);
-        EventCenter.BattaryJoined += FindMainBattary;
     }
 
     private void Update()
@@ -29,6 +30,12 @@ public class CellBattery : Battery
         if(currentPower <=0 && !GetComponent<PlayerController>().hasDead)
         {
             GetComponent<PlayerController>().SetDeadState(true);
+        }
+
+        if (SceneManager.Instance.hasMainBattary&&!_findMainbattary)
+        {
+            FindMainBattary();
+            _findMainbattary = true;
         }
     }
     
@@ -38,6 +45,7 @@ public class CellBattery : Battery
     private void Init()
     {
         isConnected = true;
+        _findMainbattary = false;
         currentPower = maxPower;
         if (!_mainBattery)
         {

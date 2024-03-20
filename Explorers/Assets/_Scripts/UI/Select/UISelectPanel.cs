@@ -113,6 +113,7 @@ public class UISelectPanel : MonoBehaviour
             }
             else
             {
+                EventCenter.CallGameStartedEvent();
                 Sequence q = DOTween.Sequence();
                 infoLine1.rectTransform.DOAnchorPos(new Vector2(infoLine1.rectTransform.anchoredPosition.x, -10), 0.2f);
                 infoLine1.rectTransform.DOScale(_line1EndValue, 0.2f);
@@ -130,7 +131,14 @@ public class UISelectPanel : MonoBehaviour
                 q.AppendInterval(1f);
                 q.Append(mask.DOFade(1, _btnAniDuration)).OnComplete(() =>
                 {
-                    UnityEngine.SceneManagement.SceneManager.LoadScene("JerryTest"); //完成动画回调
+                    //完成动画回调
+                    //更改映射表由UI到Player
+                    foreach (var player in SceneManager.Instance.players)
+                    {
+                        player.GetComponent<PlayerInput>().SwitchCurrentActionMap("Player");
+                    }
+                    //载入下一关
+                    UnityEngine.SceneManagement.SceneManager.LoadScene("JerryTest"); 
                 });
             }
         }
@@ -165,8 +173,13 @@ public class UISelectPanel : MonoBehaviour
         confirmPlayer?.Invoke();
     }
 
+    /// <summary>
+    /// 重载关卡
+    /// </summary>
     private void ReloadScene()
     {
+        //手动销毁玩家
+        SceneManager.Instance.DestoryAllPlayers();
         UnityEngine.SceneManagement.SceneManager.LoadScene("SelectScene");
     }
 }

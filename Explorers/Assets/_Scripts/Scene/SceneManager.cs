@@ -35,19 +35,22 @@ public class SceneManager : Singleton<SceneManager>
     public GameObject Slover;//使得绳子生效的父物体
     public Transform bornTransform;
 
+    public bool hasMainBattary;
     public List<CollectionTask> collectionTasks = new List<CollectionTask>();//采集物收集任务列表
 
     public List<ResTask> resTasks = new List<ResTask>();//资源收集任务列表
     
-    private List<GameObject> players = new List<GameObject>();//玩家列表
+    public List<GameObject> players = new List<GameObject>();//玩家列表
 
     private void OnEnable()
     {
+        EventCenter.GameStartedEvent += ConnectRopeToBattary;
         EventCenter.GameStartedEvent += GameInit;
     }
 
     private void OnDisable()
     {
+        EventCenter.GameStartedEvent -= ConnectRopeToBattary;
         EventCenter.GameStartedEvent -= GameInit;
     }
     void Start()
@@ -65,7 +68,9 @@ public class SceneManager : Singleton<SceneManager>
     private void CountPlayer()
     {
         _players = GameObject.FindGameObjectsWithTag("BasePlayer");
-        if (_players.Length==maxPlayer)
+        
+        //给测试关卡开启游戏用，如果不是从选择角色关进入也能开游戏
+        if (_players.Length==maxPlayer&&UnityEngine.SceneManagement.SceneManager.GetActiveScene().name!="SelectScene")
         {
             isMaxPlayer = true;
             //获得电池玩家的位置 因为绳子都需要连到他身上
@@ -73,6 +78,12 @@ public class SceneManager : Singleton<SceneManager>
             //暂时满人了直接开始 后面可能添加倒计时之类的
             EventCenter.CallGameStartedEvent();     
         }
+    }
+
+    private void ConnectRopeToBattary()
+    {
+        //获得电池玩家的位置 因为绳子都需要连到他身上
+        BatteryTransform = _players.ToList().Find(x =>x.transform.GetChild(0).gameObject.activeInHierarchy).transform.GetChild(0);
     }
 
     private void GameInit()
@@ -113,8 +124,8 @@ public class SceneManager : Singleton<SceneManager>
     /// <param name="player"></param>
     public void RegisterPlayer(GameObject player)
     {
+        Debug.Log("Register Player");
         players.Add(player);
-        EventCenter.CallPlayerRegisteredEvent();
     }
     
     /// <summary>
@@ -124,7 +135,23 @@ public class SceneManager : Singleton<SceneManager>
     public GameObject GetLatestPlayer()
     {
         if (players.Count > 0)
+        {
+            Debug.Log("GetLastPlayer");
             return players[players.Count - 1];
+        }
+
         return null;
+    }
+
+    /// <summary>
+    /// 销毁所有玩家
+    /// </summary>
+    public void DestoryAllPlayers()
+    {
+        foreach(GameObject player in players)
+        {
+            Destroy(player);
+        }
+        players.Clear();
     }
 }

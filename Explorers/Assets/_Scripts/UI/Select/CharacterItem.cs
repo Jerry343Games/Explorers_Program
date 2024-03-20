@@ -66,8 +66,7 @@ public class CharacterItem : MonoBehaviour
             confirmLightImg.color = selectedColor;
             isSelected = true;
             weaponInfoItem.transform.GetChild(0).GetComponent<Button>().Select();
-            MultiplayerEventSystem eventSystem = playerEventCollection.transform.GetChild(playerIndex)
-                .GetComponent<MultiplayerEventSystem>();
+            MultiplayerEventSystem eventSystem = SceneManager.Instance.GetLatestPlayer().GetComponent<MultiplayerEventSystem>();
             eventSystem.playerRoot = weaponInfoItem;
             eventSystem.firstSelectedGameObject = weaponInfoItem.transform.GetChild(0).gameObject;
             
@@ -82,7 +81,9 @@ public class CharacterItem : MonoBehaviour
             playerIndex++;
             if (playerIndex < uiSelectPanel.sceneManager.maxPlayer)
             {
-                playerEventCollection.transform.GetChild(playerIndex).gameObject.SetActive(true);
+                GameObject player = Instantiate(Resources.Load<GameObject>("Player/Player"));
+                player.GetComponent<MultiplayerEventSystem>().playerRoot = uiSelectPanel.gameObject;
+                player.GetComponent<MultiplayerEventSystem>().firstSelectedGameObject = uiSelectPanel.transform.GetChild(0).gameObject;
             }
         }
         else

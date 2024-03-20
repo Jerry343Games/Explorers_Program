@@ -109,6 +109,9 @@ public class OptionalFeatureItem : MonoBehaviour
         }
     }
     
+    /// <summary>
+    /// 选择自选功能1
+    /// </summary>
     private void ClickFeature1()
     {
         FeatureConfirmEvent?.Invoke();
@@ -116,6 +119,9 @@ public class OptionalFeatureItem : MonoBehaviour
         _hasConfirmed = true;
     }
 
+    /// <summary>
+    /// 选择自选功能2
+    /// </summary>
     private void ClickFeature2()
     {
         FeatureConfirmEvent?.Invoke();

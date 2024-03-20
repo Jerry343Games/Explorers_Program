@@ -104,7 +104,6 @@ public class PlayerController : MonoBehaviour
         _outSpeedFactor = 1;
 
         transform.position = SceneManager.Instance.bornTransform.position;
-        SceneManager.Instance.RegisterPlayer(gameObject);
         bubblePanel = GameObject.Find("BubblePanel").GetComponents<UIBubblePanel>()[0];
         
         //选择关卡时使用UI键位映射，反之则用Player映射
