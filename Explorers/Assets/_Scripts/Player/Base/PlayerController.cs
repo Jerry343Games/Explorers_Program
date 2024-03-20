@@ -287,7 +287,7 @@ public class PlayerController : MonoBehaviour
         {
             canUseSkill = true;
         }
-        else
+        else if(!canUseSkill)
         {
             _skillTimer -= Time.deltaTime;
         }

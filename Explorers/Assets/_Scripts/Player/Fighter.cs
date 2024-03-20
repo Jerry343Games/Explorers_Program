@@ -17,8 +17,10 @@ public class Fighter : PlayerController
     public int tempArmor;//临时护盾
     public bool canFusionBomb = true;
     private Rigidbody _rb;
+    
     void Awake()
     {
+        
         _rb = GetComponent<Rigidbody>();
         PlayerInit();   
     }
@@ -64,12 +66,12 @@ public class Fighter : PlayerController
                 
             }
         }
-        UpdatSkillState();
-        if (playerInputSetting.GetOptionalFeatureDown())
+        
+        if (playerInputSetting.GetOptionalFeatureDown()&& Skill())
         {
-            if (Skill()) { Dash(); }
+             Dash(); 
         }
-
+        UpdatSkillState();
     }
     
 
@@ -92,6 +94,7 @@ public class Fighter : PlayerController
                 break;
             //收集到场景物品
             case "Item":
+                if((other.transform.position-transform.position).magnitude<0.3f)
                 other.GetComponent<Item>().Apply(gameObject);
                 break;
             case "Resource":
@@ -105,6 +108,14 @@ public class Fighter : PlayerController
                 break;
             default:
                 break;
+        }
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        CreatBubbleUI(other.gameObject);
+        if (other.gameObject.CompareTag("Enemy"))
+        {
+            _enemyInArea.Add(other.gameObject);
         }
     }
     private void OnTriggerExit(Collider other)
@@ -146,6 +157,7 @@ public class Fighter : PlayerController
         for (int i = 0; i < _enemyInArea.Count; i++)
         {
             _enemyInArea[i].GetComponent<Enemy>().TakeDamage((int)currentWeapon.attackDamage);
+            if (_enemyInArea[i].GetComponent<Enemy>().HP <= 0) _enemyInArea.RemoveAt(i);
             if (isLeft)
             {
                 _enemyInArea[i].GetComponent<Enemy>().Vertigo(-transform.right * force);
@@ -196,30 +208,32 @@ public class Fighter : PlayerController
             currentArmor = maxArmor;
         }
     }
-    private void OnTriggerEnter(Collider other)
-    {       
-        CreatBubbleUI(other.gameObject);
-        if (other.gameObject.CompareTag("Enemy"))
-        {
-            _enemyInArea.Add(other.gameObject);
-        }
-    }
+    
 
     //自选功能
     private bool isDashing = false;
     public float dashTime = 3f;
     private float dashTimer = 0;
-    public float dashForce = 3f;
+    public float dashForce = 1f;
+    public int dashDamage = 15;
     public void Dash()
     {
+        Vector3 moveDir = new Vector3(playerInputSetting.inputDir.x, playerInputSetting.inputDir.y, 0).normalized;
+        if (moveDir.Equals(Vector3.zero)) return;
         isDashing = true;        
-        _rb .AddForce(transform.GetChild(0).transform.forward * dashForce, ForceMode.Impulse);
+        _rb .AddForce(moveDir * dashForce, ForceMode.Impulse);
+
     }
 
     public void FusionBomb()
     {
 
     }
+    public void OnCollisionEnter(Collision collision)
+    {
+        if (isDashing && collision.gameObject.CompareTag("Enemy")){
+            collision.gameObject.GetComponent<Enemy>().TakeDamage(dashDamage);
+        }
+    }
 
-    
 }
