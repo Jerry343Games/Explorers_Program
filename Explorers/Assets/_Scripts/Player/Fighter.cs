@@ -17,7 +17,7 @@ public class Fighter : PlayerController
     public int tempArmor;//临时护盾
     public bool canFusionBomb = true;
     private Rigidbody _rb;
-    
+    private bool hasUseBomb = false;
     void Awake()
     {
         
@@ -31,6 +31,9 @@ public class Fighter : PlayerController
         if (playerInputSetting.GetAttackButtonDown())
         {           
             Attack();
+        }else if (playerInputSetting.GetAttackSecondaryDown())
+        {
+            SecondaryAttack();
         }
         if(!isDashing) CharacterMove();
 
@@ -63,6 +66,9 @@ public class Fighter : PlayerController
             {
                 dashTimer = 0;
                 isDashing = false;
+                // _rb.isKinematic = false;
+                _rb.mass = 1f;
+                _rb.velocity = Vector3.zero;
                 
             }
         }
@@ -172,8 +178,10 @@ public class Fighter : PlayerController
 
     public override void SecondaryAttack()
     {
+        if (hasUseBomb) return;
+        hasUseBomb = true;
         GameObject bomb = Instantiate(Resources.Load<GameObject>("Bomb"), transform.position, Quaternion.identity);
-        bomb.GetComponent<Bomb>().Init(secondaryWeapons, new Vector3(transform.localScale.x, 0, 0));
+        bomb.GetComponent<Bomb>().Init(secondaryWeapons, transform.GetChild(0).transform.forward);
     }
 
     //因为超载可以获得临时护盾 所以重写一下受伤方法
@@ -220,9 +228,11 @@ public class Fighter : PlayerController
     {
         Vector3 moveDir = new Vector3(playerInputSetting.inputDir.x, playerInputSetting.inputDir.y, 0).normalized;
         if (moveDir.Equals(Vector3.zero)) return;
-        isDashing = true;        
-        _rb .AddForce(moveDir * dashForce, ForceMode.Impulse);
-
+        isDashing = true;
+        //_rb.isKinematic = true;
+        _rb.mass = 5;
+        _rb .AddForce(moveDir * dashForce, ForceMode.VelocityChange);
+        
     }
 
     public void FusionBomb()
