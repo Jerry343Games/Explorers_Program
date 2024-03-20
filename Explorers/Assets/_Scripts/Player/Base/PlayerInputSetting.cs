@@ -196,7 +196,21 @@ public class PlayerInputSetting : MonoBehaviour
         }
     }
     public bool GetOptionalFeatureDown() => _isOptionalFeature;
-    
+
+    private bool _isUseItem;
+    public void OnUseItemDown(InputAction.CallbackContext context)
+    {
+        if (context.started)
+        {
+            _isUseItem = true;
+        }else if (context.canceled)
+        {
+            _isUseItem = false;
+        }
+    }
+    public bool GetUseItem() => _isUseItem;
+   
+
     public void OnStickAim(InputAction.CallbackContext value)
     {
         isStick = true;

@@ -296,14 +296,16 @@ public class PlayerController : MonoBehaviour
     /// <summary>
     /// 使用技能
     /// </summary>
-    public virtual void Skill()
+    public virtual bool Skill()
     {
         if(canUseSkill)
         {
             Debug.Log("使用技能了");
             _skillTimer = skillCD;
             canUseSkill = false;
+            return true;
         }
+        return false;
     }
     /// <summary>
     /// 被眩晕
@@ -477,10 +479,14 @@ public class PlayerController : MonoBehaviour
         {
             Debug.Log(name+ "Press Attack Secondary");
         }
+        if (playerInputSetting.GetUseItem())
+        {
+            Debug.Log(name + "Press Use Item");
+        }
     }
     public void UseItem()
     {
-        if (item != null && playerInputSetting.GetOptionalFeatureDown())
+        if (item != null && playerInputSetting.GetUseItem())
         {
             Debug.Log("use" + item.name);
             item.Use(gameObject);

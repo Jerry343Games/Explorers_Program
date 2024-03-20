@@ -19,7 +19,7 @@ public class Fighter : PlayerController
     private Rigidbody _rb;
     void Awake()
     {
-        
+        _rb = GetComponent<Rigidbody>();
         PlayerInit();   
     }
     void Update()
@@ -33,18 +33,20 @@ public class Fighter : PlayerController
         if(!isDashing) CharacterMove();
 
         RestroeDefence();
-        
-        if (playerInputSetting.inputDir.x < 0)
+        if (!isDashing)
         {
-            transform.localScale = new(-1, 1, 1);
-            isLeft = true;
+            if (playerInputSetting.inputDir.x < 0)
+            {
+                transform.localScale = new(-1, 1, 1);
+                isLeft = true;
+            }
+            else if (playerInputSetting.inputDir.x > 0)
+            {
+                isLeft = false;
+                transform.localScale = new(1, 1, 1);
+            }
         }
-        else if(playerInputSetting.inputDir.x > 0)
-        {
-            isLeft = false;
-            transform.localScale = new(1, 1, 1);
-        }
-        UseItem();
+        //UseItem();
         CheckDistanceToBattery();
         CheckKeys();
         //≥Â¥Ãœ‡πÿ
@@ -65,15 +67,11 @@ public class Fighter : PlayerController
         UpdatSkillState();
         if (playerInputSetting.GetOptionalFeatureDown())
         {
-            Skill();
+            if (Skill()) { Dash(); }
         }
 
     }
-    public override void Skill()
-    {
-        base.Skill();
-        Dash();
-    }
+    
 
     private void OnTriggerStay(Collider other)
     {
