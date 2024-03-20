@@ -13,6 +13,9 @@ public enum PlayerType
     Fighter=3,
 }
 
+/// <summary>
+/// ÆøÅİÖÖÀà
+/// </summary>
 public enum BubbleType
 {
     ResourceCollectionBubble,

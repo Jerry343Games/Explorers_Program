@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
+using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem.UI;
@@ -19,7 +20,8 @@ public class CharacterItem : MonoBehaviour
     private float _infoItemEndTop = 58f;
     private float _infoItemStartTop = 97f;
     private float _infoItemHideDuration = 0.3f;
-    
+
+    public PlayerType playerType;
     public GameObject playerEventCollection;
     public bool isSelected;
     private Button _characterBtn;
@@ -27,6 +29,7 @@ public class CharacterItem : MonoBehaviour
     public GameObject weaponInfoItem;
     public GameObject infoItem;
     private Image _infoItemImg;
+    public TMP_Text info;
     public static int playerIndex;
 
     [Header("指示灯")]
@@ -34,6 +37,13 @@ public class CharacterItem : MonoBehaviour
     public Color unSelectColor;
     public Color selectedColor;
     public Color confirmedColor;
+    
+    /// <summary>
+    /// 角色改变委托，给playerSetting监听改变职业预制体
+    /// </summary>
+    public delegate void PlayerTypeChangedHandler(PlayerType myType);
+    public static event PlayerTypeChangedHandler OnPlayerTypeChanged;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -43,6 +53,7 @@ public class CharacterItem : MonoBehaviour
         _characterBtn.onClick.AddListener(ClickCharacterBtn);
         weaponInfoItem.GetComponent<OptionalFeatureItem>().FeatureConfirmEvent += CloseWeaponInfoItem;
         confirmLightImg.color = unSelectColor;
+        playerIndex = 0;
     }
     
     /// <summary>
@@ -60,6 +71,8 @@ public class CharacterItem : MonoBehaviour
             eventSystem.playerRoot = weaponInfoItem;
             eventSystem.firstSelectedGameObject = weaponInfoItem.transform.GetChild(0).gameObject;
             
+            ChangePlayerType(playerType);
+            
             //处理动画
             Sequence q = DOTween.Sequence();
             q.Append(HideInfoItem);
@@ -72,6 +85,21 @@ public class CharacterItem : MonoBehaviour
                 playerEventCollection.transform.GetChild(playerIndex).gameObject.SetActive(true);
             }
         }
+        else
+        {
+            info.text = "请勿选择和队友相同的角色";
+            Invoke("ClearInfoText",1f);
+        }
+    }
+
+    private void ClearInfoText()
+    {
+        info.text = null;
+    }
+
+    public void ChangePlayerType(PlayerType myType)
+    {
+        OnPlayerTypeChanged?.Invoke(myType);
     }
     
     /// <summary>

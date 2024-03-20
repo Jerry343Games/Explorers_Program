@@ -10,9 +10,15 @@ using UnityEngine.UI;
 
 public class UISelectPanel : MonoBehaviour
 {
+    private Vector3 _line1EndValue = new (1.2f, 1.2f, 1.2f);//提示文字终点位置
+    private float _line1AniDuration = 0.2f;//文字缩放平移动画时间
+    private float _btnEndAnchorPosY = -600f;//按钮终点位置Y坐标
+    private float _btnAniDuration = 0.3f;//按钮离开动画时间
+    
     [HideInInspector]
     public int currentConfirmPlayer;
     public bool isLaunch;
+    private bool _hasBattary;
     public Image mask;
     
     private float _countDown=3f;
@@ -62,8 +68,7 @@ public class UISelectPanel : MonoBehaviour
          _shooterFeature.FeatureConfirmEvent += LaunchPlayer;
          _fighterFeature.FeatureConfirmEvent += LaunchPlayer;
          _healerFeature.FeatureConfirmEvent += LaunchPlayer;
-
-         EventCenter.PlayerRegistered += UIModuleSet;
+         
     }
 
     private void Update()
@@ -83,33 +88,53 @@ public class UISelectPanel : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// 发射玩家程序
+    /// </summary>
     private void LaunchPlayer()
     {
         currentConfirmPlayer++;
-        Debug.Log(currentConfirmPlayer);
+        
         if (currentConfirmPlayer==sceneManager.maxPlayer)
         {
-            Sequence q = DOTween.Sequence();
-            infoLine1.rectTransform.DOAnchorPos(new Vector2(infoLine1.rectTransform.anchoredPosition.x, -10), 0.2f);
-            infoLine1.rectTransform.DOScale(new Vector3(1.2f, 1.2f, 1.2f), 0.2f);
-            infoLine2.text = null;
-            q.AppendInterval(1f);
-            isLaunch = true;
-            q.Append(battaryBtn.GetComponent<RectTransform>().DOAnchorPos(new Vector2(battaryBtn.GetComponent<RectTransform>().anchoredPosition.x,-600),0.3f));
-            q.Append(shooterBtn.GetComponent<RectTransform>().DOAnchorPos(new Vector2(shooterBtn.GetComponent<RectTransform>().anchoredPosition.x,-600),0.3f));
-            q.Append(fighterBtn.GetComponent<RectTransform>().DOAnchorPos(new Vector2(fighterBtn.GetComponent<RectTransform>().anchoredPosition.x,-600),0.3f));
-            q.Append(healerBtn.GetComponent<RectTransform>().DOAnchorPos(new Vector2(healerBtn.GetComponent<RectTransform>().anchoredPosition.x,-600),0.3f));
-            q.AppendInterval(1f);
-            q.Append(mask.DOFade(1, 0.3f));
+            if (!_hasBattary)
+            {
+                infoLine1.rectTransform.DOAnchorPos(new Vector2(infoLine1.rectTransform.anchoredPosition.x, -10), 0.2f);
+                infoLine1.rectTransform.DOScale(_line1EndValue, 0.2f);
+                infoLine1.text = "未选择电池单元，即将重新载入";
+                infoLine2.text = null;
+                Invoke("ReloadScene",1f);
+            }
+            else
+            {
+                Sequence q = DOTween.Sequence();
+                infoLine1.rectTransform.DOAnchorPos(new Vector2(infoLine1.rectTransform.anchoredPosition.x, -10), 0.2f);
+                infoLine1.rectTransform.DOScale(_line1EndValue, 0.2f);
+                infoLine2.text = null;
+                q.AppendInterval(1f);
+                isLaunch = true;
+                q.Append(battaryBtn.GetComponent<RectTransform>()
+                    .DOAnchorPos(new Vector2(battaryBtn.GetComponent<RectTransform>().anchoredPosition.x, _btnEndAnchorPosY), _btnAniDuration));
+                q.Append(shooterBtn.GetComponent<RectTransform>()
+                    .DOAnchorPos(new Vector2(shooterBtn.GetComponent<RectTransform>().anchoredPosition.x, _btnEndAnchorPosY), _btnAniDuration));
+                q.Append(fighterBtn.GetComponent<RectTransform>()
+                    .DOAnchorPos(new Vector2(fighterBtn.GetComponent<RectTransform>().anchoredPosition.x, _btnEndAnchorPosY), _btnAniDuration));
+                q.Append(healerBtn.GetComponent<RectTransform>()
+                    .DOAnchorPos(new Vector2(healerBtn.GetComponent<RectTransform>().anchoredPosition.x, _btnEndAnchorPosY), _btnAniDuration));
+                q.AppendInterval(1f);
+                q.Append(mask.DOFade(1, -_btnAniDuration));
+            }
         }
     }
     
     /// <summary>
-    /// 按下按钮时获得当前操作按下按钮的事件系统，并将其UI模式给创建的玩家
+    /// 按下按钮时,获得当前操作按下按钮的事件系统
     /// </summary>
     private void ClickBattary()
     {
         battaryEventSystem = MultiplayerEventSystem.current.gameObject.GetComponent<MultiplayerEventSystem>();
+        _hasBattary = true;
+        //通知已经赋值，可以获取事件系统
         confirmPlayer?.Invoke();
     }
 
@@ -131,9 +156,8 @@ public class UISelectPanel : MonoBehaviour
         confirmPlayer?.Invoke();
     }
 
-    private void UIModuleSet()
+    private void ReloadScene()
     {
-   
+        UnityEngine.SceneManagement.SceneManager.LoadScene("SelectScene");
     }
-    
 }

@@ -34,30 +34,14 @@ public class PlayerInputSetting : MonoBehaviour
     public LayerMask mouseRayLayer;
     private GameObject _player;
     public bool isStick;
+    [HideInInspector]
+    public PlayerType playerType;//用于接收外部分配的角色
+    private bool isCharacterLock;
     private void Awake()
     {
         Init();
         DontDestroyOnLoad(gameObject);
         //读取玩家序号，分配对应的模块
-        switch (_playerInput.playerIndex)
-        {
-            case (int)PlayerType.BatteryCarrier:
-                batteryCarrier.SetActive(true);
-                _player = batteryCarrier;
-                break;
-            case (int)PlayerType.Shooter:
-                shooter.SetActive(true);
-                _player = shooter;
-                break;
-            case (int)PlayerType.Healer:
-                healer.SetActive(true);
-                _player = healer;
-                break;
-            case (int)PlayerType.Fighter:
-                fighter.SetActive(true);
-                _player = fighter;
-                break;
-        }
     }
 
     private void Init()
@@ -71,8 +55,39 @@ public class PlayerInputSetting : MonoBehaviour
         _cableSetting = inputActionAsset["CableSetting"];
         _accelerate = inputActionAsset["Accelerate"];
         _attack = inputActionAsset["Attack"];
+
+        isCharacterLock = false;
+        CharacterItem.OnPlayerTypeChanged += HandlePlayerTypeChanged;
     }
 
+    private void HandlePlayerTypeChanged(PlayerType myType)
+    {
+        if (!isCharacterLock)
+        {
+            switch (myType)
+            {
+                case PlayerType.BatteryCarrier:
+                    batteryCarrier.SetActive(true);
+                    _player = batteryCarrier;
+                    break;
+                case PlayerType.Shooter:
+                    shooter.SetActive(true);
+                    _player = shooter;
+                    break;
+                case PlayerType.Healer:
+                    healer.SetActive(true);
+                    _player = healer;
+                    break;
+                case PlayerType.Fighter:
+                    fighter.SetActive(true);
+                    _player = fighter;
+                    break;
+            }
+
+            isCharacterLock = true;
+        }
+    }
+    
     /// <summary>
     /// 用于接收InputAction返回的玩家输入数据,玩家每次输入会被Call一次
     /// </summary>

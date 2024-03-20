@@ -112,7 +112,6 @@ public class OptionalFeatureItem : MonoBehaviour
     private void ClickFeature1()
     {
         FeatureConfirmEvent?.Invoke();
-        
         optionalFeatureSelectImg.color = _unSelectColor;
         _hasConfirmed = true;
     }
