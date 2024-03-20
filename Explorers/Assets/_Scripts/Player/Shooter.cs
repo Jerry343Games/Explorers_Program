@@ -125,6 +125,7 @@ public class Shooter : PlayerController
         Instantiate(Resources.Load<GameObject>("Effect/FlashSpiky"), shootTransform.position,
             gun.transform.rotation);
         bullet.GetComponent<Bullet>().Init(mainWeapon, gun.transform.forward);
+        MusicManager.Instance.PlaySound("射击");
     }
 
     //���
