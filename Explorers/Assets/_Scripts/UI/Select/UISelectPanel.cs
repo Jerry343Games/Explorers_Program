@@ -84,7 +84,13 @@ public class UISelectPanel : MonoBehaviour
             {
                 _countDownText = "0.00";
             }
+
+            if (_countDown<1.5)
+            {
+                infoLine2.text = "Don't Panic";
+            }
             infoLine1.text = "///所有单元已就绪，启动发射程序: "+_countDownText+" ///";    
+            
         }
     }
 
@@ -122,7 +128,10 @@ public class UISelectPanel : MonoBehaviour
                 q.Append(healerBtn.GetComponent<RectTransform>()
                     .DOAnchorPos(new Vector2(healerBtn.GetComponent<RectTransform>().anchoredPosition.x, _btnEndAnchorPosY), _btnAniDuration));
                 q.AppendInterval(1f);
-                q.Append(mask.DOFade(1, -_btnAniDuration));
+                q.Append(mask.DOFade(1, _btnAniDuration)).OnComplete(() =>
+                {
+                    UnityEngine.SceneManagement.SceneManager.LoadScene("JerryTest"); //完成动画回调
+                });
             }
         }
     }

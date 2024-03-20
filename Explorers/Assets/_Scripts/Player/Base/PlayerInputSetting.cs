@@ -34,8 +34,7 @@ public class PlayerInputSetting : MonoBehaviour
     public LayerMask mouseRayLayer;
     private GameObject _player;
     public bool isStick;
-    [HideInInspector]
-    public PlayerType playerType;//用于接收外部分配的角色
+    
     private bool isCharacterLock;
     private void Awake()
     {

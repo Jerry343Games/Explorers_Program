@@ -38,6 +38,7 @@ public class BatteryCarrier : PlayerController
     {
         PlayerInit();
         canOverload = true;
+        EventCenter.OnBattaryJoin();//通知电池加入，给其他职业监听以获得主电池
     }
     void Update()
     {

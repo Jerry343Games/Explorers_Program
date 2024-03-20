@@ -21,6 +21,7 @@ public class CellBattery : Battery
         Init();
         //启用每秒电量衰减
         InvokeRepeating("PowerDecayPreSecond", 1f, 1f);
+        EventCenter.BattaryJoined += FindMainBattary;
     }
 
     private void Update()
@@ -38,11 +39,15 @@ public class CellBattery : Battery
     {
         isConnected = true;
         currentPower = maxPower;
-        _mainBattery = GameObject.Find("BatteryCarrier").GetComponent<MainBattery>();
         if (!_mainBattery)
         {
             Debug.LogWarning("CellBattery need a MainBattery");
         }
+    }
+
+    private void FindMainBattary()
+    {
+        _mainBattery = GameObject.Find("BatteryCarrier").GetComponent<MainBattery>();
     }
 
     /// <summary>
