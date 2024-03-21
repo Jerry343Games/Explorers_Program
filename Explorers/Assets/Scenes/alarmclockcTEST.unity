@@ -840,6 +840,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: "\u5730\u7F16"
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 5aae8ad197795b243888b54a08cb476f,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5aae8ad197795b243888b54a08cb476f, type: 3}
 --- !u!1 &224099926
@@ -1189,7 +1194,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f263866b07421745a64d5f7792b23ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  resType: 0
+  collectionType: 0
   currentNum: 0
   maxNum: 0
 --- !u!114 &335216052
@@ -2775,7 +2780,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f263866b07421745a64d5f7792b23ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  resType: 0
+  collectionType: 0
   currentNum: 0
   maxNum: 0
 --- !u!114 &960315509
@@ -3102,11 +3107,10 @@ MonoBehaviour:
   BatteryTransform: {fileID: 0}
   Slover: {fileID: 0}
   bornTransform: {fileID: 983434759}
-  tasks:
-  - type: 0
-    amount: 9
-    taskUI: {fileID: 1940949122}
-    hasFinshed: 0
+  hasMainBattary: 0
+  collectionTasks: []
+  resTasks: []
+  players: []
 --- !u!4 &1023615100
 Transform:
   m_ObjectHideFlags: 0
@@ -4124,7 +4128,7 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: ce3caab56cb9ba64bb3d7c250b774d1a,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ce3caab56cb9ba64bb3d7c250b774d1a, type: 3}
@@ -4553,6 +4557,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: "\u5730\u7F162"
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 18f585e49d1f1ba41b0fd02faa7f1665,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 18f585e49d1f1ba41b0fd02faa7f1665, type: 3}
@@ -5335,10 +5344,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   resType: 0
-  beDingging: 0
+  beDigging: 0
+  currentProcess: 0
   maxProcess: 20
   speed: 2
   bubblePos: {fileID: 0}
+  hasDigged: 0
+  _diger: {fileID: 0}
 --- !u!224 &1849914477 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 7587012050301707660, guid: faa3880a6f49ae245b2f29640a70caca,
@@ -5492,7 +5504,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f263866b07421745a64d5f7792b23ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  resType: 0
+  collectionType: 0
   currentNum: 0
   maxNum: 0
 --- !u!1001 &1941159564

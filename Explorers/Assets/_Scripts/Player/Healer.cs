@@ -8,6 +8,9 @@ public class Healer : PlayerController
     public GameObject gun;
     public Transform shootTransform;
 
+    [Header("医者额外参数")]
+    private int mainWeaponChargedAmount;//"医者"充能次数
+    public int maxChargedAmount;//最大充能次数
 
     [Header("麻醉枪")]
     public WeaponDataSO tranquilizerWeaponData;//麻醉枪参数
@@ -41,8 +44,11 @@ public class Healer : PlayerController
         TimeTick();
         if (playerInputSetting.GetAttackButtonDown())
         {
-            //Attack();
-            FloatingFort();
+            MainAttack();
+        }
+        else if (playerInputSetting.GetAttackSecondaryDown())
+        {
+            SecondaryAttack();
         }
         CharacterMove();
         RestroeDefence();
@@ -124,21 +130,48 @@ public class Healer : PlayerController
         
     }
 
+    public override void UpdateAttackState()
+    {
+        if (_mainAttackTimer < 0)
+        {
+            _mainAttackTimer = mainWeapon.attackCD;
+            mainWeaponChargedAmount++;
+            mainWeaponChargedAmount = Mathf.Clamp(mainWeaponChargedAmount, 0, maxChargedAmount);
+        }
+        else
+        {
+            _mainAttackTimer -= Time.deltaTime;
+        }
+        if (_secondaryAttackTimer < 0)
+        {
+            canSecondaryAttack = true;
+        }
+        else
+        {
+            _secondaryAttackTimer -= Time.deltaTime;
+        }
+    }
     //“医者”
     public override void MainAttack()
     {
-        foreach(var player in EnemyManager.Instance.players)
+        if (isDigging) return;
+        if (mainWeaponChargedAmount>0)
         {
-            if (player.name == "BatteryCarrier") continue;
-            //非电池角色回复护盾
-            PlayerController controller = player.GetComponent<PlayerController>();
-            controller.currentArmor = Mathf.Min(controller.currentArmor + (int)mainWeapon.attackDamage, controller.maxArmor);
+            mainWeaponChargedAmount--;
+            foreach (var player in EnemyManager.Instance.players)
+            {
+                if (player.name == "BatteryCarrier") continue;
+                //非电池角色回复护盾
+                PlayerController controller = player.GetComponent<PlayerController>();
+                controller.currentArmor = Mathf.Min(controller.currentArmor + (int)mainWeapon.attackDamage, controller.maxArmor);
+            }
         }
     }
 
     //编织
     public override void SecondaryAttack()
     {
+        base.SecondaryAttack();
         GameObject bullet = Instantiate(Resources.Load<GameObject>("Bullet"), transform.position, Quaternion.identity);
         bullet.GetComponent<Bullet>().Init(secondaryWeapons, new Vector3(transform.localScale.x, 0, 0));
     }
@@ -148,10 +181,10 @@ public class Healer : PlayerController
     public void TranquilizerGun()
     {
         if (isDigging) return;
-        if(currentWeapon== tranquilizerWeaponData)
+        if(canTranquilizerAttack)
         {
             canTranquilizerAttack = false;
-            _tranquilizerAttackTimer = currentWeapon.attackCD;
+            _tranquilizerAttackTimer = tranquilizerWeaponData.attackCD;
             GetComponent<CellBattery>().ChangePower(-tranquilizerPower);
             //
             GameObject bullet = Instantiate(Resources.Load<GameObject>("TranquilizerBullet"), transform.position, Quaternion.identity);
@@ -183,18 +216,6 @@ public class Healer : PlayerController
 
 
     #endregion
-    public override void UpdateAttackState()
-    {
-        base.UpdateAttackState();
-        if (_tranquilizerAttackTimer < 0)
-        {
-            canTranquilizerAttack = true;
-        }
-        else
-        {
-            _tranquilizerAttackTimer -= Time.deltaTime;
-        }
-    }
 
     public void TimeTick()
     {
@@ -215,6 +236,14 @@ public class Healer : PlayerController
             {
                 canCallFort = true;
             }
+        }
+        if (_tranquilizerAttackTimer < 0)
+        {
+            canTranquilizerAttack = true;
+        }
+        else
+        {
+            _tranquilizerAttackTimer -= Time.deltaTime;
         }
     }
 

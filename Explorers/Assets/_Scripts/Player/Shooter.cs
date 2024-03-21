@@ -33,8 +33,11 @@ public class Shooter : PlayerController
         Aim(gun);
         if (playerInputSetting.GetAttackButtonDown())
         {
-            Attack();
-            //Salvo();
+            MainAttack();
+        }
+        else if (playerInputSetting.GetAttackSecondaryDown())
+        {
+            SecondaryAttack();
         }
         CharacterMove();
         RestroeDefence();
@@ -121,6 +124,7 @@ public class Shooter : PlayerController
     //������
     public override void MainAttack()
     {
+        base.MainAttack();
         GameObject bullet = Instantiate(Resources.Load<GameObject>("Bullet"), transform.position, Quaternion.identity);
         Instantiate(Resources.Load<GameObject>("Effect/FlashSpiky"), shootTransform.position,
             gun.transform.rotation);
@@ -131,6 +135,7 @@ public class Shooter : PlayerController
     //���
     public override void SecondaryAttack()
     {
+        base.SecondaryAttack();
         GameObject bullet = Instantiate(Resources.Load<GameObject>("Bullet"), transform.position, Quaternion.identity);
         bullet.GetComponent<Bullet>().Init(secondaryWeapons,gun.transform.forward);
     }

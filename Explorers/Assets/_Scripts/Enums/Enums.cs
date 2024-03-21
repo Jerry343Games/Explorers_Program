@@ -37,16 +37,14 @@ public enum ItemType
 /// </summary>
 public enum CollectionType
 {
-    Screw,//螺丝
-    Tin,//铁皮
-    //and so on
+    PowerFurnaceParts,//动力炉零件
+    Antenna,//天线
+    StorageAreaShell,//仓储区外壳
 }
 
 public enum ResourceType
 {
-    Gold,
-    Nickel,
-    RareEarth,
+    MineralCusters,//矿物簇
 }
 
 /// <summary>

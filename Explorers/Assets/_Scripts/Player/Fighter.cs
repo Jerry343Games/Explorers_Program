@@ -30,7 +30,7 @@ public class Fighter : PlayerController
         UpdateAttackState();
         if (playerInputSetting.GetAttackButtonDown())
         {           
-            Attack();
+            MainAttack();
         }else if (playerInputSetting.GetAttackSecondaryDown())
         {
             SecondaryAttack();
@@ -159,10 +159,11 @@ public class Fighter : PlayerController
     }
     public override void MainAttack()
     {
+        base.MainAttack();
         if (_enemyInArea.Count == 0) return;
         for (int i = 0; i < _enemyInArea.Count; i++)
         {
-            _enemyInArea[i].GetComponent<Enemy>().TakeDamage((int)currentWeapon.attackDamage);
+            _enemyInArea[i].GetComponent<Enemy>().TakeDamage((int)mainWeapon.attackDamage);
             if (_enemyInArea[i].GetComponent<Enemy>().HP <= 0) _enemyInArea.RemoveAt(i);
             if (isLeft)
             {
@@ -178,6 +179,7 @@ public class Fighter : PlayerController
 
     public override void SecondaryAttack()
     {
+        base.SecondaryAttack();
         if (hasUseBomb) return;
         hasUseBomb = true;
         GameObject bomb = Instantiate(Resources.Load<GameObject>("Bomb"), transform.position, Quaternion.identity);

@@ -51,17 +51,13 @@ public class PlayerController : MonoBehaviour
     [Header("武器")]
     public WeaponDataSO mainWeapon;//主武器
     public WeaponDataSO secondaryWeapons;//副武器
-    [HideInInspector]
-    public WeaponDataSO currentWeapon;//当前使用的武器
     private int _currentMainAmmunition, _currentSecondaryAmmunition;//主副武器当前子弹数
-    private float _mainAttackTimer, _secondaryAttackTimer;
-    private bool canMainAttack, canSecondaryAttack;
+    protected float _mainAttackTimer, _secondaryAttackTimer;
+    protected bool canMainAttack, canSecondaryAttack;
     [HideInInspector]
     public Vector3 myAimPos;//瞄准方向
 
     [Header("通用")]
-    public int attackRange;
-    public int attack;
     public bool hasDead;
 
     [Header("绳子")]
@@ -94,7 +90,7 @@ public class PlayerController : MonoBehaviour
 
         currentArmor = maxArmor;
         lastHurtTimer = timeToRepairArmor;
-        currentWeapon = mainWeapon;
+        //currentWeapon = mainWeapon;
         _currentMainAmmunition = mainWeapon.initAmmunition;
         _currentSecondaryAmmunition = secondaryWeapons.initAmmunition;
         canUseSkill = false;
@@ -351,9 +347,10 @@ public class PlayerController : MonoBehaviour
     /// <summary>
     /// 切换武器
     /// </summary>
-    public void ChangeWeapon()
+    public void ChangeWeapon(WeaponDataSO newWeapon )
     {
-        currentWeapon = (currentWeapon == mainWeapon ? secondaryWeapons : mainWeapon);
+
+
     }
 
     /// <summary>
@@ -378,35 +375,30 @@ public class PlayerController : MonoBehaviour
     }
     
     /// <summary>
-    /// 攻击方法
+    /// 主武器攻击方法 请子类重写
     /// </summary>
-    public void Attack()
+    public virtual void MainAttack()
     {
         if (isDigging) return;
-        if (currentWeapon==mainWeapon && canMainAttack)
+        if(canMainAttack)
         {
             canMainAttack = false;
-            _mainAttackTimer = currentWeapon.attackCD;
-            
-            MainAttack();
-        }
-        else if(currentWeapon== secondaryWeapons && canSecondaryAttack)
-        {
-            canSecondaryAttack = false;
-            _secondaryAttackTimer = currentWeapon.attackCD;
-            SecondaryAttack();
+            _mainAttackTimer = mainWeapon.attackCD;
         }
     }
 
     /// <summary>
-    /// 主武器攻击方法 请子类重写
-    /// </summary>
-    public virtual void MainAttack() { }
-
-    /// <summary>
     /// 副武器攻击方法 请子类重写
     /// </summary>
-    public virtual void SecondaryAttack() { }
+    public virtual void SecondaryAttack() 
+    {
+        if (isDigging) return;
+        if (canSecondaryAttack)
+        {
+            canSecondaryAttack = false;
+            _secondaryAttackTimer = secondaryWeapons.attackCD;
+        }
+    }
 
     /// <summary>
     /// 按交互物体创建一个气泡UI，记得在退出时删除
