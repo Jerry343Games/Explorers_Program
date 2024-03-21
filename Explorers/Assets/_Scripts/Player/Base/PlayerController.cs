@@ -52,8 +52,8 @@ public class PlayerController : MonoBehaviour
     public WeaponDataSO mainWeapon;//主武器
     public WeaponDataSO secondaryWeapons;//副武器
     private int _currentMainAmmunition, _currentSecondaryAmmunition;//主副武器当前子弹数
-    protected float _mainAttackTimer, _secondaryAttackTimer;
-    protected bool canMainAttack, canSecondaryAttack;
+    public float _mainAttackTimer, _secondaryAttackTimer;
+    public bool canMainAttack, canSecondaryAttack;
     [HideInInspector]
     public Vector3 myAimPos;//瞄准方向
 
@@ -377,27 +377,25 @@ public class PlayerController : MonoBehaviour
     /// <summary>
     /// 主武器攻击方法 请子类重写
     /// </summary>
-    public virtual void MainAttack()
+    public virtual bool MainAttack()
     {
-        if (isDigging) return;
-        if(canMainAttack)
-        {
-            canMainAttack = false;
-            _mainAttackTimer = mainWeapon.attackCD;
-        }
+        if (isDigging) return false;
+        if (!canMainAttack) return false;
+        canMainAttack = false;
+        _mainAttackTimer = mainWeapon.attackCD;
+        return true;
     }
 
     /// <summary>
     /// 副武器攻击方法 请子类重写
     /// </summary>
-    public virtual void SecondaryAttack() 
+    public virtual bool SecondaryAttack() 
     {
-        if (isDigging) return;
-        if (canSecondaryAttack)
-        {
-            canSecondaryAttack = false;
-            _secondaryAttackTimer = secondaryWeapons.attackCD;
-        }
+        if (isDigging) return false;
+        if (!canSecondaryAttack) return false;
+        canSecondaryAttack = false;
+        _secondaryAttackTimer = secondaryWeapons.attackCD;
+        return true;
     }
 
     /// <summary>

@@ -157,10 +157,14 @@ public class Fighter : PlayerController
         }
 
     }
-    public override void MainAttack()
+    public override bool MainAttack()
     {
-        base.MainAttack();
-        if (_enemyInArea.Count == 0) return;
+
+        if(!base.MainAttack())
+        {
+            return false;
+        }
+        if (_enemyInArea.Count == 0) return false;
         for (int i = 0; i < _enemyInArea.Count; i++)
         {
             _enemyInArea[i].GetComponent<Enemy>().TakeDamage((int)mainWeapon.attackDamage);
@@ -175,15 +179,20 @@ public class Fighter : PlayerController
             }
 
         }
+        return true;
     }
 
-    public override void SecondaryAttack()
+    public override bool SecondaryAttack()
     {
-        base.SecondaryAttack();
-        if (hasUseBomb) return;
+        if(!base.SecondaryAttack())
+        {
+            return false;
+        }
+        if (hasUseBomb) return false; 
         hasUseBomb = true;
         GameObject bomb = Instantiate(Resources.Load<GameObject>("Bomb"), transform.position, Quaternion.identity);
         bomb.GetComponent<Bomb>().Init(secondaryWeapons, transform.GetChild(0).transform.forward);
+        return true;
     }
 
     //因为超载可以获得临时护盾 所以重写一下受伤方法

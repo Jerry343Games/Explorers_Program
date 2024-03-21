@@ -122,22 +122,30 @@ public class Shooter : PlayerController
     }
 
     //������
-    public override void MainAttack()
+    public override bool MainAttack()
     {
-        base.MainAttack();
+        if(!base.MainAttack())
+        {
+            return false;
+        }
         GameObject bullet = Instantiate(Resources.Load<GameObject>("Bullet"), transform.position, Quaternion.identity);
         Instantiate(Resources.Load<GameObject>("Effect/FlashSpiky"), shootTransform.position,
             gun.transform.rotation);
         bullet.GetComponent<Bullet>().Init(mainWeapon, gun.transform.forward);
         MusicManager.Instance.PlaySound("射击");
+        return true;
     }
 
     //���
-    public override void SecondaryAttack()
+    public override bool SecondaryAttack()
     {
-        base.SecondaryAttack();
+        if(!base.SecondaryAttack())
+        {
+            return false;
+        }
         GameObject bullet = Instantiate(Resources.Load<GameObject>("Bullet"), transform.position, Quaternion.identity);
         bullet.GetComponent<Bullet>().Init(secondaryWeapons,gun.transform.forward);
+        return true;
     }
 
     #region 自选功能

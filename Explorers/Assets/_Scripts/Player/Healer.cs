@@ -152,9 +152,10 @@ public class Healer : PlayerController
         }
     }
     //“医者”
-    public override void MainAttack()
+    public override bool MainAttack()
     {
-        if (isDigging) return;
+        //充能型武器不用主武器那一套判断
+        if (isDigging) return false;
         if (mainWeaponChargedAmount>0)
         {
             mainWeaponChargedAmount--;
@@ -166,14 +167,19 @@ public class Healer : PlayerController
                 controller.currentArmor = Mathf.Min(controller.currentArmor + (int)mainWeapon.attackDamage, controller.maxArmor);
             }
         }
+        return true;
     }
 
     //编织
-    public override void SecondaryAttack()
+    public override bool SecondaryAttack()
     {
-        base.SecondaryAttack();
+        if(!base.SecondaryAttack())
+        {
+            return false;
+        }
         GameObject bullet = Instantiate(Resources.Load<GameObject>("Bullet"), transform.position, Quaternion.identity);
         bullet.GetComponent<Bullet>().Init(secondaryWeapons, new Vector3(transform.localScale.x, 0, 0));
+        return true;
     }
 
     #region 自选功能
