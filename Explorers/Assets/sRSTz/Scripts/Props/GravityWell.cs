@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
+using UnityEngine.InputSystem.iOS;
 
 public class GravityWell : Item
 {
@@ -15,6 +17,8 @@ public class GravityWell : Item
     public bool isPicked;
     public float throwPower=8f;
     private Vector3 userAimPos;
+
+    public GameObject blackHoleEffect;
     public override void Apply(GameObject user)
     {
         if (isPicked) return;
@@ -49,7 +53,7 @@ public class GravityWell : Item
 
     public void GravityChange()
     {
-        
+        PlayBlackHoleAni();
         rb.WakeUp();
         sphereCollider.radius = 5f;
         rb.velocity = Vector3.zero;
@@ -76,7 +80,7 @@ public class GravityWell : Item
                     character.GetComponent<Enemy>().canAttack = true;
                 }
             }
-            Destroy(gameObject);
+            KillBlackHole();
         }
         else
         {
@@ -115,5 +119,26 @@ public class GravityWell : Item
     {
         if (other.CompareTag("Battery") || other.CompareTag("Player") || other.CompareTag("Enemy"))
             characters.Remove(other.gameObject);
+    }
+
+    /// <summary>
+    /// 开启黑洞特效
+    /// </summary>
+    private void PlayBlackHoleAni()
+    {
+        sprite.SetActive(false);
+        Vector3 defaultScale = blackHoleEffect.transform.localScale;
+        blackHoleEffect.transform.localScale = Vector3.zero;
+        blackHoleEffect.transform.DOScale(defaultScale, 0.2f);
+        blackHoleEffect.SetActive(true);
+        blackHoleEffect.GetComponent<ParticleSystem>().Play();
+    }
+
+    /// <summary>
+    /// 关闭黑洞
+    /// </summary>
+    private void KillBlackHole()
+    {
+        blackHoleEffect.transform.DOScale(Vector3.zero, 0.2f).OnComplete(()=>Destroy(gameObject));
     }
 }
