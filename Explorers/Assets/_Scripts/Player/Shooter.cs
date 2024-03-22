@@ -1,9 +1,4 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Runtime.InteropServices.ComTypes;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 public class Shooter : PlayerController
 {
@@ -20,6 +15,18 @@ public class Shooter : PlayerController
     private bool canSalvo;
     public LayerMask enemyLayer;
 
+    [Header("毁灭鱼雷")]
+    public float torpedoesCD;//毁灭鱼雷冷却时间
+    private float _torpedoesCDTimer;
+    public float torpedoesRange;//毁灭鱼雷爆炸范围
+    public float destoryTime;//毁灭鱼雷销毁时间
+    public float torpedoesSpeed;//毁灭鱼雷飞行速度
+    public float torpedoesForce;//毁灭鱼雷击退力
+    public int torpedoesPower;//毁灭鱼雷消耗的电量
+    public int torpedoesDamage;
+    private bool canTorpedoes;
+    public LayerMask playerLayer;
+
     void Awake()
     {
         PlayerInit();
@@ -33,7 +40,8 @@ public class Shooter : PlayerController
         Aim(gun);
         if (playerInputSetting.GetAttackButtonDown())
         {
-            MainAttack();
+            //MainAttack();
+            DestroyTorpedoes();
         }
         else if (playerInputSetting.GetAttackSecondaryDown())
         {
@@ -177,7 +185,22 @@ public class Shooter : PlayerController
         }
     }
 
+
+    //毁灭鱼雷
+    public void DestroyTorpedoes()
+    {
+        if (isDigging) return;
+        if (!canTorpedoes) return;
+        canTorpedoes = false;
+        GameObject bullet = Instantiate(Resources.Load<GameObject>("Torpedoes"), gun.transform.position + gun.transform.forward*2, Quaternion.identity);
+        bullet.GetComponent<Torpedoes>().Init(enemyLayer,playerLayer,torpedoesSpeed,destoryTime,
+            torpedoesRange,torpedoesForce,torpedoesDamage, gun.transform.forward);
+        GetComponent<CellBattery>().ChangePower(-torpedoesPower);
+    }
+
     #endregion
+
+
 
     public void TimeTick()
     {
@@ -188,6 +211,15 @@ public class Shooter : PlayerController
             {
                 canSalvo = true;
                 _salvoCDTimer = salvoCD;
+            }
+        }
+        if(!canTorpedoes)
+        {
+            _torpedoesCDTimer -= Time.deltaTime;
+            if(_torpedoesCDTimer<0)
+            {
+                canTorpedoes = true;
+                _torpedoesCDTimer = torpedoesCD;
             }
         }
     }
