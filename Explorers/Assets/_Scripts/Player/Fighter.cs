@@ -75,7 +75,7 @@ public class Fighter : PlayerController
         
         if (playerInputSetting.GetOptionalFeatureDown()&& Skill())
         {
-             Dash(); 
+            SonicWaveAttack();
         }
         UpdatSkillState();
     }
@@ -245,10 +245,15 @@ public class Fighter : PlayerController
         _rb .AddForce(moveDir * dashForce, ForceMode.VelocityChange);
         
     }
-
-    public void FusionBomb()
+    public SonicWaveAttack sonicWaveAttack;
+    public float startRadius = 0.4f;
+    public float targetRadius = 100f;
+    public float enemyVertigoTime = 2f;
+   
+    public float transitionDuration = 3f;
+    public void SonicWaveAttack()
     {
-
+        sonicWaveAttack.AttactStart(this,startRadius, targetRadius, enemyVertigoTime,transitionDuration);
     }
     public void OnCollisionEnter(Collision collision)
     {
