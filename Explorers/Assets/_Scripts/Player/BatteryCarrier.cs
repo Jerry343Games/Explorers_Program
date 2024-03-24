@@ -39,12 +39,13 @@ public class BatteryCarrier : PlayerController
         PlayerInit();
         canOverload = true;
         SceneManager.Instance.hasMainBattary = true; //通知电池加入，给其他职业监听以获得主电池
+        
     }
     void Update()
     {
         if (hasDead) return;
         CharacterMove();
-        CheckKeys();
+        //CheckKeys();
         TickTime();
 
         if (playerInputSetting.GetOptionalFeatureDown())

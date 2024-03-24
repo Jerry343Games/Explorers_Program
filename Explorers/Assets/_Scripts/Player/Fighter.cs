@@ -53,7 +53,7 @@ public class Fighter : PlayerController
         }
         //UseItem();
         CheckDistanceToBattery();
-        CheckKeys();
+        //CheckKeys();
         //≥Â¥Ãœ‡πÿ
         if (isDashing)
         {

@@ -7,29 +7,27 @@ using UnityEngine.Serialization;
 using Vector2 = UnityEngine.Vector2;
 
 /// <summary>
-/// ¸ºÔğÍ³Ò»´¦ÀíÍæ¼ÒµÄÊäÈëÊı¾İ½ÓÊÕ£¬²¢¿ØÖÆ¶ÔÓ¦µÄÍæ¼ÒÄ£¿é¿ªÆô
+/// è´Ÿè´£ç»Ÿä¸€å¤„ç†ç©å®¶çš„è¾“å…¥æ•°æ®æ¥æ”¶ï¼Œå¹¶æ§åˆ¶å¯¹åº”çš„ç©å®¶æ¨¡å—å¼€å¯
 /// </summary>
 public class PlayerInputSetting : MonoBehaviour
 {
-    //´¦ÀíÊäÈë
+    //å¤„ç†è¾“å…¥
     private PlayerInput _playerInput;
     public InputActionAsset inputActionAsset;
-    private InputAction _interact;
-    private InputAction _accelerate;
-    private InputAction _cableSetting;
-    private InputAction _attack;
     private InputAction _aim;
     
-    [Header("Íæ¼ÒÄ£¿é")]
+    [Header("ç©å®¶æ¨¡å—")]
     public GameObject batteryCarrier;
     public GameObject shooter;
     public GameObject healer;
     public GameObject fighter;
-
+    public PlayerType characterType;
+    public OptionalFeature feature;//é€‰æ‹©çš„æŠ€èƒ½
+    
     [HideInInspector]
     public Vector2 inputDir;
     [HideInInspector]
-    public Vector2 aimPos;//×îÖÕÃé×¼Î»ÖÃ£¬ÓÃÓÚ»ñÈ¡
+    public Vector2 aimPos;//æœ€ç»ˆç„å‡†ä½ç½®ï¼Œç”¨äºè·å–
     private Vector2 _inputAimDir;
     private RaycastHit _hit;
     public LayerMask mouseRayLayer;
@@ -41,8 +39,7 @@ public class PlayerInputSetting : MonoBehaviour
     {
         Init();
         DontDestroyOnLoad(gameObject);
-        TestScenePlayerSelect();
-        //¶ÁÈ¡Íæ¼ÒĞòºÅ£¬·ÖÅä¶ÔÓ¦µÄÄ£¿é
+        TestScenePlayerSelect();//å½“ä¸æ˜¯ä»é€‰æ‹©å…³å¡å¼€å§‹æ—¶åˆ†é…é»˜è®¤ç©å®¶
     }
 
     private void Start()
@@ -52,23 +49,25 @@ public class PlayerInputSetting : MonoBehaviour
 
     private void Init()
     {
-        //¹éÁã¸¸ÎïÌå(³öÉúµã)
+        //å½’é›¶çˆ¶ç‰©ä½“(å‡ºç”Ÿç‚¹)
         transform.position = Vector3.zero;
         _playerInput = GetComponent<PlayerInput>();
         
-        //»ñÈ¡ÊäÈëÅäÖÃÎÄ¼ş
-        _interact = inputActionAsset["Interact"];
-        _cableSetting = inputActionAsset["CableSetting"];
-        _accelerate = inputActionAsset["Accelerate"];
-        _attack = inputActionAsset["Attack"];
         isCharacterLock = false;
         CharacterItem.OnPlayerTypeChanged += HandlePlayerTypeChanged;
+        EventCenter.GameStartedEvent += FeatureAssignment;
     }
 
+    /// <summary>
+    /// å¤–éƒ¨è·å–é€‰æ‹©çš„ç©å®¶èŒä¸š
+    /// </summary>
+    /// <param name="myType">èŒä¸š</param>
     private void HandlePlayerTypeChanged(PlayerType myType)
     {
         if (!isCharacterLock)
         {
+            characterType = myType;
+            //é€šè¿‡SelectPanelçš„å¤–éƒ¨ä¼ å‚è®¾ç½®é¢„åˆ¶ä½“
             switch (myType)
             {
                 case PlayerType.BatteryCarrier:
@@ -94,7 +93,7 @@ public class PlayerInputSetting : MonoBehaviour
     }
 
     /// <summary>
-    /// ÓÃÓÚÔÚ²»¾­¹ıÑ¡ÈË¹Ø¿¨Ê±·ÖÅä½ÇÉ«
+    /// ç”¨äºåœ¨ä¸ç»è¿‡é€‰äººå…³å¡æ—¶åˆ†é…è§’è‰²
     /// </summary>
     private void TestScenePlayerSelect()
     {
@@ -123,27 +122,35 @@ public class PlayerInputSetting : MonoBehaviour
     }
     
     /// <summary>
-    /// ÓÃÓÚ½ÓÊÕInputAction·µ»ØµÄÍæ¼ÒÊäÈëÊı¾İ,Íæ¼ÒÃ¿´ÎÊäÈë»á±»CallÒ»´Î
+    /// æ¸¸æˆå¼€å§‹æ—¶ç»Ÿä¸€è¿›è¡Œè‡ªé€‰åŠŸèƒ½åˆ†é…
     /// </summary>
-    /// <param name="value0">ÊäÈëÊı¾İ</param>
+    private void FeatureAssignment()
+    {
+        feature = PlayerManager.Instance.playerFeaturesDic[(int)characterType];
+    }
+    
+    /// <summary>
+    /// ç”¨äºæ¥æ”¶InputActionè¿”å›çš„ç©å®¶è¾“å…¥æ•°æ®,ç©å®¶æ¯æ¬¡è¾“å…¥ä¼šè¢«Callä¸€æ¬¡
+    /// </summary>
+    /// <param name="value0">è¾“å…¥æ•°æ®</param>
     public void OnMovement(InputAction.CallbackContext value0)
     {
         inputDir = value0.ReadValue<Vector2>();
     }
     
     /// <summary>
-    /// µ±Ç°Ö¡ÊÇ·ñ°´ÏÂ½»»¥¼ü£ºE£¬North
+    /// å½“å‰å¸§æ˜¯å¦æŒ‰ä¸‹äº¤äº’é”®ï¼šEï¼ŒNorth
     /// </summary>
     /// <returns></returns>
     private bool _isPressInteract;
     public void OnInteract(InputAction.CallbackContext context)
     {
-        // ¼ì²â°´¼ü±»°´ÏÂ
+        // æ£€æµ‹æŒ‰é”®è¢«æŒ‰ä¸‹
         if (context.started)
         {
             _isPressInteract = true;
         }
-        // ¼ì²â°´¼ü±»Ì§Æğ
+        // æ£€æµ‹æŒ‰é”®è¢«æŠ¬èµ·
         else if (context.canceled)
         {
             _isPressInteract = false;
@@ -152,18 +159,18 @@ public class PlayerInputSetting : MonoBehaviour
     public bool GetInteractButtonDown() => _isPressInteract;
 
     /// <summary>
-    /// µ±Ç°Ö¡ÊÇ·ñ°´ÏÂ¼ÓËÙ¼ü£ºSpace£¬East
+    /// å½“å‰å¸§æ˜¯å¦æŒ‰ä¸‹åŠ é€Ÿé”®ï¼šSpaceï¼ŒEast
     /// </summary>
     /// <returns></returns>
     private bool _isPressAccelerate;
     public void OnAccelerate(InputAction.CallbackContext context)
     {
-        // ¼ì²â°´¼ü±»°´ÏÂ
+        // æ£€æµ‹æŒ‰é”®è¢«æŒ‰ä¸‹
         if (context.started)
         {
             _isPressAccelerate = true;
         }
-        // ¼ì²â°´¼ü±»Ì§Æğ
+        // æ£€æµ‹æŒ‰é”®è¢«æŠ¬èµ·
         else if (context.canceled)
         {
             _isPressAccelerate = false;
@@ -172,18 +179,18 @@ public class PlayerInputSetting : MonoBehaviour
     public bool GetAccelerateButtonDown() => _isPressAccelerate;
 
     /// <summary>
-    /// µ±Ç°Ö¡ÊÇ·ñ°´ÏÂÉşË÷¼ü£ºF£¬LT
+    /// å½“å‰å¸§æ˜¯å¦æŒ‰ä¸‹ç»³ç´¢é”®ï¼šFï¼ŒLT
     /// </summary>
     /// <returns></returns>
     private bool _isPressCable;
     public void OnCable(InputAction.CallbackContext context)
     {
-        // ¼ì²â°´¼ü±»°´ÏÂ
+        // æ£€æµ‹æŒ‰é”®è¢«æŒ‰ä¸‹
         if (context.started)
         {
             _isPressCable = true;
         }
-        // ¼ì²â°´¼ü±»Ì§Æğ
+        // æ£€æµ‹æŒ‰é”®è¢«æŠ¬èµ·
         else if (context.canceled)
         {
             _isPressCable = false;
@@ -192,18 +199,18 @@ public class PlayerInputSetting : MonoBehaviour
     public bool GetCableButtonDown() => _isPressCable;
 
     /// <summary>
-    /// µ±Ç°Ö¡ÊÇ·ñ°´ÏÂ¹¥»÷¼ü£ºÊó±ê×ó¼ü£¬ÓÒ¼ç¼ü
+    /// å½“å‰å¸§æ˜¯å¦æŒ‰ä¸‹æ”»å‡»é”®ï¼šé¼ æ ‡å·¦é”®ï¼Œå³è‚©é”®
     /// </summary>
     /// <returns></returns>
     private bool _isPressAttack;
     public void OnAttack (InputAction.CallbackContext context)
     {
-        // ¼ì²â°´¼ü±»°´ÏÂ
+        // æ£€æµ‹æŒ‰é”®è¢«æŒ‰ä¸‹
         if (context.started)
         {
             _isPressAttack = true;
         }
-        // ¼ì²â°´¼ü±»Ì§Æğ
+        // æ£€æµ‹æŒ‰é”®è¢«æŠ¬èµ·
         else if (context.canceled)
         {
             _isPressAttack = false;
@@ -212,7 +219,7 @@ public class PlayerInputSetting : MonoBehaviour
     public bool GetAttackButtonDown() => _isPressAttack;
 
     /// <summary>
-    /// ¸±ÎäÆ÷¹¥»÷£ºÊó±êÓÒ¼ü£¬×ó¼ç¼ü
+    /// å‰¯æ­¦å™¨æ”»å‡»ï¼šé¼ æ ‡å³é”®ï¼Œå·¦è‚©é”®
     /// </summary>
     private bool _isAttackSecondary;
 
@@ -230,7 +237,7 @@ public class PlayerInputSetting : MonoBehaviour
     public bool GetAttackSecondaryDown() => _isAttackSecondary;
 
     /// <summary>
-    /// ×ÔÑ¡¹¦ÄÜ ¼üÅÌQ£¬ÊÖ±úÓÒ°â»ú¼ü
+    /// è‡ªé€‰åŠŸèƒ½ é”®ç›˜Qï¼Œæ‰‹æŸ„å³æ‰³æœºé”®
     /// </summary>
     private bool _isOptionalFeature;
     public void OnOptionalFeeatureDown(InputAction.CallbackContext context)
@@ -273,7 +280,7 @@ public class PlayerInputSetting : MonoBehaviour
         
         Ray ray = Camera.main.ScreenPointToRay(_inputAimDir);
         Vector2 _hitPos=Vector2.zero;
-        if (Physics.Raycast(ray, out _hit, 50, mouseRayLayer)) //Èç¹ûÅö×²¼ì²âµ½ÎïÌå
+        if (Physics.Raycast(ray, out _hit, 50, mouseRayLayer)) //å¦‚æœç¢°æ’æ£€æµ‹åˆ°ç‰©ä½“
         {
             _hitPos = new Vector2(_hit.point.x, _hit.point.y);
         }

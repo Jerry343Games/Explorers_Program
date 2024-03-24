@@ -38,16 +38,10 @@ public class OptionalFeatureItem : MonoBehaviour
     
     public event Action FeatureConfirmEvent;
 
-    public TargetType targetType;
+    public PlayerType targetType;
 
     private bool _hasConfirmed;
-    public enum TargetType
-    {
-        BattaryWeapon,
-        ShooterWeapon,
-        FigherWeapon,
-        HealerWeapon,
-    }
+    
     
     void Start()
     {
@@ -114,23 +108,23 @@ public class OptionalFeatureItem : MonoBehaviour
     }
     
     /// <summary>
-    /// ѡ����ѡ����1
+    /// ѡ����ѡ����1
     /// </summary>
     private void ClickFeature1()
     {
-        //FeatureConfirmEvent?.Invoke();
         SetOptionalFeature(feature1);
+        FeatureConfirmEvent?.Invoke();//这个事件是给面板收起和锁定用的，所有信息传递必须在此之前完成
         optionalFeatureSelectImg.color = _unSelectColor;
         _hasConfirmed = true;
     }
 
     /// <summary>
-    /// ѡ����ѡ����2
+    /// ѡ����ѡ����2
     /// </summary>
     private void ClickFeature2()
     {
-        //FeatureConfirmEvent?.Invoke();
         SetOptionalFeature(feature2);
+        FeatureConfirmEvent?.Invoke();//这个事件是给面板收起和锁定用的，所有信息传递必须在此之前完成
         optionalFeatureSelectImg.color = _unSelectColor;
         _hasConfirmed = true;
     }
@@ -144,22 +138,23 @@ public class OptionalFeatureItem : MonoBehaviour
         else
         {
             PlayerManager.Instance.playerFeaturesDic[(int)targetType] = feature;
+            Debug.Log(targetType+" Choose: "+PlayerManager.Instance.playerFeaturesDic[(int)targetType]);
         }
     }
     private void ConfirmPlayer()
     {
         switch (targetType)
         {
-            case TargetType.BattaryWeapon:
+            case PlayerType.BatteryCarrier:
                 myEventsystem = uiSelectPanel.battaryEventSystem;
                 break;
-            case TargetType.ShooterWeapon:
+            case PlayerType.Shooter:
                 myEventsystem = uiSelectPanel.shooterEventSystem;
                 break;
-            case TargetType.FigherWeapon:
+            case PlayerType.Fighter:
                 myEventsystem = uiSelectPanel.fighterEventSystem;
                 break;
-            case TargetType.HealerWeapon:
+            case PlayerType.Healer:
                 myEventsystem = uiSelectPanel.healerEventSystem;
                 break;
         }

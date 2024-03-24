@@ -15,7 +15,7 @@ public class PlayerController : MonoBehaviour
     public UIBubblePanel bubblePanel;
     
     /// <summary>
-    /// 玩家所分配到的唯一序列号,类型区分见枚举类
+    /// 玩家所分配到的唯一序列号,默认类型区分见枚举类
     /// </summary>
     [HideInInspector]
     public int myIndex;
@@ -81,11 +81,9 @@ public class PlayerController : MonoBehaviour
         playerInput = transform.parent.GetComponent<PlayerInput>();
         playerInputSetting = transform.parent.GetComponent<PlayerInputSetting>();
         myIndex = playerInput.playerIndex;
-        Debug.Log(transform.name+" Index: "+myIndex);
+        Debug.Log("Clone: "+transform.name+" / Index: "+myIndex);
         PlayerManager.Instance.players.Add(gameObject);
         if (gameObject.CompareTag("Battery")) EnemyManager.Instance.battery = gameObject;
-        //赋值选择的功能
-        feature = PlayerManager.Instance.playerFeaturesDic[myIndex];
         currentArmor = maxArmor;
         lastHurtTimer = timeToRepairArmor;
         _currentMainAmmunition = mainWeapon.initAmmunition;
@@ -94,7 +92,10 @@ public class PlayerController : MonoBehaviour
         isDigging = false;
         _speedFactor = 1;
         _outSpeedFactor = 1;
-
+        
+        //获得自选功能
+        feature = playerInputSetting.feature;
+        
         transform.position = SceneManager.Instance.bornTransform.position;
         bubblePanel = GameObject.Find("BubblePanel").GetComponents<UIBubblePanel>()[0];
         
@@ -478,5 +479,5 @@ public class PlayerController : MonoBehaviour
             
         }
     }
-
+    
 }

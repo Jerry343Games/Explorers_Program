@@ -18,7 +18,7 @@ public class PlayerManager : SingletonPersistent<PlayerManager>
 {
     public List<GameObject> players = new List<GameObject>();
 
-    //键：角色索引 值：选择的技能
+    //键：职业索引 值：选择的技能
     public Dictionary<int, OptionalFeature> playerFeaturesDic = new Dictionary<int, OptionalFeature>();
 
 }

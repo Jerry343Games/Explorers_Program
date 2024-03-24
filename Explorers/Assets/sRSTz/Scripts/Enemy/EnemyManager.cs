@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Pool;
 /// <summary>
-/// µĞÈËĞèÒªµÄÒ»Ğ©¹«ÓÃµÄ¶«Î÷ÏÈ·ÅÕâ
+/// æ•Œäººéœ€è¦çš„ä¸€äº›å…¬ç”¨çš„ä¸œè¥¿å…ˆæ”¾è¿™
 /// </summary>
 public class EnemyManager : SingletonPersistent<EnemyManager>
 { 

@@ -61,7 +61,7 @@ public class Shooter : PlayerController
         }
         UseItem();
         CheckDistanceToBattery();
-        CheckKeys();
+        //CheckKeys();
         if (playerInputSetting.GetOptionalFeatureDown())
         {
             switch (feature)

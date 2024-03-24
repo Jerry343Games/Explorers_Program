@@ -64,7 +64,7 @@ public class Healer : PlayerController
         }
         UseItem();
         CheckDistanceToBattery();
-        CheckKeys();
+        //CheckKeys();
         if (playerInputSetting.GetOptionalFeatureDown())
         {
             switch (feature)

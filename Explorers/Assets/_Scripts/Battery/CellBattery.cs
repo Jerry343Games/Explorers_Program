@@ -47,15 +47,15 @@ public class CellBattery : Battery
         isConnected = true;
         _findMainbattary = false;
         currentPower = maxPower;
-        if (!_mainBattery)
-        {
-            Debug.LogWarning("CellBattery need a MainBattery");
-        }
     }
 
     private void FindMainBattary()
     {
         _mainBattery = GameObject.Find("BatteryCarrier").GetComponent<MainBattery>();
+        if (!_mainBattery)
+        {
+            Debug.LogWarning("CellBattery need a MainBattery");
+        }
     }
 
     /// <summary>
