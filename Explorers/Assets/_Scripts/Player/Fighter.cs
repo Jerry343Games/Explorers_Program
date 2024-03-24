@@ -73,11 +73,21 @@ public class Fighter : PlayerController
             }
         }
         
-        if (playerInputSetting.GetOptionalFeatureDown()&& Skill())
+        if (playerInputSetting.GetOptionalFeatureDown())
         {
-            SonicWaveAttack();
+            switch(feature)
+            {
+                case OptionalFeature.Dash:
+                    Dash();
+                    break;
+                case OptionalFeature.SonicWave:
+                    SonicWaveAttack();
+                    break;
+                default:
+                    break;
+
+            }
         }
-        UpdatSkillState();
     }
     
 

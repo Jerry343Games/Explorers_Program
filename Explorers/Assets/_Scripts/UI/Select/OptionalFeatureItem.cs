@@ -29,6 +29,10 @@ public class OptionalFeatureItem : MonoBehaviour
     public Image myFeature1Img;
     public Image myFeature2Img;
 
+    public OptionalFeature feature1;
+    public OptionalFeature feature2;
+
+
     private Color _selectColor = new Color(1, 0.8f, 0.5f, 1);
     private Color _unSelectColor = new Color(1, 0.8f, 0.5f, 0);
     
@@ -114,7 +118,8 @@ public class OptionalFeatureItem : MonoBehaviour
     /// </summary>
     private void ClickFeature1()
     {
-        FeatureConfirmEvent?.Invoke();
+        //FeatureConfirmEvent?.Invoke();
+        SetOptionalFeature(feature1);
         optionalFeatureSelectImg.color = _unSelectColor;
         _hasConfirmed = true;
     }
@@ -124,11 +129,23 @@ public class OptionalFeatureItem : MonoBehaviour
     /// </summary>
     private void ClickFeature2()
     {
-        FeatureConfirmEvent?.Invoke();
+        //FeatureConfirmEvent?.Invoke();
+        SetOptionalFeature(feature2);
         optionalFeatureSelectImg.color = _unSelectColor;
         _hasConfirmed = true;
     }
 
+    private void SetOptionalFeature(OptionalFeature feature)
+    {
+        if(PlayerManager.Instance.playerFeaturesDic.ContainsKey((int)targetType))
+        {
+            PlayerManager.Instance.playerFeaturesDic.Add((int)targetType,feature);
+        }
+        else
+        {
+            PlayerManager.Instance.playerFeaturesDic[(int)targetType] = feature;
+        }
+    }
     private void ConfirmPlayer()
     {
         switch (targetType)

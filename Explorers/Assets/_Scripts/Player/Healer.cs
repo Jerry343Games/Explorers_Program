@@ -65,6 +65,21 @@ public class Healer : PlayerController
         UseItem();
         CheckDistanceToBattery();
         CheckKeys();
+        if (playerInputSetting.GetOptionalFeatureDown())
+        {
+            switch (feature)
+            {
+                case OptionalFeature.TranquilizerGun:
+                    TranquilizerGun();
+                    break;
+                case OptionalFeature.FloatingFort:
+                    FloatingFort();
+                    break;
+                default:
+                    break;
+
+            }
+        }
     }
     
     private void OnTriggerEnter(Collider other)
@@ -159,7 +174,7 @@ public class Healer : PlayerController
         if (mainWeaponChargedAmount>0)
         {
             mainWeaponChargedAmount--;
-            foreach (var player in EnemyManager.Instance.players)
+            foreach (var player in PlayerManager.Instance.players)
             {
                 if (player.name == "BatteryCarrier") continue;
                 //非电池角色回复护盾

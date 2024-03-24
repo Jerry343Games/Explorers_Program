@@ -6,9 +6,7 @@ using UnityEngine.Pool;
 /// 敌人需要的一些公用的东西先放这
 /// </summary>
 public class EnemyManager : SingletonPersistent<EnemyManager>
-{
-
-    public List<GameObject> players;
+{ 
     public GameObject battery;
     public List<EnemySpawner> spawners;
     public List<GameObject> enemisToSpawn;

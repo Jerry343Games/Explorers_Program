@@ -47,14 +47,20 @@ public class BatteryCarrier : PlayerController
         CheckKeys();
         TickTime();
 
-        //电池功能测试
-        if (playerInputSetting.GetCableButtonDown())
+        if (playerInputSetting.GetOptionalFeatureDown())
         {
-            Overload();
-        }
-        if(playerInputSetting.GetAttackButtonDown())
-        {
-            Lightning();
+            switch (feature)
+            {
+                case OptionalFeature.Logistics:
+                    Logistics();
+                    break;
+                case OptionalFeature.Charging:
+                    Charge();
+                    break;
+                default:
+                    break;
+
+            }
         }
     }
 
@@ -142,6 +148,13 @@ public class BatteryCarrier : PlayerController
             if (player == this) continue;
             player.currentArmor = player.maxArmor;
         }
+
+    }
+    #endregion
+
+    #region 后勤
+    public void Logistics()
+    {
 
     }
     #endregion

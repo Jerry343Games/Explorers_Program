@@ -62,6 +62,21 @@ public class Shooter : PlayerController
         UseItem();
         CheckDistanceToBattery();
         CheckKeys();
+        if (playerInputSetting.GetOptionalFeatureDown())
+        {
+            switch (feature)
+            {
+                case OptionalFeature.Salvo:
+                    Salvo();
+                    break;
+                case OptionalFeature.DestroyTorpedoes:
+                    DestroyTorpedoes();
+                    break;
+                default:
+                    break;
+
+            }
+        }
     }
 
     private void OnTriggerEnter(Collider other)

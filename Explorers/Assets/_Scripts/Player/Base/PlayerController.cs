@@ -43,10 +43,6 @@ public class PlayerController : MonoBehaviour
     private float lastHurtTimer;
     public float timeToRepairArmor;//脱战多久修复护盾
 
-    [Header("功能")]
-    public float skillCD;//功能冷却
-    private float _skillTimer;
-    private bool canUseSkill;
 
     [Header("武器")]
     public WeaponDataSO mainWeapon;//主武器
@@ -59,6 +55,7 @@ public class PlayerController : MonoBehaviour
 
     [Header("通用")]
     public bool hasDead;
+    public OptionalFeature feature;//选择的技能
 
     [Header("绳子")]
     public float DistanceThreshold = 10;//绳子最大长度
@@ -85,15 +82,14 @@ public class PlayerController : MonoBehaviour
         playerInputSetting = transform.parent.GetComponent<PlayerInputSetting>();
         myIndex = playerInput.playerIndex;
         Debug.Log(transform.name+" Index: "+myIndex);
-        EnemyManager.Instance.players.Add(gameObject);
+        PlayerManager.Instance.players.Add(gameObject);
         if (gameObject.CompareTag("Battery")) EnemyManager.Instance.battery = gameObject;
-
+        //赋值选择的功能
+        feature = PlayerManager.Instance.playerFeaturesDic[myIndex];
         currentArmor = maxArmor;
         lastHurtTimer = timeToRepairArmor;
-        //currentWeapon = mainWeapon;
         _currentMainAmmunition = mainWeapon.initAmmunition;
         _currentSecondaryAmmunition = secondaryWeapons.initAmmunition;
-        canUseSkill = false;
         hasDead = false;
         isDigging = false;
         _speedFactor = 1;
@@ -276,32 +272,32 @@ public class PlayerController : MonoBehaviour
     /// <summary>
     /// 更新技能CD
     /// </summary>
-    public void UpdatSkillState()
-    {
-        if (_skillTimer < 0 && !canUseSkill)
-        {
-            canUseSkill = true;
-        }
-        else if(!canUseSkill)
-        {
-            _skillTimer -= Time.deltaTime;
-        }
-    }
+    //public void UpdatSkillState()
+    //{
+    //    if (_skillTimer < 0 && !canUseSkill)
+    //    {
+    //        canUseSkill = true;
+    //    }
+    //    else if(!canUseSkill)
+    //    {
+    //        _skillTimer -= Time.deltaTime;
+    //    }
+    //}
 
     /// <summary>
     /// 使用技能
     /// </summary>
-    public virtual bool Skill()
-    {
-        if(canUseSkill)
-        {
-            Debug.Log("使用技能了");
-            _skillTimer = skillCD;
-            canUseSkill = false;
-            return true;
-        }
-        return false;
-    }
+    //public virtual bool Skill()
+    //{
+    //    if(canUseSkill)
+    //    {
+    //        Debug.Log("使用技能了");
+    //        _skillTimer = skillCD;
+    //        canUseSkill = false;
+    //        return true;
+    //    }
+    //    return false;
+    //}
     /// <summary>
     /// 被眩晕
     /// </summary>

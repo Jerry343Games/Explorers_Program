@@ -63,8 +63,8 @@ public class EnemySpawner : MonoBehaviour
 
         GameObject closestPlayer = null;
         float closestDistance = Mathf.Infinity;
-        if (EnemyManager.Instance.players.Count == 0) return 0;
-        foreach (var character in EnemyManager.Instance.players)
+        if (PlayerManager.Instance.players.Count == 0) return 0;
+        foreach (var character in PlayerManager.Instance.players)
         {
             //if (character.CompareTag("Enemy")) continue;
             float distanceToPlayer = Vector3.Distance(transform.position, character.transform.position);
