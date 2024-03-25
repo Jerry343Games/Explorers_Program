@@ -48,6 +48,11 @@ public class BatteryCarrier : PlayerController
         //CheckKeys();
         TickTime();
 
+        if (playerInputSetting.GetAttackSecondaryDown())
+        {
+            Lightning();
+        }
+        
         if (playerInputSetting.GetOptionalFeatureDown())
         {
             switch (feature)
@@ -124,7 +129,7 @@ public class BatteryCarrier : PlayerController
         Instantiate(Resources.Load<GameObject>("Effect/SparkBlue"), transform.position, Quaternion.identity);
         int attackCount = Mathf.Min(colliders.Length, targetNumber); // 实际攻击的目标数
         GetComponent<MainBattery>().ChangePower(-lightningAttackPower * attackCount); // 能量消耗根据实际攻击的目标数而定
-
+        CameraTrace.instance.CameraZoom(0.5f,90f,0f,0.5f);
         for (int i = 0; i < attackCount; i++)
         {
             GameObject lightning = Instantiate(Resources.Load<GameObject>("Lightning"), 

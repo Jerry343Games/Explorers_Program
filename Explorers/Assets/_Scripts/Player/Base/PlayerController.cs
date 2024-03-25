@@ -235,6 +235,10 @@ public class PlayerController : MonoBehaviour
             GetComponent<Battery>().ChangePower(-damageToBattery);
             currentArmor = maxArmor;
         }
+        if (damage>0)
+        {
+            CameraTrace.instance.CameraShake(1f,0.2f);
+        }
     }
 
     /// <summary>
