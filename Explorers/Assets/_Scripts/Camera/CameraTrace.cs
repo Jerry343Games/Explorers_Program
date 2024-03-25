@@ -98,8 +98,7 @@ public class CameraTrace : MonoBehaviour
     {
         Sequence sequence = DOTween.Sequence();
         sequence.Append(DoCameraView(size,duration));
-        sequence.AppendInterval(pauseDuration).Append(DoCameraView(_defaultView,backDuration));
-        
+        sequence.Append(DoCameraView(_defaultView,backDuration)).OnComplete(()=>Debug.Log("done"));
     }
     
     /// <summary>
@@ -137,14 +136,11 @@ public class CameraTrace : MonoBehaviour
         return bounds.size.x; // 返回X轴上的距离作为最大距离，也可以选择使用边界的最大维度
     }
 
-    private Tweener DoCameraView(float value, float time)
+    private Tweener DoCameraView(float myValue, float time)
     {
-        return DOTween.To(value =>
-            {
-                Camera.main.fieldOfView = value;
-            },
-            Camera.main.fieldOfView,
-            value,
+        return DOTween.To(() => Camera.main.fieldOfView,
+            x=> Camera.main.fieldOfView=x,
+            myValue,
             time
         );
     }
