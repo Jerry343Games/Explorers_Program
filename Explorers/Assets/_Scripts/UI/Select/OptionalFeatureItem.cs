@@ -131,7 +131,7 @@ public class OptionalFeatureItem : MonoBehaviour
 
     private void SetOptionalFeature(OptionalFeature feature)
     {
-        if(PlayerManager.Instance.playerFeaturesDic.ContainsKey((int)targetType))
+        if(!PlayerManager.Instance.playerFeaturesDic.ContainsKey((int)targetType))
         {
             PlayerManager.Instance.playerFeaturesDic.Add((int)targetType,feature);
         }

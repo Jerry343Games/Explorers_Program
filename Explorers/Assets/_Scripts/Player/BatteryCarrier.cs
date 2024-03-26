@@ -34,6 +34,12 @@ public class BatteryCarrier : PlayerController
     private float _chargeCDTimer;
     public int chargePower;//充能所需耗电量
     private bool canCharge;
+
+    [Header("后勤")]
+    public int logisticsPower;//后勤功能耗电量
+    public float logisticsCD;//后勤功能CD
+    private float _logisticsCDTimer;
+    private bool canLogistics;
     void Start()
     {
         PlayerInit();
@@ -161,6 +167,32 @@ public class BatteryCarrier : PlayerController
     #region 后勤
     public void Logistics()
     {
+        if (!canLogistics || !selectedPlayer) return;
+        canLogistics = false;
+        _logisticsCDTimer = logisticsCD;
+        GetComponent<MainBattery>().ChangePower(-logisticsPower);
+        //没有就获得道具 有了就替换原来的道具
+        int randomItem = Random.Range(0, 6);
+        //最喜欢的swith 获得道具 这样行？
+        switch(randomItem)
+        {
+            case 0:
+                GravityWell well = new GravityWell();
+                well.Apply(gameObject);
+                break;
+            case 1:
+                PropelBackpack backpack = new PropelBackpack();
+                backpack.Apply(gameObject);
+                break;
+            case 2:
+                break;
+            case 3:
+                break;
+            case 4:
+                break;
+            case 5:
+                break;
+        }
 
     }
     #endregion
@@ -198,6 +230,14 @@ public class BatteryCarrier : PlayerController
             if(_chargeCDTimer<0)
             {
                 canCharge = true;
+            }
+        }
+        if(!canLogistics)
+        {
+            _logisticsCDTimer-=Time.deltaTime;
+            if(_logisticsCDTimer<0)
+            {
+                canLogistics = true;
             }
         }
 
