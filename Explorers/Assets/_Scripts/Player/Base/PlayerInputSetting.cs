@@ -253,6 +253,9 @@ public class PlayerInputSetting : MonoBehaviour
     }
     public bool GetOptionalFeatureDown() => _isOptionalFeature;
 
+    /// <summary>
+    /// 道具使用
+    /// </summary>
     private bool _isUseItem;
     public void OnUseItemDown(InputAction.CallbackContext context)
     {
@@ -265,8 +268,17 @@ public class PlayerInputSetting : MonoBehaviour
         }
     }
     public bool GetUseItem() => _isUseItem;
-   
 
+    /// <summary>
+    /// 获取选择的向量
+    /// </summary>
+    private Vector3 _selectIndex;
+    public void OnBatterySelect(InputAction.CallbackContext context)
+    {
+        _selectIndex = context.ReadValue<Vector3>();
+    }
+    public Vector3 GetSelectCombination() => _selectIndex;
+    
     public void OnStickAim(InputAction.CallbackContext value)
     {
         isStick = true;

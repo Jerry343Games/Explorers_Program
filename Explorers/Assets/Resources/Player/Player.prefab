@@ -57,6 +57,8 @@ MonoBehaviour:
   shooter: {fileID: 7564652996621964968}
   healer: {fileID: 1113326784236556676}
   fighter: {fileID: 4208568781498738754}
+  characterType: 0
+  feature: 0
   inputDir: {x: 0, y: 0}
   aimPos: {x: 0, y: 0}
   mouseRayLayer:
@@ -293,6 +295,22 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: d6836476-c1b7-49cd-8ce9-47de20f2732c
     m_ActionName: Player/UseItem[/XInputControllerWindows/leftTrigger]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7042558557124252667}
+        m_TargetAssemblyTypeName: PlayerInputSetting, Assembly-CSharp
+        m_MethodName: OnBatterySelect
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: e2b5a39d-6498-4dcf-ad1c-4486771db4ef
+    m_ActionName: Player/BatterySelect[/Keyboard/1,/Keyboard/2,/Keyboard/3,/XInputControllerWindows/dpad/left,/XInputControllerWindows/dpad/up,/XInputControllerWindows/dpad/right]
   m_NeverAutoSwitchControlSchemes: 1
   m_DefaultControlScheme: 
   m_DefaultActionMap: UI
