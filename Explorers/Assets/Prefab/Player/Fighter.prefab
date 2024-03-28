@@ -192,7 +192,6 @@ MonoBehaviour:
   restoreAmount: 1
   restoreCD: 1
   timeToRepairArmor: 5
-  skillCD: 5
   mainWeapon: {fileID: 11400000, guid: e619acaa6d7b194419d154af202ddefd, type: 2}
   secondaryWeapons: {fileID: 11400000, guid: 19e482ec8dcc115479a7ad3a26d79d83, type: 2}
   _mainAttackTimer: 0
@@ -201,6 +200,7 @@ MonoBehaviour:
   canSecondaryAttack: 0
   myAimPos: {x: 0, y: 0, z: 0}
   hasDead: 0
+  feature: 0
   DistanceThreshold: 15
   isDigging: 0
   item: {fileID: 0}
