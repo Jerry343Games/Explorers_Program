@@ -147,10 +147,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4848d5bb04fc164c95d103a18d855dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerInput: {fileID: 0}
   playerInputSetting: {fileID: 0}
   bubblePanel: {fileID: 0}
   myIndex: 0
-  speed: 2
+  speed: 8
   accelerateFactor: 1.5
   vertigoTime: 0.5
   maxArmor: 0
@@ -158,14 +159,15 @@ MonoBehaviour:
   restoreAmount: 0
   restoreCD: 0
   timeToRepairArmor: 0
-  skillCD: 0
   mainWeapon: {fileID: 11400000, guid: fe7b4ae7510e5334d8dd901dab5e27cc, type: 2}
   secondaryWeapons: {fileID: 11400000, guid: fe7b4ae7510e5334d8dd901dab5e27cc, type: 2}
-  currentWeapon: {fileID: 0}
+  _mainAttackTimer: 0
+  _secondaryAttackTimer: 0
+  canMainAttack: 0
+  canSecondaryAttack: 0
   myAimPos: {x: 0, y: 0, z: 0}
-  attackRange: 0
-  attack: 0
   hasDead: 0
+  feature: 0
   DistanceThreshold: 99999
   isDigging: 0
   item: {fileID: 0}
@@ -183,6 +185,8 @@ MonoBehaviour:
     m_Bits: 8
   chargeCD: 10
   chargePower: 20
+  logisticsPower: 0
+  logisticsCD: 0
 --- !u!114 &-9115326595532701369
 MonoBehaviour:
   m_ObjectHideFlags: 0

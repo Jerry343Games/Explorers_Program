@@ -140,4 +140,28 @@ public class Enemy : MonoBehaviour
             gameObject.transform.right = direction;
         }
     }
+    public void EnemyRotate(Vector3 direction,float rotationSpeed)
+    {
+        float minAngleDifference = 0.2f;
+        if (target != null)
+        {
+            
+            direction.Normalize();
+
+            // 计算目标旋转角度
+            Quaternion targetRotation = Quaternion.LookRotation(transform.forward, direction);
+
+            // 计算当前旋转角度与目标旋转角度之间的差值
+            float angleDifference = Quaternion.Angle(transform.rotation, targetRotation);
+
+            // 如果差值大于最小角度差，则进行旋转
+            if (angleDifference > minAngleDifference)
+            {
+                // 使用 Slerp 实现平滑旋转
+                transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+            }
+        }
+    }
+
+
 }
