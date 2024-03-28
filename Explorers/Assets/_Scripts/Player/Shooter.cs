@@ -27,7 +27,7 @@ public class Shooter : PlayerController
     private bool canTorpedoes;
     public LayerMask playerLayer;
 
-    void Awake()
+    void Start()
     {
         PlayerInit();
     }
@@ -40,8 +40,7 @@ public class Shooter : PlayerController
         Aim(gun);
         if (playerInputSetting.GetAttackButtonDown())
         {
-            //MainAttack();
-            DestroyTorpedoes();
+            MainAttack();
         }
         else if (playerInputSetting.GetAttackSecondaryDown())
         {

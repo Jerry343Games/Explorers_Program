@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem.XR;
 
@@ -74,6 +75,20 @@ public class BatteryCarrier : PlayerController
 
             }
         }
+
+        if(playerInputSetting.GetSelectCombination()==Vector3.right)
+        {
+            selectedPlayer = FindObjectsOfType<PlayerController>().ToList().Find(x => x.gameObject.name == "Shooter");
+        }
+        else if(playerInputSetting.GetSelectCombination() == Vector3.up)
+        {
+            selectedPlayer = FindObjectsOfType<PlayerController>().ToList().Find(x => x.gameObject.name == "Fighter");
+        }
+        else if(playerInputSetting.GetSelectCombination() == Vector3.forward)
+        {
+            selectedPlayer = FindObjectsOfType<PlayerController>().ToList().Find(x => x.gameObject.name == "Healer");
+        }
+
     }
 
     #region ГЌди

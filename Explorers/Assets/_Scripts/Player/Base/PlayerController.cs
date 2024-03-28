@@ -72,6 +72,8 @@ public class PlayerController : MonoBehaviour
     public Vector3 mouseWorldPS => Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0));
 
 
+
+
     /// <summary>
     /// 初始化方法
     /// </summary>
@@ -80,10 +82,10 @@ public class PlayerController : MonoBehaviour
         _rigidbody = GetComponent<Rigidbody>();
         playerInput = transform.parent.GetComponent<PlayerInput>();
         playerInputSetting = transform.parent.GetComponent<PlayerInputSetting>();
-        myIndex = playerInput.playerIndex;
         Debug.Log("Clone: "+transform.name+" / Index: "+myIndex);
         PlayerManager.Instance.players.Add(gameObject);
         if (gameObject.CompareTag("Battery")) EnemyManager.Instance.battery = gameObject;
+        myIndex = playerInput.playerIndex;
         currentArmor = maxArmor;
         lastHurtTimer = timeToRepairArmor;
         _currentMainAmmunition = mainWeapon.initAmmunition;
@@ -93,8 +95,9 @@ public class PlayerController : MonoBehaviour
         _speedFactor = 1;
         _outSpeedFactor = 1;
         
-        //获得自选功能
-        feature = playerInputSetting.feature;
+        ////获得自选功能
+        //feature = playerInputSetting.feature;
+        Debug.Log(playerInputSetting.feature);
         
         transform.position = SceneManager.Instance.bornTransform.position;
         bubblePanel = GameObject.Find("BubblePanel").GetComponents<UIBubblePanel>()[0];

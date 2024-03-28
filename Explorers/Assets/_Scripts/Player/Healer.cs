@@ -31,7 +31,7 @@ public class Healer : PlayerController
     private bool canCallFort;
     public Transform fortPoint;
     private GameObject _curFort;
-    void Awake()
+    void Start()
     {
         PlayerInit();
         _currentTranquilizerAmmunition = tranquilizerWeaponData.initAmmunition;

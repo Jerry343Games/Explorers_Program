@@ -134,6 +134,7 @@ public class OptionalFeatureItem : MonoBehaviour
         if(!PlayerManager.Instance.playerFeaturesDic.ContainsKey((int)targetType))
         {
             PlayerManager.Instance.playerFeaturesDic.Add((int)targetType,feature);
+            Debug.Log(targetType + " Choose: " + PlayerManager.Instance.playerFeaturesDic[(int)targetType]);
         }
         else
         {

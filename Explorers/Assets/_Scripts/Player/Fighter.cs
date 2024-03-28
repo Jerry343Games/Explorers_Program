@@ -18,7 +18,7 @@ public class Fighter : PlayerController
     public bool canFusionBomb = true;
     private Rigidbody _rb;
     private bool hasUseBomb = false;
-    void Awake()
+    void Start()
     {
         
         _rb = GetComponent<Rigidbody>();
