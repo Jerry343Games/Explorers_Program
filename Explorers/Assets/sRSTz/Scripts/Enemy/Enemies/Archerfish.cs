@@ -75,7 +75,7 @@ public class Archerfish : Enemy
                 if (shootTimer < shootTime)
                 {
                     // 每帧让新物体朝着自己的y方向移动
-                    projectile.transform.Translate(Vector3.up * shootForce * Time.deltaTime);
+                    projectile.GetComponent<Turbulence>().Shoot(shootForce);
                     shootTimer += Time.deltaTime;
                 }
                 else

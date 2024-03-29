@@ -28,8 +28,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4151126986172546237}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -8.6741, y: 12.0523, z: 0}
-  m_LocalScale: {x: 1.0390952, y: 2.964413, z: 1}
+  m_LocalPosition: {x: -8.6098, y: 12.0523, z: 0}
+  m_LocalScale: {x: 1.4920466, y: 2.964413, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -48,7 +48,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   forceMagnitude: 50
-  forceDirection: {x: 0, y: 1, z: 0}
+  isBeShooted: 0
+  shootForce: 0
 --- !u!65 &4151126986172546225
 BoxCollider:
   m_ObjectHideFlags: 0
