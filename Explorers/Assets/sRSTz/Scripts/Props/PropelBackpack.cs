@@ -2,8 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PropelBackpack : Item
+public class PropelBackpack : PropItem
 {
+
     public float activeTime = 2f;
     private float activeTimer = 0;
     public bool isUsing = false;

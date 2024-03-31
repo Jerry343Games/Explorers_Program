@@ -52,6 +52,8 @@ public enum ResourceType
 /// </summary>
 public enum PropType
 {
+    GravityWell,
+    PropelBackpack,
 
 
 }

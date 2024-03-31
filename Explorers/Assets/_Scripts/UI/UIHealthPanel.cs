@@ -10,6 +10,7 @@ public class UIHealthPanel : MonoBehaviour
     //private SceneManager sceneManager;
     public Image HealthInner;
     public Image ArmorInner;
+    public Image ItemInner;//µÀ¾ßÍ¼Æ¬UI
     private Battery _battery;
     private PlayerController _playerController;
 
@@ -73,7 +74,9 @@ public class UIHealthPanel : MonoBehaviour
         {
             HealthInner.DOFillAmount((float)_battery.currentPower / _battery.maxPower, 0.2f);
             if(ArmorInner)
-            ArmorInner.DOFillAmount((float)_playerController.currentArmor / _playerController.maxArmor, 0.2f);
+                ArmorInner.DOFillAmount((float)_playerController.currentArmor / _playerController.maxArmor, 0.2f);
+            if (ItemInner)
+                ItemInner.sprite = Resources.Load<Sprite>("UI/Image/" + (_playerController.item as PropItem).propType.ToString());
         }
     }
 }
