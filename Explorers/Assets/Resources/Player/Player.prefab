@@ -373,37 +373,6 @@ MonoBehaviour:
   m_sendNavigationEvents: 1
   m_DragThreshold: 10
   m_PlayerRoot: {fileID: 0}
---- !u!1 &7420216820852202195
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 8980228794720753743}
-  m_Layer: 6
-  m_Name: FortPoint
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &8980228794720753743
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7420216820852202195}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.821, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 300701580336662008}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &222811742786710782
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -497,51 +466,31 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2541206623591261561}
     m_Modifications:
-    - target: {fileID: 5338948758665226377, guid: 9644debdbcef5aa4697ef57db70c48dc,
+    - target: {fileID: 1045372400355453261, guid: 9644debdbcef5aa4697ef57db70c48dc,
         type: 3}
-      propertyPath: destoryTime
-      value: 3
+      propertyPath: m_LocalScale.x
+      value: 1.4
       objectReference: {fileID: 0}
-    - target: {fileID: 5338948758665226377, guid: 9644debdbcef5aa4697ef57db70c48dc,
+    - target: {fileID: 2141862729141970053, guid: 9644debdbcef5aa4697ef57db70c48dc,
         type: 3}
-      propertyPath: torpedoesCD
-      value: 1
+      propertyPath: m_FlipX
+      value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5338948758665226377, guid: 9644debdbcef5aa4697ef57db70c48dc,
+    - target: {fileID: 2141862729141970053, guid: 9644debdbcef5aa4697ef57db70c48dc,
         type: 3}
-      propertyPath: torpedoesForce
-      value: 300
-      objectReference: {fileID: 0}
-    - target: {fileID: 5338948758665226377, guid: 9644debdbcef5aa4697ef57db70c48dc,
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: d972721500dd8c742acecd53c34d211c, type: 2}
+    - target: {fileID: 2598967162676263027, guid: 9644debdbcef5aa4697ef57db70c48dc,
         type: 3}
-      propertyPath: torpedoesPower
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 5338948758665226377, guid: 9644debdbcef5aa4697ef57db70c48dc,
-        type: 3}
-      propertyPath: torpedoesRange
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 5338948758665226377, guid: 9644debdbcef5aa4697ef57db70c48dc,
-        type: 3}
-      propertyPath: torpedoesSpeed
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 5338948758665226377, guid: 9644debdbcef5aa4697ef57db70c48dc,
-        type: 3}
-      propertyPath: torpedoesDamage
+      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5338948758665226377, guid: 9644debdbcef5aa4697ef57db70c48dc,
         type: 3}
-      propertyPath: timeToRepairArmor
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 5338948758665226377, guid: 9644debdbcef5aa4697ef57db70c48dc,
-        type: 3}
-      propertyPath: playerLayer.m_Bits
-      value: 64
-      objectReference: {fileID: 0}
+      propertyPath: playerSprite
+      value: 
+      objectReference: {fileID: 2919635153823784760}
     - target: {fileID: 7477862984688049902, guid: 9644debdbcef5aa4697ef57db70c48dc,
         type: 3}
       propertyPath: m_RootOrder
@@ -604,16 +553,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7951266776005374219, guid: 9644debdbcef5aa4697ef57db70c48dc,
         type: 3}
-      propertyPath: m_Layer
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 7951266776005374219, guid: 9644debdbcef5aa4697ef57db70c48dc,
-        type: 3}
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9644debdbcef5aa4697ef57db70c48dc, type: 3}
+--- !u!1 &2919635153823784760 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3325688866815195291, guid: 9644debdbcef5aa4697ef57db70c48dc,
+    type: 3}
+  m_PrefabInstance: {fileID: 478394019225102243}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &7018064043903220045 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7477862984688049902, guid: 9644debdbcef5aa4697ef57db70c48dc,
@@ -714,15 +664,30 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2541206623591261561}
     m_Modifications:
+    - target: {fileID: 5581026135296133216, guid: b53a680214faa4d40b7b704146a8c4de,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5895279626806241953, guid: b53a680214faa4d40b7b704146a8c4de,
+        type: 3}
+      propertyPath: m_FlipX
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6905893616000494438, guid: b53a680214faa4d40b7b704146a8c4de,
         type: 3}
-      propertyPath: fortPoint
+      propertyPath: playerSprite
       value: 
-      objectReference: {fileID: 8980228794720753743}
-    - target: {fileID: 6905893616000494438, guid: b53a680214faa4d40b7b704146a8c4de,
+      objectReference: {fileID: 2944314484073536558}
+    - target: {fileID: 8187881364205177939, guid: b53a680214faa4d40b7b704146a8c4de,
         type: 3}
-      propertyPath: timeToRepairArmor
-      value: 5
+      propertyPath: m_LocalScale.x
+      value: 1.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8187881364205177939, guid: b53a680214faa4d40b7b704146a8c4de,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.4
       objectReference: {fileID: 0}
     - target: {fileID: 8526378773217667959, guid: b53a680214faa4d40b7b704146a8c4de,
         type: 3}
@@ -800,6 +765,12 @@ Transform:
 --- !u!1 &1113326784236556676 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 9010808815923592971, guid: b53a680214faa4d40b7b704146a8c4de,
+    type: 3}
+  m_PrefabInstance: {fileID: 8250460581762199183}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &2944314484073536558 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6531284077984740001, guid: b53a680214faa4d40b7b704146a8c4de,
     type: 3}
   m_PrefabInstance: {fileID: 8250460581762199183}
   m_PrefabAsset: {fileID: 0}

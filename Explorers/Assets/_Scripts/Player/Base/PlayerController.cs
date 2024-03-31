@@ -11,6 +11,9 @@ public class PlayerController : MonoBehaviour
 {
     public PlayerInput playerInput;
     public PlayerInputSetting playerInputSetting;
+    public GameObject playerSprite;
+    [HideInInspector]
+    public Animator animator;
     [HideInInspector]
     public UIBubblePanel bubblePanel;
     
@@ -95,6 +98,8 @@ public class PlayerController : MonoBehaviour
         _speedFactor = 1;
         _outSpeedFactor = 1;
         
+        //拿动画器
+        animator = playerSprite.GetComponent<Animator>();
         ////获得自选功能
         //feature = playerInputSetting.feature;
         Debug.Log(playerInputSetting.feature);
