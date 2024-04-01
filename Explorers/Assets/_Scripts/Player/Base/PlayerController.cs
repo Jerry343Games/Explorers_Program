@@ -11,9 +11,14 @@ public class PlayerController : MonoBehaviour
 {
     public PlayerInput playerInput;
     public PlayerInputSetting playerInputSetting;
+    
+    //动画相关
     public GameObject playerSprite;
     [HideInInspector]
     public Animator animator;
+    private SpriteRenderer _spriteRenderer;
+    
+    //气泡
     [HideInInspector]
     public UIBubblePanel bubblePanel;
     
@@ -98,8 +103,10 @@ public class PlayerController : MonoBehaviour
         _speedFactor = 1;
         _outSpeedFactor = 1;
         
-        //拿动画器
+        //动画相关
         animator = playerSprite.GetComponent<Animator>();
+        _spriteRenderer = playerSprite.GetComponent<SpriteRenderer>();
+        
         ////获得自选功能
         //feature = playerInputSetting.feature;
         Debug.Log(playerInputSetting.feature);
@@ -163,6 +170,34 @@ public class PlayerController : MonoBehaviour
         else
         {
             _speedFactor = 1;
+        }
+    }
+
+    /// <summary>
+    /// 动画控制
+    /// </summary>
+    /// <param name="run">移动动画名</param>
+    /// <param name="idle">待机动画名</param>
+    public void AnimationControl(CharacterAnimation run,CharacterAnimation idle)
+    {
+        if (playerInputSetting.inputDir.x != 0)
+        {
+            if (playerInputSetting.inputDir.x < 0)
+            {
+                _spriteRenderer.flipX = false;
+            }
+            else
+            {
+                _spriteRenderer.flipX = true;
+            }
+            //过渡动画、切换法线
+            animator.CrossFade(run.ToString(),0);
+            _spriteRenderer.material.SetTexture("_Normal", PlayerManager.Instance.GetTextureByAnimationName(run));
+        }
+        else
+        {
+            animator.CrossFade(idle.ToString(),0);
+            _spriteRenderer.material.SetTexture("_Normal", PlayerManager.Instance.GetTextureByAnimationName(idle));
         }
     }
 

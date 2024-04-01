@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// ¿ÉÒÔÊ¹ÓÃ£¨int£©PlayerType.name »ñÈ¡name¶ÔÓ¦µÄ±àºÅ
+/// ï¿½ï¿½ï¿½ï¿½Ê¹ï¿½Ã£ï¿½intï¿½ï¿½PlayerType.name ï¿½ï¿½È¡nameï¿½ï¿½Ó¦ï¿½Ä±ï¿½ï¿½
 /// </summary>
 public enum PlayerType
 {
@@ -14,7 +14,7 @@ public enum PlayerType
 }
 
 /// <summary>
-/// ÆøÅÝÖÖÀà
+/// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 /// </summary>
 public enum BubbleType
 {
@@ -22,33 +22,41 @@ public enum BubbleType
     ReconnectCableBubble,
 }
 
-/// <summary>
-/// ³¡¾°ÎïÆ·ÀàÐÍ
-/// </summary>
-public enum ItemType
+public enum CharacterAnimation
 {
-    Resource,//ÊÕ¼¯Îï
-    Battery,//³¡¾°ÖÐµÄµç³Ø
-    Boost,//ÊôÐÔÌáÉý£¿
+    ShooterIdle,
+    ShooterRun,
+    HealerIdle,
+    HealerRun,
 }
 
 /// <summary>
-/// ÊÕ¼¯ÎïÀàÐÍ
+/// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ·ï¿½ï¿½ï¿½ï¿½
+/// </summary>
+public enum ItemType
+{
+    Resource,//ï¿½Õ¼ï¿½ï¿½ï¿½
+    Battery,//ï¿½ï¿½ï¿½ï¿½ï¿½ÐµÄµï¿½ï¿½
+    Boost,//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+}
+
+/// <summary>
+/// ï¿½Õ¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 /// </summary>
 public enum CollectionType
 {
-    PowerFurnaceParts,//¶¯Á¦Â¯Áã¼þ
-    Antenna,//ÌìÏß
-    StorageAreaShell,//²Ö´¢ÇøÍâ¿Ç
+    PowerFurnaceParts,//ï¿½ï¿½ï¿½ï¿½Â¯ï¿½ï¿½ï¿½
+    Antenna,//ï¿½ï¿½ï¿½ï¿½
+    StorageAreaShell,//ï¿½Ö´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 }
 
 public enum ResourceType
 {
-    MineralCusters,//¿óÎï´Ø
+    MineralCusters,//ï¿½ï¿½ï¿½ï¿½ï¿½
 }
 
 /// <summary>
-/// µÀ¾ßÀàÐÍ
+/// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 /// </summary>
 public enum PropType
 {

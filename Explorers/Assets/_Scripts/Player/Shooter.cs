@@ -48,24 +48,7 @@ public class Shooter : PlayerController
         }
         CharacterMove();
         RestroeDefence();
-        if (playerInputSetting.inputDir.x != 0)
-        {
-            if (playerInputSetting.inputDir.x < 0)
-            {
-                playerSprite.GetComponent<SpriteRenderer>().flipX = false;
-                isLeft = true;
-            }
-            else
-            {
-                isLeft = false;
-                playerSprite.GetComponent<SpriteRenderer>().flipX = true;
-            }
-            animator.CrossFade("ShooterRun",0);
-        }
-        else
-        {
-            animator.CrossFade("ShooterIdle",0);
-        }
+        AnimationControl(CharacterAnimation.ShooterRun,CharacterAnimation.ShooterIdle);
         UseItem();
         CheckDistanceToBattery();
         //CheckKeys();

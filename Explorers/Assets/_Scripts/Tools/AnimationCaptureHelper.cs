@@ -60,12 +60,11 @@ public class AnimationCaptureHelper : MonoBehaviour
     }
 
     /// <summary>
-    /// Captures the animation as individual frames into a texture.
+    /// 将动画逐帧捕捉到纹理中。
     /// 
-    /// Returns IEnumerator the work can be distributed over multiple editor frame.
-    /// This is necessary for SkinnedMeshRenders to update between calls to AnimactionClip.Sample()
-    /// and Camera.Render(). The provided onComplete action is executed after rendering is finished
-    /// so that the textures can be saved to disk.
+    /// 返回 IEnumerator，以便工作可以在多个编辑器帧上分发执行。
+    /// 这对于在调用 AnimactionClip.Sample() 和 Camera.Render() 之间更新 SkinnedMeshRenders 是必要的。
+    /// 提供的 onComplete 动作在渲染完成后执行，以便纹理可以保存到磁盘上。
     /// </summary>
     public IEnumerator CaptureAnimation(Action<Texture2D, Texture2D> onComplete)
     {

@@ -8,24 +8,24 @@ public class Healer : PlayerController
     public GameObject gun;
     public Transform shootTransform;
 
-    [Header("Ò½Õß¶îÍâ²ÎÊý")]
-    private int mainWeaponChargedAmount;//"Ò½Õß"³äÄÜ´ÎÊý
-    public int maxChargedAmount;//×î´ó³äÄÜ´ÎÊý
+    [Header("Ò½ï¿½ß¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½")]
+    private int mainWeaponChargedAmount;//"Ò½ï¿½ï¿½"ï¿½ï¿½ï¿½Ü´ï¿½ï¿½ï¿½
+    public int maxChargedAmount;//ï¿½ï¿½ï¿½ï¿½ï¿½Ü´ï¿½ï¿½ï¿½
 
-    [Header("Âé×íÇ¹")]
-    public WeaponDataSO tranquilizerWeaponData;//Âé×íÇ¹²ÎÊý
-    private int _currentTranquilizerAmmunition;//Âé×íÇ¹µ±Ç°×Óµ¯Êý
-    public int tranquilizerPower;//Ã¿·¢Âé×í×Óµ¯ºÄµçÁ¿
+    [Header("ï¿½ï¿½ï¿½ï¿½Ç¹")]
+    public WeaponDataSO tranquilizerWeaponData;//ï¿½ï¿½ï¿½ï¿½Ç¹ï¿½ï¿½ï¿½ï¿½
+    private int _currentTranquilizerAmmunition;//ï¿½ï¿½ï¿½ï¿½Ç¹ï¿½ï¿½Ç°ï¿½Óµï¿½ï¿½ï¿½
+    public int tranquilizerPower;//Ã¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Óµï¿½ï¿½Äµï¿½ï¿½ï¿½
     private bool canTranquilizerAttack;
     private float _tranquilizerAttackTimer;
-    public float tranquilizerEffectTime;//Âé×íÐ§¹ûÊ±¼ä
+    public float tranquilizerEffectTime;//ï¿½ï¿½ï¿½ï¿½Ð§ï¿½ï¿½Ê±ï¿½ï¿½
 
-    [Header("¸¡ÓÎÅÚÌ¨")]
-    public WeaponDataSO fortWeaponData;//¸¡ÓÎÅÚÌ¨²ÎÊý
-    public float fortExitTime;//¸¡ÓÎÅÚÌ¨´æÔÚÊ±¼ä
+    [Header("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ì¨")]
+    public WeaponDataSO fortWeaponData;//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ì¨ï¿½ï¿½ï¿½ï¿½
+    public float fortExitTime;//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ì¨ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½
     private float _fortExitTimer;
     public int fortPower;
-    public float fortCD;//¸¡ÓÎÅÚÌ¨ÀäÈ´Ê±¼ä
+    public float fortCD;//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ì¨ï¿½ï¿½È´Ê±ï¿½ï¿½
     private float _fortCDTimer;
     private bool hasExited;
     private bool canCallFort;
@@ -52,18 +52,10 @@ public class Healer : PlayerController
         }
         CharacterMove();
         RestroeDefence();
-        if (playerInputSetting.inputDir.x < 0)
-        {
-            transform.localScale = new(-1, 1, 1);
-            isLeft = true;
-        }
-        else
-        {
-            isLeft = false;
-            transform.localScale = new(1, 1, 1);
-        }
         UseItem();
         CheckDistanceToBattery();
+        AnimationControl(CharacterAnimation.HealerRun,CharacterAnimation.HealerIdle);
+        
         //CheckKeys();
         if (playerInputSetting.GetOptionalFeatureDown())
         {
@@ -91,16 +83,16 @@ public class Healer : PlayerController
     {
         switch (other.tag)
         {
-            //½øÈë¿ÉÖØÁ¬Éþ×ÓÇøÓò
+            //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
             case "ReconnectArea":
                 if (!_hasConnected && playerInputSetting.GetCableButtonDown())
                 {
                     ReconnectRope();
-                    //ÖØÁ¬ºóÏú»ÙÖØÁ¬ÌáÊ¾ÆøÅÝ
+                    //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½ï¿½
                     bubblePanel.reconnectCableBuffer.GetComponent<UIBubbleItem>().DestoryBubble();
                 }
                 break;
-            //ÊÕ¼¯µ½³¡¾°ÎïÆ·
+            //ï¿½Õ¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ·
             case "Item":
                 other.GetComponent<Item>().Apply(gameObject);
                 break;
@@ -131,11 +123,11 @@ public class Healer : PlayerController
                     _curDigRes.SetDiager(null);
                     _curDigRes = null;
                 }
-                //Àë¿ª×ÊÔ´ÇøÓòºóÏú»Ù½»»¥ÆøÅÝ
+                //ï¿½ë¿ªï¿½ï¿½Ô´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ù½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
                 bubblePanel.interectBubbleBuffer.GetComponent<UIBubbleItem>().DestoryBubble();
                 break;
             case "ReconnectArea":
-                //Àë¿ªÖØÁ¬ÇøÓòºóÈç¹ûÓÐÖØÁ¬ÆøÅÝ¾ÍÏú»ÙÏÂ
+                //ï¿½ë¿ªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ý¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
                 if (bubblePanel.reconnectCableBuffer)
                 {
                     bubblePanel.reconnectCableBuffer.GetComponent<UIBubbleItem>().DestoryBubble();    
@@ -166,10 +158,10 @@ public class Healer : PlayerController
             _secondaryAttackTimer -= Time.deltaTime;
         }
     }
-    //¡°Ò½Õß¡±
+    //ï¿½ï¿½Ò½ï¿½ß¡ï¿½
     public override bool MainAttack()
     {
-        //³äÄÜÐÍÎäÆ÷²»ÓÃÖ÷ÎäÆ÷ÄÇÒ»Ì×ÅÐ¶Ï
+        //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½Ð¶ï¿½
         if (isDigging) return false;
         if (mainWeaponChargedAmount>0)
         {
@@ -177,7 +169,7 @@ public class Healer : PlayerController
             foreach (var player in PlayerManager.Instance.players)
             {
                 if (player.name == "BatteryCarrier") continue;
-                //·Çµç³Ø½ÇÉ«»Ø¸´»¤¶Ü
+                //ï¿½Çµï¿½Ø½ï¿½É«ï¿½Ø¸ï¿½ï¿½ï¿½ï¿½ï¿½
                 PlayerController controller = player.GetComponent<PlayerController>();
                 controller.currentArmor = Mathf.Min(controller.currentArmor + (int)mainWeapon.attackDamage, controller.maxArmor);
             }
@@ -185,7 +177,7 @@ public class Healer : PlayerController
         return true;
     }
 
-    //±àÖ¯
+    //ï¿½ï¿½Ö¯
     public override bool SecondaryAttack()
     {
         if(!base.SecondaryAttack())
@@ -197,8 +189,8 @@ public class Healer : PlayerController
         return true;
     }
 
-    #region ×ÔÑ¡¹¦ÄÜ
-    //Âé×íÇ¹
+    #region ï¿½ï¿½Ñ¡ï¿½ï¿½ï¿½ï¿½
+    //ï¿½ï¿½ï¿½ï¿½Ç¹
     public void TranquilizerGun()
     {
         if (isDigging) return;
@@ -215,7 +207,7 @@ public class Healer : PlayerController
     }
 
 
-    //¸¡ÓÎÅÚÌ¨
+    //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ì¨
     public void FloatingFort()
     {
         if (isDigging) return;
@@ -225,7 +217,7 @@ public class Healer : PlayerController
         canCallFort = false;
         _fortCDTimer = fortCD;
 
-        //´´½¨¸¡ÓÎÅÚÌ¨
+        //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ì¨
         GameObject floatingFort = Instantiate(Resources.Load<GameObject>("FloatingFort"), transform.position + new Vector3(0,0.5f,0), Quaternion.identity);
         floatingFort.transform.SetParent(transform);
         GetComponent<CellBattery>().ChangePower(-fortPower);
@@ -245,7 +237,7 @@ public class Healer : PlayerController
             _fortExitTimer-= Time.deltaTime;
             if(_fortExitTimer<0)
             {
-                //Ïú»Ù
+                //ï¿½ï¿½ï¿½ï¿½
                 Destroy(_curFort);
                 hasExited = false;
             }
