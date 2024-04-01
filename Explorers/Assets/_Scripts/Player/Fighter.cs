@@ -18,12 +18,24 @@ public class Fighter : PlayerController
     public bool canFusionBomb = true;
     private Rigidbody _rb;
     private bool hasUseBomb = false;
+    private bool _isAttack;
+    private AniEventControl _myAniEventControl;
     void Start()
     {
-        
         _rb = GetComponent<Rigidbody>();
-        PlayerInit();   
+        PlayerInit();
+        _isAttack = false;
+        _myAniEventControl = playerSprite.GetComponent<AniEventControl>();
+        _myAniEventControl.OnFighterAttackEvent += OnHack;
+        _myAniEventControl.EndFighterAttackEvent += EndHack;
     }
+
+    private void OnDestroy()
+    {
+        _myAniEventControl.OnFighterAttackEvent -= OnHack;
+        _myAniEventControl.OnFighterAttackEvent -= EndHack;
+    }
+
     void Update()
     {
         if (hasDead) return;
@@ -38,18 +50,11 @@ public class Fighter : PlayerController
         if(!isDashing) CharacterMove();
 
         RestroeDefence();
-        if (!isDashing)
+        
+        //防止动画干扰，攻击结束后再做移动动画
+        if (!_isAttack)
         {
-            if (playerInputSetting.inputDir.x < 0)
-            {
-                transform.localScale = new(-1, 1, 1);
-                isLeft = true;
-            }
-            else if (playerInputSetting.inputDir.x > 0)
-            {
-                isLeft = false;
-                transform.localScale = new(1, 1, 1);
-            }
+            MoveAnimationControl(CharacterAnimation.FighterRun,CharacterAnimation.FighterWalk);
         }
         //UseItem();
         CheckDistanceToBattery();
@@ -118,8 +123,6 @@ public class Fighter : PlayerController
                 {
                     isDigging = true;
                     _curDigRes = other.GetComponent<Resource>();
-                   
-
                 }
                 break;
             default:
@@ -169,12 +172,25 @@ public class Fighter : PlayerController
     }
     public override bool MainAttack()
     {
-
         if(!base.MainAttack())
         {
             return false;
         }
-        if (_enemyInArea.Count == 0) return false;
+
+        _isAttack = true;
+        //动画控制
+        animator.CrossFade("FighterAttack",0);
+        playerSprite.GetComponent<SpriteRenderer>().material.SetTexture("_Normal",
+            PlayerManager.Instance.GetTextureByAnimationName(CharacterAnimation.FighterAttack));
+        return true;
+    }
+
+    /// <summary>
+    /// 由帧动画事件触发实际的伤害结算
+    /// </summary>
+    private void OnHack()
+    {
+        if (_enemyInArea.Count == 0) return;
         for (int i = 0; i < _enemyInArea.Count; i++)
         {
             _enemyInArea[i].GetComponent<Enemy>().TakeDamage((int)mainWeapon.attackDamage);
@@ -187,11 +203,14 @@ public class Fighter : PlayerController
             {
                 _enemyInArea[i].GetComponent<Enemy>().Vertigo(transform.right * force);
             }
-
         }
-        return true;
     }
 
+    private void EndHack()
+    {
+        _isAttack = false;
+    }
+    
     public override bool SecondaryAttack()
     {
         if(!base.SecondaryAttack())

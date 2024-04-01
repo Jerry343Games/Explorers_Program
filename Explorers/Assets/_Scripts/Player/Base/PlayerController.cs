@@ -178,7 +178,7 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     /// <param name="run">移动动画名</param>
     /// <param name="idle">待机动画名</param>
-    public void AnimationControl(CharacterAnimation run,CharacterAnimation idle)
+    public void MoveAnimationControl(CharacterAnimation run,CharacterAnimation idle)
     {
         if (playerInputSetting.inputDir.x != 0)
         {
@@ -200,8 +200,7 @@ public class PlayerController : MonoBehaviour
             _spriteRenderer.material.SetTexture("_Normal", PlayerManager.Instance.GetTextureByAnimationName(idle));
         }
     }
-
-
+    
     /// <summary>
     /// 绳子重连方法
     /// </summary>

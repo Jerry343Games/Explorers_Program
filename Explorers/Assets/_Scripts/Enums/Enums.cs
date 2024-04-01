@@ -24,8 +24,13 @@ public enum BubbleType
 
 public enum CharacterAnimation
 {
+    BatteryWalk,
+    BatteryRun,
     ShooterIdle,
     ShooterRun,
+    FighterWalk,
+    FighterRun,
+    FighterAttack,
     HealerIdle,
     HealerRun,
 }

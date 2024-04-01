@@ -1,32 +1,14 @@
 fileFormatVersion: 2
-guid: 1fd41a26974b5634a86326733edabac9
+guid: b0b820a6bda8efa4d804e50c56daa5d3
 ModelImporter:
   serializedVersion: 21300
   internalIDToNameTable:
   - first:
-      74: 5575320639918619766
-    second: WALKING
+      74: 8920309874440221133
+    second: "\u9AA8\u67B6|RUNNING"
   - first:
-      74: 2583947508557538698
-    second: "\u9AA8\u67B6.001|ATTACK"
-  - first:
-      74: -5043360739879426354
-    second: "\u9AA8\u67B6.001|RUNNING.001"
-  - first:
-      74: 1131705272996202088
-    second: "\u9AA8\u67B6.001|RUNNING.003"
-  - first:
-      74: 588552550192018627
-    second: "\u9AA8\u67B6.001|WALKING"
-  - first:
-      74: 724746427840072955
-    second: "\u9AA8\u67B6.001|WALKING.001"
-  - first:
-      74: 7669902828066028633
-    second: "\u9AA8\u67B6.001|WALKING.002"
-  - first:
-      74: -1930534409498756201
-    second: "\u9AA8\u67B6.001|YELLOW-ROBOT.002Action"
+      74: 5025944782399229265
+    second: "\u9AA8\u67B6|WALKING"
   externalObjects: {}
   materials:
     materialImportMode: 2
@@ -55,7 +37,65 @@ ModelImporter:
     animationWrapMode: 0
     extraExposedTransformPaths: []
     extraUserProperties: []
-    clipAnimations: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: "\u9AA8\u67B6|RUNNING"
+      takeName: "\u9AA8\u67B6|RUNNING"
+      internalID: 0
+      firstFrame: 0
+      lastFrame: 21
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: "\u9AA8\u67B6|WALKING"
+      takeName: "\u9AA8\u67B6|WALKING"
+      internalID: 0
+      firstFrame: 0
+      lastFrame: 43
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
     isReadable: 0
   meshes:
     lODScreenPercentages: []

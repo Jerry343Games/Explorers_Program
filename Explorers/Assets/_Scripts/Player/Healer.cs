@@ -54,7 +54,7 @@ public class Healer : PlayerController
         RestroeDefence();
         UseItem();
         CheckDistanceToBattery();
-        AnimationControl(CharacterAnimation.HealerRun,CharacterAnimation.HealerIdle);
+        MoveAnimationControl(CharacterAnimation.HealerRun,CharacterAnimation.HealerIdle);
         
         //CheckKeys();
         if (playerInputSetting.GetOptionalFeatureDown())

@@ -405,14 +405,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   players: []
   mappings:
-  - animationName: 0
+  - animationName: 2
     texture: {fileID: 2800000, guid: 9eac31e20e638554b8651591251f00b9, type: 3}
-  - animationName: 1
+  - animationName: 3
     texture: {fileID: 2800000, guid: ba81ec1700e8efa40a3aa16b117e0429, type: 3}
   - animationName: 2
     texture: {fileID: 2800000, guid: 0940fd234c5920d409086528f9ef43b6, type: 3}
   - animationName: 3
     texture: {fileID: 2800000, guid: 62ae67d2075a0ea4da7ba53883fb4164, type: 3}
+  - animationName: 1
+    texture: {fileID: 2800000, guid: d75b1bf592f94864e941bcf5f9dd9c77, type: 3}
+  - animationName: 0
+    texture: {fileID: 2800000, guid: 398e424618de59245b035461d721eb52, type: 3}
+  - animationName: 4
+    texture: {fileID: 2800000, guid: 9faedecbaa6748e409cd87696c6903be, type: 3}
+  - animationName: 5
+    texture: {fileID: 2800000, guid: 1f42a6310e3f00e4a93a45e683acc980, type: 3}
+  - animationName: 6
+    texture: {fileID: 2800000, guid: f1736302d0d2a4d4cb36b76d213c978e, type: 3}
 --- !u!1 &831284775
 GameObject:
   m_ObjectHideFlags: 0
@@ -906,10 +916,30 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2590948359500051080, guid: d78268db5a3d90945a00a856775b068c,
+        type: 3}
+      propertyPath: m_CastShadows
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3290343908519901437, guid: d78268db5a3d90945a00a856775b068c,
         type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 4208568781498738754, guid: d78268db5a3d90945a00a856775b068c,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4810084277592092619, guid: d78268db5a3d90945a00a856775b068c,
+        type: 3}
+      propertyPath: m_CastShadows
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6547932248802466926, guid: d78268db5a3d90945a00a856775b068c,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d78268db5a3d90945a00a856775b068c, type: 3}
