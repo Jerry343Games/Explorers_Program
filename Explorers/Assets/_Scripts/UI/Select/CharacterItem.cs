@@ -49,7 +49,7 @@ public class CharacterItem : MonoBehaviour
     {
         _characterBtn = GetComponent<Button>();
         _infoItemImg = infoItem.GetComponent<Image>();
-        _weaponSelectItem = transform.GetChild(0).GetComponent<Image>();
+        _weaponSelectItem = transform.GetChild(1).GetComponent<Image>();
         _characterBtn.onClick.AddListener(ClickCharacterBtn);
         weaponInfoItem.GetComponent<OptionalFeatureItem>().FeatureConfirmEvent += CloseWeaponInfoItem;
         confirmLightImg.color = unSelectColor;
