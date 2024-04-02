@@ -184,11 +184,11 @@ public class PlayerController : MonoBehaviour
         {
             if (playerInputSetting.inputDir.x < 0)
             {
-                _spriteRenderer.flipX = false;
+                transform.localScale = new Vector3(1, 1, 1);
             }
             else
             {
-                _spriteRenderer.flipX = true;
+                transform.localScale = new Vector3(-1, 1, 1);
             }
             //过渡动画、切换法线
             animator.CrossFade(run.ToString(),0);

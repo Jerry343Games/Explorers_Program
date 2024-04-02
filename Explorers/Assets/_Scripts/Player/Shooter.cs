@@ -1,3 +1,4 @@
+using Unity.Mathematics;
 using UnityEngine;
 
 public class Shooter : PlayerController
@@ -143,7 +144,7 @@ public class Shooter : PlayerController
         }
         GameObject bullet = Instantiate(Resources.Load<GameObject>("Bullet"), transform.position, Quaternion.identity);
         Instantiate(Resources.Load<GameObject>("Effect/FlashSpiky"), shootTransform.position,
-            gun.transform.rotation);
+            gun.transform.rotation,shootTransform);
         bullet.GetComponent<Bullet>().Init(mainWeapon, gun.transform.forward);
         MusicManager.Instance.PlaySound("射击");
         return true;
