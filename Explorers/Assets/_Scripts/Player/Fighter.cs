@@ -191,10 +191,14 @@ public class Fighter : PlayerController
     private void OnHack()
     {
         if (_enemyInArea.Count == 0) return;
+        Debug.Log(_enemyInArea.Count);
+
         for (int i = 0; i < _enemyInArea.Count; i++)
         {
             _enemyInArea[i].GetComponent<Enemy>().TakeDamage((int)mainWeapon.attackDamage);
+            _enemyInArea[i].GetComponent<Enemy>().Vertigo(transform.GetChild(0).transform.forward*force);
             if (_enemyInArea[i].GetComponent<Enemy>().HP <= 0) _enemyInArea.RemoveAt(i);
+            /*
             if (isLeft)
             {
                 _enemyInArea[i].GetComponent<Enemy>().Vertigo(-transform.right * force);
@@ -202,7 +206,8 @@ public class Fighter : PlayerController
             else
             {
                 _enemyInArea[i].GetComponent<Enemy>().Vertigo(transform.right * force);
-            }
+            }*/
+            
         }
     }
 
