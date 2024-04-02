@@ -32,7 +32,7 @@ public class Piranha:Enemy
             touchedCollision.gameObject.GetComponent<PlayerController>().Vertigo(direction * force);
             touchedCollision.gameObject.GetComponent<PlayerController>().TakeDamage(damage);
 
-            Vertigo(-transform.forward * 5f,ForceMode.Impulse,0.5f);
+            Vertigo(-transform.forward * 5f,ForceMode.Impulse,0.3f);
 
         }
     }

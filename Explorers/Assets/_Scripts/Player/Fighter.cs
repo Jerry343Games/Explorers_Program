@@ -296,4 +296,8 @@ public class Fighter : PlayerController
         }
     }
 
+    public override void Vertigo(Vector3 force, ForceMode forceMode = ForceMode.Impulse, float vertigoTime = 0.3F)
+    {
+        _rb.AddForce(force/3, forceMode);
+    }
 }
