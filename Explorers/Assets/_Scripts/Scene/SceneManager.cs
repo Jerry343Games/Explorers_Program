@@ -4,7 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using UnityEngine.Serialization;
+using UnityEngine.SceneManagement;
 
 
 
@@ -44,23 +44,25 @@ public class SceneManager : Singleton<SceneManager>
 
     private void OnEnable()
     {
-        EventCenter.GameStartedEvent += ConnectRopeToBattary;
-        EventCenter.GameStartedEvent += GameInit;
+        //EventCenter.GameStartedEvent += FindBattery;
+        //EventCenter.GameStartedEvent += GameInit;
     }
 
     private void OnDisable()
     {
-        EventCenter.GameStartedEvent -= ConnectRopeToBattary;
-        EventCenter.GameStartedEvent -= GameInit;
+        //EventCenter.GameStartedEvent -= FindBattery;
+        //EventCenter.GameStartedEvent -= GameInit;
     }
-    void Start()
+    protected override void Awake()
     {
+        base.Awake();
         Slover = GameObject.Find("Solver");
+        _players = GameObject.FindGameObjectsWithTag("BasePlayer");
     }
 
     void Update()
     {
-        if (!isMaxPlayer)
+        if (!isMaxPlayer/* && UnityEngine.SceneManagement.SceneManager.GetActiveScene().name== "sRSTz"*/)
         {
             CountPlayer();
         }
@@ -81,14 +83,14 @@ public class SceneManager : Singleton<SceneManager>
 
     }
 
-    private void ConnectRopeToBattary()
+    public void FindBattery()
     {
         //获得电池玩家的位置 因为绳子都需要连到他身上
         BatteryTransform = _players.ToList().Find(x =>x.transform.GetChild(0).gameObject.activeInHierarchy).transform.GetChild(0);
 
     }
 
-    private void GameInit()
+    public void GameInit()
     {
 
         foreach (var player in _players)

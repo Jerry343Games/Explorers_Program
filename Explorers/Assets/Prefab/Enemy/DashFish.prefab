@@ -78,8 +78,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2eb22505766ddc648b2b38152e91bef8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 10
-  force: 15
+  moveSpeed: 4
+  force: 8
   HP: 22
   damage: 10
   canMove: 1
@@ -95,7 +95,7 @@ MonoBehaviour:
   dashDetectionRadius: 12
   prepareTime: 2.5
   dashTime: 1.5
-  dashForce: 30
+  dashForce: 20
 --- !u!33 &7465511782301219571
 MeshFilter:
   m_ObjectHideFlags: 0
