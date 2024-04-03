@@ -1,10 +1,9 @@
 using Obi;
 using System;
-using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics.Tracing;
 using System.Linq;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 
 
@@ -44,14 +43,14 @@ public class SceneManager : Singleton<SceneManager>
 
     private void OnEnable()
     {
-        //EventCenter.GameStartedEvent += FindBattery;
-        //EventCenter.GameStartedEvent += GameInit;
+        EventCenter.GameStartedEvent += FindBattery;
+        EventCenter.GameStartedEvent += GameInit;
     }
 
     private void OnDisable()
     {
-        //EventCenter.GameStartedEvent -= FindBattery;
-        //EventCenter.GameStartedEvent -= GameInit;
+        EventCenter.GameStartedEvent -= FindBattery;
+        EventCenter.GameStartedEvent -= GameInit;
     }
     protected override void Awake()
     {
@@ -62,7 +61,7 @@ public class SceneManager : Singleton<SceneManager>
 
     void Update()
     {
-        if (!isMaxPlayer/* && UnityEngine.SceneManagement.SceneManager.GetActiveScene().name== "sRSTz"*/)
+        if (!isMaxPlayer)
         {
             CountPlayer();
         }
@@ -126,43 +125,44 @@ public class SceneManager : Singleton<SceneManager>
             attachment[0].target = BatteryTransform;
             attachment[1].target = player.transform.GetChild(index);
             controller.SetRope(obiRope);
+            controller.transform.position = bornTransform.position;
         }
     }
     
-    /// <summary>
-    /// 注册玩家
-    /// </summary>
-    /// <param name="player"></param>
-    public void RegisterPlayer(GameObject player)
-    {
-        Debug.Log("Register Player");
-        players.Add(player);
-    }
+    ///// <summary>
+    ///// 注册玩家
+    ///// </summary>
+    ///// <param name="player"></param>
+    //public void RegisterPlayer(GameObject player)
+    //{
+    //    Debug.Log("Register Player");
+    //    players.Add(player);
+    //}
     
-    /// <summary>
-    /// 获得最后一个注册的玩家
-    /// </summary>
-    /// <returns></returns>
-    public GameObject GetLatestPlayer()
-    {
-        if (players.Count > 0)
-        {
-            Debug.Log("GetLastPlayer");
-            return players[players.Count - 1];
-        }
+    ///// <summary>
+    ///// 获得最后一个注册的玩家
+    ///// </summary>
+    ///// <returns></returns>
+    //public GameObject GetLatestPlayer()
+    //{
+    //    if (players.Count > 0)
+    //    {
+    //        Debug.Log("GetLastPlayer");
+    //        return players[players.Count - 1];
+    //    }
 
-        return null;
-    }
+    //    return null;
+    //}
 
-    /// <summary>
-    /// 销毁所有玩家
-    /// </summary>
-    public void DestoryAllPlayers()
-    {
-        foreach(GameObject player in players)
-        {
-            Destroy(player);
-        }
-        players.Clear();
-    }
+    ///// <summary>
+    ///// 销毁所有玩家
+    ///// </summary>
+    //public void DestoryAllPlayers()
+    //{
+    //    foreach(GameObject player in players)
+    //    {
+    //        Destroy(player);
+    //    }
+    //    players.Clear();
+    //}
 }

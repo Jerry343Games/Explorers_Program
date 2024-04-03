@@ -32,7 +32,7 @@ public class CellBattery : Battery
             GetComponent<PlayerController>().SetDeadState(true);
         }
 
-        if (SceneManager.Instance.hasMainBattary&&!_findMainbattary)
+        if (PlayerManager.Instance.hasMainBattary&&!_findMainbattary)
         {
             FindMainBattary();
             _findMainbattary = true;

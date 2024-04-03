@@ -91,7 +91,7 @@ public class PlayerController : MonoBehaviour
         playerInput = transform.parent.GetComponent<PlayerInput>();
         playerInputSetting = transform.parent.GetComponent<PlayerInputSetting>();
         Debug.Log("Clone: "+transform.name+" / Index: "+myIndex);
-        PlayerManager.Instance.players.Add(gameObject);
+        PlayerManager.Instance.gamePlayers.Add(gameObject);
         if (gameObject.CompareTag("Battery")) EnemyManager.Instance.battery = gameObject;
         myIndex = playerInput.playerIndex;
         currentArmor = maxArmor;
@@ -111,7 +111,6 @@ public class PlayerController : MonoBehaviour
         //feature = playerInputSetting.feature;
         Debug.Log(playerInputSetting.feature);
         
-        transform.position = SceneManager.Instance.bornTransform.position;
         bubblePanel = GameObject.Find("BubblePanel").GetComponents<UIBubblePanel>()[0];
         
         //选择关卡时使用UI键位映射，反之则用Player映射
@@ -228,6 +227,7 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     public void CheckDistanceToBattery()
     {
+        if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name == "SelectScene") return;
         if (!SceneManager.Instance.BatteryTransform) return;
         if (Vector3.Distance(SceneManager.Instance.BatteryTransform.position, transform.position) > DistanceThreshold && _hasConnected)
         {

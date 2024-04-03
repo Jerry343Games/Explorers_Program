@@ -23,7 +23,7 @@ public class UISelectPanel : MonoBehaviour
     
     private float _countDown=3f;
     private string _countDownText;
-    public SceneManager sceneManager;
+    //public SceneManager sceneManager;
 
     public TMP_Text infoLine1;
     public TMP_Text infoLine2;
@@ -101,8 +101,10 @@ public class UISelectPanel : MonoBehaviour
     {
         currentConfirmPlayer++;
         
-        if (currentConfirmPlayer==sceneManager.maxPlayer)
+        if (currentConfirmPlayer==PlayerManager.Instance.maxPlayerCount)
         {
+            Debug.Log("currentConfirmPlayer");
+            Debug.Log(_hasBattary);
             if (!_hasBattary)
             {
                 infoLine1.rectTransform.DOAnchorPos(new Vector2(infoLine1.rectTransform.anchoredPosition.x, -10), 0.2f);
@@ -133,12 +135,12 @@ public class UISelectPanel : MonoBehaviour
                 {
                     //完成动画回调
                     //更改映射表由UI到Player
-                    foreach (var player in SceneManager.Instance.players)
+                    foreach (var player in PlayerManager.Instance.players)
                     {
                         player.GetComponent<PlayerInput>().SwitchCurrentActionMap("Player");
                     }
                     //载入下一关
-                    UnityEngine.SceneManagement.SceneManager.LoadScene("JerryTest"); 
+                    UnityEngine.SceneManagement.SceneManager.LoadScene("JerryTest");
                 });
             }
         }
@@ -179,7 +181,7 @@ public class UISelectPanel : MonoBehaviour
     private void ReloadScene()
     {
         //手动销毁玩家
-        SceneManager.Instance.DestoryAllPlayers();
+        PlayerManager.Instance.DestoryAllPlayers();
         UnityEngine.SceneManagement.SceneManager.LoadScene("SelectScene");
     }
 }

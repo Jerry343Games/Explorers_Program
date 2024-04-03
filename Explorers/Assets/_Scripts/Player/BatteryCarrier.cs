@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using UnityEngine.InputSystem.XR;
 
 public class BatteryCarrier : PlayerController
 {
@@ -45,7 +44,7 @@ public class BatteryCarrier : PlayerController
     {
         PlayerInit();
         canOverload = true;
-        SceneManager.Instance.hasMainBattary = true; //通知电池加入，给其他职业监听以获得主电池
+        PlayerManager.Instance.hasMainBattary = true; //通知电池加入，给其他职业监听以获得主电池
         
     }
     void Update()

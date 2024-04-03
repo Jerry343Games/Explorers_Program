@@ -23,6 +23,8 @@ public class AnimationTextureMapping
 }
 public class PlayerManager : SingletonPersistent<PlayerManager>
 {
+    public int maxPlayerCount;
+    //游玩的玩家列表 是父物体
     public List<GameObject> players = new List<GameObject>();
 
     //键：职业索引 值：选择的技能
@@ -30,7 +32,11 @@ public class PlayerManager : SingletonPersistent<PlayerManager>
 
     //预加载法线数据
     public List<AnimationTextureMapping> mappings = new List<AnimationTextureMapping>();
-    
+
+    public bool hasMainBattary;
+    //敌人需要的敌人列表 是玩家角色子物体
+    public List<GameObject> gamePlayers = new List<GameObject>();
+
     //通过动画查找法线
     public Texture2D GetTextureByAnimationName(CharacterAnimation animationName)
     {
@@ -42,6 +48,43 @@ public class PlayerManager : SingletonPersistent<PlayerManager>
             }
         }
         return null; // 如果找不到对应的贴图，则返回null
+    }
+
+    /// <summary>
+    /// 注册玩家
+    /// </summary>
+    /// <param name="player"></param>
+    public void RegisterPlayer(GameObject player)
+    {
+        Debug.Log("Register Player");
+        players.Add(player);
+    }
+
+    /// <summary>
+    /// 获得最后一个注册的玩家
+    /// </summary>
+    /// <returns></returns>
+    public GameObject GetLatestPlayer()
+    {
+        if (players.Count > 0)
+        {
+            Debug.Log("GetLastPlayer");
+            return players[players.Count - 1];
+        }
+
+        return null;
+    }
+
+    /// <summary>
+    /// 销毁所有玩家
+    /// </summary>
+    public void DestoryAllPlayers()
+    {
+        foreach (GameObject player in players)
+        {
+            Destroy(player);
+        }
+        players.Clear();
     }
 
 }

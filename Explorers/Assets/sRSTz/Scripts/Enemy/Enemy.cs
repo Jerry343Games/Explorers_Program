@@ -60,8 +60,8 @@ public class Enemy : MonoBehaviour
         
         GameObject closestPlayer = null;
         float closestDistance = Mathf.Infinity;
-        if (PlayerManager.Instance.players.Count == 0) return null;
-        foreach (var character in PlayerManager.Instance.players)
+        if (PlayerManager.Instance.gamePlayers.Count == 0) return null;
+        foreach (var character in PlayerManager.Instance.gamePlayers)
         {
             if (character.GetComponent<PlayerController>()==null|| character.GetComponent<PlayerController>().hasDead) continue;
             //if (character.CompareTag("Enemy")) continue;

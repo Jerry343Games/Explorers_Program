@@ -66,7 +66,7 @@ public class CharacterItem : MonoBehaviour
             confirmLightImg.color = selectedColor;
             isSelected = true;
             weaponInfoItem.transform.GetChild(0).GetComponent<Button>().Select();
-            MultiplayerEventSystem eventSystem = SceneManager.Instance.GetLatestPlayer().GetComponent<MultiplayerEventSystem>();
+            MultiplayerEventSystem eventSystem = PlayerManager.Instance.GetLatestPlayer().GetComponent<MultiplayerEventSystem>();
             eventSystem.playerRoot = weaponInfoItem;
             eventSystem.firstSelectedGameObject = weaponInfoItem.transform.GetChild(0).gameObject;
             
@@ -79,7 +79,7 @@ public class CharacterItem : MonoBehaviour
             
             //允许添加下一个输入设备
             playerIndex++;
-            if (playerIndex < uiSelectPanel.sceneManager.maxPlayer)
+            if (playerIndex < PlayerManager.Instance.maxPlayerCount)
             {
                 GameObject player = Instantiate(Resources.Load<GameObject>("Player/Player"));
                 player.GetComponent<MultiplayerEventSystem>().playerRoot = uiSelectPanel.gameObject;
