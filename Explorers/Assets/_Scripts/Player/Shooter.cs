@@ -96,6 +96,7 @@ public class Shooter : PlayerController
             //�ռ���������Ʒ
             case "Item":
                 other.GetComponent<Item>().Apply(gameObject);
+
                 break;
             case "Resource":
                 if (!isDigging && playerInputSetting.GetInteractButtonDown())

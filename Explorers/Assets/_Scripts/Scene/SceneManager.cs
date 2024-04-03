@@ -39,7 +39,7 @@ public class SceneManager : Singleton<SceneManager>
 
     public List<ResTask> resTasks = new List<ResTask>();//资源收集任务列表
     
-    public List<GameObject> players = new List<GameObject>();//玩家列表
+    //public List<GameObject> players = new List<GameObject>();//玩家列表
 
     private void OnEnable()
     {
@@ -108,6 +108,7 @@ public class SceneManager : Singleton<SceneManager>
             }
             //获得自选功能
             controller.feature = controller.playerInputSetting.feature;
+            controller.transform.position = bornTransform.position;
             //电池不连电池
             if (player == BatteryTransform.parent.gameObject) continue;
             float rotationZ = Vector3.Angle((player.transform.GetChild(index).position - BatteryTransform.position).normalized, Vector3.right) *
@@ -125,7 +126,6 @@ public class SceneManager : Singleton<SceneManager>
             attachment[0].target = BatteryTransform;
             attachment[1].target = player.transform.GetChild(index);
             controller.SetRope(obiRope);
-            controller.transform.position = bornTransform.position;
         }
     }
     

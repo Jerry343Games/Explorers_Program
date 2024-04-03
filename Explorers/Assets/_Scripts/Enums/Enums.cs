@@ -67,7 +67,7 @@ public enum PropType
 {
     GravityWell,
     PropelBackpack,
-
+    Sonar,
 
 }
 
