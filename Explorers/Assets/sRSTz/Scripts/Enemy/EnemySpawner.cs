@@ -11,6 +11,10 @@ public class EnemySpawner : MonoBehaviour
     private float _spawnTimer = 0;
     public float spawnRadius = 5f;
     public bool isAlwaysSpawn = false;
+    private void Awake()
+    {
+        EnemyManager.Instance.spawners.Add(this);
+    }
     /// <summary>
     /// 持续只生成一种
     /// </summary>
@@ -22,6 +26,14 @@ public class EnemySpawner : MonoBehaviour
             Instantiate(enemyPrefab);
         }
 
+    }
+    public void SpawnAlways(GameObject prefab)
+    {
+        if (GetClosestPlayerDistance() < spawnRadius) return;
+        if (prefab && HasTimerArrived())
+        {
+            Instantiate(prefab);
+        }
     }
     /// <summary>
     /// 只生成一次，生成完后置空

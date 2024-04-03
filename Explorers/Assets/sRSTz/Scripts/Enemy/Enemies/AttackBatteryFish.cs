@@ -45,7 +45,7 @@ public class AttackBatteryFish : Enemy
             rb.velocity = direction * moveSpeed; // 沿着朝向玩家的方向移动
 
             // 将人物的方向设置为计算得到的方向
-            gameObject.transform.right = direction;
+            EnemyRotate(direction, 15f);
         }
         else if (canMove) //如果丢失玩家并且能移动，那么回到出生点
         {

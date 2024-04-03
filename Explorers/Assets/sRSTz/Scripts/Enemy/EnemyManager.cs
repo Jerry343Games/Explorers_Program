@@ -13,11 +13,12 @@ public class EnemyManager : SingletonPersistent<EnemyManager>
     protected override void Awake()
     {
         base.Awake();
-        spawners.AddRange(FindObjectsOfType<EnemySpawner>());
+        
     }
 
     private void Update()
     {
+        if(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name != "SelectScene"&&spawners.Count!=0)
         SpawnEnemy();
     }
 
@@ -28,7 +29,7 @@ public class EnemyManager : SingletonPersistent<EnemyManager>
         {
             if (spawners[i].isAlwaysSpawn)
             {
-                spawners[i].SpawnAlways();
+                spawners[i].SpawnAlways(enemisToSpawn[Random.Range(0,enemisToSpawn.Count-1)]);
             }
             else
             {

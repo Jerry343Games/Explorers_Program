@@ -32,6 +32,10 @@ public class Enemy : MonoBehaviour
     public Vector3 spawnerPoint;
     [HideInInspector]
     public bool canAttack = true;
+
+    public List<GameObject> detectedObjs = new();
+
+
     protected virtual void Awake()
     {
         rb = GetComponent<Rigidbody>();
@@ -39,6 +43,9 @@ public class Enemy : MonoBehaviour
     }
     private void Update()
     {
+        //TODO 每帧根据周边的物体计算影响因子，然后移动时根据影响因子移动
+
+
         if (!canMove)
         {
             if (vertigoTimer >= vertigoTime)
@@ -112,6 +119,7 @@ public class Enemy : MonoBehaviour
     }
     public virtual void ReturnSpawnpoint()
     {
+        Vector3 randomPosition = new Vector3(spawnerPoint.x + Random.Range(0,5f), spawnerPoint.y + Random.Range(0, 5f), spawnerPoint.z);
         if ( stayTimer < stayTime)
         {
             stayTimer += Time.fixedDeltaTime;
@@ -121,7 +129,7 @@ public class Enemy : MonoBehaviour
             isReturning = true;
 
         }
-        if ((spawnerPoint - transform.position).magnitude < 0.2f)
+        if ((randomPosition - transform.position).magnitude < 0.2f)
         {
             isReturning = false;
             stayTimer = 0;
@@ -161,6 +169,16 @@ public class Enemy : MonoBehaviour
                 transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
             }
         }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        detectedObjs.Add(other.gameObject);
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (detectedObjs.Contains(other.gameObject)) detectedObjs.Remove(other.gameObject);
     }
 
 
