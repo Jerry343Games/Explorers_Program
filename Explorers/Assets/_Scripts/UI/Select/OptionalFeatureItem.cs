@@ -33,7 +33,7 @@ public class OptionalFeatureItem : MonoBehaviour
     public OptionalFeature feature2;
 
 
-    private Color _selectColor = new Color(1, 0.8f, 0.5f, 1);
+    private Color _selectColor = new Color(0, 0f, 0f, 0.3f);
     private Color _unSelectColor = new Color(1, 0.8f, 0.5f, 0);
     
     public event Action FeatureConfirmEvent;
