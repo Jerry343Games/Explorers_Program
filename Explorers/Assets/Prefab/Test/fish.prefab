@@ -130,14 +130,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
-  moveSpeed: 5
+  moveSpeed: 2.5
   avoidanceStrength: 5
   obstacleMask:
     serializedVersion: 2
     m_Bits: 1024
-  avoidanceRadius: 1
-  separationStrength: 1
-  separationRadius: 0.5
+  avoidanceRadius: 0.5
+  separationStrength: 3
+  separationRadius: 0.3
   companionMask:
     serializedVersion: 2
     m_Bits: 8
+  turnSmoothTime: 0.05
