@@ -33,7 +33,7 @@ public class OptionalFeatureItem : MonoBehaviour
     public OptionalFeature feature2;
 
 
-    private Color _selectColor = new Color(0, 0f, 0f, 0.3f);
+    private Color _selectColor = new Color(0, 0f, 0f, 0.2f);
     private Color _unSelectColor = new Color(1, 0.8f, 0.5f, 0);
     
     public event Action FeatureConfirmEvent;
@@ -84,24 +84,28 @@ public class OptionalFeatureItem : MonoBehaviour
                     secondaryWeaponSelectImg.color = _unSelectColor;
                     optionalFeatureSelectImg.color = _unSelectColor;
                     optionalFeatureImg.sprite = null;
+                    optionalFeatureImg.color = new Color(0, 0, 0, 0);
                     break;
                 case "SecondaryWeaponInfo":
                     mainWeaponSelectImg.color = _unSelectColor;
                     secondaryWeaponSelectImg.color = _selectColor;
                     optionalFeatureSelectImg.color = _unSelectColor;
                     optionalFeatureImg.sprite = null;
+                    optionalFeatureImg.color = new Color(0, 0, 0, 0);
                     break;
                 case "OptionalFeature1":
                     mainWeaponSelectImg.color = _unSelectColor;
                     secondaryWeaponSelectImg.color = _unSelectColor;
                     optionalFeatureSelectImg.color = _selectColor;
                     optionalFeatureImg.sprite = myFeature1Img.sprite;
+                    optionalFeatureImg.color = new Color(1, 1, 1, 1);
                     break;
                 case "OptionalFeature2":
                     mainWeaponSelectImg.color = _unSelectColor;
                     secondaryWeaponSelectImg.color = _unSelectColor;
                     optionalFeatureSelectImg.color = _selectColor;
                     optionalFeatureImg.sprite = myFeature2Img.sprite;
+                    optionalFeatureImg.color = new Color(1, 1, 1, 1);
                     break;
             }
         }

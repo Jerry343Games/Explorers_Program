@@ -87,6 +87,7 @@ public class UISelectPanel : MonoBehaviour
 
             if (_countDown<1.5)
             {
+                infoLine2.fontSize = 9f;
                 infoLine2.text = "Don't Panic";
             }
             infoLine1.text = "///所有单元已就绪，启动发射程序: "+_countDownText+" ///";    

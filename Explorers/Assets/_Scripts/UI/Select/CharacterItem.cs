@@ -17,8 +17,8 @@ public class CharacterItem : MonoBehaviour
     private float _weaponInfoItemStartTop = 292f;
     private float _weaponInfoItemShowDuration = 0.3f;
     //角色信息起止位置、动画时间
-    private float _infoItemEndTop = 58f;
-    private float _infoItemStartTop = 97f;
+    private float _infoItemEndTop = 80f;
+    private float _infoItemStartTop = 115f;
     private float _infoItemHideDuration = 0.3f;
 
     public PlayerType playerType;
