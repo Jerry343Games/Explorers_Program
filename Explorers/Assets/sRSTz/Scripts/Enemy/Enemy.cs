@@ -163,16 +163,16 @@ public class Enemy : MonoBehaviour
     private void Update()
     {
         //TODO 每帧根据周边的物体计算影响因子，然后移动时根据影响因子移动
-        impactFactor.UpdateFactor("Player",( target.transform.position)- transform.position );
-        foreach(GameObject gameObject in detectedObjs)
-        {
-            Vector2 direction = gameObject.transform.position- transform.position ;
-            impactFactor.UpdateFactor(gameObject.tag, direction);
-        }
-        Debug.Log(impactFactor.factors[0]+" "+ impactFactor.factors[1] + " " + impactFactor.factors[2] + " " + impactFactor.factors[3] + " " + impactFactor.factors[4] + " " + impactFactor.factors[5] + " " + impactFactor.factors[6] +
-            " " + impactFactor.factors[7] + " " + impactFactor.factors[8] + " " + impactFactor.factors[9] + " " + impactFactor.factors[10] + " " + impactFactor.factors[11]);
-        int maxFactor = impactFactor.FindMax();
-        angleVector = AngleToVector(maxFactor * 30);
+        // impactFactor.UpdateFactor("Player",( target.transform.position)- transform.position );
+        // foreach(GameObject gameObject in detectedObjs)
+        // {
+        //     Vector2 direction = gameObject.transform.position- transform.position ;
+        //     impactFactor.UpdateFactor(gameObject.tag, direction);
+        // }
+        // Debug.Log(impactFactor.factors[0]+" "+ impactFactor.factors[1] + " " + impactFactor.factors[2] + " " + impactFactor.factors[3] + " " + impactFactor.factors[4] + " " + impactFactor.factors[5] + " " + impactFactor.factors[6] +
+        //     " " + impactFactor.factors[7] + " " + impactFactor.factors[8] + " " + impactFactor.factors[9] + " " + impactFactor.factors[10] + " " + impactFactor.factors[11]);
+        // int maxFactor = impactFactor.FindMax();
+        // angleVector = AngleToVector(maxFactor * 30);
         if (!canMove)
         {
             if (vertigoTimer >= vertigoTime)
