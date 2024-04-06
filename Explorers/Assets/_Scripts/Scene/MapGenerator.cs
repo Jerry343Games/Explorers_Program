@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using DG.DemiLib;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class MapGenerator : MonoBehaviour
 {
@@ -8,12 +10,18 @@ public class MapGenerator : MonoBehaviour
     public int height = 4;
     private Vector2Int start;
     private Vector2Int end;
+    [Header("路径长度范围")]
+    public Vector2Int pathRange;
     private List<Vector2Int> path = new List<Vector2Int>();
     
-    public GameObject[] gridMarkers=new GameObject[12]; // 预先在Unity编辑器中赋值
-    public GameObject roadStraightPrefab; // 直道模型的预制体
-    public GameObject roadTurnPrefab; // 转弯道模型的预制体
-    public GameObject roadTJunctionPrefab;
+    public GameObject[] gridMarkers; // 预先在Unity编辑器中赋值
+    public GameObject roadStraightHorizontalPrefab; //水平道模型的预制体
+    public GameObject roadStraightVerticalPrefab;
+    public GameObject roadCrossPrefab; // T形交叉道模型的预制体
+    public GameObject startPrefab; // 起点模型的预制体
+    public GameObject endPrefab; // 终点模型的预制体
+
+    public GameObject defaultPrefab;
 
     void Start()
     {
@@ -22,20 +30,44 @@ public class MapGenerator : MonoBehaviour
 
     public void GenerateMap()
     {
-        // 随机起点和终点
-        start = new Vector2Int(0, Random.Range(0, width));
-        end = new Vector2Int(height - 1, Random.Range(0, width));
-
-        // 使用深度优先搜索(DFS)生成路径
-        DFS(start, new HashSet<Vector2Int>());
-
-        // 为每个单元格分配道路类型并放置模型
-        foreach (var cell in path)
+        bool isValidPath = false;
+        while (!isValidPath)
         {
-            PlaceModel(cell, DetermineRoadType(cell));
-        }
+            path.Clear(); // 清除之前的路径
+            // 随机起点和终点
+            start = new Vector2Int(0, Random.Range(0, width));
+            end = new Vector2Int(height - 1, Random.Range(0, width));
 
-        // 在这里可以添加额外的逻辑来创建死胡同或分支
+            // 使用深度优先搜索(DFS)生成路径
+            DFS(start, new HashSet<Vector2Int>());
+
+            if (path.Count >= pathRange.x && path.Count <= pathRange.y)
+            {
+                isValidPath = true; // 如果路径长度在min和max之间，则结束循环
+            }
+        }
+        // 创建一个HashSet包含所有路径单元格
+        HashSet<Vector2Int> pathCells = new HashSet<Vector2Int>(path);
+
+        // 遍历整个地图
+        for (int x = 0; x < height; x++)
+        {
+            for (int y = 0; y < width; y++)
+            {
+                Vector2Int cell = new Vector2Int(x, y);
+                if (pathCells.Contains(cell))
+                {
+                    // 这是路径的一部分，放置相应的道路模型
+                    PlaceModel(cell, DetermineRoadType(cell));
+                }
+                else
+                {
+                    // 这不是路径的一部分，放置默认模型
+                    PlaceModel(cell, "None"); // 修改这里以发送"None"作为类型
+                }
+            }
+        }
+        
     }
 
     bool DFS(Vector2Int current, HashSet<Vector2Int> visited)
@@ -98,78 +130,87 @@ public class MapGenerator : MonoBehaviour
     // 这个方法确定并返回当前cell的道路类型
     string DetermineRoadType(Vector2Int cell)
     {
-        // 用来表示是否有相邻的道路
         bool up = IsCellInPath(cell + Vector2Int.up);
         bool down = IsCellInPath(cell + Vector2Int.down);
         bool left = IsCellInPath(cell + Vector2Int.left);
         bool right = IsCellInPath(cell + Vector2Int.right);
 
-        // 根据相邻单元格判断道路类型
         int count = (up ? 1 : 0) + (down ? 1 : 0) + (left ? 1 : 0) + (right ? 1 : 0);
-        if (count == 1)
+        
+        // 修改部分开始
+        if (count == 2)
         {
-            // 如果只有一个相邻单元格在路径中，那么这是一个死胡同
-            return "DeadEnd";
-        }
-        else if (count == 2)
-        {
-            // 如果有两个相邻单元格在路径中，它可能是直道或转弯
-            if ((up && down) || (left && right))
+            // 如果有两个相邻单元格在路径中，区分直线是竖直还是水平
+            if (up && down)
             {
-                return "Straight";
+                return "Horizontal"; // 水平
+            }
+            else if (left && right)
+            {
+                return "Vertical"; // 竖直
             }
             else
             {
-                return "Turn";
+                //两个开口以上
+                return "Crossroads";
             }
         }
-        else if (count == 3)
+        else if (count > 2)
         {
-            // 三个相邻单元格在路径中表示这是一个三叉路口
-            return "T-Junction";
-        }
-        else if (count == 4)
-        {
-            // 四个相邻单元格在路径中表示这是一个四叉路口
+            // 如果开口数量大于2，统一标记为十字路口
             return "Crossroads";
         }
-
-        // 如果没有相邻单元格在路径中，那么这个单元格不是道路的一部分
-        return "None";
+        else
+        {
+            // 其他情况（如死胡同和单独的格子）不再单独分类
+            return "Crossroads";
+        }
     }
 
     void PlaceModel(Vector2Int gridPos, string roadType)
     {
-        // 找到对应的标记点
         GameObject marker = gridMarkers[gridPos.x * width + gridPos.y];
-        
-        // 根据道路类型实例化模型
         GameObject prefabToPlace = null;
-        switch(roadType)
+
+        // 检查是否为起点或终点，并选择适当的预制体
+        if (gridPos == start)
         {
-            case "Straight":
-                prefabToPlace = roadStraightPrefab;
-                break;
-            case "Turn":
-                prefabToPlace = roadTurnPrefab;
-                break;
-            case "T-Junction":
-                prefabToPlace = roadTJunctionPrefab;
-                break;
-            default:
-                prefabToPlace = roadStraightPrefab;
-                break;
-            // ...处理其他道路类型
+            prefabToPlace = startPrefab;
+        }
+        else if (gridPos == end)
+        {
+            prefabToPlace = endPrefab;
+        }
+        else
+        {
+            // 如果不是起点或终点，根据道路类型放置道路模型
+            switch(roadType)
+            {
+                case "Vertical":
+                    prefabToPlace = roadStraightVerticalPrefab;
+                    break;
+                case "Horizontal":
+                    prefabToPlace = roadStraightHorizontalPrefab;
+                    break;
+                case "Crossroads":
+                    prefabToPlace = roadCrossPrefab;
+                    break;
+                case "None":
+                    prefabToPlace = defaultPrefab;
+                    break;
+                // 必要时处理其他道路类型...
+            }
         }
 
         if(prefabToPlace != null)
         {
-            // 实例化模型并放置到标记点的位置
             Instantiate(prefabToPlace, marker.transform.position, Quaternion.identity, marker.transform);
         }
     }
     
-    //标记点验证自检
+    /// <summary>
+    /// 标记点自检
+    /// </summary>
     void ValidateGridMarkers()
     {
         // 确保网格标记点的数量是正确的
