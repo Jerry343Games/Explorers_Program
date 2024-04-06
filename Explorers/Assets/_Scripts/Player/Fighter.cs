@@ -332,24 +332,4 @@ public class Fighter : PlayerController
         _rb.AddForce(force/3, forceMode);
     }
 
-    //public void TimeTick()
-    //{
-    //    if(!canDash)
-    //    {
-    //        _dashCDTimer -= Time.deltaTime;
-    //        if(_dashCDTimer<0)
-    //        {
-    //            canDash = true;
-    //        }
-    //    }
-    //    if(!canSonicWave)
-    //    {
-    //        _sonicWaveCDTimer -= Time.deltaTime;
-    //        if(_sonicWaveCDTimer < 0)
-    //        {
-    //            canSonicWave = true;
-    //        }
-    //    }
-
-    //}
 }

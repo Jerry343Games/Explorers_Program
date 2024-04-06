@@ -55,6 +55,7 @@ public class SceneManager : Singleton<SceneManager>
     protected override void Awake()
     {
         base.Awake();
+        maxPlayer = PlayerManager.Instance.players.Count;
         Slover = GameObject.Find("Solver");
         _players = GameObject.FindGameObjectsWithTag("BasePlayer");
     }

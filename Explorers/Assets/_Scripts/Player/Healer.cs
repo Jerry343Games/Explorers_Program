@@ -249,22 +249,6 @@ public class Healer : PlayerController
                 hasExited = false;
             }
         }
-        //if(!canCallFort)
-        //{
-        //    _fortCDTimer -= Time.deltaTime;
-        //    if(_fortCDTimer<0)
-        //    {
-        //        canCallFort = true;
-        //    }
-        //}
-        //if (_tranquilizerAttackTimer < 0)
-        //{
-        //    canTranquilizerAttack = true;
-        //}
-        //else
-        //{
-        //    _tranquilizerAttackTimer -= Time.deltaTime;
-        //}
     }
 
 

@@ -45,7 +45,6 @@ public class Shooter : PlayerController
         if (hasDead) return;
         UpdateAttackState();
         UpdateFeatureState();
-        TimeTick();
         Aim(gun);
         if (playerInputSetting.GetAttackButtonDown())
         {
@@ -219,25 +218,4 @@ public class Shooter : PlayerController
 
 
 
-    public void TimeTick()
-    {
-        //if(!canSalvo)
-        //{
-        //    _salvoCDTimer -= Time.deltaTime;
-        //    if(_salvoCDTimer<0)
-        //    {
-        //        canSalvo = true;
-        //        _salvoCDTimer = salvoCD;
-        //    }
-        //}
-        //if(!canTorpedoes)
-        //{
-        //    _torpedoesCDTimer -= Time.deltaTime;
-        //    if(_torpedoesCDTimer<0)
-        //    {
-        //        canTorpedoes = true;
-        //        _torpedoesCDTimer = torpedoesCD;
-        //    }
-        //}
-    }
 }

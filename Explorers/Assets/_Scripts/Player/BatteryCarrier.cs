@@ -245,22 +245,6 @@ public class BatteryCarrier : PlayerController
                 canLightningAttack = true;
             }
         }
-        //if(!canCharge)
-        //{
-        //    _chargeCDTimer -= Time.deltaTime;
-        //    if(_chargeCDTimer<0)
-        //    {
-        //        canCharge = true;
-        //    }
-        //}
-        //if(!canLogistics)
-        //{
-        //    _logisticsCDTimer-=Time.deltaTime;
-        //    if(_logisticsCDTimer<0)
-        //    {
-        //        canLogistics = true;
-        //    }
-        //}
 
     }
 }
