@@ -44,15 +44,17 @@ public class EnemyAI : MonoBehaviour
         {
             detector.Detect(aiData);
         }
+        /*
         float[] danger = new float[8];
         float[] interest = new float[8];
         foreach (SteeringBehaviour behaviour in steeringBehaviours)
         {
             (danger, interest) = behaviour.GetSteering(danger,interest, aiData);
-        }
+        }*/
     
     }
-
+    public float turnSmoothTime = 0.05f; // 转向平滑过渡的时间
+    private float turnSmoothVelocity; // 用于SmoothDamp的速度
     private void Update()
     {
         //Enemy AI movement based on Target availability
@@ -60,6 +62,14 @@ public class EnemyAI : MonoBehaviour
         {
             //Looking at the Target
             OnPointerInput?.Invoke(aiData.currentTarget.position);
+            //********暂时先放在这里
+            Vector3 finalDirection = aiData.currentTarget.position - transform.position;
+            if (finalDirection != Vector3.zero)
+            {
+                float targetAngle = Mathf.Atan2(finalDirection.y, finalDirection.x) * Mathf.Rad2Deg;
+                float angle = Mathf.SmoothDampAngle(transform.eulerAngles.z, targetAngle, ref turnSmoothVelocity, turnSmoothTime);
+                transform.rotation = Quaternion.Euler(0f, 0f, angle);
+            }
             if (following == false)
             {
                 following = true;
@@ -100,7 +110,7 @@ public class EnemyAI : MonoBehaviour
             else
             {
                 //Chase logic
-               // movementInput = movementDirectionSolver.GetDirectionToMove(steeringBehaviours, aiData);
+                movementInput = movementDirectionSolver.GetDirectionToMove(steeringBehaviours, aiData);
                 yield return new WaitForSeconds(aiUpdateDelay);
                 StartCoroutine(ChaseAndAttack());
             }

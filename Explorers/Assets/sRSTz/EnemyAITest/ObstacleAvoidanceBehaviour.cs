@@ -5,7 +5,7 @@ using UnityEngine;
 public class ObstacleAvoidanceBehaviour : SteeringBehaviour
 {
     [SerializeField]
-    private float radius = 2f, agentColliderSize = 0.8f;
+    private float radius = 2f, agentColliderSize = 1f;
 
     [SerializeField]
     private bool showGizmo = true;
@@ -39,7 +39,7 @@ public class ObstacleAvoidanceBehaviour : SteeringBehaviour
                 }
             }
         }
-        Debug.Log(danger);
+        
         dangersResultTemp = danger;
         return (danger, interest);
     }
