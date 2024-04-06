@@ -1487,7 +1487,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: -23.019382, y: 0}
+  m_AnchoredPosition: {x: 98, y: 0}
   m_SizeDelta: {x: 145.8952, y: 85.8813}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &257251297
@@ -1795,7 +1795,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f263866b07421745a64d5f7792b23ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  resType: 0
+  collectionType: 0
   currentNum: 0
   maxNum: 0
 --- !u!114 &335216052
@@ -4628,7 +4628,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f263866b07421745a64d5f7792b23ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  resType: 0
+  collectionType: 0
   currentNum: 0
   maxNum: 0
 --- !u!114 &960315509
@@ -5185,11 +5185,9 @@ MonoBehaviour:
   BatteryTransform: {fileID: 0}
   Slover: {fileID: 0}
   bornTransform: {fileID: 983434759}
-  tasks:
-  - type: 0
-    amount: 9
-    taskUI: {fileID: 1940949122}
-    hasFinshed: 0
+  hasMainBattary: 0
+  collectionTasks: []
+  resTasks: []
 --- !u!4 &1023615100
 Transform:
   m_ObjectHideFlags: 0
@@ -6229,7 +6227,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74824041f7030fc43aef852541d201ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  players: []
   battery: {fileID: 0}
   spawners: []
   enemisToSpawn:
@@ -8795,10 +8792,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   resType: 0
-  beDingging: 0
+  beDigging: 0
+  currentProcess: 0
   maxProcess: 20
   speed: 2
   bubblePos: {fileID: 0}
+  hasDigged: 0
+  _diger: {fileID: 0}
 --- !u!1 &1817636957
 GameObject:
   m_ObjectHideFlags: 0
@@ -9182,7 +9182,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f263866b07421745a64d5f7792b23ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  resType: 0
+  collectionType: 0
   currentNum: 0
   maxNum: 0
 --- !u!1001 &1941159564
@@ -10310,21 +10310,33 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 969707875}
     m_Modifications:
+    - target: {fileID: 220563036, guid: faa3880a6f49ae245b2f29640a70caca, type: 3}
+      propertyPath: m_RootOrder
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 461176538, guid: faa3880a6f49ae245b2f29640a70caca, type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 566763425, guid: faa3880a6f49ae245b2f29640a70caca, type: 3}
+      propertyPath: m_RootOrder
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 746371777, guid: faa3880a6f49ae245b2f29640a70caca, type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 819998717, guid: faa3880a6f49ae245b2f29640a70caca, type: 3}
       propertyPath: HealthInner
       value: 
       objectReference: {fileID: 1566624773}
+    - target: {fileID: 1277091003, guid: faa3880a6f49ae245b2f29640a70caca, type: 3}
+      propertyPath: m_RootOrder
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 1715207762, guid: faa3880a6f49ae245b2f29640a70caca, type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 7587012050255033475, guid: faa3880a6f49ae245b2f29640a70caca,
         type: 3}
@@ -10440,7 +10452,7 @@ PrefabInstance:
     - target: {fileID: 7587012050301707660, guid: faa3880a6f49ae245b2f29640a70caca,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 152.01607
+      value: 203.8
       objectReference: {fileID: 0}
     - target: {fileID: 7587012050301707660, guid: faa3880a6f49ae245b2f29640a70caca,
         type: 3}
