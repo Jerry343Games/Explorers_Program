@@ -110,7 +110,11 @@ public class SceneManager : Singleton<SceneManager>
             controller.feature = controller.playerInputSetting.feature;
             controller.transform.position = bornTransform.position;
             //电池不连电池
-            if (player == BatteryTransform.parent.gameObject) continue;
+            if (player == BatteryTransform.parent.gameObject)
+            {
+                EnemyManager.Instance.battery = controller.gameObject;
+                continue;
+            }
             float rotationZ = Vector3.Angle((player.transform.GetChild(index).position - BatteryTransform.position).normalized, Vector3.right) *
                 (player.transform.GetChild(index).position.y < BatteryTransform.position.y ? -1 : 1);
             Quaternion rotation = Quaternion.Euler(new Vector3(0, 0, rotationZ));

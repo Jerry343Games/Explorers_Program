@@ -98,7 +98,7 @@ public class PlayerController : MonoBehaviour
         playerInputSetting = transform.parent.GetComponent<PlayerInputSetting>();
         Debug.Log("Clone: "+transform.name+" / Index: "+myIndex);
         PlayerManager.Instance.gamePlayers.Add(gameObject);
-        if (gameObject.CompareTag("Battery")) EnemyManager.Instance.battery = gameObject;
+        //if (gameObject.CompareTag("Battery")) EnemyManager.Instance.battery = gameObject;
         myIndex = playerInput.playerIndex;
         currentArmor = maxArmor;
         lastHurtTimer = timeToRepairArmor;
