@@ -31,21 +31,28 @@ public class BatteryCarrier : PlayerController
 
     [Header("充能")]
     public float chargeCD;//充能冷却时间
-    private float _chargeCDTimer;
+    //private float _chargeCDTimer;
     public int chargePower;//充能所需耗电量
-    private bool canCharge;
+    //private bool canCharge;
 
     [Header("后勤")]
     public int logisticsPower;//后勤功能耗电量
     public float logisticsCD;//后勤功能CD
-    private float _logisticsCDTimer;
-    private bool canLogistics;
+    //private float _logisticsCDTimer;
+    //private bool canLogistics;
     void Start()
     {
         PlayerInit();
         canOverload = true;
         PlayerManager.Instance.hasMainBattary = true; //通知电池加入，给其他职业监听以获得主电池
-        
+
+        //switch 语法糖     
+        featureCD = feature switch
+        {
+            OptionalFeature.Logistics => logisticsCD,
+            OptionalFeature.Charging => chargeCD,
+            _ => 0,
+        };
     }
     void Update()
     {
@@ -53,7 +60,7 @@ public class BatteryCarrier : PlayerController
         CharacterMove();
         //CheckKeys();
         TickTime();
-
+        UpdateFeatureState();
         if (playerInputSetting.GetAttackSecondaryDown())
         {
             Lightning();
@@ -165,9 +172,9 @@ public class BatteryCarrier : PlayerController
     #region 充能
     public void Charge()
     {
-        if (!canCharge) return;
-        canCharge = false;
-        _chargeCDTimer = chargeCD;
+        if (!canUseFeature) return;
+        canUseFeature = false;
+        _featureCDTimer = featureCD;
         GetComponent<MainBattery>().ChangePower(-chargePower);
         foreach(var player in FindObjectsOfType<PlayerController>())
         {
@@ -181,9 +188,9 @@ public class BatteryCarrier : PlayerController
     #region 后勤
     public void Logistics()
     {
-        if (!canLogistics || !selectedPlayer) return;
-        canLogistics = false;
-        _logisticsCDTimer = logisticsCD;
+        if (!canUseFeature || !selectedPlayer) return;
+        canUseFeature = false;
+        _featureCDTimer = featureCD;
         GetComponent<MainBattery>().ChangePower(-logisticsPower);
         //没有就获得道具 有了就替换原来的道具
         int randomItem = Random.Range(0, 6);
@@ -238,22 +245,22 @@ public class BatteryCarrier : PlayerController
                 canLightningAttack = true;
             }
         }
-        if(!canCharge)
-        {
-            _chargeCDTimer -= Time.deltaTime;
-            if(_chargeCDTimer<0)
-            {
-                canCharge = true;
-            }
-        }
-        if(!canLogistics)
-        {
-            _logisticsCDTimer-=Time.deltaTime;
-            if(_logisticsCDTimer<0)
-            {
-                canLogistics = true;
-            }
-        }
+        //if(!canCharge)
+        //{
+        //    _chargeCDTimer -= Time.deltaTime;
+        //    if(_chargeCDTimer<0)
+        //    {
+        //        canCharge = true;
+        //    }
+        //}
+        //if(!canLogistics)
+        //{
+        //    _logisticsCDTimer-=Time.deltaTime;
+        //    if(_logisticsCDTimer<0)
+        //    {
+        //        canLogistics = true;
+        //    }
+        //}
 
     }
 }

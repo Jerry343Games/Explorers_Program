@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -13,34 +14,43 @@ public class Healer : PlayerController
     public int maxChargedAmount;//�����ܴ���
 
     [Header("����ǹ")]
-    public WeaponDataSO tranquilizerWeaponData;//����ǹ����
-    private int _currentTranquilizerAmmunition;//����ǹ��ǰ�ӵ���
-    public int tranquilizerPower;//ÿ�������ӵ��ĵ���
-    private bool canTranquilizerAttack;
-    private float _tranquilizerAttackTimer;
-    public float tranquilizerEffectTime;//����Ч��ʱ��
+    public WeaponDataSO tranquilizerWeaponData;
+    //private int _currentTranquilizerAmmunition;
+    public int tranquilizerPower;
+    //private bool canTranquilizerAttack;
+    //private float _tranquilizerAttackTimer;
+    public float tranquilizerEffectTime;
 
     [Header("������̨")]
-    public WeaponDataSO fortWeaponData;//������̨����
-    public float fortExitTime;//������̨����ʱ��
+    public WeaponDataSO fortWeaponData;
+    public float fortExitTime;
     private float _fortExitTimer;
     public int fortPower;
-    public float fortCD;//������̨��ȴʱ��
+    public float fortCD;
     private float _fortCDTimer;
     private bool hasExited;
-    private bool canCallFort;
+    //private bool canCallFort;
     public Transform fortPoint;
     private GameObject _curFort;
     void Start()
     {
         PlayerInit();
-        _currentTranquilizerAmmunition = tranquilizerWeaponData.initAmmunition;
-        canCallFort = true;
+        //_currentTranquilizerAmmunition = tranquilizerWeaponData.initAmmunition;
+        //canCallFort = true;
+
+        //switch 语法糖
+        featureCD = feature switch
+        {
+            OptionalFeature.TranquilizerGun => tranquilizerWeaponData.attackCD,
+            OptionalFeature.FloatingFort => fortCD,
+            _ => 0,
+        };
     }
     void Update()
     {
         if (hasDead) return;
         UpdateAttackState();
+        UpdateFeatureState();
         TimeTick();
         if (playerInputSetting.GetAttackButtonDown())
         {
@@ -194,16 +204,13 @@ public class Healer : PlayerController
     public void TranquilizerGun()
     {
         if (isDigging) return;
-        if(canTranquilizerAttack)
-        {
-            canTranquilizerAttack = false;
-            _tranquilizerAttackTimer = tranquilizerWeaponData.attackCD;
-            GetComponent<CellBattery>().ChangePower(-tranquilizerPower);
-            //
-            GameObject bullet = Instantiate(Resources.Load<GameObject>("TranquilizerBullet"), transform.position, Quaternion.identity);
-            bullet.GetComponent<TranquilizerBullet>().Init(mainWeapon, gun.transform.forward,tranquilizerEffectTime);
-
-        }
+        if (!canUseFeature) return;
+        canUseFeature = false;
+        _featureCDTimer = featureCD;
+        GetComponent<CellBattery>().ChangePower(-tranquilizerPower);
+        //
+        GameObject bullet = Instantiate(Resources.Load<GameObject>("TranquilizerBullet"), transform.position, Quaternion.identity);
+        bullet.GetComponent<TranquilizerBullet>().Init(mainWeapon, gun.transform.forward, tranquilizerEffectTime);
     }
 
 
@@ -211,11 +218,11 @@ public class Healer : PlayerController
     public void FloatingFort()
     {
         if (isDigging) return;
-        if (!canCallFort) return;
+        if (!canUseFeature) return;
         hasExited = true;
         _fortExitTimer = fortExitTime;
-        canCallFort = false;
-        _fortCDTimer = fortCD;
+        canUseFeature = false;
+        _featureCDTimer = featureCD;
 
         //����������̨
         GameObject floatingFort = Instantiate(Resources.Load<GameObject>("FloatingFort"), transform.position + new Vector3(0,0.5f,0), Quaternion.identity);
@@ -242,22 +249,22 @@ public class Healer : PlayerController
                 hasExited = false;
             }
         }
-        if(!canCallFort)
-        {
-            _fortCDTimer -= Time.deltaTime;
-            if(_fortCDTimer<0)
-            {
-                canCallFort = true;
-            }
-        }
-        if (_tranquilizerAttackTimer < 0)
-        {
-            canTranquilizerAttack = true;
-        }
-        else
-        {
-            _tranquilizerAttackTimer -= Time.deltaTime;
-        }
+        //if(!canCallFort)
+        //{
+        //    _fortCDTimer -= Time.deltaTime;
+        //    if(_fortCDTimer<0)
+        //    {
+        //        canCallFort = true;
+        //    }
+        //}
+        //if (_tranquilizerAttackTimer < 0)
+        //{
+        //    canTranquilizerAttack = true;
+        //}
+        //else
+        //{
+        //    _tranquilizerAttackTimer -= Time.deltaTime;
+        //}
     }
 
 

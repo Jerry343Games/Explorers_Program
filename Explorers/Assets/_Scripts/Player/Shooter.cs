@@ -8,35 +8,43 @@ public class Shooter : PlayerController
     public Transform shootTransform;
     [Header("齐射")]
     public float salvoCD;//齐射冷却时间
-    private float _salvoCDTimer;
+    //private float _salvoCDTimer;
     public int salveAmount;//齐射的导弹数量
     public int salveMissileDamage;//单枚导弹伤害
     public float salvoRange;//齐射检测范围
     public float salvoMissileSpeed;//单枚导弹速度
-    private bool canSalvo;
+    //private bool canSalvo;
     public LayerMask enemyLayer;
 
     [Header("毁灭鱼雷")]
     public float torpedoesCD;//毁灭鱼雷冷却时间
-    private float _torpedoesCDTimer;
+    //private float _torpedoesCDTimer;
     public float torpedoesRange;//毁灭鱼雷爆炸范围
     public float destoryTime;//毁灭鱼雷销毁时间
     public float torpedoesSpeed;//毁灭鱼雷飞行速度
     public float torpedoesForce;//毁灭鱼雷击退力
     public int torpedoesPower;//毁灭鱼雷消耗的电量
     public int torpedoesDamage;
-    private bool canTorpedoes;
+    //private bool canTorpedoes;
     public LayerMask playerLayer;
 
     void Start()
     {
         PlayerInit();
+        //switch 语法糖
+        featureCD = feature switch
+        {
+            OptionalFeature.Salvo => salvoCD,
+            OptionalFeature.DestroyTorpedoes=>torpedoesCD,
+            _=>0,
+        };
     }
     // Update is called once per frame
     void Update()
     {
         if (hasDead) return;
         UpdateAttackState();
+        UpdateFeatureState();
         TimeTick();
         Aim(gun);
         if (playerInputSetting.GetAttackButtonDown())
@@ -168,10 +176,11 @@ public class Shooter : PlayerController
     public void Salvo()
     {
         if (isDigging) return;
-        if (!canSalvo) return;
+        if (!canUseFeature) return;
         Collider[] colliders = Physics.OverlapSphere(transform.position, salvoRange, enemyLayer);
         if (colliders.Length == 0) return;
-        canSalvo = false;
+        canUseFeature = false;
+        _featureCDTimer = featureCD;
         //找最近的敌人
         Collider nearest = colliders[0];
         foreach (var coll in colliders)
@@ -197,8 +206,9 @@ public class Shooter : PlayerController
     public void DestroyTorpedoes()
     {
         if (isDigging) return;
-        if (!canTorpedoes) return;
-        canTorpedoes = false;
+        if (!canUseFeature) return;
+        canUseFeature = false;
+        _featureCDTimer = featureCD;
         GameObject bullet = Instantiate(Resources.Load<GameObject>("Torpedoes"), gun.transform.position + gun.transform.forward*2, Quaternion.identity);
         bullet.GetComponent<Torpedoes>().Init(enemyLayer,playerLayer,torpedoesSpeed,destoryTime,
             torpedoesRange,torpedoesForce,torpedoesDamage, gun.transform.forward);
@@ -211,23 +221,23 @@ public class Shooter : PlayerController
 
     public void TimeTick()
     {
-        if(!canSalvo)
-        {
-            _salvoCDTimer -= Time.deltaTime;
-            if(_salvoCDTimer<0)
-            {
-                canSalvo = true;
-                _salvoCDTimer = salvoCD;
-            }
-        }
-        if(!canTorpedoes)
-        {
-            _torpedoesCDTimer -= Time.deltaTime;
-            if(_torpedoesCDTimer<0)
-            {
-                canTorpedoes = true;
-                _torpedoesCDTimer = torpedoesCD;
-            }
-        }
+        //if(!canSalvo)
+        //{
+        //    _salvoCDTimer -= Time.deltaTime;
+        //    if(_salvoCDTimer<0)
+        //    {
+        //        canSalvo = true;
+        //        _salvoCDTimer = salvoCD;
+        //    }
+        //}
+        //if(!canTorpedoes)
+        //{
+        //    _torpedoesCDTimer -= Time.deltaTime;
+        //    if(_torpedoesCDTimer<0)
+        //    {
+        //        canTorpedoes = true;
+        //        _torpedoesCDTimer = torpedoesCD;
+        //    }
+        //}
     }
 }

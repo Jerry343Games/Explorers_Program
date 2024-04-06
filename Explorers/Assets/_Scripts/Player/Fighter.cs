@@ -20,6 +20,28 @@ public class Fighter : PlayerController
     private bool hasUseBomb = false;
     private bool _isAttack;
     private AniEventControl _myAniEventControl;
+
+    //自选功能
+
+    [Header("次声波")]
+
+    public SonicWaveAttack sonicWaveAttack;
+    public float startRadius = 0.4f;
+    public float targetRadius = 100f;
+    public float enemyVertigoTime = 2f;
+    public float transitionDuration = 3f;
+    public float sonicWaveCD;
+    //private bool canSonicWave;
+
+    [Header("冲撞")]
+
+    private bool isDashing = false;
+    public float dashTime = 3f;
+    private float _dashTimer = 0;
+    public float dashForce = 1f;
+    public int dashDamage = 15;
+    //private bool canDash;
+    public float dashCD;
     void Start()
     {
         _rb = GetComponent<Rigidbody>();
@@ -28,6 +50,14 @@ public class Fighter : PlayerController
         _myAniEventControl = playerSprite.GetComponent<AniEventControl>();
         _myAniEventControl.OnFighterAttackEvent += OnHack;
         _myAniEventControl.EndFighterAttackEvent += EndHack;
+
+        //switch 语法糖
+        featureCD = feature switch
+        {
+            OptionalFeature.SonicWave => sonicWaveCD,
+            OptionalFeature.Dash => dashCD,
+            _ => 0,
+        };
     }
 
     private void OnDestroy()
@@ -40,6 +70,7 @@ public class Fighter : PlayerController
     {
         if (hasDead) return;
         UpdateAttackState();
+        UpdateFeatureState();
         if (playerInputSetting.GetAttackButtonDown())
         {           
             MainAttack();
@@ -63,15 +94,14 @@ public class Fighter : PlayerController
         if (isDashing)
         {
             _rb.angularVelocity = Vector3.zero;
-            if (dashTimer < dashTime)
+            if (_dashTimer < dashTime)
             {
-                dashTimer += Time.deltaTime;
+                _dashTimer += Time.deltaTime;
             }
             else
             {
-                dashTimer = 0;
+                _dashTimer = 0;
                 isDashing = false;
-                // _rb.isKinematic = false;
                 _rb.mass = 1f;
                 _rb.velocity = Vector3.zero;
                 
@@ -261,16 +291,14 @@ public class Fighter : PlayerController
             currentArmor = maxArmor;
         }
     }
-    
 
-    //自选功能
-    private bool isDashing = false;
-    public float dashTime = 3f;
-    private float dashTimer = 0;
-    public float dashForce = 1f;
-    public int dashDamage = 15;
+    //冲撞
     public void Dash()
     {
+        if (isDigging) return;
+        if (!canUseFeature) return;
+        canUseFeature = false;
+        _featureCDTimer = featureCD;
         Vector3 moveDir = new Vector3(playerInputSetting.inputDir.x, playerInputSetting.inputDir.y, 0).normalized;
         if (moveDir.Equals(Vector3.zero)) return;
         isDashing = true;
@@ -279,16 +307,19 @@ public class Fighter : PlayerController
         _rb .AddForce(moveDir * dashForce, ForceMode.VelocityChange);
         
     }
-    public SonicWaveAttack sonicWaveAttack;
-    public float startRadius = 0.4f;
-    public float targetRadius = 100f;
-    public float enemyVertigoTime = 2f;
-   
-    public float transitionDuration = 3f;
+
+    //次声波
     public void SonicWaveAttack()
     {
+
+        if (isDigging) return;
+        if (!canUseFeature) return;
+        canUseFeature = false;
+        _featureCDTimer = featureCD;
         sonicWaveAttack.AttactStart(this,startRadius, targetRadius, enemyVertigoTime,transitionDuration);
     }
+
+
     public void OnCollisionEnter(Collision collision)
     {
         if (isDashing && collision.gameObject.CompareTag("Enemy")){
@@ -300,4 +331,25 @@ public class Fighter : PlayerController
     {
         _rb.AddForce(force/3, forceMode);
     }
+
+    //public void TimeTick()
+    //{
+    //    if(!canDash)
+    //    {
+    //        _dashCDTimer -= Time.deltaTime;
+    //        if(_dashCDTimer<0)
+    //        {
+    //            canDash = true;
+    //        }
+    //    }
+    //    if(!canSonicWave)
+    //    {
+    //        _sonicWaveCDTimer -= Time.deltaTime;
+    //        if(_sonicWaveCDTimer < 0)
+    //        {
+    //            canSonicWave = true;
+    //        }
+    //    }
+
+    //}
 }

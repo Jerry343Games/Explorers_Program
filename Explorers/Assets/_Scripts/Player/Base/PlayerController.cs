@@ -64,6 +64,12 @@ public class PlayerController : MonoBehaviour
     [Header("通用")]
     public bool hasDead;
     public OptionalFeature feature;//选择的技能
+    [HideInInspector]
+    public float _featureCDTimer;
+    [HideInInspector]
+    public float featureCD;
+    [HideInInspector]
+    public bool canUseFeature;
 
     [Header("绳子")]
     public float DistanceThreshold = 10;//绳子最大长度
@@ -316,20 +322,23 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+
+    
     /// <summary>
-    /// 更新技能CD
+    /// 
     /// </summary>
-    //public void UpdatSkillState()
-    //{
-    //    if (_skillTimer < 0 && !canUseSkill)
-    //    {
-    //        canUseSkill = true;
-    //    }
-    //    else if(!canUseSkill)
-    //    {
-    //        _skillTimer -= Time.deltaTime;
-    //    }
-    //}
+    public void UpdateFeatureState()
+    {
+        if(!canUseFeature)
+        {
+            _featureCDTimer -= Time.deltaTime;
+            if(_featureCDTimer<0)
+            {
+                canUseFeature = true;
+            }
+        }
+
+    }
 
     /// <summary>
     /// 使用技能
@@ -387,14 +396,6 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    /// <summary>
-    /// 切换武器
-    /// </summary>
-    public void ChangeWeapon(WeaponDataSO newWeapon )
-    {
-
-
-    }
 
     /// <summary>
     /// 使weapon的前向始终朝向_aimDirection

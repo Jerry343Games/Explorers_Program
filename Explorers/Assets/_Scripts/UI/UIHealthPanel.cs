@@ -10,7 +10,7 @@ public class UIHealthPanel : MonoBehaviour
     //private SceneManager sceneManager;
     public Image HealthInner;
     public Image ArmorInner;
-    public Image ItemInner;//道具图片UI
+    public Image FeatureInner;//功能图片UI
     private Battery _battery;
     private PlayerController _playerController;
 
@@ -39,6 +39,8 @@ public class UIHealthPanel : MonoBehaviour
                 {
                     _battery = BatteryCarrier.GetComponent<Battery>();
                     _playerController = BatteryCarrier.GetComponent<PlayerController>();
+                    FeatureInner.sprite = Resources.Load<Sprite>("UI/Image/" + BatteryCarrier.GetComponent<PlayerController>().feature.ToString());
+
                 }
                 break;
             case "ShooterPanel":
@@ -47,6 +49,8 @@ public class UIHealthPanel : MonoBehaviour
                 {
                     _battery = Shooter.GetComponent<Battery>();
                     _playerController = Shooter.GetComponent<PlayerController>();
+                    FeatureInner.sprite = Resources.Load<Sprite>("UI/Image/" + Shooter.GetComponent<PlayerController>().feature.ToString());
+
                 }
                 break;
              case "HealerPanel":
@@ -55,6 +59,8 @@ public class UIHealthPanel : MonoBehaviour
                 {
                     _battery = Healer.GetComponent<Battery>();
                     _playerController = Healer.GetComponent<PlayerController>();
+                    FeatureInner.sprite = Resources.Load<Sprite>("UI/Image/" + Healer.GetComponent<PlayerController>().feature.ToString());
+
                 }
                 break;
              case "FighterPanel":
@@ -63,11 +69,16 @@ public class UIHealthPanel : MonoBehaviour
                 {
                     _battery = Fighter.GetComponent<Battery>();
                     _playerController = Fighter.GetComponent<PlayerController>();
+                    FeatureInner.sprite = Resources.Load<Sprite>("UI/Image/" + Fighter.GetComponent<PlayerController>().feature.ToString());
+
                 }
                 break;
         }
+
+
+
     }
-    
+
     private void SetHealthUI()
     {
         if (_battery)
@@ -75,8 +86,10 @@ public class UIHealthPanel : MonoBehaviour
             HealthInner.DOFillAmount((float)_battery.currentPower / _battery.maxPower, 0.2f);
             if(ArmorInner)
                 ArmorInner.DOFillAmount((float)_playerController.currentArmor / _playerController.maxArmor, 0.2f);
-            if (ItemInner)
-                ItemInner.sprite = Resources.Load<Sprite>("UI/Image/" + (_playerController.item as PropItem).propType.ToString());
+            if (FeatureInner)
+                FeatureInner.transform.GetChild(0).GetComponent<Image>().fillAmount =
+                     Mathf.Clamp(_playerController._featureCDTimer / _playerController.featureCD, 0f, 1f);
+
         }
     }
 }
