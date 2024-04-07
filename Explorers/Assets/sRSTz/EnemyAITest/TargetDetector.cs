@@ -38,6 +38,7 @@ public class TargetDetector : Detector
         }*/
         if (playerColliderList != null)
         {
+            colliders.Clear();
             foreach (Collider playerCollider in playerColliderList)
             {
 
@@ -51,18 +52,8 @@ public class TargetDetector : Detector
                     {
                         Debug.DrawRay(transform.position, direction * targetDetectionRange, Color.magenta);
                         colliders.Add(playerCollider.transform); /*= new List<Transform>() { playerCollider.transform };*/
-                    }/*
-                    else
-                    {
-                        colliders = null;
-                    }*/
-                }/*
-                else
-                {
-                    colliders = null;
-                }*/
-
-                
+                    }
+                }
             }
         }
         else

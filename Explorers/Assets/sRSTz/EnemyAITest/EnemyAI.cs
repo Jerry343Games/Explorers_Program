@@ -26,7 +26,8 @@ public class EnemyAI : MonoBehaviour
 
     [SerializeField]
     private Vector2 movementInput;
-
+    //[SerializeField]
+    //private Vector3 rotateInput;//暂时写在这，用于旋转
     [SerializeField]
     private ContextSolver movementDirectionSolver;
 
@@ -44,13 +45,7 @@ public class EnemyAI : MonoBehaviour
         {
             detector.Detect(aiData);
         }
-        /*
-        float[] danger = new float[8];
-        float[] interest = new float[8];
-        foreach (SteeringBehaviour behaviour in steeringBehaviours)
-        {
-            (danger, interest) = behaviour.GetSteering(danger,interest, aiData);
-        }*/
+        
     
     }
     public float turnSmoothTime = 0.05f; // 转向平滑过渡的时间
@@ -63,10 +58,10 @@ public class EnemyAI : MonoBehaviour
             //Looking at the Target
             OnPointerInput?.Invoke(aiData.currentTarget.position);
             //********暂时先放在这里
-            Vector3 finalDirection = aiData.currentTarget.position - transform.position;
-            if (finalDirection != Vector3.zero)
+            //rotateInput = aiData.currentTarget.position - transform.position;
+            if (movementInput != Vector2.zero)
             {
-                float targetAngle = Mathf.Atan2(finalDirection.y, finalDirection.x) * Mathf.Rad2Deg;
+                float targetAngle = Mathf.Atan2(movementInput.y, movementInput.x) * Mathf.Rad2Deg;
                 float angle = Mathf.SmoothDampAngle(transform.eulerAngles.z, targetAngle, ref turnSmoothVelocity, turnSmoothTime);
                 transform.rotation = Quaternion.Euler(0f, 0f, angle);
             }
@@ -92,6 +87,7 @@ public class EnemyAI : MonoBehaviour
             //Stopping Logic
             Debug.Log("Stopping");
             movementInput = Vector2.zero;
+            //rotateInput = Vector3.zero;
             following = false;
             yield break;
         }
