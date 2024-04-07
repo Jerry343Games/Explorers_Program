@@ -62,7 +62,7 @@ public class DashFish : Enemy
 
             // 将人物的方向设置为计算得到的方向
             //gameObject.transform.right = direction;
-            EnemyRotate(direction, 15f);
+            EnemyRotate();
         }
         else
         {

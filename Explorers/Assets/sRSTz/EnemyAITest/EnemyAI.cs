@@ -2,7 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
-
+/// <summary>
+/// 只负责正常的寻路即可。其他状态比如冲刺喷射的方法，放在每个敌人专属的脚本中提供,如果是远程攻击怪，并且距离到达要求，就自动停止寻路即可。别的复杂逻辑就交给别的代码了。。
+/// 只负责在寻路时计算出最期望的方向即可。别的都交给专属的脚本就行
+/// </summary>
 public class EnemyAI : MonoBehaviour
 {
     [SerializeField]
@@ -15,14 +18,18 @@ public class EnemyAI : MonoBehaviour
     private AIData aiData;
 
     [SerializeField]
-    private float detectionDelay = 0.05f, aiUpdateDelay = 0.06f, attackDelay = 1f;
+    private float detectionDelay = 0.05f, aiUpdateDelay = 0.06f;//, attackDelay = 1f;
 
     [SerializeField]
     private float attackDistance = 0.5f;
+    //整个脚本最后只返回一个结果的向量就行了
+    
+    public Vector2 FinalMovement { get => movementInput; }
 
     //Inputs sent from the Enemy AI to the Enemy controller
-    public UnityEvent OnAttackPressed;
-    public UnityEvent<Vector2> OnMovementInput, OnPointerInput;
+    //左边是玩家进入攻击范围执行的方法（如冲刺，喷射等）；右边是如果接触到玩家执行的方法
+    //public UnityEvent OnPlayerInAttackArea, OnTouchAttack;
+    //public UnityEvent<Vector2> OnMovementInput, OnPointerInput;
 
     [SerializeField]
     private Vector2 movementInput;
@@ -30,6 +37,7 @@ public class EnemyAI : MonoBehaviour
     //private Vector3 rotateInput;//暂时写在这，用于旋转
     [SerializeField]
     private ContextSolver movementDirectionSolver;
+    
 
     bool following = false;
 
@@ -37,6 +45,7 @@ public class EnemyAI : MonoBehaviour
     {
         //Detecting Player and Obstacles around
         InvokeRepeating("PerformDetection", 0, detectionDelay);
+        
     }
 
     private void PerformDetection()
@@ -48,23 +57,17 @@ public class EnemyAI : MonoBehaviour
         
     
     }
-    public float turnSmoothTime = 0.05f; // 转向平滑过渡的时间
-    private float turnSmoothVelocity; // 用于SmoothDamp的速度
+    
     private void Update()
     {
         //Enemy AI movement based on Target availability
         if (aiData.currentTarget != null)
         {
             //Looking at the Target
-            OnPointerInput?.Invoke(aiData.currentTarget.position);
+            //OnPointerInput?.Invoke(aiData.currentTarget.position);
             //********暂时先放在这里
             //rotateInput = aiData.currentTarget.position - transform.position;
-            if (movementInput != Vector2.zero)
-            {
-                float targetAngle = Mathf.Atan2(movementInput.y, movementInput.x) * Mathf.Rad2Deg;
-                float angle = Mathf.SmoothDampAngle(transform.eulerAngles.z, targetAngle, ref turnSmoothVelocity, turnSmoothTime);
-                transform.rotation = Quaternion.Euler(0f, 0f, angle);
-            }
+            
             if (following == false)
             {
                 following = true;
@@ -77,9 +80,13 @@ public class EnemyAI : MonoBehaviour
             aiData.currentTarget = aiData.targets[0];
         }
         //Moving the Agent
-        OnMovementInput?.Invoke(movementInput);
+        //OnMovementInput?.Invoke(movementInput*enemy.moveSpeed);
     }
-
+    /// <summary>
+    /// 整个追逐+攻击的判断，并且执行攻击的事件
+    /// </summary>
+    /// <returns></returns>
+    
     private IEnumerator ChaseAndAttack()
     {
         if (aiData.currentTarget == null)
@@ -89,29 +96,81 @@ public class EnemyAI : MonoBehaviour
             movementInput = Vector2.zero;
             //rotateInput = Vector3.zero;
             following = false;
+            //StartCoroutine(ChaseAndAttack());
             yield break;
         }
         else
         {
-            float distance = Vector2.Distance(aiData.currentTarget.position, transform.position);
+            //Chase logic
+            //只是给移动的字段赋值，具体的移动还是在update里
+            movementInput = movementDirectionSolver.GetDirectionToMove(steeringBehaviours, aiData);
+            yield return new WaitForSeconds(aiUpdateDelay);
+            StartCoroutine(ChaseAndAttack());
+            //float distance = Vector2.Distance(aiData.currentTarget.position, transform.position);
 
-            if (distance < attackDistance)
+            /*if (distance < attackDistance)
             {
                 //Attack logic
+                //执行一下攻击的事件，然后等待attackdelay秒再次执行追击协程（等于说只有后摇）
                 movementInput = Vector2.zero;
-                OnAttackPressed?.Invoke();
+                OnPlayerInAttackArea?.Invoke();
+                Debug.Log("Attack");
                 yield return new WaitForSeconds(attackDelay);
                 StartCoroutine(ChaseAndAttack());
             }
             else
             {
                 //Chase logic
+                //只是给移动的字段赋值，具体的移动还是在update里
                 movementInput = movementDirectionSolver.GetDirectionToMove(steeringBehaviours, aiData);
                 yield return new WaitForSeconds(aiUpdateDelay);
                 StartCoroutine(ChaseAndAttack());
-            }
+            }*/
 
         }
 
+    }
+    /*#region 获取攻击目标，攻击的相关代码
+    
+    private void OnCollisionEnter(Collision collision)
+    {
+
+        if (collision.gameObject.CompareTag("Player") || collision.gameObject.CompareTag("Battery"))
+        {
+            touchedCollision = collision;
+            OnTouchAttack?.Invoke();
+        }
+    }
+    public void TouchAttack()
+    {
+        Debug.Log("touch Attack");
+        if (touchedCollision != null && canAttack)
+        {
+            Debug.Log(touchedCollision.gameObject.name);
+            // 计算弹飞的方向
+            Vector2 direction = (touchedCollision.transform.position - transform.position).normalized;
+
+            // 给玩家一个弹飞的力
+            touchedCollision.gameObject.GetComponent<PlayerController>().Vertigo(direction * force);
+            touchedCollision.gameObject.GetComponent<PlayerController>().TakeDamage(damage);
+
+            Vertigo(-transform.forward * 5f, ForceMode.Impulse, 0.3f);
+
+        }
+    }
+    public void DashFishDash()
+    {
+        Debug.Log("dash");
+
+    }
+    #endregion*/
+
+    private void OnDrawGizmos()
+    {
+        if (Application.isPlaying)
+        {
+            Gizmos.color = Color.blue;
+            Gizmos.DrawRay(transform.position, movementInput);
+        }
     }
 }

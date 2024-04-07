@@ -6,7 +6,7 @@ public class Piranha:Enemy
 {
     private void FixedUpdate()
     {
-        GetClosestPlayer();
+        //GetClosestPlayer();
         Move();
     }
     private void OnCollisionEnter(Collision collision)
@@ -39,21 +39,22 @@ public class Piranha:Enemy
 
     public void Move()
     {
-        if (target != null&&canMove&& (target.transform.position - transform.position).magnitude < detectionRange)// 确保玩家存在
+        if (canMove)// 确保玩家存在
         {
 
             //Vector2 direction = (target.transform.position - transform.position).normalized; // 获取朝向玩家的单位向量
             
-            rb.velocity = angleVector * moveSpeed; // 沿着影响因子计算出的方向移动
+            rb.velocity = enemyAI.FinalMovement * moveSpeed; // 沿着影响因子计算出的方向移动
 
             // 将人物的方向设置为计算得到的方向
             //gameObject.transform.right = direction;
-            EnemyRotate(angleVector, 15f);
+            EnemyRotate();
         }
+        /*
         else if(canMove) //如果丢失玩家并且能移动，那么回到出生点
         {
             ReturnSpawnpoint();
-        }
+        }*/
     }
 
     

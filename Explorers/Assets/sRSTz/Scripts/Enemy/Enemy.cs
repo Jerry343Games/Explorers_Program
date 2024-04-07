@@ -148,31 +148,19 @@ public class Enemy : MonoBehaviour
     public Vector3 spawnerPoint;
     [HideInInspector]
     public bool canAttack = true;
+    public EnemyAI enemyAI;//只负责寻路
 
-    [Header("影响因子相关")]
-    public List<GameObject> detectedObjs = new();
-    public Vector2 angleVector = Vector2.zero;
-    public ImpactFactor impactFactor;
-
+    public float turnSmoothTime = 0.05f; // 转向平滑过渡的时间
+    private float turnSmoothVelocity; // 用于SmoothDamp的速度
     protected virtual void Awake()
     {
         rb = GetComponent<Rigidbody>();
         spawnerPoint = gameObject.transform.position;
-        impactFactor = new(new float[12] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 });
+        
     }
     private void Update()
     {
-        //TODO 每帧根据周边的物体计算影响因子，然后移动时根据影响因子移动
-        // impactFactor.UpdateFactor("Player",( target.transform.position)- transform.position );
-        // foreach(GameObject gameObject in detectedObjs)
-        // {
-        //     Vector2 direction = gameObject.transform.position- transform.position ;
-        //     impactFactor.UpdateFactor(gameObject.tag, direction);
-        // }
-        // Debug.Log(impactFactor.factors[0]+" "+ impactFactor.factors[1] + " " + impactFactor.factors[2] + " " + impactFactor.factors[3] + " " + impactFactor.factors[4] + " " + impactFactor.factors[5] + " " + impactFactor.factors[6] +
-        //     " " + impactFactor.factors[7] + " " + impactFactor.factors[8] + " " + impactFactor.factors[9] + " " + impactFactor.factors[10] + " " + impactFactor.factors[11]);
-        // int maxFactor = impactFactor.FindMax();
-        // angleVector = AngleToVector(maxFactor * 30);
+        
         if (!canMove)
         {
             if (vertigoTimer >= vertigoTime)
@@ -282,38 +270,16 @@ public class Enemy : MonoBehaviour
             gameObject.transform.right = direction;
         }
     }
-    public void EnemyRotate(Vector3 direction,float rotationSpeed)
+    public void EnemyRotate()
     {
-        float minAngleDifference = 0.2f;
-        if (target != null)
+        if (enemyAI.FinalMovement  != Vector2.zero)
         {
-            
-            direction.Normalize();
-
-            // 计算目标旋转角度
-            Quaternion targetRotation = Quaternion.LookRotation(transform.forward, direction);
-
-            // 计算当前旋转角度与目标旋转角度之间的差值
-            float angleDifference = Quaternion.Angle(transform.rotation, targetRotation);
-
-            // 如果差值大于最小角度差，则进行旋转
-            if (angleDifference > minAngleDifference)
-            {
-                // 使用 Slerp 实现平滑旋转
-                transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
-            }
+            float targetAngle = Mathf.Atan2(enemyAI.FinalMovement.y, enemyAI.FinalMovement.x) * Mathf.Rad2Deg;
+            float angle = Mathf.SmoothDampAngle(transform.eulerAngles.z, targetAngle, ref turnSmoothVelocity, turnSmoothTime);
+            transform.rotation = Quaternion.Euler(0f, 0f, angle);
         }
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        detectedObjs.Add(other.gameObject);
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
-        if (detectedObjs.Contains(other.gameObject)) detectedObjs.Remove(other.gameObject);
-    }
-
+    
 
 }
