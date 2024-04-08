@@ -49,8 +49,14 @@ MonoBehaviour:
   BatteryTransform: {fileID: 0}
   Slover: {fileID: 0}
   bornTransform: {fileID: 0}
-  tasks:
+  hasMainBattary: 0
+  collectionTasks:
   - type: 0
-    amount: 9
+    amount: 3
+    taskUI: {fileID: 0}
+    hasFinshed: 0
+  resTasks:
+  - type: 0
+    amount: 2
     taskUI: {fileID: 0}
     hasFinshed: 0
