@@ -17,6 +17,8 @@ public class SeekBehaviour : SteeringBehaviour
     private Vector2 targetPositionCached;
     private float[] interestsTemp;
 
+    public bool isSeekBatteryFirst = false;
+    
     public override (float[] danger, float[] interest) GetSteering(float[] danger, float[] interest, AIData aiData)
     {
         //if we don't have a target stop seeking
@@ -30,9 +32,30 @@ public class SeekBehaviour : SteeringBehaviour
             }
             else
             {
+                //优先找电池的代码先写到这了，水平不足
                 reachedLastTarget = false;
-                aiData.currentTarget = aiData.targets.OrderBy
+                if (!isSeekBatteryFirst)
+                {
+                    aiData.currentTarget = aiData.targets.OrderBy
                     (target => Vector2.Distance(target.position, transform.position)).FirstOrDefault();
+                }
+                else
+                {
+                    Transform finalTarget=null;
+                    foreach(var target in aiData.targets)
+                    {
+                        if (target.gameObject.CompareTag("Battery"))
+                        {
+                            finalTarget = target;
+                            break;
+                        }
+                    }
+                    if (finalTarget != null) aiData.currentTarget = finalTarget;
+
+                    else aiData.currentTarget = aiData.targets.OrderBy
+                    (target => Vector2.Distance(target.position, transform.position)).FirstOrDefault();
+                }
+                
             }
 
         }
@@ -40,8 +63,27 @@ public class SeekBehaviour : SteeringBehaviour
         //cache the last position only if we still see the target (if the targets collection is not empty)
         if (aiData.currentTarget != null && aiData.targets != null && aiData.targets.Contains(aiData.currentTarget))
         {
-            aiData.currentTarget = aiData.targets.OrderBy
-                    (target => Vector2.Distance(target.position, transform.position)).FirstOrDefault();
+            if (!isSeekBatteryFirst)
+            {
+                aiData.currentTarget = aiData.targets.OrderBy
+                (target => Vector2.Distance(target.position, transform.position)).FirstOrDefault();
+            }
+            else
+            {
+                Transform finalTarget = null;
+                foreach (var target in aiData.targets)
+                {
+                    if (target.gameObject.CompareTag("Battery"))
+                    {
+                        finalTarget = target;
+                        break;
+                    }
+                }
+                if (finalTarget != null) aiData.currentTarget = finalTarget;
+
+                else aiData.currentTarget = aiData.targets.OrderBy
+                (target => Vector2.Distance(target.position, transform.position)).FirstOrDefault();
+            }
             targetPositionCached = targetPositionCached = aiData.currentTarget.position;
         }
             
