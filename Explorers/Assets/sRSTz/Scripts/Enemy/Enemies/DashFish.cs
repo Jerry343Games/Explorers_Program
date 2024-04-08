@@ -49,14 +49,14 @@ public class DashFish : Enemy
 
     public  void Move()
     {
-        if (target == null||!canMove) return; // 确保玩家存在
+        if (!canMove) return; // 确保玩家存在
         Vector2 distance = (target.transform.position - transform.position);
-        Vector2 direction = distance.normalized; // 获取朝向玩家的单位向量
-        if (distance.magnitude > detectionRange && canMove)//如果丢失玩家并且能移动
+        Vector2 direction = enemyAI.FinalMovement; // 获取朝向玩家的单位向量
+        /*if (distance.magnitude > detectionRange && canMove)//如果丢失玩家并且能移动
         {
             ReturnSpawnpoint();
         }
-        else
+        else*/
         if (prepareTimer==0&& Mathf.Pow(distance.x, 2) + Mathf.Pow(distance.y, 2) >= Mathf.Pow(dashDetectionRadius, 2)){
             rb.velocity = direction * moveSpeed; // 沿着朝向玩家的方向移动
 
@@ -85,7 +85,7 @@ public class DashFish : Enemy
             else if(!isDashing)//如果还没冲刺
             {
                 // 将人物的方向设置为计算得到的方向
-                gameObject.transform.right = direction;
+                EnemyRotate();
                 if (prepareTimer < prepareTime)
                 {
                     attackArea.SetActive(true);

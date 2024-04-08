@@ -48,25 +48,23 @@ public class Archerfish : Enemy
     }
     public void Move()
     {
-        if (target == null || !canMove) return; // 确保玩家存在
+        if (!canMove) return;
         Vector2 distance = (target.transform.position - transform.position);
-        Vector2 direction = distance.normalized; // 获取朝向玩家的单位向量
-        if (distance.magnitude > detectionRange && canMove)//如果丢失玩家并且能移动
-        {
-            ReturnSpawnpoint();
-        }
-        else
-        if (prepareTimer == 0 && Mathf.Pow(distance.x, 2) + Mathf.Pow(distance.y, 2) >= Mathf.Pow(shootDetectionRadius, 2))
+        Vector2 direction = enemyAI.FinalMovement; // 获取朝向玩家的单位向量
+        //如果距离大于射击范围，就进一步靠近玩家
+        if (!isShooting&& Mathf.Pow(distance.x, 2) + Mathf.Pow(distance.y, 2) >= Mathf.Pow(shootDetectionRadius, 2))
         {
             rb.velocity = direction * moveSpeed; // 沿着朝向玩家的方向移动
 
             // 将人物的方向设置为计算得到的方向
-            gameObject.transform.right = direction;
+            EnemyRotate();
+            attackArea.SetActive(false);
+            prepareTimer = 0;
         }
-        else
+        else//如果进入射击范围，就执行射击逻辑
         {
             rb.velocity = Vector3.zero;
-            //如果正在冲刺
+            //如果正在射
             if (isShooting)
             {
                 
@@ -88,22 +86,25 @@ public class Archerfish : Enemy
                     
                 }
             }
-            else if (!isShooting)//如果还没冲刺
+            else if (!isShooting&&target!=null)//如果还没射
             {
                 // 将人物的方向设置为计算得到的方向
-                gameObject.transform.right = direction;
-                if (prepareTimer < prepareTime)
+
+                //gameObject.transform.right = direction;
+                EnemyRotate();
+                if (prepareTimer < prepareTime)//在准备射
                 {
                     attackArea.SetActive(true);
                     prepareTimer += Time.deltaTime;
                 }
-                else
+                else//开始射
                 {
+                    
                     attackArea.SetActive(false);
                     prepareTimer = 0;
                     isShooting = true;
                     //TODO
-                     projectile = Instantiate(turbulencePrefab, transform.position, Quaternion.identity);
+                    projectile = Instantiate(turbulencePrefab, transform.position, Quaternion.identity);
                     
 
                     // 获取预制体的 Transform 组件
