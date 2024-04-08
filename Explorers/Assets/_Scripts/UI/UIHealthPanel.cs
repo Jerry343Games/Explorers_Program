@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
@@ -11,6 +8,7 @@ public class UIHealthPanel : MonoBehaviour
     public Image HealthInner;
     public Image ArmorInner;
     public Image FeatureInner;//功能图片UI
+    public Image ItemInner;//道具图片UI
     private Battery _battery;
     private PlayerController _playerController;
 
@@ -85,11 +83,25 @@ public class UIHealthPanel : MonoBehaviour
         {
             HealthInner.DOFillAmount((float)_battery.currentPower / _battery.maxPower, 0.2f);
             if(ArmorInner)
+            {
                 ArmorInner.DOFillAmount((float)_playerController.currentArmor / _playerController.maxArmor, 0.2f);
+            }
             if (FeatureInner)
-                FeatureInner.transform.GetChild(0).GetComponent<Image>().fillAmount =
-                     Mathf.Clamp(_playerController._featureCDTimer / _playerController.featureCD, 0f, 1f);
-
+            {
+                FeatureInner.transform.GetChild(0).GetComponent<Image>().fillAmount = Mathf.Clamp(_playerController._featureCDTimer / _playerController.featureCD, 0f, 1f);
+            }
+            if(ItemInner)
+            {
+                if (_playerController.item)
+                {
+                    ItemInner.color = Color.white;
+                    ItemInner.sprite = Resources.Load<Sprite>("UI/Image/" + (_playerController.item as PropItem).propType.ToString());
+                }
+                else
+                {
+                    ItemInner.color = new Color(1, 1, 1, 0);
+                }
+            }
         }
     }
 }

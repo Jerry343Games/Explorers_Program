@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class BatteryCarrier : PlayerController
@@ -198,12 +199,10 @@ public class BatteryCarrier : PlayerController
         switch(randomItem)
         {
             case 0:
-                GravityWell well = new GravityWell();
-                well.Apply(gameObject);
+                GravityWell well = Instantiate(Resources.Load<GameObject>("Item/GravityWell"), selectedPlayer.transform.position, Quaternion.identity).GetComponent<GravityWell>();
                 break;
             case 1:
-                PropelBackpack backpack = new PropelBackpack();
-                backpack.Apply(gameObject);
+                PropelBackpack backpack = Instantiate(Resources.Load<GameObject>("Item/PropelBackpack"), selectedPlayer.transform.position, Quaternion.identity).GetComponent<PropelBackpack>();
                 break;
             case 2:
                 break;
