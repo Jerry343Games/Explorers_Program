@@ -40,7 +40,7 @@ public class PlayerController : MonoBehaviour
     public float vertigoTime = 0.3f;//被攻击后眩晕的时间（不能操作）
     private float _vertigoTimer = 0;
     private bool _canMove = true;//是否能移动
-
+    public bool isMoveReverse = false;
     [Header("护盾")]
     public int maxArmor;//电池护盾量
     [HideInInspector]
@@ -165,7 +165,15 @@ public class PlayerController : MonoBehaviour
         }
         if (isDigging) return;
         MovementCombination();
-        transform.Translate(_moveDir * Time.deltaTime * speed * _speedFactor*_outSpeedFactor, Space.World);
+        if (!isMoveReverse)
+        {
+            transform.Translate(_moveDir * Time.deltaTime * speed * _speedFactor * _outSpeedFactor, Space.World);
+        }
+        else
+        {
+            transform.Translate(-_moveDir * Time.deltaTime * speed * _speedFactor * _outSpeedFactor, Space.World);
+        }
+        
         
         //主动加速判断
         if (playerInputSetting.GetAccelerateButtonDown())
@@ -177,7 +185,15 @@ public class PlayerController : MonoBehaviour
             _speedFactor = 1;
         }
     }
-
+    public void MoveReverse(float reversedTime)
+    {
+        isMoveReverse = true;
+        Invoke("MoveReverseReturnNormal", reversedTime);
+    }
+    private void MoveReverseReturnNormal()
+    {
+        isMoveReverse = false;
+    }
     /// <summary>
     /// 动画控制
     /// </summary>
@@ -294,7 +310,26 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     public void RestroeDefence()
     {
+        //如果进入到腐蚀状态，那就不回甲了
+        if (isDefenceDowning)
+        {
+            if (defenceDownTimer < defenceDownTime)
+            {
+                defenceDownTimer += Time.deltaTime;
+                //掉甲
+                currentArmor -= (int)(downRate * Time.deltaTime);
+                currentArmor = Math.Max(currentArmor, 0);
+                Debug.Log("腐蚀状态，当前护甲值：" + currentArmor);
+            }
+            else
+            {
+                isDefenceDowning = false;
+                defenceDownTimer = 0;
 
+            }
+
+            return;
+        }
         if(lastHurtTimer<timeToRepairArmor)
         {
             lastHurtTimer += Time.deltaTime;
@@ -321,8 +356,19 @@ public class PlayerController : MonoBehaviour
             _restoreTimer -= Time.deltaTime;
         }
     }
-
-
+    private float defenceDownTimer = 0f;
+    private float defenceDownTime;
+    private bool isDefenceDowning = false;
+    private float downRate;
+    /// <summary>
+    /// 缓慢掉甲，掉到0或者倒计时结束
+    /// </summary>
+    public void DefenceDown(float downTime,float downRate)
+    {
+        defenceDownTime = downTime;
+        isDefenceDowning = true;
+        this.downRate = downRate;
+    }
     
     /// <summary>
     /// 
