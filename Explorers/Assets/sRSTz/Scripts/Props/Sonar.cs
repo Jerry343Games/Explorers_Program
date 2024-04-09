@@ -17,6 +17,7 @@ public class Sonar : PropItem
     {
         CollectionItem[] items = FindObjectsOfType<CollectionItem>();
         Vector3 nearestItemPos = Vector3.zero;
+        if (items.Length == 0) return;
         float curNearestDis = Vector3.Distance(items[0].transform.position, user.transform.position);
         foreach (var item in items)
         {

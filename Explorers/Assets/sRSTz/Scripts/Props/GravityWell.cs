@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class GravityWell : PropItem
 {
-
+    
     List<GameObject> characters = new();
     public float activeTime = 3f;
     private float activeTimer = 0;

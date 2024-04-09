@@ -216,7 +216,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f91ddcb468aa644c90a3f75961e4daf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetDetectionRange: 5
+  targetDetectionRange: 12
   obstaclesLayerMask:
     serializedVersion: 2
     m_Bits: 1088
@@ -415,14 +415,14 @@ GameObject:
   - component: {fileID: 5652795573597667106}
   - component: {fileID: 5652795573597667110}
   - component: {fileID: 5652795573597667111}
-  - component: {fileID: 1094181166}
+  - component: {fileID: 1408727699573505793}
   m_Layer: 3
   m_Name: TestDashFish
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &5652795573597667135
 Transform:
   m_ObjectHideFlags: 0
@@ -559,7 +559,7 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.6
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &1094181166
+--- !u!114 &1408727699573505793
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -568,11 +568,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 5652795573597667134}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7e43ba39f75a36644832f7867065e252, type: 3}
+  m_Script: {fileID: 11500000, guid: 2eb22505766ddc648b2b38152e91bef8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 5
-  force: 15
+  moveSpeed: 4
+  force: 8
   HP: 22
   damage: 10
   canMove: 1
@@ -587,12 +587,10 @@ MonoBehaviour:
   canAttack: 1
   enemyAI: {fileID: 5652795573597667106}
   turnSmoothTime: 0.05
-  shootDetectionRadius: 12
-  prepareTime: 3
-  shootTime: 3
-  shootForce: 15
-  turbulencePrefab: {fileID: 4151126986172546237, guid: a451b8984acb91d4a8035b745a3f4009,
-    type: 3}
+  dashDetectionRadius: 12
+  prepareTime: 2.5
+  dashTime: 1.5
+  dashForce: 20
 --- !u!1 &5652795573747803933
 GameObject:
   m_ObjectHideFlags: 0
