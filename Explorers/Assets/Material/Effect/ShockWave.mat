@@ -7,25 +7,21 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: DistortionEffect
-  m_Shader: {fileID: -6465566751694194690, guid: 60429786061303d489ac631f64a699df,
+  m_Name: ShockWave
+  m_Shader: {fileID: -6465566751694194690, guid: 392d00020209cf54887b25d32083d930,
     type: 3}
   m_ValidKeywords: []
   m_InvalidKeywords: []
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: 3000
+  m_CustomRenderQueue: -1
   stringTagMap: {}
   disabledShaderPasses: []
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
-    - _Main_Tex:
-        m_Texture: {fileID: 8400000, guid: b13482e3eacdc204cb25e9b6463bc1fd, type: 2}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _Texture2DAsset_42e1ad1712eb4fae9ac983cf6875a37e_Out_0:
+    - _Texture2DAsset_44f7dcd4268c455b9040be4db6ca18d6_Out_0:
         m_Texture: {fileID: 2800000, guid: 626fb8cdfc271f841831a349728ae3ab, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
@@ -43,15 +39,18 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _MainTex_Tilling_Offset: 0
-    - _QueueControl: 1
+    - _QueueControl: 0
     - _QueueOffset: 0
-    - _noiseScale: 5.1
-    - _strength: 0.03
+    - _Range: 0.5
+    - _Size: 0.65
+    - _Speed: 1
+    - _noiseScale: 48.2
+    - _strength: 0
+    - _time: 0.67
     m_Colors:
-    - _MainTex_Tilling_Offset: {r: 1, g: 1, b: 0, a: 0}
+    - _FocalPoint: {r: 0.5, g: 0.5, b: 0, a: 0}
   m_BuildTextureStacks: []
---- !u!114 &7523231296335567806
+--- !u!114 &6394079123967298323
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}
