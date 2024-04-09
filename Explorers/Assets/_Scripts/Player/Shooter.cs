@@ -38,6 +38,7 @@ public class Shooter : PlayerController
             OptionalFeature.DestroyTorpedoes=>torpedoesCD,
             _=>0,
         };
+
     }
     // Update is called once per frame
     void Update()
@@ -94,8 +95,6 @@ public class Shooter : PlayerController
                     if (playerInputSetting.GetCableButtonDown())
                     {
                         ReconnectRope();
-                        
-                        //����������������ʾ����
                         bubblePanel.reconnectCableBuffer.GetComponent<UIBubbleItem>().DestoryBubble();
                     }
                 }
@@ -113,6 +112,13 @@ public class Shooter : PlayerController
                     _curDigRes.SetDiager(this);
                     _curDigRes.beDigging = true;
                 }
+                break;
+            case "Chest":
+                if (playerInputSetting.GetInteractButtonDown())
+                {
+                    other.GetComponent<PropChest>().OpenChest();
+                }
+
                 break;
             default:
                 break;

@@ -19,11 +19,16 @@ public class PropChest : MonoBehaviour
     /// </summary>
     public void OpenChest()
     {
+        //开箱动画
+
         GameObject selectedPropPrefab = ChooseRandomPropPrefab();
         if(selectedPropPrefab != null)
         {
             Instantiate(selectedPropPrefab, transform.position, Quaternion.identity);
         }
+
+        //延迟消失
+        Destroy(gameObject, .5f);
     }
 
     /// <summary>

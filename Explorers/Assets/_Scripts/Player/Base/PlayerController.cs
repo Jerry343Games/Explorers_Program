@@ -497,14 +497,17 @@ public class PlayerController : MonoBehaviour
         switch (other.tag)
         {
             case "Resource":
-                BubbleInfo resInfo = new BubbleInfo
+                if (!hasDead)
                 {
-                    Type = BubbleType.ResourceCollectionBubble,
-                    Obj1 = gameObject,
-                    Obj2= other.gameObject,
-                    Content = "采集"
-                };
-                bubblePanel.CreateBubble(resInfo);
+                    BubbleInfo resInfo = new BubbleInfo
+                    {
+                        Type = BubbleType.ResourceCollectionBubble,
+                        Obj1 = gameObject,
+                        Obj2 = other.gameObject,
+                        Content = "采集"
+                    };
+                    bubblePanel.CreateBubble(resInfo);
+                }
                 break;
             case "ReconnectArea":
                 if (!_hasConnected&&!hasDead){
@@ -517,6 +520,21 @@ public class PlayerController : MonoBehaviour
                 };
                 bubblePanel.CreateBubble(recInfo);
                 }
+                break;
+            case "Chest":
+                if (!hasDead)
+                {
+                    BubbleInfo recInfo = new BubbleInfo
+                    {
+                        Type = BubbleType.ChestOpenBubble,
+                        Obj1 = gameObject,
+                        Obj2 = other.gameObject,
+                        Content = "打开"
+                    };
+                    bubblePanel.CreateBubble(recInfo);
+                }
+
+
                 break;
             default:
                 break;

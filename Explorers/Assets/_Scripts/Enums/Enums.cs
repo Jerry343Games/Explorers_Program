@@ -20,6 +20,7 @@ public enum BubbleType
 {
     ResourceCollectionBubble,
     ReconnectCableBubble,
+    ChestOpenBubble,
 }
 
 public enum CharacterAnimation

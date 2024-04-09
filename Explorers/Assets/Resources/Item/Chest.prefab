@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &2837724597536359659
+--- !u!1 &6851849833420681715
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,26 +8,25 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 2837724597536359663}
-  - component: {fileID: 2837724597536359660}
-  - component: {fileID: 2837724597536359661}
-  - component: {fileID: 2837724597536359662}
-  - component: {fileID: 2837724597536359568}
-  - component: {fileID: 2837724597536359569}
+  - component: {fileID: 6851849833420681719}
+  - component: {fileID: 6851849833420681716}
+  - component: {fileID: 6851849833420681717}
+  - component: {fileID: 6851849833420681718}
+  - component: {fileID: 6851849833420681721}
   m_Layer: 0
-  m_Name: Sonar
-  m_TagString: Item
+  m_Name: Chest
+  m_TagString: Chest
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &2837724597536359663
+--- !u!4 &6851849833420681719
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2837724597536359659}
+  m_GameObject: {fileID: 6851849833420681715}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -36,21 +35,21 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &2837724597536359660
+--- !u!33 &6851849833420681716
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2837724597536359659}
+  m_GameObject: {fileID: 6851849833420681715}
   m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
---- !u!23 &2837724597536359661
+--- !u!23 &6851849833420681717
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2837724597536359659}
+  m_GameObject: {fileID: 6851849833420681715}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -64,7 +63,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: f020c76215dbf9d4eb356de2ced90c1f, type: 2}
+  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -86,46 +85,38 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!135 &2837724597536359662
+--- !u!135 &6851849833420681718
 SphereCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2837724597536359659}
+  m_GameObject: {fileID: 6851849833420681715}
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.8
+  m_Radius: 1
   m_Center: {x: 0, y: 0, z: 0}
---- !u!54 &2837724597536359568
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2837724597536359659}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 0
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
---- !u!114 &2837724597536359569
+--- !u!114 &6851849833420681721
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2837724597536359659}
+  m_GameObject: {fileID: 6851849833420681715}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 11c496c83c679d2408f16e0106aebcce, type: 3}
+  m_Script: {fileID: 11500000, guid: 960184ca08ed6b240b396f017a2c7687, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemType: 0
-  propType: 2
+  propChances:
+  - propPrefab: {fileID: 8667609187247183410, guid: c93aa4792a5c62d458420a05fef7a91f,
+      type: 3}
+    chance: 0.3
+  - propPrefab: {fileID: 5437758440608078092, guid: f0f06b2925bd6d040a8a075606cda283,
+      type: 3}
+    chance: 0.3
+  - propPrefab: {fileID: 2837724597536359659, guid: 996800f1fa0ff114fb6ba666eeaaedec,
+      type: 3}
+    chance: 0.4
