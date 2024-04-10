@@ -42,6 +42,7 @@ public class Torpedoes : MonoBehaviour
         else
         {
             //±¬Õ¨ÌØÐ§
+            Instantiate(Resources.Load<GameObject>("Effect/RocketExplosion"),transform.position,Quaternion.identity);
             Collider[] enemyColls = Physics.OverlapSphere(transform.position, _range,_enemyLayer);
             Collider[] playerColls = Physics.OverlapSphere(transform.position, _range, _playerLayer);
             foreach(var coll in enemyColls)
@@ -67,6 +68,7 @@ public class Torpedoes : MonoBehaviour
     {
         if(other.tag=="Enemy" || other.tag == "Player")
         {
+            Instantiate(Resources.Load<GameObject>("Effect/RocketExplosion"),transform.position,Quaternion.identity);
             Collider[] enemyColls = Physics.OverlapSphere(transform.position, _range, _enemyLayer);
             Collider[] playerColls = Physics.OverlapSphere(transform.position, _range, _playerLayer);
             foreach (var coll in enemyColls)

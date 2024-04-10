@@ -36,7 +36,7 @@ public class Shooter : PlayerController
         {
             OptionalFeature.Salvo => salvoCD,
             OptionalFeature.DestroyTorpedoes=>torpedoesCD,
-            _=>0,
+            _=>1,
         };
 
     }
