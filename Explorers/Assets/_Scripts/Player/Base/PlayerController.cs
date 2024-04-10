@@ -281,6 +281,7 @@ public class PlayerController : MonoBehaviour
     public virtual void TakeDamage(int damage)
     {
         if (hasDead) return;
+        Debug.Log(name);
         if(isDigging)
         {
             isDigging = false;//´ò¶Ï×´Ì¬

@@ -11,11 +11,12 @@ public class DashFish : Enemy
     private float dashTimer = 0;
     public float dashForce = 3f;
     private GameObject attackArea;
-
+    private Vector3 attackAraeOffset;
     protected override void Awake()
     {
         base.Awake();
         attackArea = transform.GetChild(0).gameObject;
+        attackAraeOffset = attackArea.transform.position -transform.position;
     }
     private void FixedUpdate()
     {
@@ -36,6 +37,7 @@ public class DashFish : Enemy
     {
         if (touchedCollision != null && canAttack)
         {
+           
             // 计算弹飞的方向
             Vector2 direction = (touchedCollision.transform.position - transform.position).normalized;
 
@@ -89,10 +91,16 @@ public class DashFish : Enemy
                 if (prepareTimer < prepareTime)
                 {
                     attackArea.SetActive(true);
+                    //AxisLookAt(attackArea.transform, (Vector2)attackArea.transform.position + direction, Vector3.right);
+                    float targetAngle = Mathf.Atan2(enemyAI.FinalMovement.y, enemyAI.FinalMovement.x) * Mathf.Rad2Deg;
+                    float angle = Mathf.SmoothDampAngle(attackArea. transform.eulerAngles.z, targetAngle, ref turnSmoothVelocity, turnSmoothTime);
+                    attackArea.transform.rotation = Quaternion.Euler(0f, 0f, angle);
+                    attackArea.transform.position = transform.position + attackAraeOffset;
                     prepareTimer += Time.deltaTime;
                 }
-                else
+                else//准备完了就开始冲刺
                 {
+                    animator.Play("Attack");
                     attackArea.SetActive(false);
                     prepareTimer = 0;
                     isDashing = true;

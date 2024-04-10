@@ -42,6 +42,7 @@ public class Fighter : PlayerController
     public int dashDamage = 15;
     //private bool canDash;
     public float dashCD;
+    public GameObject attcakAreaSprite;
     void Start()
     {
         _rb = GetComponent<Rigidbody>();
@@ -206,15 +207,20 @@ public class Fighter : PlayerController
         {
             return false;
         }
-
+        
         _isAttack = true;
+        attcakAreaSprite.SetActive(true);
+        Invoke(nameof(AttackEffectDisable), Enemy.GetAnimatorLength(attcakAreaSprite.GetComponent<Animator>(), "FighterAttack"));
         //动画控制
         animator.CrossFade("FighterAttack",0);
         playerSprite.GetComponent<SpriteRenderer>().material.SetTexture("_Normal",
             PlayerManager.Instance.GetTextureByAnimationName(CharacterAnimation.FighterAttack));
         return true;
     }
-
+    public void AttackEffectDisable()
+    {
+        attcakAreaSprite.SetActive(false);
+    }
     /// <summary>
     /// 由帧动画事件触发实际的伤害结算
     /// </summary>
@@ -329,7 +335,7 @@ public class Fighter : PlayerController
 
     public override void Vertigo(Vector3 force, ForceMode forceMode = ForceMode.Impulse, float vertigoTime = 0.3F)
     {
-        _rb.AddForce(force/3, forceMode);
+        _rb.AddForce(force/2, forceMode);
     }
 
 }

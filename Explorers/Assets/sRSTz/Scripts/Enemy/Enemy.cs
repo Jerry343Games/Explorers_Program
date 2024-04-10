@@ -151,12 +151,19 @@ public class Enemy : MonoBehaviour
     public EnemyAI enemyAI;//只负责寻路
 
     public float turnSmoothTime = 0.05f; // 转向平滑过渡的时间
-    private float turnSmoothVelocity; // 用于SmoothDamp的速度
+    public float turnSmoothVelocity; // 用于SmoothDamp的速度
+
+    public Animator animator;
+    // 获取 SpriteRenderer 的当前翻转状态
+    bool isFlipped;
+    public SpriteRenderer spriteRenderer;
+    public bool isDefaultLeft = false;
     protected virtual void Awake()
     {
         rb = GetComponent<Rigidbody>();
         spawnerPoint = gameObject.transform.position;
-        
+        spriteRenderer = gameObject.GetComponentInChildren<SpriteRenderer>();
+       isFlipped = spriteRenderer.flipX;
     }
     private void Update()
     {
@@ -273,12 +280,80 @@ public class Enemy : MonoBehaviour
     }
     public void EnemyRotate()
     {
-        if (enemyAI.FinalMovement  != Vector2.zero)
+        /*if (enemyAI.FinalMovement  != Vector2.zero)
         {
             float targetAngle = Mathf.Atan2(enemyAI.FinalMovement.y, enemyAI.FinalMovement.x) * Mathf.Rad2Deg;
             float angle = Mathf.SmoothDampAngle(transform.eulerAngles.z, targetAngle, ref turnSmoothVelocity, turnSmoothTime);
             transform.rotation = Quaternion.Euler(0f, 0f, angle);
+        }*/
+        // 判断 direction 是在 y 轴方向的左边还是右边
+        if (isDefaultLeft)
+        {
+            if (enemyAI.FinalMovement.x > 0 && !isFlipped) // 在 y 轴方向的右边，且当前没有翻转
+            {
+                // 翻转 Sprite
+                spriteRenderer.flipX = true;
+                isFlipped = true;
+            }
+            else if (enemyAI.FinalMovement.x < 0 && isFlipped) // 在 y 轴方向的左边，且当前已经翻转
+            {
+                // 取消翻转
+                spriteRenderer.flipX = false;
+                isFlipped = false;
+            }
+            return;
         }
+        if (enemyAI.FinalMovement.x < 0 && !isFlipped) // 在 y 轴方向的左边，且当前没有翻转
+        {
+            // 翻转 Sprite
+            spriteRenderer.flipX = true;
+            isFlipped = true;
+        }
+        else if (enemyAI.FinalMovement.x > 0 && isFlipped) // 在 y 轴方向的右边，且当前已经翻转
+        {
+            // 取消翻转
+            spriteRenderer.flipX = false;
+            isFlipped = false;
+        }
+    }
+    public static float GetAnimatorLength(Animator animator, string name)
+    {
+        //动画片段时间长度
+        float length = 0;
+
+        AnimationClip[] clips = animator.runtimeAnimatorController.animationClips;
+        Debug.Log(clips.Length);
+        foreach (AnimationClip clip in clips)
+        {
+            Debug.Log(clip.name);
+            if (clip.name.Equals(name))
+            {
+                length = clip.length;
+                break;
+            }
+        }
+        return length;
+    }
+    /// <summary>
+    /// 用某个轴去朝向物体
+    /// </summary>
+    /// <param name="tr_self">朝向的本体</param>
+    /// <param name="lookPos">朝向的目标</param>
+    /// <param name="directionAxis">方向轴，取决于你用那个方向去朝向</param>
+
+    public  void AxisLookAt(Transform tr_self, Vector3 lookPos, Vector3 directionAxis)
+    {
+        var rotation = tr_self.rotation;
+        var targetDir = lookPos - tr_self.position;
+        //指定哪根轴朝向目标,自行修改Vector3的方向
+        var fromDir = tr_self.rotation * directionAxis;
+        //计算垂直于当前方向和目标方向的轴
+        var axis = Vector3.Cross(fromDir, targetDir).normalized;
+        //计算当前方向和目标方向的夹角
+        var angle = Vector3.Angle(fromDir, targetDir);
+        //将当前朝向向目标方向旋转一定角度，这个角度值可以做插值
+        tr_self.rotation = Quaternion.AngleAxis(angle, axis) * rotation;
+        tr_self.localEulerAngles = new Vector3(0, tr_self.localEulerAngles.y, 90);//后来调试增加的，因为我想让x，z轴向不会有任何变化
     }
 
     

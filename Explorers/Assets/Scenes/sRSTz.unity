@@ -862,7 +862,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 141421559}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 9.75, y: 9.83, z: 0}
+  m_LocalPosition: {x: 7.55, y: 6.27, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -6367,12 +6367,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1435087169}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 12.67, y: 10.21, z: 0}
+  m_LocalPosition: {x: 12.17, y: 6.2, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 45
+  m_RootOrder: 44
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1435476757
 PrefabInstance:
@@ -6564,85 +6564,6 @@ MonoBehaviour:
   filter: -65535
   m_SourceCollider: {fileID: 1506635737}
   m_DistanceField: {fileID: 0}
---- !u!1001 &1522485895
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 3815850958843820129, guid: 653dc08645dac664c857e4aaa84d2015,
-        type: 3}
-      propertyPath: m_Name
-      value: ArcherFish
-      objectReference: {fileID: 0}
-    - target: {fileID: 3815850958843820129, guid: 653dc08645dac664c857e4aaa84d2015,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3815850958843820134, guid: 653dc08645dac664c857e4aaa84d2015,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 42
-      objectReference: {fileID: 0}
-    - target: {fileID: 3815850958843820134, guid: 653dc08645dac664c857e4aaa84d2015,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -5.6888
-      objectReference: {fileID: 0}
-    - target: {fileID: 3815850958843820134, guid: 653dc08645dac664c857e4aaa84d2015,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 23.0207
-      objectReference: {fileID: 0}
-    - target: {fileID: 3815850958843820134, guid: 653dc08645dac664c857e4aaa84d2015,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3815850958843820134, guid: 653dc08645dac664c857e4aaa84d2015,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3815850958843820134, guid: 653dc08645dac664c857e4aaa84d2015,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3815850958843820134, guid: 653dc08645dac664c857e4aaa84d2015,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3815850958843820134, guid: 653dc08645dac664c857e4aaa84d2015,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3815850958843820134, guid: 653dc08645dac664c857e4aaa84d2015,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3815850958843820134, guid: 653dc08645dac664c857e4aaa84d2015,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3815850958843820134, guid: 653dc08645dac664c857e4aaa84d2015,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7814497622299251913, guid: 653dc08645dac664c857e4aaa84d2015,
-        type: 3}
-      propertyPath: shootDetectionRadius
-      value: 4
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 653dc08645dac664c857e4aaa84d2015, type: 3}
 --- !u!1 &1524400789
 GameObject:
   m_ObjectHideFlags: 0
@@ -9602,6 +9523,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: TestDashFish
       objectReference: {fileID: 0}
+    - target: {fileID: 5652795573597667134, guid: a80b4a3bf30a3a24ab7f4c559d75a94a,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5652795573597667135, guid: a80b4a3bf30a3a24ab7f4c559d75a94a,
         type: 3}
       propertyPath: m_RootOrder
@@ -9610,12 +9536,12 @@ PrefabInstance:
     - target: {fileID: 5652795573597667135, guid: a80b4a3bf30a3a24ab7f4c559d75a94a,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 11.22
+      value: 5.31
       objectReference: {fileID: 0}
     - target: {fileID: 5652795573597667135, guid: a80b4a3bf30a3a24ab7f4c559d75a94a,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 4.59
+      value: 57.44
       objectReference: {fileID: 0}
     - target: {fileID: 5652795573597667135, guid: a80b4a3bf30a3a24ab7f4c559d75a94a,
         type: 3}
@@ -9866,7 +9792,7 @@ PrefabInstance:
     - target: {fileID: 1086026406784503984, guid: 3e40154d7a37cf3498f04acf62696411,
         type: 3}
       propertyPath: m_RootOrder
-      value: 43
+      value: 42
       objectReference: {fileID: 0}
     - target: {fileID: 1086026406784503984, guid: 3e40154d7a37cf3498f04acf62696411,
         type: 3}
@@ -9923,11 +9849,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: TestArcherFish
       objectReference: {fileID: 0}
-    - target: {fileID: 1086026406784503985, guid: 3e40154d7a37cf3498f04acf62696411,
+    - target: {fileID: 4710928886199881377, guid: 3e40154d7a37cf3498f04acf62696411,
         type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
+      propertyPath: animator
+      value: 
+      objectReference: {fileID: 5641569169351900173}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3e40154d7a37cf3498f04acf62696411, type: 3}
 --- !u!1001 &5641569169351900172
@@ -9940,17 +9866,17 @@ PrefabInstance:
     - target: {fileID: 1936099003532618552, guid: c68c0fcd1b3a7d74b83417d32cabfa06,
         type: 3}
       propertyPath: m_RootOrder
-      value: 44
+      value: 43
       objectReference: {fileID: 0}
     - target: {fileID: 1936099003532618552, guid: c68c0fcd1b3a7d74b83417d32cabfa06,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 10.81
+      value: 5.9
       objectReference: {fileID: 0}
     - target: {fileID: 1936099003532618552, guid: c68c0fcd1b3a7d74b83417d32cabfa06,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 6.62
+      value: 60
       objectReference: {fileID: 0}
     - target: {fileID: 1936099003532618552, guid: c68c0fcd1b3a7d74b83417d32cabfa06,
         type: 3}
@@ -9997,13 +9923,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: TestAttackBatteryFish
       objectReference: {fileID: 0}
-    - target: {fileID: 1936099003532618553, guid: c68c0fcd1b3a7d74b83417d32cabfa06,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c68c0fcd1b3a7d74b83417d32cabfa06, type: 3}
+--- !u!95 &5641569169351900173 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 2069621772, guid: c68c0fcd1b3a7d74b83417d32cabfa06,
+    type: 3}
+  m_PrefabInstance: {fileID: 5641569169351900172}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &5725462135082075859
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10288,10 +10215,15 @@ PrefabInstance:
       propertyPath: m_Name
       value: Squid
       objectReference: {fileID: 0}
+    - target: {fileID: 3375836587709826554, guid: 810b739649834b04f88477c7e244d885,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3375836587709826555, guid: 810b739649834b04f88477c7e244d885,
         type: 3}
       propertyPath: m_RootOrder
-      value: 47
+      value: 46
       objectReference: {fileID: 0}
     - target: {fileID: 3375836587709826555, guid: 810b739649834b04f88477c7e244d885,
         type: 3}
@@ -10799,7 +10731,7 @@ PrefabInstance:
     - target: {fileID: 8891635232205229904, guid: 9ae301778c5af444fafe5c0b992e4c7f,
         type: 3}
       propertyPath: m_RootOrder
-      value: 46
+      value: 45
       objectReference: {fileID: 0}
     - target: {fileID: 8891635232205229904, guid: 9ae301778c5af444fafe5c0b992e4c7f,
         type: 3}

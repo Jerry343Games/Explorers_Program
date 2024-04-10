@@ -16,12 +16,16 @@ public class AttackBatteryFish : Enemy
         {
 
             touchedCollision = collision;
-            Attack();
+            //Attack();
+            //if (enemyAI.GetCurrentTarget() == null) return;
+            animator.Play("Attack");
+            Invoke(nameof(Attack), GetAnimatorLength(animator, "Attack")/2);
         }
     }
     public  void Attack()
     {
-
+        
+        
         if (touchedCollision != null && canAttack)
         {
 
@@ -55,7 +59,10 @@ public class AttackBatteryFish : Enemy
             ReturnSpawnpoint();
         }*/
     }
-
+    private void OnCollisionExit(Collision collision)
+    {
+        touchedCollision = null;
+    }
 
 
 }

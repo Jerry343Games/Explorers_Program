@@ -21,7 +21,7 @@ public class ElectricEel : Enemy
             Attack();
         }
     }
-    public void Attack()
+    public  void Attack()
     {
 
         if (touchedCollision != null && canAttack)

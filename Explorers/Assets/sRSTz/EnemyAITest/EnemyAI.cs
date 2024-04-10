@@ -130,41 +130,11 @@ public class EnemyAI : MonoBehaviour
         }
 
     }
-    /*#region 获取攻击目标，攻击的相关代码
+    public Transform GetCurrentTarget()
+    {
+        return aiData.currentTarget;
+    }
     
-    private void OnCollisionEnter(Collision collision)
-    {
-
-        if (collision.gameObject.CompareTag("Player") || collision.gameObject.CompareTag("Battery"))
-        {
-            touchedCollision = collision;
-            OnTouchAttack?.Invoke();
-        }
-    }
-    public void TouchAttack()
-    {
-        Debug.Log("touch Attack");
-        if (touchedCollision != null && canAttack)
-        {
-            Debug.Log(touchedCollision.gameObject.name);
-            // 计算弹飞的方向
-            Vector2 direction = (touchedCollision.transform.position - transform.position).normalized;
-
-            // 给玩家一个弹飞的力
-            touchedCollision.gameObject.GetComponent<PlayerController>().Vertigo(direction * force);
-            touchedCollision.gameObject.GetComponent<PlayerController>().TakeDamage(damage);
-
-            Vertigo(-transform.forward * 5f, ForceMode.Impulse, 0.3f);
-
-        }
-    }
-    public void DashFishDash()
-    {
-        Debug.Log("dash");
-
-    }
-    #endregion*/
-
     private void OnDrawGizmos()
     {
         if (Application.isPlaying)

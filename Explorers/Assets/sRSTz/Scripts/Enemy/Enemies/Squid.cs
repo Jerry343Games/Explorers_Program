@@ -23,12 +23,12 @@ public class Squid : Enemy
             Attack();
         }
     }
-    public void Attack()
+    public  void Attack()
     {
 
         if (touchedCollision != null && canAttack)
         {
-
+            animator.Play("Attack");
             // 计算弹飞的方向
             Vector2 direction = (touchedCollision.transform.position - transform.position).normalized;
             shieldDisintegrationPlayer = touchedCollision.gameObject.GetComponent<PlayerController>();
