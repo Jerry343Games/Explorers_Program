@@ -25,8 +25,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3165116962154618503}
   m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -0.015, y: 0.056, z: 0.079}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: -0.015, y: 0.093, z: 0.119}
+  m_LocalScale: {x: 1.3005, y: 1.3005, z: 1.3005}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3795479232929037764}
@@ -53,7 +53,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: ccbdf339399950340b1bf7fc262f89c1, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -213,9 +213,9 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3946353639550936320}
-  m_LocalRotation: {x: -0.0000006556511, y: -0.0000003874302, z: 0.005971551, w: -0.9999822}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.335, y: 0.019, z: 0.006}
-  m_LocalScale: {x: 0.01, y: 0.01, z: 0.01}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8008069749559363491}
@@ -281,6 +281,7 @@ MonoBehaviour:
   speed: 6
   accelerateFactor: 1.5
   vertigoTime: 0.3
+  isMoveReverse: 0
   maxArmor: 7
   currentArmor: 0
   restoreAmount: 1
@@ -295,6 +296,9 @@ MonoBehaviour:
   myAimPos: {x: 0, y: 0, z: 0}
   hasDead: 0
   feature: 0
+  _featureCDTimer: 0
+  featureCD: 0
+  canUseFeature: 0
   DistanceThreshold: 15
   isDigging: 0
   item: {fileID: 0}

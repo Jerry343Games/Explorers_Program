@@ -222,6 +222,31 @@ public class PlayerController : MonoBehaviour
         }
     }
     
+    public void MoveAnimationControlTest(CharacterAnimation run_left,CharacterAnimation run_right,CharacterAnimation idle)
+    {
+        if (playerInputSetting.inputDir.x != 0)
+        {
+            if (playerInputSetting.inputDir.x < 0)
+            {
+                //transform.localScale = new Vector3(1, 1, 1);
+                animator.CrossFade(run_left.ToString(), 0f);
+                _spriteRenderer.material.SetTexture("_Normal", PlayerManager.Instance.GetTextureByAnimationName(run_left));
+            }
+            else
+            {
+                //transform.localScale = new Vector3(1, 1, 1);
+                animator.CrossFade(run_right.ToString(), 0f);
+                _spriteRenderer.material.SetTexture("_Normal", PlayerManager.Instance.GetTextureByAnimationName(run_right));
+            }
+            
+        }
+        else
+        {
+            animator.CrossFade(idle.ToString(),0);
+            _spriteRenderer.material.SetTexture("_Normal", PlayerManager.Instance.GetTextureByAnimationName(idle));
+        }
+    }
+    
     /// <summary>
     /// 绳子重连方法
     /// </summary>

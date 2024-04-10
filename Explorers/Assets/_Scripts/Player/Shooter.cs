@@ -57,7 +57,7 @@ public class Shooter : PlayerController
         }
         CharacterMove();
         RestroeDefence();
-        MoveAnimationControl(CharacterAnimation.ShooterRun,CharacterAnimation.ShooterIdle);
+        MoveAnimationControlTest(CharacterAnimation.ShooterLeft_Run,CharacterAnimation.ShooterRight_Run,CharacterAnimation.ShooterIdle);
         UseItem();
         CheckDistanceToBattery();
         //CheckKeys();

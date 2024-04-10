@@ -21,7 +21,7 @@ public class AnimationTextureMapping
     public CharacterAnimation animationName;
     public Texture2D texture;
 }
-public class PlayerManager : SingletonPersistent<PlayerManager>
+public class   PlayerManager : SingletonPersistent<PlayerManager>
 {
     public int maxPlayerCount;
     //游玩的玩家列表 是父物体
@@ -29,15 +29,18 @@ public class PlayerManager : SingletonPersistent<PlayerManager>
 
     //键：职业索引 值：选择的技能
     public Dictionary<int, OptionalFeature> playerFeaturesDic = new Dictionary<int, OptionalFeature>();
-
-    //预加载法线数据
-    public List<AnimationTextureMapping> mappings = new List<AnimationTextureMapping>();
-
+    
     public bool hasMainBattary;
     //敌人需要的敌人列表 是玩家角色子物体
     public List<GameObject> gamePlayers = new List<GameObject>();
+    //预加载法线数据
+    public List<AnimationTextureMapping> mappings = new List<AnimationTextureMapping>();
 
-    //通过动画查找法线
+    /// <summary>
+    /// 通过动画名查找法线贴图
+    /// </summary>
+    /// <param name="animationName"></param>
+    /// <returns></returns>
     public Texture2D GetTextureByAnimationName(CharacterAnimation animationName)
     {
         foreach (var mapping in mappings)
