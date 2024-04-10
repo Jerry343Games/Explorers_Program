@@ -19,7 +19,7 @@ public class AttackBatteryFish : Enemy
             //Attack();
             //if (enemyAI.GetCurrentTarget() == null) return;
             animator.Play("Attack");
-            Invoke(nameof(Attack), GetAnimatorLength(animator, "Attack")/2);
+            Invoke(nameof(Attack), GetAnimatorLength(animator, "Attack")/1.5f);
         }
     }
     public  void Attack()
