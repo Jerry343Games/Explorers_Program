@@ -18,7 +18,9 @@ public class ElectricEel : Enemy
         {
 
             touchedCollision = collision;
-            Attack();
+            //Attack();
+            animator.Play("Attack");
+            Invoke(nameof(Attack), GetAnimatorLength(animator, "Attack")/1.5f);
         }
     }
     public  void Attack()

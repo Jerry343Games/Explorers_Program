@@ -95,11 +95,16 @@ public class Archerfish : Enemy
                 if (prepareTimer < prepareTime)//在准备射
                 {
                     attackArea.SetActive(true);
+                    float targetAngle = Mathf.Atan2(enemyAI.FinalMovement.y, enemyAI.FinalMovement.x) * Mathf.Rad2Deg;
+                    float angle = Mathf.SmoothDampAngle(attackArea.transform.eulerAngles.z, targetAngle, ref turnSmoothVelocity, turnSmoothTime);
+                    attackArea.transform.rotation = Quaternion.Euler(0f, 0f, angle);
+
+
                     prepareTimer += Time.deltaTime;
                 }
                 else//开始射
                 {
-                    
+                    animator.Play("Attack");
                     attackArea.SetActive(false);
                     prepareTimer = 0;
                     isShooting = true;
@@ -111,7 +116,7 @@ public class Archerfish : Enemy
                     Transform projectileTransform = projectile.transform;
 
                     // 将新物体的y方向设置为创建它的物体的x方向
-                    projectileTransform.up = transform.right;
+                    projectileTransform.up = enemyAI.FinalMovement;
                 }
 
             }
