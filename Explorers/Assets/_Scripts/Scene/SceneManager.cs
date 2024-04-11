@@ -109,6 +109,8 @@ public class SceneManager : Singleton<SceneManager>
             }
             //获得自选功能
             controller.feature = controller.playerInputSetting.feature;
+            controller.SetFeatureCD();
+
             controller.transform.position = bornTransform.position;
             //电池不连电池
             if (player == BatteryTransform.parent.gameObject)

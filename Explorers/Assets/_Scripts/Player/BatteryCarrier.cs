@@ -47,13 +47,6 @@ public class BatteryCarrier : PlayerController
         canOverload = true;
         PlayerManager.Instance.hasMainBattary = true; //通知电池加入，给其他职业监听以获得主电池
 
-        //switch 语法糖     
-        featureCD = feature switch
-        {
-            OptionalFeature.Logistics => logisticsCD,
-            OptionalFeature.Charging => chargeCD,
-            _ => 0,
-        };
     }
     void Update()
     {
@@ -245,5 +238,15 @@ public class BatteryCarrier : PlayerController
             }
         }
 
+    }
+
+    public override void SetFeatureCD()
+    {
+        featureCD = feature switch
+        {
+            OptionalFeature.Logistics => logisticsCD,
+            OptionalFeature.Charging => chargeCD,
+            _ => 0,
+        };
     }
 }

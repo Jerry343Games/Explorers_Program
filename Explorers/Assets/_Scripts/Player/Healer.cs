@@ -9,11 +9,11 @@ public class Healer : PlayerController
     public GameObject gun;
     public Transform shootTransform;
 
-    [Header("ҽ�߶������")]
+    [Header("医者")]
     private int mainWeaponChargedAmount;//"ҽ��"���ܴ���
     public int maxChargedAmount;//�����ܴ���
 
-    [Header("����ǹ")]
+    [Header("麻醉枪")]
     public WeaponDataSO tranquilizerWeaponData;
     //private int _currentTranquilizerAmmunition;
     public int tranquilizerPower;
@@ -21,7 +21,7 @@ public class Healer : PlayerController
     //private float _tranquilizerAttackTimer;
     public float tranquilizerEffectTime;
 
-    [Header("������̨")]
+    [Header("浮游炮台")]
     public WeaponDataSO fortWeaponData;
     public float fortExitTime;
     private float _fortExitTimer;
@@ -38,13 +38,6 @@ public class Healer : PlayerController
         //_currentTranquilizerAmmunition = tranquilizerWeaponData.initAmmunition;
         //canCallFort = true;
 
-        //switch 语法糖
-        featureCD = feature switch
-        {
-            OptionalFeature.TranquilizerGun => tranquilizerWeaponData.attackCD,
-            OptionalFeature.FloatingFort => fortCD,
-            _ => 0,
-        };
     }
     void Update()
     {
@@ -196,6 +189,7 @@ public class Healer : PlayerController
         }
         GameObject bullet = Instantiate(Resources.Load<GameObject>("Bullet"), transform.position, Quaternion.identity);
         bullet.GetComponent<Bullet>().Init(secondaryWeapons, new Vector3(transform.localScale.x, 0, 0));
+        MusicManager.Instance.PlaySound("射击");
         return true;
     }
 
@@ -249,6 +243,16 @@ public class Healer : PlayerController
                 hasExited = false;
             }
         }
+    }
+
+    public override void SetFeatureCD()
+    {
+        featureCD = feature switch
+        {
+            OptionalFeature.TranquilizerGun => tranquilizerWeaponData.attackCD,
+            OptionalFeature.FloatingFort => fortCD,
+            _ => 0,
+        };
     }
 
 

@@ -52,13 +52,6 @@ public class Fighter : PlayerController
         _myAniEventControl.OnFighterAttackEvent += OnHack;
         _myAniEventControl.EndFighterAttackEvent += EndHack;
 
-        //switch Óï·¨ÌÇ
-        featureCD = feature switch
-        {
-            OptionalFeature.SonicWave => sonicWaveCD,
-            OptionalFeature.Dash => dashCD,
-            _ => 0,
-        };
     }
 
     private void OnDestroy()
@@ -336,6 +329,16 @@ public class Fighter : PlayerController
     public override void Vertigo(Vector3 force, ForceMode forceMode = ForceMode.Impulse, float vertigoTime = 0.3F)
     {
         _rb.AddForce(force/2, forceMode);
+    }
+
+    public override void SetFeatureCD()
+    {
+        featureCD = feature switch
+        {
+            OptionalFeature.SonicWave => sonicWaveCD,
+            OptionalFeature.Dash => dashCD,
+            _ => 0,
+        };
     }
 
 }
