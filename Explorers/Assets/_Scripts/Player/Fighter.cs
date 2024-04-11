@@ -208,6 +208,9 @@ public class Fighter : PlayerController
         animator.CrossFade("FighterAttack",0);
         playerSprite.GetComponent<SpriteRenderer>().material.SetTexture("_Normal",
             PlayerManager.Instance.GetTextureByAnimationName(CharacterAnimation.FighterAttack));
+
+        MusicManager.Instance.PlaySound("Á´¾â¹¥»÷");
+
         return true;
     }
     public void AttackEffectDisable()

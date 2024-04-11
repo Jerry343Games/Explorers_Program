@@ -189,7 +189,7 @@ public class Healer : PlayerController
         }
         GameObject bullet = Instantiate(Resources.Load<GameObject>("Bullet"), transform.position, Quaternion.identity);
         bullet.GetComponent<Bullet>().Init(secondaryWeapons, new Vector3(transform.localScale.x, 0, 0));
-        MusicManager.Instance.PlaySound("射击");
+        MusicManager.Instance.PlaySound("手枪射击");
         return true;
     }
 

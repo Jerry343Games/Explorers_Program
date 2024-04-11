@@ -19,6 +19,11 @@ public class RandomGenerator : MonoBehaviour
 
     public int spawnCount;
 
+    private void Start()
+    {
+        GenerateObjectsInPoint();
+    }
+
     public GameObject GetRandomObject()
     {
         if (objectChances.Count == 0)
@@ -47,6 +52,7 @@ public class RandomGenerator : MonoBehaviour
             cumulativeWeight += objectChance.chance;
             if (randomPoint < cumulativeWeight)
             {
+                Debug.Log(1);
                 return objectChance.objectPrefab;
             }
         }

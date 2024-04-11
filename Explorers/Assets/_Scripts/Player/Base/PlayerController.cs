@@ -278,6 +278,9 @@ public class PlayerController : MonoBehaviour
         //设置绳子两边的牵引对象
         attachment[0].target = SceneManager.Instance.BatteryTransform;
         attachment[1].target = transform;
+
+        MusicManager.Instance.PlaySound("连接电缆");
+
     }
 
     /// <summary>
@@ -298,6 +301,8 @@ public class PlayerController : MonoBehaviour
             _hasConnected = false;
             //溶解效果
             GetComponent<CellBattery>().ChangeConnectState(_hasConnected);
+            MusicManager.Instance.PlaySound("断开电缆");
+
         }
     }
     
@@ -332,6 +337,8 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
+            MusicManager.Instance.PlaySound("电能护盾破碎");
+
             int damageToBattery = damage - currentArmor;
             GetComponent<Battery>().ChangePower(-damageToBattery);
             currentArmor = maxArmor;
@@ -454,6 +461,10 @@ public class PlayerController : MonoBehaviour
     public void SetDeadState(bool newState)
     {
         hasDead = newState;
+        if(hasDead)
+        {
+            MusicManager.Instance.PlaySound("角色电力耗尽");
+        }
     }
 
     /// <summary>
