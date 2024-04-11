@@ -163,7 +163,7 @@ public class Enemy : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         spawnerPoint = gameObject.transform.position;
         spriteRenderer = gameObject.GetComponentInChildren<SpriteRenderer>();
-       isFlipped = spriteRenderer.flipX;
+        isFlipped = spriteRenderer.flipX;
     }
     private void Update()
     {

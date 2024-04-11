@@ -31,13 +31,6 @@ public class Shooter : PlayerController
     void Start()
     {
         PlayerInit();
-        //switch 语法糖
-        featureCD = feature switch
-        {
-            OptionalFeature.Salvo => salvoCD,
-            OptionalFeature.DestroyTorpedoes=>torpedoesCD,
-            _=>1,
-        };
 
     }
     // Update is called once per frame
@@ -174,6 +167,16 @@ public class Shooter : PlayerController
         GameObject bullet = Instantiate(Resources.Load<GameObject>("Bullet"), transform.position, Quaternion.identity);
         bullet.GetComponent<Bullet>().Init(secondaryWeapons,gun.transform.forward);
         return true;
+    }
+
+    public override void SetFeatureCD()
+    {
+        featureCD = feature switch
+        {
+            OptionalFeature.Salvo => salvoCD,
+            OptionalFeature.DestroyTorpedoes => torpedoesCD,
+            _ => 1,
+        };
     }
 
     #region 自选功能
