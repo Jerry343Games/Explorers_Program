@@ -1,0 +1,38 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Wave
+  m_Shader: {fileID: 4800000, guid: 2c3c3f65d71596b428717b2600f3ec08, type: 3}
+  m_ValidKeywords: []
+  m_InvalidKeywords: []
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _MainTex:
+        m_Texture: {fileID: 2800000, guid: 830e1560983ff9b4dbd1f5556c38aad1, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats:
+    - _Cutoff: 0.5
+    - _DeformationAmount: 1
+    - _DeformationRadius: 0
+    - _HeightWaveFrequencey: 1
+    - _WaveFactor: 0.07
+    - _WaveSpeed: 1.39
+    - _WaveStrength: 3.05
+    m_Colors:
+    - _PlayerPosition: {r: 0, g: 0, b: 0, a: 1}
+  m_BuildTextureStacks: []

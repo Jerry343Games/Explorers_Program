@@ -133,7 +133,7 @@ public class Fighter : PlayerController
                         ReconnectRope();
                         
                         //重连后销毁重连提示气泡
-                        bubblePanel.reconnectCableBuffer.GetComponent<UIBubbleItem>().DestoryBubble();
+                        UIBubblePanel.Instance.reconnectCableBuffer.GetComponent<UIBubbleItem>().DestoryBubble();
                     }
                 }
                 break;
@@ -174,7 +174,7 @@ public class Fighter : PlayerController
                     _curDigRes = null;
                 }
                 //离开资源区域后销毁交互气泡
-                bubblePanel.interectBubbleBuffer.GetComponent<UIBubbleItem>().DestoryBubble();
+                UIBubblePanel.Instance.interectBubbleBuffer.GetComponent<UIBubbleItem>().DestoryBubble();
                 break;
             case "Enemy":
                 if(_enemyInArea.Contains(other.gameObject))
@@ -184,9 +184,9 @@ public class Fighter : PlayerController
                 break;
             case "ReconnectArea":
                 //离开重连区域后如果有重连气泡就销毁下
-                if (bubblePanel.reconnectCableBuffer)
+                if (UIBubblePanel.Instance.reconnectCableBuffer)
                 {
-                    bubblePanel.reconnectCableBuffer.GetComponent<UIBubbleItem>().DestoryBubble();    
+                    UIBubblePanel.Instance.reconnectCableBuffer.GetComponent<UIBubbleItem>().DestoryBubble();    
                 }
                 break;
             default:

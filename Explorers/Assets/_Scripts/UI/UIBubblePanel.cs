@@ -6,14 +6,18 @@ using UnityEngine.Serialization;
 
 public class BubbleInfo
 {
-    public BubbleType Type { get; set; }
+    public BubbleType Type { get; set; }//气泡类型
     public GameObject Obj1 { get; set; }
     public GameObject Obj2 { get; set; }
-    public string Content { get; set; }
+    public string Content { get; set; }//文本
 }
 
 public class UIBubblePanel : MonoBehaviour
 {
+    
+    // 创建静态实例变量
+    public static UIBubblePanel Instance { get; private set; }
+    
     public delegate void BubbleCreateHandler(BubbleInfo info);
     public event BubbleCreateHandler OnBubbleCreate;
 
@@ -28,6 +32,18 @@ public class UIBubblePanel : MonoBehaviour
     
     private void Awake()
     {
+        // 检查实例是否已存在
+        if (Instance == null)
+        {
+            // 如果实例不存在，则设置当前对象为实例
+            Instance = this;
+        }
+        else if (Instance != this)
+        {
+            // 如果当前实例不是已存在的实例，则销毁它
+            Destroy(gameObject);
+        }
+        
         OnBubbleCreate += HandleBubbleCreation;
     }
     

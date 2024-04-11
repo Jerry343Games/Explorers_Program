@@ -19,8 +19,8 @@ public class PlayerController : MonoBehaviour
     private SpriteRenderer _spriteRenderer;
     
     //气泡
-    [HideInInspector]
-    public UIBubblePanel bubblePanel;
+    //[HideInInspector]
+    //public UIBubblePanel bubblePanel;
     
     /// <summary>
     /// 玩家所分配到的唯一序列号,默认类型区分见枚举类
@@ -118,7 +118,7 @@ public class PlayerController : MonoBehaviour
         //feature = playerInputSetting.feature;
         Debug.Log(playerInputSetting.feature);
         
-        bubblePanel = GameObject.Find("BubblePanel").GetComponents<UIBubblePanel>()[0];
+        //bubblePanel = GameObject.Find("BubblePanel").GetComponents<UIBubblePanel>()[0];
         
         //选择关卡时使用UI键位映射，反之则用Player映射
         if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name=="SelectScene")
@@ -554,7 +554,7 @@ public class PlayerController : MonoBehaviour
                         Obj2 = other.gameObject,
                         Content = "采集"
                     };
-                    bubblePanel.CreateBubble(resInfo);
+                    UIBubblePanel.Instance.CreateBubble(resInfo);
                 }
                 break;
             case "ReconnectArea":
@@ -566,7 +566,7 @@ public class PlayerController : MonoBehaviour
                     Obj2= other.gameObject,
                     Content = "重新连接"
                 };
-                bubblePanel.CreateBubble(recInfo);
+                UIBubblePanel.Instance.CreateBubble(recInfo);
                 }
                 break;
             case "Chest":
@@ -579,7 +579,7 @@ public class PlayerController : MonoBehaviour
                         Obj2 = other.gameObject,
                         Content = "打开"
                     };
-                    bubblePanel.CreateBubble(recInfo);
+                    UIBubblePanel.Instance.CreateBubble(recInfo);
                 }
 
 
@@ -594,7 +594,7 @@ public class PlayerController : MonoBehaviour
     {
         isDigging = false;
         _curDigRes = null;
-        bubblePanel.interectBubbleBuffer.GetComponent<UIBubbleItem>().DestoryBubble();
+        UIBubblePanel.Instance.interectBubbleBuffer.GetComponent<UIBubbleItem>().DestoryBubble();
     }
     
     public void CheckKeys()

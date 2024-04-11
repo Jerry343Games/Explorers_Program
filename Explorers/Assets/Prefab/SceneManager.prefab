@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2112194313047903269}
   - component: {fileID: 2112194313047903266}
+  - component: {fileID: 6426847241708671556}
   m_Layer: 0
   m_Name: SceneManager
   m_TagString: SceneManager
@@ -55,8 +56,28 @@ MonoBehaviour:
     amount: 3
     taskUI: {fileID: 0}
     hasFinshed: 0
+  - type: 1
+    amount: 3
+    taskUI: {fileID: 0}
+    hasFinshed: 0
+  - type: 2
+    amount: 3
+    taskUI: {fileID: 0}
+    hasFinshed: 0
   resTasks:
   - type: 0
     amount: 2
     taskUI: {fileID: 0}
     hasFinshed: 0
+--- !u!114 &6426847241708671556
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2112194313047903267}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 015d6e331002e6c429687edd88b8c80a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

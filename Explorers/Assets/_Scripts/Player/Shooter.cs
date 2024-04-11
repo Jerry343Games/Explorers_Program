@@ -89,7 +89,7 @@ public class Shooter : PlayerController
                     if (playerInputSetting.GetCableButtonDown())
                     {
                         ReconnectRope();
-                        bubblePanel.reconnectCableBuffer.GetComponent<UIBubbleItem>().DestoryBubble();
+                        UIBubblePanel.Instance.reconnectCableBuffer.GetComponent<UIBubbleItem>().DestoryBubble();
                     }
                 }
                 break;
@@ -131,12 +131,12 @@ public class Shooter : PlayerController
                     _curDigRes = null;
 
                 }
-                bubblePanel.interectBubbleBuffer.GetComponent<UIBubbleItem>().DestoryBubble();
+                UIBubblePanel.Instance.interectBubbleBuffer.GetComponent<UIBubbleItem>().DestoryBubble();
                 break;
             case "ReconnectArea":
-                if (bubblePanel.reconnectCableBuffer)
+                if (UIBubblePanel.Instance.reconnectCableBuffer)
                 {
-                    bubblePanel.reconnectCableBuffer.GetComponent<UIBubbleItem>().DestoryBubble();    
+                    UIBubblePanel.Instance.reconnectCableBuffer.GetComponent<UIBubbleItem>().DestoryBubble();    
                 }
                 break;
         }

@@ -92,7 +92,7 @@ public class Healer : PlayerController
                 {
                     ReconnectRope();
                     //����������������ʾ����
-                    bubblePanel.reconnectCableBuffer.GetComponent<UIBubbleItem>().DestoryBubble();
+                    UIBubblePanel.Instance.reconnectCableBuffer.GetComponent<UIBubbleItem>().DestoryBubble();
                 }
                 break;
             //�ռ���������Ʒ
@@ -127,13 +127,13 @@ public class Healer : PlayerController
                     _curDigRes = null;
                 }
                 //�뿪��Դ��������ٽ�������
-                bubblePanel.interectBubbleBuffer.GetComponent<UIBubbleItem>().DestoryBubble();
+                UIBubblePanel.Instance.interectBubbleBuffer.GetComponent<UIBubbleItem>().DestoryBubble();
                 break;
             case "ReconnectArea":
                 //�뿪���������������������ݾ�������
-                if (bubblePanel.reconnectCableBuffer)
+                if (UIBubblePanel.Instance.reconnectCableBuffer)
                 {
-                    bubblePanel.reconnectCableBuffer.GetComponent<UIBubbleItem>().DestoryBubble();    
+                    UIBubblePanel.Instance.reconnectCableBuffer.GetComponent<UIBubbleItem>().DestoryBubble();    
                 }
                 break;
         }
