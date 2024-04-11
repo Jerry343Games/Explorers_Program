@@ -27,7 +27,8 @@ public enum CharacterAnimation
 {
     BatteryWalk,
     BatteryRun,
-    ShooterIdle,
+    ShooterLeft_Idle,
+    ShooterRight_Idle,
     ShooterLeft_Run,
     ShooterRight_Run,
     FighterWalk,

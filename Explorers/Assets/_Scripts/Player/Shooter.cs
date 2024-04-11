@@ -50,7 +50,8 @@ public class Shooter : PlayerController
         }
         CharacterMove();
         RestroeDefence();
-        MoveAnimationControlTest(CharacterAnimation.ShooterLeft_Run,CharacterAnimation.ShooterRight_Run,CharacterAnimation.ShooterIdle);
+        MoveAnimationControlTest(CharacterAnimation.ShooterLeft_Run,CharacterAnimation.ShooterRight_Run,CharacterAnimation.ShooterLeft_Idle,CharacterAnimation.ShooterRight_Idle);
+        WeaponLayerChange();
         UseItem();
         CheckDistanceToBattery();
         //CheckKeys();
@@ -155,6 +156,18 @@ public class Shooter : PlayerController
         bullet.GetComponent<Bullet>().Init(mainWeapon, gun.transform.forward);
         MusicManager.Instance.PlaySound("射击");
         return true;
+    }
+    
+    public void WeaponLayerChange()
+    {
+        if (_isAniLeft)
+        {
+            gun.transform.GetChild(0).GetComponent<SpriteRenderer>().sortingOrder = 1;
+        }
+        else
+        {
+            gun.transform.GetChild(0).GetComponent<SpriteRenderer>().sortingOrder = -1;
+        }
     }
 
     //���

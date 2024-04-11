@@ -41,6 +41,7 @@ public class PlayerController : MonoBehaviour
     private float _vertigoTimer = 0;
     private bool _canMove = true;//是否能移动
     public bool isMoveReverse = false;
+    public bool _isAniLeft = false;//动画向左
     [Header("护盾")]
     public int maxArmor;//电池护盾量
     [HideInInspector]
@@ -222,19 +223,19 @@ public class PlayerController : MonoBehaviour
         }
     }
     
-    public void MoveAnimationControlTest(CharacterAnimation run_left,CharacterAnimation run_right,CharacterAnimation idle)
+    public void MoveAnimationControlTest(CharacterAnimation run_left,CharacterAnimation run_right,CharacterAnimation idle_left,CharacterAnimation idle_right)
     {
         if (playerInputSetting.inputDir.x != 0)
         {
             if (playerInputSetting.inputDir.x < 0)
             {
-                //transform.localScale = new Vector3(1, 1, 1);
+                _isAniLeft = true;
                 animator.CrossFade(run_left.ToString(), 0f);
                 _spriteRenderer.material.SetTexture("_Normal", PlayerManager.Instance.GetTextureByAnimationName(run_left));
             }
             else
             {
-                //transform.localScale = new Vector3(1, 1, 1);
+                _isAniLeft = false;
                 animator.CrossFade(run_right.ToString(), 0f);
                 _spriteRenderer.material.SetTexture("_Normal", PlayerManager.Instance.GetTextureByAnimationName(run_right));
             }
@@ -242,10 +243,20 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
-            animator.CrossFade(idle.ToString(),0);
-            _spriteRenderer.material.SetTexture("_Normal", PlayerManager.Instance.GetTextureByAnimationName(idle));
+            if (_isAniLeft)
+            {
+                animator.CrossFade(idle_left.ToString(),0);
+                _spriteRenderer.material.SetTexture("_Normal", PlayerManager.Instance.GetTextureByAnimationName(idle_left));
+            }
+            else
+            {
+                animator.CrossFade(idle_right.ToString(),0);
+                _spriteRenderer.material.SetTexture("_Normal", PlayerManager.Instance.GetTextureByAnimationName(idle_right));
+            }
+            
         }
     }
+    
     
     /// <summary>
     /// 绳子重连方法
