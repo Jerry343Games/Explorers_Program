@@ -33,6 +33,11 @@ public class CameraTrace : MonoBehaviour
         _defaultView = Camera.main.fieldOfView;
     }
 
+    public void SetOriginalPos()
+    {
+        transform.position = new Vector3(SceneManager.Instance.bornTransform.position.x, SceneManager.Instance.bornTransform.position.y, transform.position.z);
+
+    }
     void LateUpdate()
     {
         TraceCenter();

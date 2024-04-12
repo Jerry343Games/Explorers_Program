@@ -64,6 +64,7 @@ public class SceneManager : Singleton<SceneManager>
     private void Start()
     {
         bornTransform = GameObject.FindGameObjectWithTag("Start").transform;
+        CameraTrace.instance.SetOriginalPos();
         foreach (var collection in FindObjectsOfType<CollectionItem>())
         {
             switch(collection.collectionType)
