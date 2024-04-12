@@ -54,6 +54,7 @@ public class DashFish : Enemy
         if (!canMove) return; // 确保玩家存在
         Vector2 distance = (target.transform.position - transform.position);
         Vector2 direction = enemyAI.FinalMovement; // 获取朝向玩家的单位向量
+        Vector2 targetDirection = distance.normalized;
         /*if (distance.magnitude > detectionRange && canMove)//如果丢失玩家并且能移动
         {
             ReturnSpawnpoint();
@@ -92,7 +93,7 @@ public class DashFish : Enemy
                 {
                     attackArea.SetActive(true);
                     //AxisLookAt(attackArea.transform, (Vector2)attackArea.transform.position + direction, Vector3.right);
-                    float targetAngle = Mathf.Atan2(enemyAI.FinalMovement.y, enemyAI.FinalMovement.x) * Mathf.Rad2Deg;
+                    float targetAngle = Mathf.Atan2(targetDirection.y, targetDirection.x) * Mathf.Rad2Deg;
                     float angle = Mathf.SmoothDampAngle(attackArea. transform.eulerAngles.z, targetAngle, ref turnSmoothVelocity, turnSmoothTime);
                     attackArea.transform.rotation = Quaternion.Euler(0f, 0f, angle);
                     attackArea.transform.position = transform.position + attackAraeOffset;
@@ -104,7 +105,7 @@ public class DashFish : Enemy
                     attackArea.SetActive(false);
                     prepareTimer = 0;
                     isDashing = true;
-                    rb.AddForce(direction * dashForce, ForceMode.Impulse);
+                    rb.AddForce(targetDirection * dashForce, ForceMode.Impulse);
                 }
 
 

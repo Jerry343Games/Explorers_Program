@@ -9,7 +9,10 @@ public class TargetDetector : Detector
 
     [SerializeField]
     private LayerMask obstaclesLayerMask, playerLayerMask;
-
+    [SerializeField]
+    private LayerMask enemyLayerMask;//用来检测周围敌人的
+    [SerializeField]
+    private float enemyDetectionRange = 5f;
     [SerializeField]
     private bool showGizmos = false;
 
@@ -21,21 +24,8 @@ public class TargetDetector : Detector
         //Find out if player is near
         Collider[] playerColliderList =
             Physics.OverlapSphere(transform.position, targetDetectionRange, playerLayerMask);
-        //*Collider playerCollider=null;
-        /*if (playerColliderList != null)
-        {
-            float minDistance = 99f;
-            foreach(var player in playerColliderList)
-            {
-                float currentDistance = (player.transform.position - transform.position).magnitude;
-                if ( currentDistance< minDistance)
-                {
-                    playerCollider = player;
-                    minDistance = currentDistance;
-                }
-                
-            }
-        }*/
+        Collider[] enemyColliderList =
+            Physics.OverlapSphere(transform.position, enemyDetectionRange, enemyLayerMask);
         if (playerColliderList != null)
         {
             colliders.Clear();
@@ -62,6 +52,15 @@ public class TargetDetector : Detector
             colliders.Clear();
         }
         aiData.targets = colliders;
+        if (enemyColliderList != null)
+        {
+            aiData.enemies.Clear();
+            foreach(var enemyCollider in enemyColliderList)
+            {
+                aiData.enemies.Add(enemyCollider);
+            }
+        }
+            
     }
 
     private void OnDrawGizmosSelected()

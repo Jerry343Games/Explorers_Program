@@ -120,6 +120,15 @@ public struct ImpactFactor
 }
 
 #endregion
+public enum EnemyType
+{
+    Piranha,
+    AttackBatteryFish,
+    ArcherFish,
+    ElectricEel,
+    Squid,
+    DashFish
+}
 public class Enemy : MonoBehaviour
 {
     // 可以之后加个存数据的结构体
@@ -158,6 +167,7 @@ public class Enemy : MonoBehaviour
     bool isFlipped;
     public SpriteRenderer spriteRenderer;
     public bool isDefaultLeft = false;
+    public EnemyType enemyType;
     protected virtual void Awake()
     {
         rb = GetComponent<Rigidbody>();

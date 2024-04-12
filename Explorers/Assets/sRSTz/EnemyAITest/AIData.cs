@@ -6,8 +6,9 @@ public class AIData : MonoBehaviour
 {
     public List<Transform> targets = null;
     public Collider[] obstacles = null;
-
+    public List<Collider> enemies = null;
     public Transform currentTarget;
 
     public int GetTargetsCount() => targets == null ? 0 : targets.Count;
+    
 }

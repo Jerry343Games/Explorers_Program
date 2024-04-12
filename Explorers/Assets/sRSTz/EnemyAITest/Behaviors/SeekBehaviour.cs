@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
+
+
 public class SeekBehaviour : SteeringBehaviour
 {
     [SerializeField]
@@ -10,7 +12,7 @@ public class SeekBehaviour : SteeringBehaviour
 
     [SerializeField]
     private bool showGizmo = true;
-
+   
     bool reachedLastTarget = true;
 
     //gizmo parameters

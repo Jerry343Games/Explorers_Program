@@ -51,6 +51,7 @@ public class Archerfish : Enemy
         if (!canMove) return;
         Vector2 distance = (target.transform.position - transform.position);
         Vector2 direction = enemyAI.FinalMovement; // 获取朝向玩家的单位向量
+        Vector2 targetDirection = distance.normalized;
         //如果距离大于射击范围，就进一步靠近玩家
         if (!isShooting&& Mathf.Pow(distance.x, 2) + Mathf.Pow(distance.y, 2) >= Mathf.Pow(shootDetectionRadius, 2))
         {
@@ -95,7 +96,7 @@ public class Archerfish : Enemy
                 if (prepareTimer < prepareTime)//在准备射
                 {
                     attackArea.SetActive(true);
-                    float targetAngle = Mathf.Atan2(enemyAI.FinalMovement.y, enemyAI.FinalMovement.x) * Mathf.Rad2Deg;
+                    float targetAngle = Mathf.Atan2(targetDirection.y, targetDirection.x) * Mathf.Rad2Deg;
                     float angle = Mathf.SmoothDampAngle(attackArea.transform.eulerAngles.z, targetAngle, ref turnSmoothVelocity, turnSmoothTime);
                     attackArea.transform.rotation = Quaternion.Euler(0f, 0f, angle);
 
@@ -116,7 +117,7 @@ public class Archerfish : Enemy
                     Transform projectileTransform = projectile.transform;
 
                     // 将新物体的y方向设置为创建它的物体的x方向
-                    projectileTransform.up = enemyAI.FinalMovement;
+                    projectileTransform.up = targetDirection;
                 }
 
             }
