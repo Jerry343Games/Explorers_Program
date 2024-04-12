@@ -24,7 +24,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7808647220973782532}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 108, y: -80, z: 0}
+  m_LocalPosition: {x: 90, y: -80, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -78,7 +78,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   width: 3
   height: 4
-  pathRange: {x: 6, y: 9}
+  pathRange: {x: 8, y: 10}
   gridMarkers:
   - {fileID: 7808647221448297004}
   - {fileID: 7808647221961098158}
@@ -92,15 +92,17 @@ MonoBehaviour:
   - {fileID: 7808647221410274615}
   - {fileID: 7808647221368168823}
   - {fileID: 7808647221847224705}
-  roadStraightHorizontalPrefab: {fileID: 6943500453028790029, guid: 31740f78d5a19d94ea2223caf64ae3c0,
+  roadStraightHorizontalPrefabs:
+  - {fileID: 7571857504595995374, guid: c962e8527063735499fd216b149db833, type: 3}
+  roadStraightVerticalPrefabs:
+  - {fileID: 69395497882504998, guid: 91c828d6665d39844a996821b94c3bba, type: 3}
+  roadCrossPrefabs:
+  - {fileID: 6075765602208695660, guid: c22889866abcec742b2375a48a84f306, type: 3}
+  - {fileID: 1966564204002061449, guid: 35fd0475522672140917ffd44b065f34, type: 3}
+  - {fileID: 6304370941909727341, guid: c09a71feddef2ca418df731e4f2ff7f7, type: 3}
+  startPrefab: {fileID: 6532628193584150280, guid: b1af6cf2cfc14194aabc551e46b5a3cd,
     type: 3}
-  roadStraightVerticalPrefab: {fileID: 8136364609732880463, guid: 777d1ab11e1a7f34291a0f91f343930d,
-    type: 3}
-  roadCrossPrefab: {fileID: 6822007767236733127, guid: 67dff4ca4293fea4faa85e6330de5be8,
-    type: 3}
-  startPrefab: {fileID: 3334056769537789656, guid: 8eafc10229d1ca840b2a8048723243f8,
-    type: 3}
-  endPrefab: {fileID: 786734206362061277, guid: ebd727a7d2f3a3940ac719897726584e,
+  endPrefab: {fileID: 1256686816964422478, guid: 3e8f51128b3379b4cafa627680f231ee,
     type: 3}
   defaultPrefab: {fileID: 884513655501073954, guid: 71a4d7e17d31fef4c8d0aeae60cdd921,
     type: 3}
@@ -159,7 +161,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7808647221347591310}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 108, y: -40, z: 0}
+  m_LocalPosition: {x: 90, y: -40, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -190,7 +192,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7808647221368168823}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 54, y: -120, z: 0}
+  m_LocalPosition: {x: 45, y: -120, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -326,7 +328,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7808647221847224705}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 108, y: -120, z: 0}
+  m_LocalPosition: {x: 90, y: -120, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -357,7 +359,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7808647221961098158}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 54, y: 0, z: 0}
+  m_LocalPosition: {x: 45, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -388,7 +390,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7808647222039193572}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 108, y: 0, z: 0}
+  m_LocalPosition: {x: 90, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -419,7 +421,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7808647222149286912}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 54, y: -80, z: 0}
+  m_LocalPosition: {x: 45, y: -80, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -481,7 +483,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7808647222731554503}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 54, y: -40, z: 0}
+  m_LocalPosition: {x: 45, y: -40, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

@@ -15,9 +15,9 @@ public class MapGenerator : MonoBehaviour
     private List<Vector2Int> path = new List<Vector2Int>();
     
     public GameObject[] gridMarkers; // 预先在Unity编辑器中赋值
-    public GameObject roadStraightHorizontalPrefab; //水平道模型的预制体
-    public GameObject roadStraightVerticalPrefab;
-    public GameObject roadCrossPrefab; // T形交叉道模型的预制体
+    public GameObject[] roadStraightHorizontalPrefabs; //水平道模型的预制体
+    public GameObject[] roadStraightVerticalPrefabs;
+    public GameObject[] roadCrossPrefabs; // T形交叉道模型的预制体
     public GameObject startPrefab; // 起点模型的预制体
     public GameObject endPrefab; // 终点模型的预制体
 
@@ -183,17 +183,17 @@ public class MapGenerator : MonoBehaviour
         }
         else
         {
-            // 如果不是起点或终点，根据道路类型放置道路模型
-            switch(roadType)
+            // 根据道路类型随机选择一个预制体
+            switch (roadType)
             {
                 case "Vertical":
-                    prefabToPlace = roadStraightVerticalPrefab;
+                    prefabToPlace = roadStraightVerticalPrefabs[Random.Range(0, roadStraightVerticalPrefabs.Length)];
                     break;
                 case "Horizontal":
-                    prefabToPlace = roadStraightHorizontalPrefab;
+                    prefabToPlace = roadStraightHorizontalPrefabs[Random.Range(0, roadStraightHorizontalPrefabs.Length)];
                     break;
                 case "Crossroads":
-                    prefabToPlace = roadCrossPrefab;
+                    prefabToPlace = roadCrossPrefabs[Random.Range(0, roadCrossPrefabs.Length)];
                     break;
                 case "None":
                     prefabToPlace = defaultPrefab;
@@ -202,7 +202,7 @@ public class MapGenerator : MonoBehaviour
             }
         }
 
-        if(prefabToPlace != null)
+        if (prefabToPlace != null)
         {
             Instantiate(prefabToPlace, marker.transform.position, Quaternion.identity, marker.transform);
         }
