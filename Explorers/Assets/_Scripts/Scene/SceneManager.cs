@@ -3,12 +3,13 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics.Tracing;
 using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 
 
 
 [Serializable]
-public struct CollectionTask//收集物任务
+public class CollectionTask//收集物任务
 {
     public CollectionType type;
     public int amount;
@@ -16,7 +17,7 @@ public struct CollectionTask//收集物任务
     public bool hasFinshed;
 }
 [Serializable]
-public struct ResTask//采集资源任务
+public class ResTask//采集资源任务
 {
     public ResourceType type;
     public int amount;
@@ -58,6 +59,34 @@ public class SceneManager : Singleton<SceneManager>
         maxPlayer = PlayerManager.Instance.players.Count;
         Slover = GameObject.Find("Solver");
         _players = GameObject.FindGameObjectsWithTag("BasePlayer");
+    }
+
+    private void Start()
+    {
+        foreach(var collection in FindObjectsOfType<CollectionItem>())
+        {
+            switch(collection.collectionType)
+            {
+                case CollectionType.PowerFurnaceParts:
+                    collectionTasks[0].amount++;
+                    break;
+                case CollectionType.Antenna:
+                    collectionTasks[1].amount++;
+                    break;
+                case CollectionType.StorageAreaShell:
+                    collectionTasks[2].amount++;
+                    break;
+                default:
+                    break;
+            }
+        }
+        foreach(var task in collectionTasks)
+        {
+            task.taskUI.GetComponent<UICollectionPanel>().Init();
+        }
+
+
+
     }
 
     void Update()
@@ -135,41 +164,5 @@ public class SceneManager : Singleton<SceneManager>
             controller.SetRope(obiRope);
         }
     }
-    
-    ///// <summary>
-    ///// 注册玩家
-    ///// </summary>
-    ///// <param name="player"></param>
-    //public void RegisterPlayer(GameObject player)
-    //{
-    //    Debug.Log("Register Player");
-    //    players.Add(player);
-    //}
-    
-    ///// <summary>
-    ///// 获得最后一个注册的玩家
-    ///// </summary>
-    ///// <returns></returns>
-    //public GameObject GetLatestPlayer()
-    //{
-    //    if (players.Count > 0)
-    //    {
-    //        Debug.Log("GetLastPlayer");
-    //        return players[players.Count - 1];
-    //    }
-
-    //    return null;
-    //}
-
-    ///// <summary>
-    ///// 销毁所有玩家
-    ///// </summary>
-    //public void DestoryAllPlayers()
-    //{
-    //    foreach(GameObject player in players)
-    //    {
-    //        Destroy(player);
-    //    }
-    //    players.Clear();
-    //}
+   
 }

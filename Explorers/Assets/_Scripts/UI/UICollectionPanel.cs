@@ -28,15 +28,10 @@ public class UICollectionPanel : MonoBehaviour
     }
     private void Update()
     {
-        if (sceneManager.isMaxPlayer && !hasInit)
-        {
-            Init(); //如果需要随机的收集物啥的再搞 现在固定
-            hasInit = true;
-        }
         SetResUI();
 
     }
-    private void Init()
+    public void Init()
     {
         currentNum = 0;
         maxNum = sceneManager.collectionTasks.Find(x => x.type == collectionType).amount;
