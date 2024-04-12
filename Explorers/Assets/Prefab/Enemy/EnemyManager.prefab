@@ -44,17 +44,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74824041f7030fc43aef852541d201ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  players: []
   battery: {fileID: 0}
   spawners: []
-  enemisToSpawn:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  enemySpwanGroups:
+  - enemyGroup: {fileID: 2564897410854749535, guid: f3c00f245cb02da43acd538818de338f,
+      type: 3}
+    spwanWeight: 5
+  - enemyGroup: {fileID: 8951840470830353399, guid: 86168afc590d8f5409ebc320d33f473d,
+      type: 3}
+    spwanWeight: 2
+  - enemyGroup: {fileID: 5516522003751727047, guid: 1c20deb7100bad042980d4130a0b2d65,
+      type: 3}
+    spwanWeight: 2
+  - enemyGroup: {fileID: 5892522718014581413, guid: 8e4d08ddba0a24640a02597b76e98a39,
+      type: 3}
+    spwanWeight: 1
+  - enemyGroup: {fileID: 2564897410854749535, guid: f3c00f245cb02da43acd538818de338f,
+      type: 3}
+    spwanWeight: 5
+  spwanerDistanceToBattery: 2
+  maxEnemisCount: 40
+  spwanersNearToFar: []

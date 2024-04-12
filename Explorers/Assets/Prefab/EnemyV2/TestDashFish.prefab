@@ -232,7 +232,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74a008a1b55f1434e818f68c462b4f75, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  showGizmos: 1
+  showGizmos: 0
 --- !u!1 &5652795572578982944
 GameObject:
   m_ObjectHideFlags: 0
@@ -287,7 +287,8 @@ MonoBehaviour:
   enemyLayerMask:
     serializedVersion: 2
     m_Bits: 8
-  showGizmos: 1
+  enemyDetectionRange: 5
+  showGizmos: 0
 --- !u!1 &5652795572602904382
 GameObject:
   m_ObjectHideFlags: 0
@@ -333,7 +334,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetRechedThreshold: 1
-  showGizmo: 1
+  showGizmo: 0
   isSeekBatteryFirst: 0
 --- !u!1 &5652795572616776603
 GameObject:
@@ -414,7 +415,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   radius: 2
   agentColliderSize: 1
-  showGizmo: 1
+  showGizmo: 0
 --- !u!1 &5652795572929598223
 GameObject:
   m_ObjectHideFlags: 0
@@ -463,7 +464,7 @@ MonoBehaviour:
   layerMask:
     serializedVersion: 2
     m_Bits: 1024
-  showGizmos: 1
+  showGizmos: 0
 --- !u!1 &5652795573597667134
 GameObject:
   m_ObjectHideFlags: 0

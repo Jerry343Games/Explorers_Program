@@ -50,7 +50,7 @@ GameObject:
   - component: {fileID: 7599928205910551937}
   m_Layer: 3
   m_Name: TestPiranha
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -108,8 +108,8 @@ MonoBehaviour:
   - {fileID: 4462179797472911910}
   - {fileID: 4462179797927865590}
   aiData: {fileID: 4462179796799115252}
-  detectionDelay: 0.05
-  aiUpdateDelay: 0.06
+  detectionDelay: 0.1
+  aiUpdateDelay: 0.1
   attackDistance: 0.5
   movementInput: {x: 0, y: 0}
   movementDirectionSolver: {fileID: 4462179798035257391}
@@ -156,7 +156,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 3
   force: 15
-  HP: 10
+  HP: 5
   damage: 1
   canMove: 1
   vertigoTime: 0.2
@@ -221,7 +221,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   radius: 2
   agentColliderSize: 1
-  showGizmo: 1
+  showGizmo: 0
 --- !u!1 &4462179797472912344
 GameObject:
   m_ObjectHideFlags: 0
@@ -270,7 +270,7 @@ MonoBehaviour:
   layerMask:
     serializedVersion: 2
     m_Bits: 1024
-  showGizmos: 1
+  showGizmos: 0
 --- !u!1 &4462179797927865591
 GameObject:
   m_ObjectHideFlags: 0
@@ -326,7 +326,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 0
   enemyDetectionRange: 5
-  showGizmos: 1
+  showGizmos: 0
 --- !u!1 &4462179797953884137
 GameObject:
   m_ObjectHideFlags: 0
@@ -372,7 +372,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetRechedThreshold: 1
-  showGizmo: 1
+  showGizmo: 0
   isSeekBatteryFirst: 0
 --- !u!1 &4462179797965732684
 GameObject:
@@ -451,7 +451,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74a008a1b55f1434e818f68c462b4f75, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  showGizmos: 1
+  showGizmos: 0
 --- !u!1 &6349775086248869460
 GameObject:
   m_ObjectHideFlags: 0
