@@ -63,7 +63,8 @@ public class SceneManager : Singleton<SceneManager>
 
     private void Start()
     {
-        foreach(var collection in FindObjectsOfType<CollectionItem>())
+        bornTransform = GameObject.FindGameObjectWithTag("Start").transform;
+        foreach (var collection in FindObjectsOfType<CollectionItem>())
         {
             switch(collection.collectionType)
             {

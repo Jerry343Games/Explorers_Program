@@ -23,7 +23,7 @@ public class MapGenerator : MonoBehaviour
 
     public GameObject defaultPrefab;
 
-    void Start()
+    void Awake()
     {
         GenerateMap();
     }
