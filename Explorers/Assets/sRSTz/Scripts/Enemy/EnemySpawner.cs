@@ -42,7 +42,7 @@ public class EnemySpawner : MonoBehaviour
     /// <returns></returns>
     public bool SpwanOnce(GameObject gameObject)
     {
-        Debug.Log("prepareToSpwan");
+        
         if (GetClosestPlayerDistance() < spawnRadius || !HasTimerArrived()) return false;
         else
         {
