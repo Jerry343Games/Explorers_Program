@@ -36,7 +36,7 @@ public class EnemyAvoidBehavior : SteeringBehaviour
                 //override value only if it is higher than the current one stored in the danger array
                 //先把所有敌人的回避因子加到danger里（先累加，结果最高到1）
                 danger[i] = danger[i] + valueToPutIn > 0.5f ? 0.5f: danger[i] + valueToPutIn;
-                Debug.Log(danger[i]);
+               
                 /*if (valueToPutIn > danger[i])
                 {
                     danger[i] = valueToPutIn;

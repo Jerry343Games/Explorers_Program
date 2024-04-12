@@ -134,7 +134,11 @@ MonoBehaviour:
   playerLayerMask:
     serializedVersion: 2
     m_Bits: 64
-  showGizmos: 1
+  enemyLayerMask:
+    serializedVersion: 2
+    m_Bits: 0
+  enemyDetectionRange: 5
+  showGizmos: 0
 --- !u!1 &902359331782052849
 GameObject:
   m_ObjectHideFlags: 0
@@ -180,7 +184,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetRechedThreshold: 1
-  showGizmo: 1
+  showGizmo: 0
   isSeekBatteryFirst: 0
 --- !u!1 &902359331804815188
 GameObject:
@@ -259,7 +263,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74a008a1b55f1434e818f68c462b4f75, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  showGizmos: 1
+  showGizmos: 0
 --- !u!1 &902359332377315264
 GameObject:
   m_ObjectHideFlags: 0
@@ -308,7 +312,7 @@ MonoBehaviour:
   layerMask:
     serializedVersion: 2
     m_Bits: 1024
-  showGizmos: 1
+  showGizmos: 0
 --- !u!1 &902359332495822822
 GameObject:
   m_ObjectHideFlags: 0
@@ -355,7 +359,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   radius: 2
   agentColliderSize: 1
-  showGizmo: 1
+  showGizmo: 0
 --- !u!1 &902359332785826801
 GameObject:
   m_ObjectHideFlags: 0
@@ -410,6 +414,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   targets: []
   obstacles: []
+  enemies: []
   currentTarget: {fileID: 0}
 --- !u!114 &902359332785826797
 MonoBehaviour:
@@ -496,6 +501,7 @@ MonoBehaviour:
   animator: {fileID: 2088409268705304300}
   spriteRenderer: {fileID: 6838584531539212232}
   isDefaultLeft: 1
+  enemyType: 0
   reverseTime: 5
 --- !u!1 &902359333741147090
 GameObject:
@@ -528,7 +534,6 @@ Transform:
   - {fileID: 902359331782052848}
   - {fileID: 902359332495822820}
   - {fileID: 902359331864263736}
-  - {fileID: 6345947382005477955}
   m_Father: {fileID: 902359332785826800}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -637,47 +642,3 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!1 &6345947382005477952
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 6345947382005477955}
-  - component: {fileID: 6345947382005477954}
-  m_Layer: 3
-  m_Name: DashBehavior
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &6345947382005477955
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6345947382005477952}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 902359333741147089}
-  m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6345947382005477954
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6345947382005477952}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e6e4ba58e4800454c86debe08682feff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

@@ -87,6 +87,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   targets: []
   obstacles: []
+  enemies: []
   currentTarget: {fileID: 0}
 --- !u!114 &1936099003532618533
 MonoBehaviour:
@@ -153,13 +154,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cafcaca17f41b384a9789e318ac85ee2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 2
+  moveSpeed: 4
   force: 10
   HP: 10
   damage: 10
   canMove: 1
   vertigoTime: 0.2
-  detectionRange: 5
+  detectionRange: 8
   stayTime: 4
   isReturning: 0
   stayTimer: 0
@@ -173,6 +174,7 @@ MonoBehaviour:
   animator: {fileID: 2069621772}
   spriteRenderer: {fileID: 0}
   isDefaultLeft: 1
+  enemyType: 0
 --- !u!1 &1936099003940882184
 GameObject:
   m_ObjectHideFlags: 0
@@ -221,7 +223,7 @@ MonoBehaviour:
   layerMask:
     serializedVersion: 2
     m_Bits: 1024
-  showGizmos: 1
+  showGizmos: 0
 --- !u!1 &1936099004292370222
 GameObject:
   m_ObjectHideFlags: 0
@@ -268,7 +270,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   radius: 2
   agentColliderSize: 1
-  showGizmo: 1
+  showGizmo: 0
 --- !u!1 &1936099004454452465
 GameObject:
   m_ObjectHideFlags: 0
@@ -313,7 +315,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74a008a1b55f1434e818f68c462b4f75, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  showGizmos: 1
+  showGizmos: 0
 --- !u!1 &1936099004559673383
 GameObject:
   m_ObjectHideFlags: 0
@@ -358,14 +360,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f91ddcb468aa644c90a3f75961e4daf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetDetectionRange: 5
+  targetDetectionRange: 8
   obstaclesLayerMask:
     serializedVersion: 2
     m_Bits: 1088
   playerLayerMask:
     serializedVersion: 2
     m_Bits: 64
-  showGizmos: 1
+  enemyLayerMask:
+    serializedVersion: 2
+    m_Bits: 0
+  enemyDetectionRange: 5
+  showGizmos: 0
 --- !u!1 &1936099004647841692
 GameObject:
   m_ObjectHideFlags: 0
@@ -444,7 +450,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetRechedThreshold: 1
-  showGizmo: 1
+  showGizmo: 0
   isSeekBatteryFirst: 1
 --- !u!1 &3902515961492048535
 GameObject:
