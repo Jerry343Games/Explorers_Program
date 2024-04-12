@@ -18,20 +18,19 @@ public class MapGeneratorEditor : Editor
     {
         serializedObject.Update();
 
-        // 更新行列数以匹配新的地图尺寸
-        int rows = 4;      // 行数保持为4
-        int columns = 5;   // 列数更新为5
+        // Assuming the map is always a 3x4 grid as per the original requirement
+        int rows = 4;
+        int columns = 3;
 
-        // 检查网格标记数组的大小是否正确
-        if (gridMarkersProp.arraySize != rows * columns)
+        // Check if the array size is as expected
+        if(gridMarkersProp.arraySize != rows * columns)
         {
-            EditorGUILayout.HelpBox("网格标记数量不正确，预期为: " + (rows * columns) + " 实际为: " + gridMarkersProp.arraySize, MessageType.Error);
+            EditorGUILayout.HelpBox("不是3*4网格", MessageType.Error);
         }
         else
         {
             EditorGUI.BeginChangeCheck();
 
-            // 循环显示所有行和列的网格标记编辑器
             for (int i = 0; i < rows; i++)
             {
                 EditorGUILayout.BeginHorizontal();
@@ -50,9 +49,11 @@ public class MapGeneratorEditor : Editor
             }
         }
 
-        // 绘制默认检查器其余部分
+        // Draw the rest of the default inspector
         DrawDefaultInspector();
     }
     
+    
+
 }
 

@@ -6,8 +6,8 @@ using UnityEngine.Serialization;
 
 public class MapGenerator : MonoBehaviour
 {
-    public int width = 4;
-    public int height = 5;
+    public int width = 3;
+    public int height = 4;
     private Vector2Int start;
     private Vector2Int end;
     [Header("路径长度范围")]
