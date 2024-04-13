@@ -63,7 +63,7 @@ public class EnemyManager : SingletonPersistent<EnemyManager>
 
         // }
         spwanersNearToFar = GetClosestGeneratorsOutsideDistance(spwanerDistanceToBattery);
-        for (int i = 0; i < 3; i++)
+        for (int i = 0; i < 2; i++)
         {
             if (i > spwanersNearToFar.Count - 1) break;
             spwanersNearToFar[i].GetComponent<EnemySpawner>().SpwanOnce(SelectRandomMonster());
