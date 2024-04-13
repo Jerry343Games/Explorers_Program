@@ -40,18 +40,18 @@ public class EnemySpawner : MonoBehaviour
     /// </summary>
     /// <param name="prefab"></param>
     /// <returns></returns>
-    public bool SpwanOnce()
+    public bool SpwanOnce(GameObject gameObject)
     {
-
-        if (GetClosestPlayerDistance() < spawnRadius || !HasTimerArrived()) return false;
-        else
-        {
-            Debug.Log("22");
+        
+       // if (GetClosestPlayerDistance() < spawnRadius || !HasTimerArrived()) return false;
+       // else
+       // {
+            enemyPrefab = gameObject;
             Instantiate(enemyPrefab);
-            
+            enemyPrefab.transform.position = transform.position;
             enemyPrefab = null;
             return true;
-        }
+       // }
     }
     /// <summary>
     /// 检查是否到达生成时间
@@ -79,7 +79,7 @@ public class EnemySpawner : MonoBehaviour
         foreach (var character in PlayerManager.Instance.gamePlayers)
         {
             //if (character.CompareTag("Enemy")) continue;
-            float distanceToPlayer = Vector3.Distance(transform.position, character.transform.position);
+            float distanceToPlayer = Vector2.Distance(transform.position, character.transform.position);
             if (distanceToPlayer < closestDistance)
             {
                 closestDistance = distanceToPlayer;
