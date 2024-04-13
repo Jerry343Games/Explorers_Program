@@ -80,6 +80,10 @@ public class Healer : PlayerController
     private void OnTriggerEnter(Collider other)
     {
         CreatBubbleUI(other.gameObject);
+        if (other.gameObject.tag == "Item")
+        {
+            other.GetComponent<Item>().Apply(gameObject);
+        }
     }
     
     private void OnTriggerStay(Collider other)
@@ -95,10 +99,10 @@ public class Healer : PlayerController
                     UIBubblePanel.Instance.reconnectCableBuffer.GetComponent<UIBubbleItem>().DestoryBubble();
                 }
                 break;
-            //�ռ���������Ʒ
-            case "Item":
-                other.GetComponent<Item>().Apply(gameObject);
-                break;
+            ////�ռ���������Ʒ
+            //case "Item":
+            //    other.GetComponent<Item>().Apply(gameObject);
+            //    break;
             case "Resource":
                 
                 if (!isDigging && playerInputSetting.GetInteractButtonDown())

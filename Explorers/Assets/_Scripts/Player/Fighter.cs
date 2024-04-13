@@ -137,11 +137,11 @@ public class Fighter : PlayerController
                     }
                 }
                 break;
-            //收集到场景物品
-            case "Item":
-                if((other.transform.position-transform.position).magnitude<0.3f)
-                other.GetComponent<Item>().Apply(gameObject);
-                break;
+            ////收集到场景物品
+            //case "Item":
+            //    if((other.transform.position-transform.position).magnitude<0.3f)
+            //    other.GetComponent<Item>().Apply(gameObject);
+            //    break;
             case "Resource":
                 if(!isDigging&& playerInputSetting.GetInteractButtonDown())
                 {
@@ -159,6 +159,10 @@ public class Fighter : PlayerController
         if (other.gameObject.CompareTag("Enemy"))
         {
             _enemyInArea.Add(other.gameObject);
+        }
+        if (other.gameObject.tag == "Item")
+        {
+            other.GetComponent<Item>().Apply(gameObject);
         }
     }
     private void OnTriggerExit(Collider other)
