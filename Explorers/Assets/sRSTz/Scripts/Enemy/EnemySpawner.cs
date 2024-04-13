@@ -43,15 +43,15 @@ public class EnemySpawner : MonoBehaviour
     public bool SpwanOnce(GameObject gameObject)
     {
         
-        if (GetClosestPlayerDistance() < spawnRadius || !HasTimerArrived()) return false;
-        else
-        {
+       // if (GetClosestPlayerDistance() < spawnRadius || !HasTimerArrived()) return false;
+       // else
+       // {
             enemyPrefab = gameObject;
             Instantiate(enemyPrefab);
             enemyPrefab.transform.position = transform.position;
             enemyPrefab = null;
             return true;
-        }
+       // }
     }
     /// <summary>
     /// 检查是否到达生成时间

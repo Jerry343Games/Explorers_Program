@@ -28,16 +28,15 @@ public class EnemyManager : SingletonPersistent<EnemyManager>
     {
         InvokeRepeating("CheckEnemySpwan", 0, 1f);
     }
-    private void Update()
-    {
-        if (!canSpwanEnemy||spawners==null||spawners.Count==0||battery==null) return;
-        if(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name != "SelectScene"&&spawners.Count!=0)
-        SpawnEnemy();
-    }
+    
     public void CheckEnemySpwan()
     {
+        Debug.Log(GameObject.FindGameObjectsWithTag("Enemy").Length);
         if (GameObject.FindGameObjectsWithTag("Enemy").Length > maxEnemisCount) canSpwanEnemy = false;
         else canSpwanEnemy = true;
+        if (!canSpwanEnemy || spawners == null || spawners.Count == 0 || battery == null) return;
+        if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name != "SelectScene" && spawners.Count != 0)
+            SpawnEnemy();
     }
     public void SpawnEnemy()
     {
