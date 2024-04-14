@@ -200,28 +200,28 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     /// <param name="run">移动动画名</param>
     /// <param name="idle">待机动画名</param>
-    public void MoveAnimationControl(CharacterAnimation run,CharacterAnimation idle)
-    {
-        if (playerInputSetting.inputDir.x != 0)
-        {
-            if (playerInputSetting.inputDir.x < 0)
-            {
-                transform.localScale = new Vector3(1, 1, 1);
-            }
-            else
-            {
-                transform.localScale = new Vector3(-1, 1, 1);
-            }
-            //过渡动画、切换法线
-            animator.CrossFade(run.ToString(),0);
-            _spriteRenderer.material.SetTexture("_Normal", PlayerManager.Instance.GetTextureByAnimationName(run));
-        }
-        else
-        {
-            animator.CrossFade(idle.ToString(),0);
-            _spriteRenderer.material.SetTexture("_Normal", PlayerManager.Instance.GetTextureByAnimationName(idle));
-        }
-    }
+    //public void MoveAnimationControl(CharacterAnimation run,CharacterAnimation idle)
+    //{
+    //    if (playerInputSetting.inputDir.x != 0)
+    //    {
+    //        if (playerInputSetting.inputDir.x < 0)
+    //        {
+    //            transform.localScale = new Vector3(1, 1, 1);
+    //        }
+    //        else
+    //        {
+    //            transform.localScale = new Vector3(-1, 1, 1);
+    //        }
+    //        //过渡动画、切换法线
+    //        animator.CrossFade(run.ToString(),0);
+    //        _spriteRenderer.material.SetTexture("_Normal", PlayerManager.Instance.GetTextureByAnimationName(run));
+    //    }
+    //    else
+    //    {
+    //        animator.CrossFade(idle.ToString(),0);
+    //        _spriteRenderer.material.SetTexture("_Normal", PlayerManager.Instance.GetTextureByAnimationName(idle));
+    //    }
+    //}
     
     public void MoveAnimationControlTest(CharacterAnimation run_left,CharacterAnimation run_right,CharacterAnimation idle_left,CharacterAnimation idle_right)
     {
