@@ -394,8 +394,8 @@ GameObject:
   - component: {fileID: 3059179247859817993}
   - component: {fileID: 3059179247859817992}
   - component: {fileID: 3059179247859817996}
-  - component: {fileID: 9142559980172305566}
   - component: {fileID: 5041219446942751085}
+  - component: {fileID: 7837299486722973192}
   m_Layer: 3
   m_Name: Squid
   m_TagString: Enemy
@@ -477,39 +477,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 120
   m_CollisionDetection: 0
---- !u!114 &9142559980172305566
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3059179247859818004}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cafcaca17f41b384a9789e318ac85ee2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  moveSpeed: 4
-  force: 10
-  HP: 10
-  damage: 10
-  canMove: 1
-  vertigoTime: 0.2
-  detectionRange: 15
-  stayTime: 4
-  isReturning: 0
-  stayTimer: 0
-  target: {fileID: 0}
-  rb: {fileID: 0}
-  spawnerPoint: {x: 0, y: 0, z: 0}
-  canAttack: 1
-  enemyAI: {fileID: 3059179247859817992}
-  turnSmoothTime: 0.05
-  turnSmoothVelocity: 0
-  animator: {fileID: 3506620310813743393}
-  spriteRenderer: {fileID: 3506620310813743398}
-  isDefaultLeft: 0
-  enemyType: 0
 --- !u!136 &5041219446942751085
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -524,6 +491,42 @@ CapsuleCollider:
   m_Height: 0.61
   m_Direction: 0
   m_Center: {x: -0.01, y: -0.01, z: 0}
+--- !u!114 &7837299486722973192
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3059179247859818004}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4e9d14833a1c8d40971e7da0b9595f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveSpeed: 6
+  force: 10
+  HP: 10
+  damage: 10
+  canMove: 1
+  vertigoTime: 0.2
+  detectionRange: 5
+  stayTime: 4
+  isReturning: 0
+  stayTimer: 0
+  target: {fileID: 0}
+  rb: {fileID: 0}
+  spawnerPoint: {x: 0, y: 0, z: 0}
+  canAttack: 1
+  enemyAI: {fileID: 3059179247859817992}
+  turnSmoothTime: 0.05
+  turnSmoothVelocity: 0
+  animator: {fileID: 3506620310813743393}
+  isFlipped: 0
+  spriteRenderer: {fileID: 3506620310813743398}
+  isDefaultLeft: 0
+  enemyType: 4
+  shieldDisintegrationTime: 5
+  defenceDownRote: 1
 --- !u!1 &3059179248280225335
 GameObject:
   m_ObjectHideFlags: 0

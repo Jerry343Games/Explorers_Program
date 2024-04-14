@@ -481,7 +481,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c5824606b7edbf4681b3d0140a8d08b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 4
+  moveSpeed: 6
   force: 10
   HP: 10
   damage: 10
@@ -499,9 +499,10 @@ MonoBehaviour:
   turnSmoothTime: 0.05
   turnSmoothVelocity: 0
   animator: {fileID: 2088409268705304300}
+  isFlipped: 0
   spriteRenderer: {fileID: 6838584531539212232}
   isDefaultLeft: 1
-  enemyType: 0
+  enemyType: 3
   reverseTime: 5
 --- !u!1 &902359333741147090
 GameObject:
