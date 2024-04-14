@@ -75,8 +75,9 @@ public class BatteryCarrier : PlayerController
 
             }
         }
-        MoveAnimationControl(CharacterAnimation.BatteryRun,CharacterAnimation.BatteryWalk);
-        if(playerInputSetting.GetSelectCombination()==Vector3.right)
+        MoveAnimationControlTest(CharacterAnimation.BatteryLeft_Run, CharacterAnimation.BatteryRight_Run, CharacterAnimation.BatteryLeft_Walk, CharacterAnimation.BatteryRight_Walk);
+
+        if (playerInputSetting.GetSelectCombination()==Vector3.right)
         {
             selectedPlayer = FindObjectsOfType<PlayerController>().ToList().Find(x => x.gameObject.name == "Shooter");
         }

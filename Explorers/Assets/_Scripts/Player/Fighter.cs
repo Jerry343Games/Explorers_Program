@@ -79,7 +79,8 @@ public class Fighter : PlayerController
         //防止动画干扰，攻击结束后再做移动动画
         if (!_isAttack)
         {
-            MoveAnimationControl(CharacterAnimation.FighterRun,CharacterAnimation.FighterWalk);
+            MoveAnimationControlTest(CharacterAnimation.FighterLeft_Run, CharacterAnimation.FighterRight_Run, CharacterAnimation.FighterLeft_Walk, CharacterAnimation.FighterRight_Walk);
+
         }
         //UseItem();
         CheckDistanceToBattery();
@@ -211,7 +212,7 @@ public class Fighter : PlayerController
         //动画控制
         animator.CrossFade("FighterAttack",0);
         playerSprite.GetComponent<SpriteRenderer>().material.SetTexture("_Normal",
-            PlayerManager.Instance.GetTextureByAnimationName(CharacterAnimation.FighterAttack));
+            PlayerManager.Instance.GetTextureByAnimationName(CharacterAnimation.FighterLeft_Attack));//???可能存在问题
 
         MusicManager.Instance.PlaySound("链锯攻击");
 
