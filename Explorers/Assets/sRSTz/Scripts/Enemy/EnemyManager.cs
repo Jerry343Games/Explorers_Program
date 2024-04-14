@@ -61,7 +61,7 @@ public class EnemyManager : SingletonPersistent<EnemyManager>
 
 
         // }
-        spwanersNearToFar = GetClosestGeneratorsOutsideDistance(spwanerDistanceToBattery);
+        spwanersNearToFar = GetFilteredAndSortedGenerators(spwanerDistanceToBattery);
         for (int i = 0; i < 2; i++)
         {
             if (i > spwanersNearToFar.Count - 1) break;
@@ -95,16 +95,19 @@ public class EnemyManager : SingletonPersistent<EnemyManager>
         return enemySpwanGroups[enemySpwanGroups.Count - 1].enemyGroup;
     }
     //获得距离电池一定距离外的怪物生成点由近到远的排序
-    public List<Transform> GetClosestGeneratorsOutsideDistance(float distance)
+    public List<Transform> GetFilteredAndSortedGenerators(float distance)
     {
         List<Transform> generatorsOutsideDistance = new List<Transform>();
 
         foreach (var generator in spawners)
         {
-            float distanceToBattery = Vector3.Distance(generator.transform.position, battery.transform.position);
-            if (distanceToBattery > distance)
+            if (generator.transform.position.y < battery.transform.position.y) // 只保留 generator 的 y 坐标小于 battery 的 y 坐标的生成点
             {
-                generatorsOutsideDistance.Add(generator.transform);
+                float distanceToBattery = Vector2.Distance(generator.transform.position, battery.transform.position);
+                if (distanceToBattery > distance)
+                {
+                    generatorsOutsideDistance.Add(generator.transform);
+                }
             }
         }
 
@@ -115,5 +118,6 @@ public class EnemyManager : SingletonPersistent<EnemyManager>
 
         return generatorsOutsideDistance;
     }
+
 
 }

@@ -164,7 +164,7 @@ public class Enemy : MonoBehaviour
 
     public Animator animator;
     // 获取 SpriteRenderer 的当前翻转状态
-    bool isFlipped;
+    public bool isFlipped;
     public SpriteRenderer spriteRenderer;
     public bool isDefaultLeft = false;
     public EnemyType enemyType;

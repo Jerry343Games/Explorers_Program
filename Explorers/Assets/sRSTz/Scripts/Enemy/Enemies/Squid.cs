@@ -13,6 +13,13 @@ public class Squid : Enemy
         //GetClosestPlayer();
         Move();
     }
+    protected override void Awake()
+    {
+        rb = GetComponent<Rigidbody>();
+        spawnerPoint = gameObject.transform.position;
+        spriteRenderer = gameObject.GetComponentInChildren<SpriteRenderer>();
+        isFlipped = spriteRenderer.flipY;
+    }
     private void OnCollisionEnter(Collision collision)
     {
 
@@ -54,7 +61,34 @@ public class Squid : Enemy
 
             // 将人物的方向设置为计算得到的方向
             //gameObject.transform.right = direction;
-            EnemyRotate();
+            if (isDefaultLeft)
+            {
+                if (enemyAI.FinalMovement.x > 0 && !isFlipped) // 在 y 轴方向的右边，且当前没有翻转
+                {
+                    // 翻转 Sprite
+                    spriteRenderer.flipY = true;
+                    isFlipped = true;
+                }
+                else if (enemyAI.FinalMovement.x < 0 && isFlipped) // 在 y 轴方向的左边，且当前已经翻转
+                {
+                    // 取消翻转
+                    spriteRenderer.flipY = false;
+                    isFlipped = false;
+                }
+                return;
+            }
+            if (enemyAI.FinalMovement.x < 0 && !isFlipped) // 在 y 轴方向的左边，且当前没有翻转
+            {
+                // 翻转 Sprite
+                spriteRenderer.flipY = true;
+                isFlipped = true;
+            }
+            else if (enemyAI.FinalMovement.x > 0 && isFlipped) // 在 y 轴方向的右边，且当前已经翻转
+            {
+                // 取消翻转
+                spriteRenderer.flipY = false;
+                isFlipped = false;
+            }
         }
         /*
         else if(canMove) //如果丢失玩家并且能移动，那么回到出生点
