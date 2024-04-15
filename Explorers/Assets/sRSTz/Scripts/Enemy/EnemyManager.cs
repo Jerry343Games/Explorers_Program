@@ -40,34 +40,25 @@ public class EnemyManager : SingletonPersistent<EnemyManager>
     }
     public void SpawnEnemy()
     {
-
-        //for(int i = 0; i < spawners.Count; i++)
-        //{
-        /*if (spawners[i].isAlwaysSpawn)
+        if (GameObject.FindGameObjectsWithTag("Enemy").Length == 0)
         {
-            spawners[i].SpawnAlways(SelectRandomMonster());
+            Debug.Log("start enemy0");
+            foreach(var spwaner in spawners)
+            {
+                spwaner.SpwanOnce(SelectRandomMonster());
+            }
         }
-        else
-        {*/
-        //if (spawners[i].enemyPrefab == null)
-        //{
-        //   if (enemySpwanGroups.Count == 0) return;
-        //   spawners[i].enemyPrefab = SelectRandomMonster();
-
-        // } 
-        //  spawners[i].SpwanOnce();
-
-        //}
 
 
-        // }
+        /*
+        
         spwanersNearToFar = GetFilteredAndSortedGenerators(spwanerDistanceToBattery);
         for (int i = 0; i < 2; i++)
         {
             if (i > spwanersNearToFar.Count - 1) break;
             spwanersNearToFar[i].GetComponent<EnemySpawner>().SpwanOnce(SelectRandomMonster());
         }
-        
+        */
 
     }
 

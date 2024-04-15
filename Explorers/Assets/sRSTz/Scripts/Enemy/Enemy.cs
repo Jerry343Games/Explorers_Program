@@ -332,10 +332,10 @@ public class Enemy : MonoBehaviour
         float length = 0;
 
         AnimationClip[] clips = animator.runtimeAnimatorController.animationClips;
-        Debug.Log(clips.Length);
+        
         foreach (AnimationClip clip in clips)
         {
-            Debug.Log(clip.name);
+            
             if (clip.name.Equals(name))
             {
                 length = clip.length;

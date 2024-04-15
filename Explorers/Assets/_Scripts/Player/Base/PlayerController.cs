@@ -361,7 +361,7 @@ public class PlayerController : MonoBehaviour
             {
                 defenceDownTimer += Time.deltaTime;
                 //µô¼×
-                currentArmor -= (int)(downRate * Time.deltaTime);
+                currentArmor -= (int)(downRate * Time.deltaTime*50);
                 currentArmor = Math.Max(currentArmor, 0);
                 Debug.Log("¸¯Ê´×´Ì¬£¬µ±Ç°»¤¼×Öµ£º" + currentArmor);
             }

@@ -43,6 +43,7 @@ public class Fighter : PlayerController
     //private bool canDash;
     public float dashCD;
     public GameObject attcakAreaSprite;
+    public GameObject attackAreaCollider;
     void Start()
     {
         _rb = GetComponent<Rigidbody>();
@@ -65,6 +66,19 @@ public class Fighter : PlayerController
         if (hasDead) return;
         UpdateAttackState();
         UpdateFeatureState();
+        if (playerInputSetting.inputDir.x != 0)
+        {
+            if (playerInputSetting.inputDir.x < 0)
+            {
+                attackAreaCollider.transform.rotation = Quaternion.Euler(0, -180, 0);
+                attcakAreaSprite.transform.rotation = Quaternion.Euler(0, 0, 0);
+            }
+            else
+            {
+                attackAreaCollider.transform.rotation = Quaternion.Euler(0, 0, 0);
+                attcakAreaSprite.transform.rotation = Quaternion.Euler(0, -180, 0);
+            }
+        }
         if (playerInputSetting.GetAttackButtonDown())
         {           
             MainAttack();
@@ -89,7 +103,7 @@ public class Fighter : PlayerController
         if (isDashing)
         {
             _rb.angularVelocity = Vector3.zero;
-            if (_dashTimer < dashTime)
+            if (_dashTimer < dashTime&&_rb.velocity.magnitude>0.1f)
             {
                 _dashTimer += Time.deltaTime;
             }
@@ -208,11 +222,26 @@ public class Fighter : PlayerController
         
         _isAttack = true;
         attcakAreaSprite.SetActive(true);
-        Invoke(nameof(AttackEffectDisable), Enemy.GetAnimatorLength(attcakAreaSprite.GetComponent<Animator>(), "FighterAttack"));
+        Invoke(nameof(AttackEffectDisable), Enemy.GetAnimatorLength(attcakAreaSprite.GetComponentInChildren<Animator>(), "FighterAttack"));
         //动画控制
         animator.CrossFade("FighterAttack",0);
         playerSprite.GetComponent<SpriteRenderer>().material.SetTexture("_Normal",
             PlayerManager.Instance.GetTextureByAnimationName(CharacterAnimation.FighterLeft_Attack));//???可能存在问题
+        if (_isAniLeft)
+        {
+            animator.CrossFade("FighterLeft_Attack", 0f);
+            playerSprite.GetComponent<SpriteRenderer>().material.SetTexture("_Normal",
+            PlayerManager.Instance.GetTextureByAnimationName(CharacterAnimation.FighterLeft_Attack));//???可能存在问题
+        }
+        else
+        {
+            animator.CrossFade("FighterRight_Attack", 0f);
+            playerSprite.GetComponent<SpriteRenderer>().material.SetTexture("_Normal",
+            PlayerManager.Instance.GetTextureByAnimationName(CharacterAnimation.FighterRight_Attack));//???可能存在问题
+        }
+
+
+
 
         MusicManager.Instance.PlaySound("链锯攻击");
 
@@ -221,19 +250,21 @@ public class Fighter : PlayerController
     public void AttackEffectDisable()
     {
         attcakAreaSprite.SetActive(false);
+        _isAttack = false;
     }
     /// <summary>
     /// 由帧动画事件触发实际的伤害结算
     /// </summary>
     private void OnHack()
     {
+        Debug.Log("hit" + _enemyInArea.Count);
         if (_enemyInArea.Count == 0) return;
-        Debug.Log(_enemyInArea.Count);
+        
 
         for (int i = 0; i < _enemyInArea.Count; i++)
         {
             _enemyInArea[i].GetComponent<Enemy>().TakeDamage((int)mainWeapon.attackDamage);
-            _enemyInArea[i].GetComponent<Enemy>().Vertigo(transform.GetChild(0).transform.forward*force);
+            _enemyInArea[i].GetComponent<Enemy>().Vertigo(attackAreaCollider.transform.right.normalized*force);
             if (_enemyInArea[i].GetComponent<Enemy>().HP <= 0) _enemyInArea.RemoveAt(i);
             /*
             if (isLeft)
@@ -262,7 +293,7 @@ public class Fighter : PlayerController
         if (hasUseBomb) return false; 
         hasUseBomb = true;
         GameObject bomb = Instantiate(Resources.Load<GameObject>("Bomb"), transform.position, Quaternion.identity);
-        bomb.GetComponent<Bomb>().Init(secondaryWeapons, transform.GetChild(0).transform.forward);
+        bomb.GetComponent<Bomb>().Init(secondaryWeapons, attackAreaCollider.transform.right);
         return true;
     }
 
@@ -304,11 +335,13 @@ public class Fighter : PlayerController
     {
         if (isDigging) return;
         if (!canUseFeature) return;
-        canUseFeature = false;
-        _featureCDTimer = featureCD;
+        
+        
         Vector3 moveDir = new Vector3(playerInputSetting.inputDir.x, playerInputSetting.inputDir.y, 0).normalized;
         if (moveDir.Equals(Vector3.zero)) return;
         isDashing = true;
+        canUseFeature = false;
+        _featureCDTimer = featureCD;
         //_rb.isKinematic = true;
         _rb.mass = 5;
         _rb .AddForce(moveDir * dashForce, ForceMode.VelocityChange);
