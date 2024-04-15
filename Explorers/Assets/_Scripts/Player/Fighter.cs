@@ -103,7 +103,7 @@ public class Fighter : PlayerController
         if (isDashing)
         {
             _rb.angularVelocity = Vector3.zero;
-            if (_dashTimer < dashTime)
+            if (_dashTimer < dashTime&&_rb.velocity.magnitude>0.1f)
             {
                 _dashTimer += Time.deltaTime;
             }
@@ -264,7 +264,7 @@ public class Fighter : PlayerController
         for (int i = 0; i < _enemyInArea.Count; i++)
         {
             _enemyInArea[i].GetComponent<Enemy>().TakeDamage((int)mainWeapon.attackDamage);
-            _enemyInArea[i].GetComponent<Enemy>().Vertigo(attackAreaCollider.transform.right*force);
+            _enemyInArea[i].GetComponent<Enemy>().Vertigo(attackAreaCollider.transform.right.normalized*force);
             if (_enemyInArea[i].GetComponent<Enemy>().HP <= 0) _enemyInArea.RemoveAt(i);
             /*
             if (isLeft)
