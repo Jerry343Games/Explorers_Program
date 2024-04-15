@@ -98,7 +98,7 @@ public class Healer : PlayerController
                 {
                     ReconnectRope();
                     //����������������ʾ����
-                    UIBubblePanel.Instance.reconnectCableBuffer.GetComponent<UIBubbleItem>().DestoryBubble();
+                    //UIBubblePanel.Instance.reconnectCableBuffer.GetComponent<UIBubbleItem>().DestoryBubble();
                 }
                 break;
             ////�ռ���������Ʒ
