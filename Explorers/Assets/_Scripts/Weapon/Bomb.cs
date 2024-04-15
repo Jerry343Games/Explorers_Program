@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem.XR;
 
 public class Bomb : MonoBehaviour
 {
@@ -18,6 +19,7 @@ public class Bomb : MonoBehaviour
     private bool hasPrepare = false;
     List<GameObject> characters = new();
     public float force = 5f;
+    private PlayerController _controller;
     private void Awake()
     {
         _rb = GetComponent<Rigidbody>();
@@ -25,8 +27,9 @@ public class Bomb : MonoBehaviour
         
     }
 
-    public void Init(WeaponDataSO data,Vector3 dir,float prepareTime = 1f)
+    public void Init(WeaponDataSO data,Vector3 dir,float prepareTime = 1f, PlayerController controller=null)
     {
+        _controller = controller;
         _damage = data.attackDamage;
         _speed = data.attackSpeed;
         _destroyTime = data.attackRange / 60f;
@@ -61,7 +64,9 @@ public class Bomb : MonoBehaviour
                 character.GetComponent<Enemy>().Vertigo(forceDirection * force);
                 character.GetComponent<Enemy>().TakeDamage(20);
             }
+            (_controller as Fighter).hasUseBomb = false;
             Destroy(gameObject);
+
         }
         
     }

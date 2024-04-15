@@ -17,7 +17,7 @@ public class Fighter : PlayerController
     public int tempArmor;//¡Ÿ ±ª§∂‹
     public bool canFusionBomb = true;
     private Rigidbody _rb;
-    private bool hasUseBomb = false;
+    public bool hasUseBomb = false;
     private bool _isAttack;
     private AniEventControl _myAniEventControl;
 
@@ -293,7 +293,7 @@ public class Fighter : PlayerController
         if (hasUseBomb) return false; 
         hasUseBomb = true;
         GameObject bomb = Instantiate(Resources.Load<GameObject>("Bomb"), transform.position, Quaternion.identity);
-        bomb.GetComponent<Bomb>().Init(secondaryWeapon, attackAreaCollider.transform.right);
+        bomb.GetComponent<Bomb>().Init(secondaryWeapon, attackAreaCollider.transform.right,1,this);
         return true;
     }
 
@@ -335,8 +335,9 @@ public class Fighter : PlayerController
     {
         if (isDigging) return;
         if (!canUseFeature) return;
-        
-        
+        canUseFeature = false;
+        _featureCDTimer = featureCD;
+
         Vector3 moveDir = new Vector3(playerInputSetting.inputDir.x, playerInputSetting.inputDir.y, 0).normalized;
         if (moveDir.Equals(Vector3.zero)) return;
         isDashing = true;
