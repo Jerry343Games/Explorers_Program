@@ -17,6 +17,7 @@ public class AniEventControl : MonoBehaviour
     public void OnFighterAttack()
     {
         OnFighterAttackEvent?.Invoke();
+        
     }
 
     public void EndFighterAttack()
