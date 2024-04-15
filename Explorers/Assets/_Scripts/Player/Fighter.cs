@@ -293,7 +293,7 @@ public class Fighter : PlayerController
         if (hasUseBomb) return false; 
         hasUseBomb = true;
         GameObject bomb = Instantiate(Resources.Load<GameObject>("Bomb"), transform.position, Quaternion.identity);
-        bomb.GetComponent<Bomb>().Init(secondaryWeapons, transform.GetChild(0).transform.forward);
+        bomb.GetComponent<Bomb>().Init(secondaryWeapons, attackAreaCollider.transform.right);
         return true;
     }
 
@@ -335,11 +335,13 @@ public class Fighter : PlayerController
     {
         if (isDigging) return;
         if (!canUseFeature) return;
-        canUseFeature = false;
-        _featureCDTimer = featureCD;
+        
+        
         Vector3 moveDir = new Vector3(playerInputSetting.inputDir.x, playerInputSetting.inputDir.y, 0).normalized;
         if (moveDir.Equals(Vector3.zero)) return;
         isDashing = true;
+        canUseFeature = false;
+        _featureCDTimer = featureCD;
         //_rb.isKinematic = true;
         _rb.mass = 5;
         _rb .AddForce(moveDir * dashForce, ForceMode.VelocityChange);
