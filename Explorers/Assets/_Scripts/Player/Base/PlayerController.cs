@@ -55,7 +55,7 @@ public class PlayerController : MonoBehaviour
 
     [Header("武器")]
     public WeaponDataSO mainWeapon;//主武器
-    public WeaponDataSO secondaryWeapons;//副武器
+    public WeaponDataSO secondaryWeapon;//副武器
     private int _currentMainAmmunition, _currentSecondaryAmmunition;//主副武器当前子弹数
     public float _mainAttackTimer, _secondaryAttackTimer;
     public bool canMainAttack, canSecondaryAttack;
@@ -104,7 +104,7 @@ public class PlayerController : MonoBehaviour
         currentArmor = maxArmor;
         lastHurtTimer = timeToRepairArmor;
         _currentMainAmmunition = mainWeapon.initAmmunition;
-        _currentSecondaryAmmunition = secondaryWeapons.initAmmunition;
+        _currentSecondaryAmmunition = secondaryWeapon.initAmmunition;
         hasDead = false;
         isDigging = false;
         _speedFactor = 1;
@@ -532,7 +532,7 @@ public class PlayerController : MonoBehaviour
         if (isDigging) return false;
         if (!canSecondaryAttack) return false;
         canSecondaryAttack = false;
-        _secondaryAttackTimer = secondaryWeapons.attackCD;
+        _secondaryAttackTimer = secondaryWeapon.attackCD;
         return true;
     }
 

@@ -107,7 +107,7 @@ public class BatteryCarrier : PlayerController
         {
             case 1://射手
                 selectedPlayer.mainWeapon.attackDamage *= 1.5f;
-                selectedPlayer.secondaryWeapons.attackDamage *= 1.5f;
+                selectedPlayer.secondaryWeapon.attackDamage *= 1.5f;
                 break;
             case 2://战士
                 (selectedPlayer as Fighter).tempArmor = selectedPlayer.maxArmor;
@@ -125,7 +125,7 @@ public class BatteryCarrier : PlayerController
         {
             case 1://射手
                 selectedPlayer.mainWeapon.attackDamage /= 1.5f;
-                selectedPlayer.secondaryWeapons.attackDamage /= 1.5f;
+                selectedPlayer.secondaryWeapon.attackDamage /= 1.5f;
                 break;
             case 2://战士
                 (selectedPlayer as Fighter).tempArmor = 0;

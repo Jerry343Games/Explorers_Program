@@ -44,6 +44,7 @@ public class Healer : PlayerController
         if (hasDead) return;
         UpdateAttackState();
         UpdateFeatureState();
+        Aim(gun);
         TimeTick();
         if (playerInputSetting.GetAttackButtonDown())
         {
@@ -58,7 +59,7 @@ public class Healer : PlayerController
         UseItem();
         CheckDistanceToBattery();
         MoveAnimationControlTest(CharacterAnimation.HealerLeft_Run, CharacterAnimation.HealerRight_Run, CharacterAnimation.HealerLeft_Idle, CharacterAnimation.HealerRight_Idle);
-
+        WeaponLayerChange();
 
         //CheckKeys();
         if (playerInputSetting.GetOptionalFeatureDown())
@@ -174,7 +175,7 @@ public class Healer : PlayerController
         if (mainWeaponChargedAmount>0)
         {
             mainWeaponChargedAmount--;
-            foreach (var player in PlayerManager.Instance.players)
+            foreach (var player in PlayerManager.Instance.gamePlayers)
             {
                 if (player.name == "BatteryCarrier") continue;
                 //�ǵ�ؽ�ɫ�ظ�����
@@ -188,12 +189,14 @@ public class Healer : PlayerController
     //��֯
     public override bool SecondaryAttack()
     {
-        if(!base.SecondaryAttack())
+        if (!base.SecondaryAttack())
         {
             return false;
         }
-        GameObject bullet = Instantiate(Resources.Load<GameObject>("Bullet"), transform.position, Quaternion.identity);
-        bullet.GetComponent<Bullet>().Init(secondaryWeapons, new Vector3(transform.localScale.x, 0, 0));
+        GameObject bullet = Instantiate(Resources.Load<GameObject>("Bullet"), shootTransform.position, Quaternion.identity);
+        Instantiate(Resources.Load<GameObject>("Effect/FlashSpiky"), shootTransform.position,
+            gun.transform.rotation, shootTransform);
+        bullet.GetComponent<Bullet>().Init(secondaryWeapon, gun.transform.forward);
         MusicManager.Instance.PlaySound("手枪射击");
         return true;
     }
@@ -208,8 +211,8 @@ public class Healer : PlayerController
         _featureCDTimer = featureCD;
         GetComponent<CellBattery>().ChangePower(-tranquilizerPower);
         //
-        GameObject bullet = Instantiate(Resources.Load<GameObject>("TranquilizerBullet"), transform.position, Quaternion.identity);
-        bullet.GetComponent<TranquilizerBullet>().Init(mainWeapon, gun.transform.forward, tranquilizerEffectTime);
+        GameObject bullet = Instantiate(Resources.Load<GameObject>("TranquilizerBullet"), shootTransform.position, Quaternion.identity);
+        bullet.GetComponent<TranquilizerBullet>().Init(tranquilizerWeaponData, gun.transform.forward, tranquilizerEffectTime);
     }
 
 
@@ -259,6 +262,16 @@ public class Healer : PlayerController
             _ => 0,
         };
     }
-
+    public void WeaponLayerChange()
+    {
+        if (_isAniLeft)
+        {
+            gun.transform.GetChild(0).GetComponent<SpriteRenderer>().sortingOrder = 1;
+        }
+        else
+        {
+            gun.transform.GetChild(0).GetComponent<SpriteRenderer>().sortingOrder = -1;
+        }
+    }
 
 }

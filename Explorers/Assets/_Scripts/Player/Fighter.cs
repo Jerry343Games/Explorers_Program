@@ -293,7 +293,7 @@ public class Fighter : PlayerController
         if (hasUseBomb) return false; 
         hasUseBomb = true;
         GameObject bomb = Instantiate(Resources.Load<GameObject>("Bomb"), transform.position, Quaternion.identity);
-        bomb.GetComponent<Bomb>().Init(secondaryWeapons, attackAreaCollider.transform.right);
+        bomb.GetComponent<Bomb>().Init(secondaryWeapon, attackAreaCollider.transform.right);
         return true;
     }
 
