@@ -16,7 +16,8 @@ public class Piranha:Enemy
         {
 
             touchedCollision = collision;
-            Attack();
+            animator.Play("Attack");
+            Invoke(nameof(Attack), GetAnimatorLength(animator, "Attack") / 1.5f);
         }
     }
     public void Attack()

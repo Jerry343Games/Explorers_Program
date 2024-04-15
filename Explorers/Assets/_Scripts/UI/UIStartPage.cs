@@ -1,0 +1,119 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using DG.Tweening;
+using UnityEngine;
+using UnityEngine.UI;
+
+public class UIStartPage : MonoBehaviour
+{
+    public LayerMask interactableLayer; // 设置一个Layer用于射线检测的过滤
+    private GameObject lastHoveredObject; // 记录上一次鼠标停留的对象
+
+    public Vector3 BtnStartScale = new Vector3(0.3722149f, 0.3722149f, 0.3722149f);
+    public Vector3 BtnEndScale = new Vector3(0.39f, 0.39f, 0.39f);
+
+    public Color defaultColor=new Color(1,1,1,1);
+    public Color selectColor=new Color(1,1,1,1);
+    
+    public float intensity;
+
+    private bool _isClick;
+    public Image maskImage;
+
+    private void Awake()
+    {
+        _isClick = false;
+    }
+
+    void Update()
+    {
+        if (!_isClick)
+        {
+            MouseActions();    
+        }
+    }
+
+    private void MouseActions()
+    {
+        // 检测鼠标移动到模型上的情况
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hit;
+
+        if (Physics.Raycast(ray, out hit, 100f, interactableLayer))
+        {
+            GameObject hitObject = hit.collider.gameObject;
+
+            // 如果鼠标停留在新的对象上
+            if (lastHoveredObject != hitObject)
+            {
+                if (lastHoveredObject != null)
+                {
+                    // 对上一个对象执行移开鼠标的操作
+                    OnMouseExit(lastHoveredObject);
+                }
+
+                // 对当前对象执行鼠标悬停的操作
+                OnMouseEnter(hitObject);
+                lastHoveredObject = hitObject;
+            }
+
+            // 如果点击了鼠标左键
+            if (Input.GetMouseButtonDown(0))
+            {
+                OnClick(hitObject);
+            }
+        }
+        else
+        {
+            if (lastHoveredObject != null)
+            {
+                // 当没有任何对象被鼠标悬停时执行
+                OnMouseExit(lastHoveredObject);
+                lastHoveredObject = null;
+            }
+        }
+    }
+
+    private void OnMouseEnter(GameObject gameObject)
+    {
+        // 这里添加鼠标悬停时的操作
+        gameObject.transform.DOScale(BtnEndScale, 0.2f);
+        float factor = Mathf.Pow(2, intensity);
+        gameObject.GetComponent<MeshRenderer>().material.SetColor("_EmissionColor",selectColor*factor);
+    }
+
+    private void OnMouseExit(GameObject gameObject)
+    {
+        // 这里添加鼠标移出时的操作
+        gameObject.transform.DOScale(BtnStartScale, 0.2f);
+        float factor = Mathf.Pow(2, intensity);
+        gameObject.GetComponent<MeshRenderer>().material.SetColor("_EmissionColor",defaultColor*factor);
+        
+    }
+
+    private void OnClick(GameObject gameObject)
+    {
+        // 这里添加点击时的操作
+        _isClick = true;
+        Sequence seq = DOTween.Sequence();
+        seq.Append(gameObject.transform.DOScale(BtnEndScale + new Vector3(0.02f, 0.02f, 0.02f), 0.2f));
+        seq.Append(gameObject.transform.DOScale(BtnEndScale, 0.2f));
+        if (gameObject.name=="start")
+        {
+            seq.Append(maskImage.DOFade(1, 0.5f).OnComplete(() =>
+            {
+                UnityEngine.SceneManagement.SceneManager.LoadScene("SelectScene");
+            })
+            );
+        }
+        if (gameObject.name=="exit")
+        {
+            
+        }
+        if (gameObject.name=="options")
+        {
+            
+        }
+    }
+}
