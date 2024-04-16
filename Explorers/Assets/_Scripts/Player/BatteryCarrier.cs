@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class BatteryCarrier : PlayerController
 {
@@ -10,6 +11,7 @@ public class BatteryCarrier : PlayerController
 
     [Header("超载")]
     public PlayerController selectedPlayer;//选择的要进行操作的机器人
+    public Image selectPlayerImage;
 
     public float overloadDuration;//过载持续时间
     public float overloadCD;//过载功能冷却时间
@@ -80,14 +82,20 @@ public class BatteryCarrier : PlayerController
         if (playerInputSetting.GetSelectCombination()==Vector3.right)
         {
             selectedPlayer = FindObjectsOfType<PlayerController>().ToList().Find(x => x.gameObject.name == "Shooter");
+
+            SetSelectPlayerImage(PlayerType.Shooter);
         }
         else if(playerInputSetting.GetSelectCombination() == Vector3.up)
         {
             selectedPlayer = FindObjectsOfType<PlayerController>().ToList().Find(x => x.gameObject.name == "Fighter");
+            SetSelectPlayerImage(PlayerType.Fighter);
+
         }
         else if(playerInputSetting.GetSelectCombination() == Vector3.forward)
         {
             selectedPlayer = FindObjectsOfType<PlayerController>().ToList().Find(x => x.gameObject.name == "Healer");
+            SetSelectPlayerImage(PlayerType.Healer);
+
         }
 
     }
@@ -249,5 +257,11 @@ public class BatteryCarrier : PlayerController
             OptionalFeature.Charging => chargeCD,
             _ => 0,
         };
+    }
+
+    public void SetSelectPlayerImage(PlayerType type)
+    {
+        selectPlayerImage.color = Color.white;
+        selectPlayerImage.sprite = Resources.Load<Sprite>("UI/Image/"+type.ToString());
     }
 }
