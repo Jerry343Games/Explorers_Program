@@ -1,18 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static UnityEditor.FilePathAttribute;
 
 
 [System.Serializable]
 public struct ObjectChance
 {
     public GameObject objectPrefab;
-    public float chance; // ÕâÊÇ±¬ÂÊ£¬¿ÉÒÔ¸ù¾İÊµ¼ÊĞèÇóµ÷Õû
+    public float chance; // ï¿½ï¿½ï¿½Ç±ï¿½ï¿½Ê£ï¿½ï¿½ï¿½ï¿½Ô¸ï¿½ï¿½ï¿½Êµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 }
 public class RandomGenerator : MonoBehaviour
 {
-    // ÔÚInspectorÖĞÅäÖÃÎïÆ·ºÍ¸ÅÂÊÁĞ±í
+    // ï¿½ï¿½Inspectorï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ·ï¿½Í¸ï¿½ï¿½ï¿½ï¿½Ğ±ï¿½
     public List<ObjectChance> objectChances;
 
     public List<Transform> spawnPoints;
@@ -28,7 +27,7 @@ public class RandomGenerator : MonoBehaviour
     {
         if (objectChances.Count == 0)
         {
-            Debug.LogWarning("ÎïÆ·ÁĞ±íÎª¿Õ£¬ÎŞ·¨Éú³ÉÎïÌå");
+            Debug.LogWarning("ï¿½ï¿½Æ·ï¿½Ğ±ï¿½Îªï¿½Õ£ï¿½ï¿½Ş·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
             return null;
         }
 
@@ -40,7 +39,7 @@ public class RandomGenerator : MonoBehaviour
 
         if (totalWeight <= 0)
         {
-            Debug.LogWarning("×ÜÈ¨ÖØÎª0£¬ÎŞ·¨Éú³ÉÎïÌå");
+            Debug.LogWarning("ï¿½ï¿½È¨ï¿½ï¿½Îª0ï¿½ï¿½ï¿½Ş·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
             return null;
         }
 
@@ -56,7 +55,7 @@ public class RandomGenerator : MonoBehaviour
             }
         }
 
-        Debug.LogWarning("ÎŞ·¨Ñ¡ÔñºÏÊÊµÄÎïÌå");
+        Debug.LogWarning("ï¿½Ş·ï¿½Ñ¡ï¿½ï¿½ï¿½ï¿½Êµï¿½ï¿½ï¿½ï¿½ï¿½");
         return null;
     }
 
