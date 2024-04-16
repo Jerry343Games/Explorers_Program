@@ -8,8 +8,9 @@ public class BubbleManager : Singleton<SceneManager>
 
     public delegate void BubbleCreateHandler(BubbleInfo info);
     public event BubbleCreateHandler OnBubbleCreate;
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
         OnBubbleCreate += CreateBubble;
     }
 

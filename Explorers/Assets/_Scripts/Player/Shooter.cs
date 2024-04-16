@@ -93,7 +93,7 @@ public class Shooter : PlayerController
                     if (playerInputSetting.GetCableButtonDown())
                     {
                         ReconnectRope();
-                        //UIBubblePanel.Instance.reconnectCableBuffer.GetComponent<UIBubbleItem>().DestoryBubble();
+                        UIBubblePanel.Instance.reconnectCableBuffer.GetComponent<UIBubbleItem>().DestoryBubble();
                     }
                 }
                 break;
