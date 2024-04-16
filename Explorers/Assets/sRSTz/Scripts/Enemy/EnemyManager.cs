@@ -24,9 +24,11 @@ public class EnemyManager : SingletonPersistent<EnemyManager>
     public int maxEnemisCount = 40;
     private bool canSpwanEnemy = true;
     public List<Transform> spwanersNearToFar;
+    public float enemySpwanTime = 180f;
     private void Start()
     {
         InvokeRepeating("CheckEnemySpwan", 0, 1f);
+        InvokeRepeating("SpwanEnemyAfter", 0, enemySpwanTime);
     }
     
     public void CheckEnemySpwan()
@@ -36,32 +38,39 @@ public class EnemyManager : SingletonPersistent<EnemyManager>
         else canSpwanEnemy = true;
         if (!canSpwanEnemy || spawners == null || spawners.Count == 0 || battery == null) return;
         if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name != "SelectScene" && spawners.Count != 0)
-            SpawnEnemy();
+            SpawnEnemyStart();
     }
-    public void SpawnEnemy()
+    public void SpawnEnemyStart()
     {
         if (GameObject.FindGameObjectsWithTag("Enemy").Length == 0)
         {
-            Debug.Log("start enemy0");
+            
             foreach(var spwaner in spawners)
             {
-                spwaner.SpwanOnce(SelectRandomMonster());
+               spwaner.SpwanOnce(SelectRandomMonster());
+               
             }
         }
 
 
-        /*
         
+        
+        
+        
+
+    }
+    //刷一波怪潮
+    public void SpwanEnemyAfter()
+    {
+        Debug.Log("before" + GameObject.FindGameObjectsWithTag("Enemy").Length);
         spwanersNearToFar = GetFilteredAndSortedGenerators(spwanerDistanceToBattery);
-        for (int i = 0; i < 2; i++)
+        for (int i = 0; i < 3; i++)
         {
             if (i > spwanersNearToFar.Count - 1) break;
             spwanersNearToFar[i].GetComponent<EnemySpawner>().SpwanOnce(SelectRandomMonster());
         }
-        */
-
+        Debug.Log("after" + GameObject.FindGameObjectsWithTag("Enemy").Length);
     }
-
     public GameObject SelectRandomMonster()
     {
         float totalWeight = 0;

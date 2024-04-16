@@ -277,7 +277,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f91ddcb468aa644c90a3f75961e4daf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetDetectionRange: 12
+  targetDetectionRange: 18
   obstaclesLayerMask:
     serializedVersion: 2
     m_Bits: 1088
@@ -574,7 +574,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2eb22505766ddc648b2b38152e91bef8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 4
+  moveSpeed: 5
   force: 8
   HP: 22
   damage: 10
@@ -596,7 +596,7 @@ MonoBehaviour:
   spriteRenderer: {fileID: 241330014}
   isDefaultLeft: 0
   enemyType: 5
-  dashDetectionRadius: 12
+  dashDetectionRadius: 15
   prepareTime: 1.5
   dashTime: 1.5
   dashForce: 20
