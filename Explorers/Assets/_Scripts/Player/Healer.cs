@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Healer : PlayerController
 {
@@ -9,9 +10,13 @@ public class Healer : PlayerController
     public GameObject gun;
     public Transform shootTransform;
 
+
+
     [Header("医者")]
-    private int mainWeaponChargedAmount;//"ҽ��"���ܴ���
-    public int maxChargedAmount;//�����ܴ���
+    private int mainWeaponChargedAmount;
+    public int maxChargedAmount;
+    public Text chargedAmountText;
+
 
     [Header("麻醉枪")]
     public WeaponDataSO tranquilizerWeaponData;
@@ -150,9 +155,11 @@ public class Healer : PlayerController
     {
         if (_mainAttackTimer < 0)
         {
+            canMainAttack = true;
             _mainAttackTimer = mainWeapon.attackCD;
             mainWeaponChargedAmount++;
             mainWeaponChargedAmount = Mathf.Clamp(mainWeaponChargedAmount, 0, maxChargedAmount);
+            chargedAmountText.text = mainWeaponChargedAmount.ToString();
         }
         else
         {
@@ -170,11 +177,16 @@ public class Healer : PlayerController
     //��ҽ�ߡ�
     public override bool MainAttack()
     {
-        //����������������������һ���ж�
-        if (isDigging) return false;
+
+        if (!base.MainAttack())
+        {
+            return false;
+        }
         if (mainWeaponChargedAmount>0)
         {
             mainWeaponChargedAmount--;
+            chargedAmountText.text = mainWeaponChargedAmount.ToString();
+
             foreach (var player in PlayerManager.Instance.gamePlayers)
             {
                 if (player.name == "BatteryCarrier") continue;
