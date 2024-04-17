@@ -73,8 +73,7 @@ public class Archerfish : Enemy
                 rb.angularVelocity = Vector3.zero;
                 if (shootTimer < shootTime)
                 {
-                    // 每帧让新物体朝着自己的y方向移动
-                    projectile.GetComponent<Turbulence>().Shoot(shootForce);
+                    
                     shootTimer += Time.deltaTime;
                 }
                 else
@@ -118,6 +117,8 @@ public class Archerfish : Enemy
 
                     // 将新物体的y方向设置为创建它的物体的x方向
                     projectileTransform.up = targetDirection;
+                    // 让新物体朝着自己的y方向移动
+                    projectile.GetComponent<Turbulence>().Shoot(shootForce);
                 }
 
             }

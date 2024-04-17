@@ -141,6 +141,7 @@ public class UISelectPanel : MonoBehaviour
                     }
                     //载入下一关
                     UnityEngine.SceneManagement.SceneManager.LoadScene("JerryTest");
+                    
                 });
             }
         }

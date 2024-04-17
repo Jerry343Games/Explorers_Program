@@ -25,10 +25,12 @@ public class EnemyManager : SingletonPersistent<EnemyManager>
     private bool canSpwanEnemy = true;
     public List<Transform> spwanersNearToFar;
     public float enemySpwanTime = 180f;
+    //[HideInInspector]
+    public List<GameObject> turbulenceSpawners;//所有的湍流喷射，随机启用其中一部分
     private void Start()
     {
-        InvokeRepeating("CheckEnemySpwan", 0, 1f);
-        InvokeRepeating("SpwanEnemyAfter", 0, enemySpwanTime);
+        InvokeRepeating("CheckEnemySpwan", 1, 1f);
+        InvokeRepeating("SpwanEnemyAfter", 1, enemySpwanTime);
     }
     
     public void CheckEnemySpwan()
@@ -37,9 +39,10 @@ public class EnemyManager : SingletonPersistent<EnemyManager>
         if (GameObject.FindGameObjectsWithTag("Enemy").Length > maxEnemisCount) canSpwanEnemy = false;
         else canSpwanEnemy = true;
         if (!canSpwanEnemy || spawners == null || spawners.Count == 0 || battery == null) return;
-        if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name != "SelectScene" && spawners.Count != 0)
-            SpawnEnemyStart();
+        if (!UnityEngine.SceneManagement.SceneManager.GetActiveScene().name.Equals("SelectScene") && spawners.Count != 0)
+        { SpawnEnemyStart(); TurbulenceStart(); }
     }
+    //先刷新一波原生怪
     public void SpawnEnemyStart()
     {
         if (GameObject.FindGameObjectsWithTag("Enemy").Length == 0)
@@ -53,23 +56,45 @@ public class EnemyManager : SingletonPersistent<EnemyManager>
         }
 
 
-        
-        
-        
-        
-
     }
-    //刷一波怪潮
-    public void SpwanEnemyAfter()
+    //刷一波怪潮//经过一段时间生成虫潮 TODO：随机选同一边，然后再从这一边的角度随机选三个方向刷怪（暂定），直接刷墙里应该是可以的（注意把敌人与墙的碰撞取消）
+    private void SpwanEnemyAfter()
     {
-        Debug.Log("before" + GameObject.FindGameObjectsWithTag("Enemy").Length);
-        spwanersNearToFar = GetFilteredAndSortedGenerators(spwanerDistanceToBattery);
+        if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name.Equals("SelectScene")) return;
+            spwanersNearToFar = GetFilteredAndSortedGenerators(spwanerDistanceToBattery);
         for (int i = 0; i < 3; i++)
         {
             if (i > spwanersNearToFar.Count - 1) break;
             spwanersNearToFar[i].GetComponent<EnemySpawner>().SpwanOnce(SelectRandomMonster());
         }
         Debug.Log("after" + GameObject.FindGameObjectsWithTag("Enemy").Length);
+    }
+    //启用一部分的湍流发射器
+    public void TurbulenceStart()
+    {
+        if (turbulenceSpawners.Count != 0) return;
+        turbulenceSpawners.AddRange(GameObject.FindGameObjectsWithTag("TurbulenceSpawner"));
+        Debug.Log("12131" + turbulenceSpawners.Count);
+        // 随机选择四分之一的turbulenceSpawner
+        int quarterCount = Mathf.CeilToInt(turbulenceSpawners.Count / 2.5f);
+        List<GameObject> selectedSpawners = new List<GameObject>();
+
+        for (int i = 0; i < quarterCount; i++)
+        {
+            int randomIndex = Random.Range(0, turbulenceSpawners.Count);
+            selectedSpawners.Add(turbulenceSpawners[randomIndex]);
+            turbulenceSpawners.RemoveAt(randomIndex);
+        }
+        foreach(var spawner in turbulenceSpawners)
+        {
+            spawner.SetActive(false);
+        }
+        // 启用选中的spawners
+        foreach (var spawner in selectedSpawners)
+        {
+            spawner.GetComponent<TurbulenceSpawner>().StartShoot();
+        }
+
     }
     public GameObject SelectRandomMonster()
     {
