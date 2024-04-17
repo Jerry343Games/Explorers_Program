@@ -108,8 +108,8 @@ MonoBehaviour:
   - {fileID: 4462179797472911910}
   - {fileID: 4462179797927865590}
   aiData: {fileID: 4462179796799115252}
-  detectionDelay: 0.5
-  aiUpdateDelay: 0.5
+  detectionDelay: 0.2
+  aiUpdateDelay: 0.2
   attackDistance: 0.5
   movementInput: {x: 0, y: 0}
   movementDirectionSolver: {fileID: 4462179798035257391}
@@ -127,7 +127,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 120
+  m_Constraints: 56
   m_CollisionDetection: 0
 --- !u!114 &7599928205910551937
 MonoBehaviour:
@@ -161,7 +161,7 @@ MonoBehaviour:
   animator: {fileID: 1242778195960415632}
   isFlipped: 0
   spriteRenderer: {fileID: 360786506958138727}
-  isDefaultLeft: 1
+  isDefaultLeft: 0
   enemyType: 0
 --- !u!136 &3778295219695722161
 CapsuleCollider:
@@ -530,7 +530,7 @@ SpriteRenderer:
   m_SortingOrder: 0
   m_Sprite: {fileID: 675453649, guid: a4f9dc43e958a8d43bf5944594b01b62, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_FlipX: 0
+  m_FlipX: 1
   m_FlipY: 0
   m_DrawMode: 0
   m_Size: {x: 0.32, y: 0.32}

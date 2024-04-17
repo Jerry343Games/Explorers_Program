@@ -173,7 +173,7 @@ public class Enemy : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         spawnerPoint = gameObject.transform.position;
         spriteRenderer = gameObject.GetComponentInChildren<SpriteRenderer>();
-        isFlipped = spriteRenderer.flipX;
+        isFlipped = spriteRenderer.flipY;
     }
     private void Update()
     {
@@ -290,40 +290,40 @@ public class Enemy : MonoBehaviour
     }
     public void EnemyRotate()
     {
-        /*if (enemyAI.FinalMovement  != Vector2.zero)
+        if (enemyAI.FinalMovement  != Vector2.zero)
         {
             float targetAngle = Mathf.Atan2(enemyAI.FinalMovement.y, enemyAI.FinalMovement.x) * Mathf.Rad2Deg;
             float angle = Mathf.SmoothDampAngle(transform.eulerAngles.z, targetAngle, ref turnSmoothVelocity, turnSmoothTime);
             transform.rotation = Quaternion.Euler(0f, 0f, angle);
-        }*/
+        }
         // 判断 direction 是在 y 轴方向的左边还是右边
         if (isDefaultLeft)
         {
             if (enemyAI.FinalMovement.x > 0 && !isFlipped) // 在 y 轴方向的右边，且当前没有翻转
             {
                 // 翻转 Sprite
-                spriteRenderer.flipX = true;
+                spriteRenderer.flipY = true;
                 isFlipped = true;
             }
             else if (enemyAI.FinalMovement.x < 0 && isFlipped) // 在 y 轴方向的左边，且当前已经翻转
             {
                 // 取消翻转
-                spriteRenderer.flipX = false;
+                spriteRenderer.flipY = false;
                 isFlipped = false;
             }
             return;
         }
-        if (enemyAI.FinalMovement.x < 0 && !isFlipped) // 在 y 轴方向的左边，且当前没有翻转
+        if (enemyAI.FinalMovement.x > 0 && isFlipped) // 在 y 轴方向的右边，且当前没有翻转
         {
             // 翻转 Sprite
-            spriteRenderer.flipX = true;
-            isFlipped = true;
+            spriteRenderer.flipY = false;
+            isFlipped = false;
         }
-        else if (enemyAI.FinalMovement.x > 0 && isFlipped) // 在 y 轴方向的右边，且当前已经翻转
+        else if (enemyAI.FinalMovement.x < 0 && !isFlipped) // 在 y 轴方向的左边，且当前已经翻转
         {
             // 取消翻转
-            spriteRenderer.flipX = false;
-            isFlipped = false;
+            spriteRenderer.flipY = true;
+            isFlipped = true;
         }
     }
     public static float GetAnimatorLength(Animator animator, string name)
