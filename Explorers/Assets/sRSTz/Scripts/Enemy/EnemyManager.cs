@@ -29,8 +29,8 @@ public class EnemyManager : SingletonPersistent<EnemyManager>
     public List<GameObject> turbulenceSpawners;//所有的湍流喷射，随机启用其中一部分
     private void Start()
     {
-        InvokeRepeating("CheckEnemySpwan", 1, 1f);
-        InvokeRepeating("SpwanEnemyAfter", 1, enemySpwanTime);
+        InvokeRepeating("CheckEnemySpwan", 0, 1f);
+        InvokeRepeating("SpwanEnemyAfter", 0, enemySpwanTime);
     }
     
     public void CheckEnemySpwan()

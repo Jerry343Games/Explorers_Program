@@ -7,6 +7,11 @@ public class Piranha:Enemy
     private void FixedUpdate()
     {
         //GetClosestPlayer();
+        //*************************************************
+        if (isSleeping) { 
+            //rb.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationZ;
+            return;
+        }
         Move();
     }
     private void OnCollisionEnter(Collision collision)

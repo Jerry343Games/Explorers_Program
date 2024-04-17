@@ -168,12 +168,19 @@ public class Enemy : MonoBehaviour
     public SpriteRenderer spriteRenderer;
     public bool isDefaultLeft = false;
     public EnemyType enemyType;
+
+    [Header("沉睡相关")]
+    public bool isSleeping;//勾选上之后，出生时会睡觉（
+    public float sleepDetectRadius;//睡眠时的检测半径
+    public float detectThread = 1f;
+    public float awakeRadius = 1f;//叫醒周围敌人的半径
     protected virtual void Awake()
     {
         rb = GetComponent<Rigidbody>();
         spawnerPoint = gameObject.transform.position;
         spriteRenderer = gameObject.GetComponentInChildren<SpriteRenderer>();
         isFlipped = spriteRenderer.flipY;
+        if (isSleeping) InvokeRepeating(nameof(SleepAwakeCheck), 0, detectThread);
     }
     private void Update()
     {
@@ -232,6 +239,24 @@ public class Enemy : MonoBehaviour
     { 
         HP -= damage;
         if (HP <= 0) Dead();
+        if (isSleeping) { 
+            StartledFromSleep();
+            //TODO 把周围一小圈的敌人也惊动
+            Collider[] hitColliders = Physics.OverlapSphere(transform.position, awakeRadius);
+            
+            foreach (var hitCollider in hitColliders)
+            {
+                if (hitCollider.CompareTag("Enemy"))
+                {
+                    Enemy enemy = hitCollider.GetComponent<Enemy>();
+                    if (enemy.isSleeping)
+
+                        enemy.StartledFromSleep();
+
+
+                }
+            }
+        }
     }
     public virtual void Dead()
     {
@@ -365,7 +390,25 @@ public class Enemy : MonoBehaviour
         tr_self.rotation = Quaternion.AngleAxis(angle, axis) * rotation;
         tr_self.localEulerAngles = new Vector3(0, tr_self.localEulerAngles.y, 90);//后来调试增加的，因为我想让x，z轴向不会有任何变化
     }
+    //检测一次范围内是否有玩家或者电池
+    public void SleepAwakeCheck()
+    {
+        if ((GetClosestPlayer().transform.position - transform.position).magnitude < sleepDetectRadius)
+        {
+            StartledFromSleep();
+        }
+    }
+    //强制唤醒  如果在某个行为发生了，并且敌人正在睡觉，则调用此方法强制唤醒
+    public void StartledFromSleep()
+    {        
+        isSleeping = false;
+        //TODO 短暂显示被惊动的图标
+        Debug.Log("被惊动");
+        CancelInvoke(nameof(SleepAwakeCheck));
+        rb.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY|RigidbodyConstraints.FreezePositionZ;
+        
+        
 
-    
+    }
 
 }
