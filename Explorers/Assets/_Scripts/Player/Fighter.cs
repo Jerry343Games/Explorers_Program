@@ -66,6 +66,8 @@ public class Fighter : PlayerController
         if (hasDead) return;
         UpdateAttackState();
         UpdateFeatureState();
+        UpdateSwitchRopeState();
+
         if (playerInputSetting.inputDir.x != 0)
         {
             if (playerInputSetting.inputDir.x < 0)
@@ -82,7 +84,8 @@ public class Fighter : PlayerController
         if (playerInputSetting.GetAttackButtonDown())
         {           
             MainAttack();
-        }else if (playerInputSetting.GetAttackSecondaryDown())
+        }
+        else if (playerInputSetting.GetAttackSecondaryDown())
         {
             SecondaryAttack();
         }
@@ -132,6 +135,13 @@ public class Fighter : PlayerController
 
             }
         }
+
+        if(playerInputSetting.GetCableButtonDown() && _hasConnected &&switchStateBufferTimer<0)
+        {
+            switchStateBufferTimer = switchStateBufferTime;
+            DisconnectRope();
+        }
+
     }
     
 
@@ -143,12 +153,13 @@ public class Fighter : PlayerController
             case "ReconnectArea":
                 if (!_hasConnected)
                 {
-                    if (playerInputSetting.GetCableButtonDown())
+                    if (playerInputSetting.GetCableButtonDown() && switchStateBufferTimer < 0)
                     {
+                        switchStateBufferTimer = switchStateBufferTime;
                         ReconnectRope();
                         
                         //重连后销毁重连提示气泡
-                        UIBubblePanel.Instance.reconnectCableBuffer.GetComponent<UIBubbleItem>().DestoryBubble();
+                        //UIBubblePanel.Instance.reconnectCableBuffer.GetComponent<UIBubbleItem>().DestoryBubble();
                     }
                 }
                 break;

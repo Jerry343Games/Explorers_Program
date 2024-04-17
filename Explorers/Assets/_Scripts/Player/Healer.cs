@@ -49,6 +49,7 @@ public class Healer : PlayerController
         if (hasDead) return;
         UpdateAttackState();
         UpdateFeatureState();
+        UpdateSwitchRopeState();
         Aim(gun);
         TimeTick();
         if (playerInputSetting.GetAttackButtonDown())
@@ -82,6 +83,11 @@ public class Healer : PlayerController
 
             }
         }
+        if (playerInputSetting.GetCableButtonDown() && _hasConnected && switchStateBufferTimer<0)
+        {
+            switchStateBufferTimer = switchStateBufferTime;
+            DisconnectRope();
+        }
     }
     
     private void OnTriggerEnter(Collider other)
@@ -99,8 +105,9 @@ public class Healer : PlayerController
         {
             //�����������������
             case "ReconnectArea":
-                if (!_hasConnected && playerInputSetting.GetCableButtonDown())
+                if (!_hasConnected && playerInputSetting.GetCableButtonDown() && switchStateBufferTimer < 0)
                 {
+                    switchStateBufferTimer = switchStateBufferTime;
                     ReconnectRope();
                     //����������������ʾ����
                     //UIBubblePanel.Instance.reconnectCableBuffer.GetComponent<UIBubbleItem>().DestoryBubble();
@@ -137,11 +144,9 @@ public class Healer : PlayerController
                     _curDigRes.SetDiager(null);
                     _curDigRes = null;
                 }
-                //�뿪��Դ��������ٽ�������
                 UIBubblePanel.Instance.interectBubbleBuffer.GetComponent<UIBubbleItem>().DestoryBubble();
                 break;
             case "ReconnectArea":
-                //�뿪���������������������ݾ�������
                 if (UIBubblePanel.Instance.reconnectCableBuffer)
                 {
                     UIBubblePanel.Instance.reconnectCableBuffer.GetComponent<UIBubbleItem>().DestoryBubble();    

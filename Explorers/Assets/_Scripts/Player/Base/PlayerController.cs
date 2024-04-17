@@ -74,8 +74,10 @@ public class PlayerController : MonoBehaviour
 
     [Header("绳子")]
     public float DistanceThreshold = 10;//绳子最大长度
-    protected bool _hasConnected;//是否处于连接状态
-    protected ObiRope _obiRope;
+    public bool _hasConnected;//是否处于连接状态
+    public ObiRope _obiRope;
+    public float switchStateBufferTime;//断开和连接之间切换的缓冲时间 解决在重连区域无法断开的问题
+    protected float switchStateBufferTimer;
 
     [Header("开采资源")]
     public bool isDigging;
@@ -103,6 +105,7 @@ public class PlayerController : MonoBehaviour
         myIndex = playerInput.playerIndex;
         currentArmor = maxArmor;
         lastHurtTimer = timeToRepairArmor;
+        switchStateBufferTimer = switchStateBufferTime;
         _currentMainAmmunition = mainWeapon.initAmmunition;
         _currentSecondaryAmmunition = secondaryWeapon.initAmmunition;
         hasDead = false;
@@ -195,33 +198,6 @@ public class PlayerController : MonoBehaviour
     {
         isMoveReverse = false;
     }
-    /// <summary>
-    /// 动画控制
-    /// </summary>
-    /// <param name="run">移动动画名</param>
-    /// <param name="idle">待机动画名</param>
-    //public void MoveAnimationControl(CharacterAnimation run,CharacterAnimation idle)
-    //{
-    //    if (playerInputSetting.inputDir.x != 0)
-    //    {
-    //        if (playerInputSetting.inputDir.x < 0)
-    //        {
-    //            transform.localScale = new Vector3(1, 1, 1);
-    //        }
-    //        else
-    //        {
-    //            transform.localScale = new Vector3(-1, 1, 1);
-    //        }
-    //        //过渡动画、切换法线
-    //        animator.CrossFade(run.ToString(),0);
-    //        _spriteRenderer.material.SetTexture("_Normal", PlayerManager.Instance.GetTextureByAnimationName(run));
-    //    }
-    //    else
-    //    {
-    //        animator.CrossFade(idle.ToString(),0);
-    //        _spriteRenderer.material.SetTexture("_Normal", PlayerManager.Instance.GetTextureByAnimationName(idle));
-    //    }
-    //}
     
     public void MoveAnimationControlTest(CharacterAnimation run_left,CharacterAnimation run_right,CharacterAnimation idle_left,CharacterAnimation idle_right)
     {
@@ -280,6 +256,16 @@ public class PlayerController : MonoBehaviour
         attachment[1].target = transform;
 
         MusicManager.Instance.PlaySound("连接电缆");
+    }
+
+    public void DisconnectRope()
+    {
+        _hasConnected = false;
+        GetComponent<CellBattery>().ChangeConnectState(_hasConnected);
+        ObiParticleAttachment[] attachment = _obiRope.GetComponents<ObiParticleAttachment>();
+        attachment[0].enabled = false;
+        attachment[1].enabled = false;
+        Destroy(_obiRope.gameObject, .5f);
 
     }
 
@@ -302,6 +288,7 @@ public class PlayerController : MonoBehaviour
             //溶解效果
             GetComponent<CellBattery>().ChangeConnectState(_hasConnected);
             MusicManager.Instance.PlaySound("断开电缆");
+            Destroy(_obiRope.gameObject, .5f);
 
         }
     }
@@ -428,6 +415,14 @@ public class PlayerController : MonoBehaviour
             }
         }
         
+    }
+
+    public void UpdateSwitchRopeState()
+    {
+        if(switchStateBufferTimer>=0)
+        {
+            switchStateBufferTimer -= Time.deltaTime;
+        }
     }
 
     /// <summary>

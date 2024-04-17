@@ -39,6 +39,7 @@ public class Shooter : PlayerController
         if (hasDead) return;
         UpdateAttackState();
         UpdateFeatureState();
+        UpdateSwitchRopeState();
         Aim(gun);
         if (playerInputSetting.GetAttackButtonDown())
         {
@@ -70,6 +71,12 @@ public class Shooter : PlayerController
 
             }
         }
+
+        if (playerInputSetting.GetCableButtonDown() && _hasConnected && switchStateBufferTimer<0)
+        {
+            switchStateBufferTimer = switchStateBufferTime;
+            DisconnectRope();
+        }
     }
 
     private void OnTriggerEnter(Collider other)
@@ -90,10 +97,11 @@ public class Shooter : PlayerController
             case "ReconnectArea":
                 if (!_hasConnected)
                 {
-                    if (playerInputSetting.GetCableButtonDown())
+                    if (playerInputSetting.GetCableButtonDown() && switchStateBufferTimer < 0)
                     {
+                        switchStateBufferTimer = switchStateBufferTime;
                         ReconnectRope();
-                        UIBubblePanel.Instance.reconnectCableBuffer.GetComponent<UIBubbleItem>().DestoryBubble();
+                        //UIBubblePanel.Instance.reconnectCableBuffer.GetComponent<UIBubbleItem>().DestoryBubble();
                     }
                 }
                 break;
