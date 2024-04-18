@@ -560,7 +560,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 120
+  m_Constraints: 126
   m_CollisionDetection: 0
 --- !u!114 &1408727699573505793
 MonoBehaviour:
@@ -596,6 +596,10 @@ MonoBehaviour:
   spriteRenderer: {fileID: 241330014}
   isDefaultLeft: 1
   enemyType: 5
+  isSleeping: 1
+  sleepDetectRadius: 0
+  detectThread: 1
+  awakeRadius: 1
   dashDetectionRadius: 15
   prepareTime: 1.5
   dashTime: 1.5

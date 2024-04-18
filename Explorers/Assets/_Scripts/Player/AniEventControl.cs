@@ -11,6 +11,9 @@ public class AniEventControl : MonoBehaviour
 
     public event AniEventHandler EndFighterAttackEvent;
 
+
+    public event AniEventHandler OnEnemyAttackEvent;
+    public event AniEventHandler EndEnemyAttackEvent;
     /// <summary>
     /// 触发OnAttack动画事件时
     /// </summary>
@@ -24,4 +27,16 @@ public class AniEventControl : MonoBehaviour
     {
         EndFighterAttackEvent?.Invoke();
     }
+    /// <summary>
+    /// 敌人开始攻击时调用，速度减慢到几乎为0
+    /// </summary>
+    public void OnEnemyAttack()
+    {
+        OnEnemyAttackEvent?.Invoke();
+    }
+    public void EndEnemyAttack()
+    {
+        EndEnemyAttackEvent?.Invoke();
+    }
+
 }

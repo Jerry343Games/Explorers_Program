@@ -20,6 +20,11 @@ public class DashFish : Enemy
     }
     private void FixedUpdate()
     {
+        if (isSleeping)
+        {
+            //rb.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationZ;
+            return;
+        }
         GetClosestPlayer();
         Move();
     }

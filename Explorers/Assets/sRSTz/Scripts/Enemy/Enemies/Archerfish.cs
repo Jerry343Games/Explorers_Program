@@ -16,6 +16,11 @@ public class Archerfish : Enemy
     GameObject projectile;//射出的东西
     private void FixedUpdate()
     {
+        if (isSleeping)
+        {
+            //rb.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationZ;
+            return;
+        }
         GetClosestPlayer();
         Move();
     }

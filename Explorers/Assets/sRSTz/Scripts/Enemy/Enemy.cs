@@ -171,11 +171,20 @@ public class Enemy : MonoBehaviour
 
     [Header("沉睡相关")]
     public bool isSleeping;//勾选上之后，出生时会睡觉（
-    public float sleepDetectRadius;//睡眠时的检测半径
-    public float detectThread = 1f;
-    public float awakeRadius = 1f;//叫醒周围敌人的半径
+    public float sleepDetectRadius=5f;//睡眠时的检测半径
+   public float detectThread = 1f;
+    public float awakeRadius = 6f;//叫醒周围敌人的半径
+    [Header("修改后的攻击相关")]
+    public float dashToAttackDetectRadius;//在此范围内速度加快
+    public List<GameObject> playersInAttackArea;
+    public AniEventControl aniEvent;
+    public bool isAttack = false;
+    private float fasterSpeed;
+    public float speedOffset = 3f;
     protected virtual void Awake()
     {
+        aniEvent.EndEnemyAttackEvent += () => { isAttack = false; };
+        fasterSpeed = moveSpeed + speedOffset;
         rb = GetComponent<Rigidbody>();
         spawnerPoint = gameObject.transform.position;
         spriteRenderer = gameObject.GetComponentInChildren<SpriteRenderer>();
@@ -184,7 +193,17 @@ public class Enemy : MonoBehaviour
     }
     private void Update()
     {
-        
+        //在这里检测距离，并改变速度  如果还没攻击，那么进入加速范围就加速，没进入就是正常速度
+        if (!isAttack&& Vector2.Distance(GetClosestPlayer().transform.position, transform.position) < dashToAttackDetectRadius)
+        {
+            moveSpeed = fasterSpeed;
+        }
+        else if(!isAttack)
+        {
+            moveSpeed = fasterSpeed - speedOffset;
+        }
+
+
         if (!canMove)
         {
             if (vertigoTimer >= vertigoTime)
@@ -241,21 +260,7 @@ public class Enemy : MonoBehaviour
         if (HP <= 0) Dead();
         if (isSleeping) { 
             StartledFromSleep();
-            //TODO 把周围一小圈的敌人也惊动
-            Collider[] hitColliders = Physics.OverlapSphere(transform.position, awakeRadius);
             
-            foreach (var hitCollider in hitColliders)
-            {
-                if (hitCollider.CompareTag("Enemy"))
-                {
-                    Enemy enemy = hitCollider.GetComponent<Enemy>();
-                    if (enemy.isSleeping)
-
-                        enemy.StartledFromSleep();
-
-
-                }
-            }
         }
     }
     public virtual void Dead()
@@ -406,9 +411,39 @@ public class Enemy : MonoBehaviour
         Debug.Log("被惊动");
         CancelInvoke(nameof(SleepAwakeCheck));
         rb.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY|RigidbodyConstraints.FreezePositionZ;
-        
-        
+        Collider[] hitColliders = Physics.OverlapSphere(transform.position, awakeRadius);
+
+        foreach (var hitCollider in hitColliders)
+        {
+            if (hitCollider.CompareTag("Enemy"))
+            {
+                Enemy enemy = hitCollider.GetComponent<Enemy>();
+                if (enemy.isSleeping)
+
+                    enemy.StartledFromSleep();
+
+
+            }
+        }
+
 
     }
 
+    //新攻击相关
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (!isAttack&& other.CompareTag("Player") || other.CompareTag("Battery"))
+        {
+            playersInAttackArea.Add(other.gameObject);
+            animator.Play("Attack");
+            isAttack = true;
+        }
+            
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (playersInAttackArea.Contains(other.gameObject)) playersInAttackArea.Remove(other.gameObject);
+    }
 }

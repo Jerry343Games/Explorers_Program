@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class Piranha:Enemy
 {
+    protected override void Awake()
+    {
+        base.Awake();
+        aniEvent.OnEnemyAttackEvent += Attack;
+    }
     private void FixedUpdate()
     {
         //GetClosestPlayer();
@@ -14,6 +19,7 @@ public class Piranha:Enemy
         }
         Move();
     }
+    /*
     private void OnCollisionEnter(Collision collision)
     {
 
@@ -24,22 +30,26 @@ public class Piranha:Enemy
             animator.Play("Attack");
             Invoke(nameof(Attack), GetAnimatorLength(animator, "Attack") / 1.5f);
         }
-    }
+    }*/
     public void Attack()
     {
         
-        if (touchedCollision != null&&canAttack)
+        if (playersInAttackArea.Count == 0) return;
+        foreach (var player in playersInAttackArea)
         {
-            
-            // 计算弹飞的方向
-            Vector2 direction = (touchedCollision. transform.position- transform.position).normalized;
+            if (player != null && canAttack)
+            {
 
-            // 给玩家一个弹飞的力
-            touchedCollision.gameObject.GetComponent<PlayerController>().Vertigo(direction * force);
-            touchedCollision.gameObject.GetComponent<PlayerController>().TakeDamage(damage);
+                // 计算弹飞的方向
+                Vector2 direction = (player.transform.position - transform.position).normalized;
 
-            Vertigo(-transform.forward * 5f,ForceMode.Impulse,0.3f);
+                // 给玩家一个弹飞的力
+                player.gameObject.GetComponent<PlayerController>().Vertigo(direction * force);
+                player.gameObject.GetComponent<PlayerController>().TakeDamage(damage);
 
+                //Vertigo(-transform.forward * 5f, ForceMode.Impulse, 0.3f);
+
+            }
         }
     }
 

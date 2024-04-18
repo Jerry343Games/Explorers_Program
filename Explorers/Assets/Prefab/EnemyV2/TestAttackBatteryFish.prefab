@@ -127,7 +127,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 120
+  m_Constraints: 126
   m_CollisionDetection: 0
 --- !u!114 &5641569168307098035
 MonoBehaviour:
@@ -163,6 +163,10 @@ MonoBehaviour:
   spriteRenderer: {fileID: 0}
   isDefaultLeft: 0
   enemyType: 1
+  isSleeping: 1
+  sleepDetectRadius: 0
+  detectThread: 1
+  awakeRadius: 1
 --- !u!136 &8290364460762954042
 CapsuleCollider:
   m_ObjectHideFlags: 0
