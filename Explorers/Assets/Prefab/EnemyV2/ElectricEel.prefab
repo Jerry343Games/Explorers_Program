@@ -372,8 +372,9 @@ GameObject:
   - component: {fileID: 902359332785826796}
   - component: {fileID: 902359332785826797}
   - component: {fileID: 902359332785826793}
-  - component: {fileID: 902359332785826792}
   - component: {fileID: 8600731019605596107}
+  - component: {fileID: 1243618604428997425}
+  - component: {fileID: 2945793410133831746}
   m_Layer: 3
   m_Name: ElectricEel
   m_TagString: Enemy
@@ -456,19 +457,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 126
   m_CollisionDetection: 0
---- !u!135 &902359332785826792
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 902359332785826801}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.6
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &8600731019605596107
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -504,10 +492,42 @@ MonoBehaviour:
   isDefaultLeft: 0
   enemyType: 3
   isSleeping: 1
-  sleepDetectRadius: 0
+  sleepDetectRadius: 5
   detectThread: 1
-  awakeRadius: 1
+  awakeRadius: 6
+  dashToAttackDetectRadius: 3
+  playersInAttackArea: []
+  aniEvent: {fileID: 2457974746571506634}
+  isAttack: 0
+  speedOffset: 2
   reverseTime: 5
+--- !u!136 &1243618604428997425
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 902359332785826801}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.22
+  m_Height: 2.35
+  m_Direction: 0
+  m_Center: {x: -0.1, y: 0, z: 0}
+--- !u!135 &2945793410133831746
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 902359332785826801}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Center: {x: 1.62, y: 0, z: 0}
 --- !u!1 &902359333741147090
 GameObject:
   m_ObjectHideFlags: 0
@@ -553,6 +573,7 @@ GameObject:
   - component: {fileID: 8496085668504781144}
   - component: {fileID: 6838584531539212232}
   - component: {fileID: 2088409268705304300}
+  - component: {fileID: 2457974746571506634}
   m_Layer: 3
   m_Name: Sprite
   m_TagString: Untagged
@@ -647,3 +668,15 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &2457974746571506634
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5315769793706229175}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41f3f670e9171634294212ca3f360e24, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

@@ -181,8 +181,11 @@ public class Enemy : MonoBehaviour
     public bool isAttack = false;
     private float fasterSpeed;
     public float speedOffset = 3f;
+    [HideInInspector]
+    public float slowSpeed;
     protected virtual void Awake()
     {
+        slowSpeed = moveSpeed - speedOffset;
         aniEvent.EndEnemyAttackEvent += () => { isAttack = false; };
         fasterSpeed = moveSpeed + speedOffset;
         rb = GetComponent<Rigidbody>();

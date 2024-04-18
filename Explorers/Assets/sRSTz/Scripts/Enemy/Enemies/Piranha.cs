@@ -33,7 +33,7 @@ public class Piranha:Enemy
     }*/
     public void Attack()
     {
-        
+        moveSpeed = slowSpeed;
         if (playersInAttackArea.Count == 0) return;
         foreach (var player in playersInAttackArea)
         {

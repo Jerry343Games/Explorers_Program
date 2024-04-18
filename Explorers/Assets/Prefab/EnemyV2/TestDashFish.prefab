@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 241330013}
   - component: {fileID: 241330015}
   - component: {fileID: 241330014}
+  - component: {fileID: 2948842186776904643}
   m_Layer: 3
   m_Name: Sprite
   m_TagString: Untagged
@@ -105,6 +106,18 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &2948842186776904643
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 241330012}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41f3f670e9171634294212ca3f360e24, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4968260754433628816
 GameObject:
   m_ObjectHideFlags: 0
@@ -597,9 +610,14 @@ MonoBehaviour:
   isDefaultLeft: 1
   enemyType: 5
   isSleeping: 1
-  sleepDetectRadius: 0
+  sleepDetectRadius: 5
   detectThread: 1
-  awakeRadius: 1
+  awakeRadius: 6
+  dashToAttackDetectRadius: 3
+  playersInAttackArea: []
+  aniEvent: {fileID: 2948842186776904643}
+  isAttack: 0
+  speedOffset: 3
   dashDetectionRadius: 15
   prepareTime: 1.5
   dashTime: 1.5

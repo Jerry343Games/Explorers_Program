@@ -8,6 +8,7 @@ public class Squid : Enemy
     private PlayerController shieldDisintegrationPlayer = null;
     public float shieldDisintegrationTime = 5f;
     public float defenceDownRote = 1f;
+    
     private void FixedUpdate()
     {
         if (isSleeping)
@@ -21,10 +22,12 @@ public class Squid : Enemy
     protected override void Awake()
     {
         rb = GetComponent<Rigidbody>();
+        aniEvent.OnEnemyAttackEvent += Attack;
         spawnerPoint = gameObject.transform.position;
         spriteRenderer = gameObject.GetComponentInChildren<SpriteRenderer>();
         //isFlipped = spriteRenderer.flipX;
     }
+    /*
     private void OnCollisionEnter(Collision collision)
     {
 
@@ -34,11 +37,11 @@ public class Squid : Enemy
             touchedCollision = collision;
             Attack();
         }
-    }
+    }*/
     public  void Attack()
     {
 
-        if (touchedCollision != null && canAttack)
+        /*if (touchedCollision != null && canAttack)
         {
             animator.Play("Attack");
             // 计算弹飞的方向
@@ -52,6 +55,25 @@ public class Squid : Enemy
             shieldDisintegrationPlayer.DefenceDown(shieldDisintegrationTime, defenceDownRote);
 
 
+        }*/
+
+        if (playersInAttackArea.Count == 0) return;
+        foreach (var player in playersInAttackArea)
+        {
+            if (player != null && canAttack)
+            {
+
+                // 计算弹飞的方向
+                Vector2 direction = (player.transform.position - transform.position).normalized;
+
+                // 给玩家一个弹飞的力
+                player.gameObject.GetComponent<PlayerController>().Vertigo(direction * force);
+                player.gameObject.GetComponent<PlayerController>().TakeDamage(damage);
+
+               // Vertigo(-transform.forward * 5f, ForceMode.Impulse, 0.3f);
+                player.GetComponent<PlayerController>().DefenceDown(shieldDisintegrationTime, defenceDownRote);
+
+            }
         }
     }
 
