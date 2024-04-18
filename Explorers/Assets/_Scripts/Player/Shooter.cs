@@ -106,12 +106,9 @@ public class Shooter : PlayerController
                 }
                 break;
             case "Resource":
-                if (!isDigging && playerInputSetting.GetInteractButtonDown())
+                if ( playerInputSetting.GetInteractButtonDown())
                 {
-                    isDigging = true;
-                    _curDigRes = other.GetComponent<Resource>();
-                    _curDigRes.SetDiager(this);
-                    _curDigRes.beDigging = true;
+                    other.GetComponent<Resource>().SpawnMineralCollections();
                 }
                 break;
             case "Chest":
@@ -130,15 +127,7 @@ public class Shooter : PlayerController
         switch (other.tag)
         {
             case "Resource":
-                if (isDigging)
-                {
-                    isDigging = false;
-                    _curDigRes.beDigging = false;
-                    _curDigRes.SetDiager(null);
-                    _curDigRes = null;
-
-                }
-                UIBubblePanel.Instance.interectBubbleBuffer.GetComponent<UIBubbleItem>().DestoryBubble();
+                //UIBubblePanel.Instance.interectBubbleBuffer.GetComponent<UIBubbleItem>().DestoryBubble();
                 break;
             case "ReconnectArea":
                 if (UIBubblePanel.Instance.reconnectCableBuffer)
@@ -206,7 +195,6 @@ public class Shooter : PlayerController
     //齐射 发射六枚微型导弹锁定最近的敌人
     public void Salvo()
     {
-        if (isDigging) return;
         if (!canUseFeature) return;
         Collider[] colliders = Physics.OverlapSphere(transform.position, salvoRange, enemyLayer);
         if (colliders.Length == 0) return;
@@ -236,7 +224,6 @@ public class Shooter : PlayerController
     //毁灭鱼雷
     public void DestroyTorpedoes()
     {
-        if (isDigging) return;
         if (!canUseFeature) return;
         canUseFeature = false;
         _featureCDTimer = featureCD;

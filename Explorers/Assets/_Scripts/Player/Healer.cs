@@ -119,12 +119,10 @@ public class Healer : PlayerController
             //    break;
             case "Resource":
                 
-                if (!isDigging && playerInputSetting.GetInteractButtonDown())
+                if (playerInputSetting.GetInteractButtonDown())
                 {
-                    isDigging = true;
-                    _curDigRes = other.GetComponent<Resource>();
-                    _curDigRes.SetDiager(this);
-                    _curDigRes.beDigging = true;
+
+                    other.GetComponent<Resource>().SpawnMineralCollections();
                 }
                 break;
             default:
@@ -137,14 +135,9 @@ public class Healer : PlayerController
         switch (other.tag)
         {
             case "Resource":
-                if (isDigging)
-                {
-                    isDigging = false;
-                    _curDigRes.beDigging = false;
-                    _curDigRes.SetDiager(null);
-                    _curDigRes = null;
-                }
-                UIBubblePanel.Instance.interectBubbleBuffer.GetComponent<UIBubbleItem>().DestoryBubble();
+
+
+                //UIBubblePanel.Instance.interectBubbleBuffer.GetComponent<UIBubbleItem>().DestoryBubble();
                 break;
             case "ReconnectArea":
                 if (UIBubblePanel.Instance.reconnectCableBuffer)
@@ -222,7 +215,6 @@ public class Healer : PlayerController
     //����ǹ
     public void TranquilizerGun()
     {
-        if (isDigging) return;
         if (!canUseFeature) return;
         canUseFeature = false;
         _featureCDTimer = featureCD;
@@ -236,7 +228,6 @@ public class Healer : PlayerController
     //������̨
     public void FloatingFort()
     {
-        if (isDigging) return;
         if (!canUseFeature) return;
         hasExited = true;
         _fortExitTimer = fortExitTime;

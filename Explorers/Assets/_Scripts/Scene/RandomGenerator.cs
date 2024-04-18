@@ -16,18 +16,22 @@ public class RandomGenerator : MonoBehaviour
 
     public List<Transform> spawnPoints;
 
+    private List<bool> pointHasItem = new List<bool>();
+
     public int spawnCount;
 
     private void Awake()
     {
+        for (int i = 0; i < spawnPoints.Count; i++)
+        {
+            pointHasItem.Add(false);
+        }
         GenerateObjectsInPoint();
     }
-
     public GameObject GetRandomObject()
     {
         if (objectChances.Count == 0)
         {
-            Debug.LogWarning("��Ʒ�б�Ϊ�գ��޷���������");
             return null;
         }
 
@@ -39,7 +43,6 @@ public class RandomGenerator : MonoBehaviour
 
         if (totalWeight <= 0)
         {
-            Debug.LogWarning("��Ȩ��Ϊ0���޷���������");
             return null;
         }
 
@@ -55,7 +58,6 @@ public class RandomGenerator : MonoBehaviour
             }
         }
 
-        Debug.LogWarning("�޷�ѡ����ʵ�����");
         return null;
     }
 
@@ -63,10 +65,18 @@ public class RandomGenerator : MonoBehaviour
 
     public void GenerateObjectsInPoint()
     {
-        for(int i=0;i<spawnCount;i++)
+
+        int i = 0;
+        while(i< spawnCount)
         {
-            GameObject obj = Instantiate(GetRandomObject(), 
-                spawnPoints[Random.Range(0, spawnPoints.Count)].position, Quaternion.identity);
+            int randomNum = Random.Range(0, spawnPoints.Count);
+            if (!pointHasItem[randomNum])
+            {
+                GameObject obj = Instantiate(GetRandomObject(),
+    spawnPoints[randomNum].position, Quaternion.identity);
+                pointHasItem[randomNum] = true;
+                i++;
+            }
         }
     }
 

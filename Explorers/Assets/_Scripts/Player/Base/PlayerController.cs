@@ -80,8 +80,8 @@ public class PlayerController : MonoBehaviour
     protected float switchStateBufferTimer;
 
     [Header("开采资源")]
-    public bool isDigging;
-    protected Resource _curDigRes;
+    //public bool isDigging;
+    //protected Resource _curDigRes;
 
     [Header("道具")]
     public Item item;
@@ -109,7 +109,7 @@ public class PlayerController : MonoBehaviour
         _currentMainAmmunition = mainWeapon.initAmmunition;
         _currentSecondaryAmmunition = secondaryWeapon.initAmmunition;
         hasDead = false;
-        isDigging = false;
+        //isDigging = false;
         _speedFactor = 1;
         _outSpeedFactor = 1;
         
@@ -167,7 +167,7 @@ public class PlayerController : MonoBehaviour
             }
             return;
         }
-        if (isDigging) return;
+        //if (isDigging) return;
         MovementCombination();
         if (!isMoveReverse)
         {
@@ -310,13 +310,13 @@ public class PlayerController : MonoBehaviour
     {
         if (hasDead) return;
         Debug.Log(name);
-        if(isDigging)
-        {
-            isDigging = false;//打断状态
-            _curDigRes.GetComponent<Resource>().beDigging = false;
-            _curDigRes.SetDiager(null);
-            _curDigRes = null;
-        }
+        //if(isDigging)
+        //{
+        //    isDigging = false;//打断状态
+        //    _curDigRes.GetComponent<Resource>().beDigging = false;
+        //    _curDigRes.SetDiager(null);
+        //    _curDigRes = null;
+        //}
         lastHurtTimer = 0;
         if (damage < currentArmor)
         {
@@ -512,7 +512,7 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     public virtual bool MainAttack()
     {
-        if (isDigging) return false;
+        //if (isDigging) return false;
         if (!canMainAttack) return false;
         canMainAttack = false;
         _mainAttackTimer = mainWeapon.attackCD;
@@ -524,7 +524,7 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     public virtual bool SecondaryAttack() 
     {
-        if (isDigging) return false;
+        //if (isDigging) return false;
         if (!canSecondaryAttack) return false;
         canSecondaryAttack = false;
         _secondaryAttackTimer = secondaryWeapon.attackCD;
@@ -585,12 +585,12 @@ public class PlayerController : MonoBehaviour
     }
 
 
-    public void DiggingOver()
-    {
-        isDigging = false;
-        _curDigRes = null;
-        UIBubblePanel.Instance.interectBubbleBuffer.GetComponent<UIBubbleItem>().DestoryBubble();
-    }
+    //public void DiggingOver()
+    //{
+    //    isDigging = false;
+    //    _curDigRes = null;
+    //    UIBubblePanel.Instance.interectBubbleBuffer.GetComponent<UIBubbleItem>().DestoryBubble();
+    //}
     
     public void CheckKeys()
 

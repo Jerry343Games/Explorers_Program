@@ -163,16 +163,10 @@ public class Fighter : PlayerController
                     }
                 }
                 break;
-            ////收集到场景物品
-            //case "Item":
-            //    if((other.transform.position-transform.position).magnitude<0.3f)
-            //    other.GetComponent<Item>().Apply(gameObject);
-            //    break;
             case "Resource":
-                if(!isDigging&& playerInputSetting.GetInteractButtonDown())
+                if(playerInputSetting.GetInteractButtonDown())
                 {
-                    isDigging = true;
-                    _curDigRes = other.GetComponent<Resource>();
+                    other.GetComponent<Resource>().SpawnMineralCollections();
                 }
                 break;
             default:
@@ -197,14 +191,10 @@ public class Fighter : PlayerController
         switch (other.tag)
         {
             case "Resource":
-                if (isDigging)
-                {
-                    isDigging = false;
-                   
-                    _curDigRes = null;
-                }
+
+
                 //离开资源区域后销毁交互气泡
-                UIBubblePanel.Instance.interectBubbleBuffer.GetComponent<UIBubbleItem>().DestoryBubble();
+                //UIBubblePanel.Instance.interectBubbleBuffer.GetComponent<UIBubbleItem>().DestoryBubble();
                 break;
             case "Enemy":
                 if(_enemyInArea.Contains(other.gameObject))
@@ -312,11 +302,6 @@ public class Fighter : PlayerController
     public override void TakeDamage(int damage)
     {
         if (hasDead||isDashing) return;
-        if (isDigging)
-        {
-            isDigging = false;//打断状态
-           
-        }
         int realDamage = damage;
         if(damage<=tempArmor)
         {
@@ -344,7 +329,6 @@ public class Fighter : PlayerController
     //冲撞
     public void Dash()
     {
-        if (isDigging) return;
         if (!canUseFeature) return;
         canUseFeature = false;
         _featureCDTimer = featureCD;
@@ -363,8 +347,6 @@ public class Fighter : PlayerController
     //次声波
     public void SonicWaveAttack()
     {
-
-        if (isDigging) return;
         if (!canUseFeature) return;
         canUseFeature = false;
         _featureCDTimer = featureCD;
