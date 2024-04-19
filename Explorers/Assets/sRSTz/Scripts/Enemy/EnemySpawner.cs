@@ -47,7 +47,7 @@ public class EnemySpawner : MonoBehaviour
        // else
        // {
             enemyPrefab = gameObject;
-            Instantiate(enemyPrefab);
+            //Instantiate(enemyPrefab);
             enemyPrefab.transform.position = transform.position;
             enemyPrefab = null;
             return true;

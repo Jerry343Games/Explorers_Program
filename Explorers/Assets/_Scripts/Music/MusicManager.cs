@@ -10,9 +10,9 @@ public class MusicManager : Singleton<MusicManager>
 
     public List<AudioSource> soundAudioList = new List<AudioSource>();//音效组件列表
 
-    public float musicVolumn = 1;
+    public float musicVolumnMultiplier = 1;//音乐音量要乘以的倍率（主要用于UI面板调整）
 
-    public float soundVolumn = 1;
+    public float soundVolumnMultiplier = 1;//音效音量要乘以的倍率（主要用于UI面板调整）
 
 
     public void PlayBackMusic(string musicName)
@@ -54,7 +54,7 @@ public class MusicManager : Singleton<MusicManager>
     IEnumerator LoadMusic(float fadeSpeed)
     {
         musicAudio.Play();
-        while (musicAudio.volume < musicVolumn)
+        while (musicAudio.volume < musicVolumnMultiplier)
         {
             musicAudio.volume += fadeSpeed;
             yield return new WaitForSecondsRealtime(.1f);
@@ -76,7 +76,22 @@ public class MusicManager : Singleton<MusicManager>
         soundAudioList.Add(soundAudio);
         soundAudio.clip = Resources.Load<AudioClip>("Audio/Sound/" + soundName);
         soundAudio.loop = false;
-        soundAudio.volume = soundVolumn;
+
+        //如果初始音量不合适 可以在这里调整
+        switch(soundName)
+        {
+            case "射击":
+                soundAudio.volume = 0.5f;
+                break;
+            case "手枪射击":
+                soundAudio.volume = 0.8f;
+
+                break;
+            default:
+                soundAudio.volume = 1;
+                break;
+        }
+        soundAudio.volume *= soundVolumnMultiplier;
         soundAudio.Play();
         while (soundAudio.isPlaying)
         {

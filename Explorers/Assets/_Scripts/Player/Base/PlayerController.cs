@@ -269,6 +269,12 @@ public class PlayerController : MonoBehaviour
 
     }
 
+    public void Reborn()
+    {
+        hasDead = false;
+        ReconnectRope();
+    }
+
     /// <summary>
     /// 判断绳子长度是否超出阈值
     /// </summary>
@@ -324,7 +330,10 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
-            MusicManager.Instance.PlaySound("电能护盾破碎");
+            if (playerInput.playerIndex!=0)
+            {
+                MusicManager.Instance.PlaySound("电能护盾破碎");
+            }
 
             int damageToBattery = damage - currentArmor;
             GetComponent<Battery>().ChangePower(-damageToBattery);

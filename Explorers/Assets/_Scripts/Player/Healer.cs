@@ -92,6 +92,11 @@ public class Healer : PlayerController
     
     private void OnTriggerEnter(Collider other)
     {
+        if (hasDead && other.gameObject.tag == "ReconnectArea")
+        {
+            SceneManager.Instance.BatteryTransform.GetComponent<BatteryCarrier>().readyToRebornPlayers.Add(this);
+            return;
+        }
         CreatBubbleUI(other.gameObject);
         if (other.gameObject.tag == "Item")
         {
@@ -101,6 +106,7 @@ public class Healer : PlayerController
     
     private void OnTriggerStay(Collider other)
     {
+        if (hasDead) return;
         switch (other.tag)
         {
             //�����������������
@@ -132,6 +138,12 @@ public class Healer : PlayerController
     
     private void OnTriggerExit(Collider other)
     {
+        if (hasDead && other.gameObject.tag == "ReconnectArea")
+        {
+            SceneManager.Instance.BatteryTransform.GetComponent<BatteryCarrier>().readyToRebornPlayers.Remove(this);
+            return;
+        }
+
         switch (other.tag)
         {
             case "Resource":

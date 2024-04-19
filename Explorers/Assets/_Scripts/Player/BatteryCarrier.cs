@@ -34,15 +34,14 @@ public class BatteryCarrier : PlayerController
 
     [Header("充能")]
     public float chargeCD;//充能冷却时间
-    //private float _chargeCDTimer;
     public int chargePower;//充能所需耗电量
-    //private bool canCharge;
 
     [Header("后勤")]
     public int logisticsPower;//后勤功能耗电量
     public float logisticsCD;//后勤功能CD
-    //private float _logisticsCDTimer;
-    //private bool canLogistics;
+
+    [Header("救援")]
+    public List<PlayerController> readyToRebornPlayers = new List<PlayerController>();
     void Start()
     {
         PlayerInit();
@@ -96,6 +95,12 @@ public class BatteryCarrier : PlayerController
             selectedPlayer = FindObjectsOfType<PlayerController>().ToList().Find(x => x.gameObject.name == "Healer");
             SetSelectPlayerImage(PlayerType.Healer);
 
+        }
+
+        if(readyToRebornPlayers.Count>0 && playerInputSetting.GetCableButtonDown())
+        {
+            readyToRebornPlayers[0].Reborn();
+            readyToRebornPlayers.RemoveAt(0);
         }
 
     }

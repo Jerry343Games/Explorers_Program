@@ -81,6 +81,12 @@ public class Shooter : PlayerController
 
     private void OnTriggerEnter(Collider other)
     {
+        if(hasDead && other.gameObject.tag=="ReconnectArea")
+        {
+            SceneManager.Instance.BatteryTransform.GetComponent<BatteryCarrier>().readyToRebornPlayers.Add(this);
+            return;
+        }
+
         //�������������UI
         CreatBubbleUI(other.gameObject);
         if(other.gameObject.tag== "Item")
@@ -91,6 +97,7 @@ public class Shooter : PlayerController
 
     private void OnTriggerStay(Collider other)
     {
+        if (hasDead) return;
         switch (other.tag)
         {
             //�����������������
@@ -124,6 +131,12 @@ public class Shooter : PlayerController
     }
     private void OnTriggerExit(Collider other)
     {
+        if (hasDead && other.gameObject.tag == "ReconnectArea")
+        {
+            SceneManager.Instance.BatteryTransform.GetComponent<BatteryCarrier>().readyToRebornPlayers.Remove(this);
+            return;
+        }
+
         switch (other.tag)
         {
             case "Resource":

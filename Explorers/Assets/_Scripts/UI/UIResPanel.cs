@@ -8,22 +8,23 @@ public class UIResPanel : MonoBehaviour
 {
     private SceneManager sceneManager;
     private Image _resIconImg;//资源图标
-    private Image _resProcessInner;//资源收集进度条
     private bool hasInit;
     public ResourceType resType;
 
-    //[HideInInspector]
+    [HideInInspector]
     public int currentNum;
     [HideInInspector]
     public int maxNum;
+
+    private Text _resProcessText;
 
     private void Awake()
     {
         sceneManager = GameObject.FindWithTag("SceneManager").GetComponent<SceneManager>();
 
         _resIconImg = transform.GetChild(0).GetComponent<Image>();
-        _resProcessInner = transform.GetChild(1).GetChild(0).GetComponent<Image>();
 
+        _resProcessText = transform.GetChild(1).GetComponent<Text>();
     }
     private void Update()
     {
@@ -39,10 +40,11 @@ public class UIResPanel : MonoBehaviour
     {
         currentNum = 0;
         maxNum = sceneManager.resTasks.Find(x => x.type == resType).amount;
+        _resIconImg.sprite = Resources.Load<Sprite>("UI/Image/" + resType.ToString());
     }
 
     private void SetResUI()
     {
-        _resProcessInner.fillAmount = (float)currentNum / maxNum;
+        _resProcessText.text = currentNum + "/" + maxNum;
     }
 }

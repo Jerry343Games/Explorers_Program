@@ -147,7 +147,8 @@ public class Fighter : PlayerController
 
     private void OnTriggerStay(Collider other)
     {
-        switch(other.tag)
+        if (hasDead) return;
+        switch (other.tag)
         {
             //进入可重连绳子区域
             case "ReconnectArea":
@@ -175,6 +176,12 @@ public class Fighter : PlayerController
     }
     private void OnTriggerEnter(Collider other)
     {
+        if (hasDead && other.gameObject.tag == "ReconnectArea")
+        {
+            SceneManager.Instance.BatteryTransform.GetComponent<BatteryCarrier>().readyToRebornPlayers.Add(this);
+            return;
+        }
+
         CreatBubbleUI(other.gameObject);
         if (other.gameObject.CompareTag("Enemy"))
         {
@@ -187,6 +194,11 @@ public class Fighter : PlayerController
     }
     private void OnTriggerExit(Collider other)
     {
+        if (hasDead && other.gameObject.tag == "ReconnectArea")
+        {
+            SceneManager.Instance.BatteryTransform.GetComponent<BatteryCarrier>().readyToRebornPlayers.Remove(this);
+            return;
+        }
 
         switch (other.tag)
         {
