@@ -186,6 +186,7 @@ public class Enemy : MonoBehaviour
     protected virtual void Awake()
     {
         slowSpeed = moveSpeed - speedOffset;
+        if(aniEvent!=null)
         aniEvent.EndEnemyAttackEvent += () => { isAttack = false; };
         fasterSpeed = moveSpeed + speedOffset;
         rb = GetComponent<Rigidbody>();

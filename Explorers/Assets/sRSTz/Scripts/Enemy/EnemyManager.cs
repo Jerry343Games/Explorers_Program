@@ -27,20 +27,23 @@ public class EnemyManager : SingletonPersistent<EnemyManager>
     public float enemySpwanTime = 180f;
     //[HideInInspector]
     public List<GameObject> turbulenceSpawners;//所有的湍流喷射，随机启用其中一部分
+    
+    public EnemySpawnPanel spawnPanel;
     private void Start()
     {
         InvokeRepeating("CheckEnemySpwan", 0, 1f);
-        InvokeRepeating("SpwanEnemyAfter", 0, enemySpwanTime);
+        InvokeRepeating(nameof(UpdateEnemySpawnPanel), 0, enemySpwanTime);
     }
     
-    public void CheckEnemySpwan()
+    public void CheckEnemySpwan()//开局刷怪和湍流
     {
         Debug.Log(GameObject.FindGameObjectsWithTag("Enemy").Length);
         if (GameObject.FindGameObjectsWithTag("Enemy").Length > maxEnemisCount) canSpwanEnemy = false;
         else canSpwanEnemy = true;
         if (!canSpwanEnemy || spawners == null || spawners.Count == 0 || battery == null) return;
         if (!UnityEngine.SceneManagement.SceneManager.GetActiveScene().name.Equals("SelectScene") && spawners.Count != 0)
-        { SpawnEnemyStart(); TurbulenceStart(); }
+        { SpawnEnemyStart(); TurbulenceStart(); CancelInvoke(nameof(CheckEnemySpwan)); }
+
     }
     //先刷新一波原生怪
     public void SpawnEnemyStart()
@@ -58,7 +61,7 @@ public class EnemyManager : SingletonPersistent<EnemyManager>
 
     }
     //刷一波怪潮//经过一段时间生成虫潮 TODO：随机选同一边，然后再从这一边的角度随机选三个方向刷怪（暂定），直接刷墙里应该是可以的（注意把敌人与墙的碰撞取消）
-    private void SpwanEnemyAfter()
+    public void SpawnEnemyAfter()
     {
         if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name.Equals("SelectScene")) return;
             spwanersNearToFar = GetFilteredAndSortedGenerators(spwanerDistanceToBattery);
@@ -68,6 +71,11 @@ public class EnemyManager : SingletonPersistent<EnemyManager>
             spwanersNearToFar[i].GetComponent<EnemySpawner>().SpwanOnce(SelectRandomMonster());
         }
         Debug.Log("after" + GameObject.FindGameObjectsWithTag("Enemy").Length);
+    }
+    private void UpdateEnemySpawnPanel()
+    {
+        if (spawnPanel == null) return;
+        spawnPanel.StartCountdown(10);
     }
     //启用一部分的湍流发射器
     public void TurbulenceStart()
