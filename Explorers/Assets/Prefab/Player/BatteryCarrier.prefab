@@ -205,18 +205,19 @@ MonoBehaviour:
   playerInputSetting: {fileID: 0}
   playerSprite: {fileID: 2642180563019275834}
   animator: {fileID: 0}
-  bubblePanel: {fileID: 0}
   myIndex: 0
   speed: 8
   accelerateFactor: 1.5
   vertigoTime: 0.5
+  isMoveReverse: 0
+  _isAniLeft: 0
   maxArmor: 0
   currentArmor: 0
   restoreAmount: 0
   restoreCD: 0
   timeToRepairArmor: 0
   mainWeapon: {fileID: 11400000, guid: fe7b4ae7510e5334d8dd901dab5e27cc, type: 2}
-  secondaryWeapons: {fileID: 11400000, guid: fe7b4ae7510e5334d8dd901dab5e27cc, type: 2}
+  secondaryWeapon: {fileID: 0}
   _mainAttackTimer: 0
   _secondaryAttackTimer: 0
   canMainAttack: 0
@@ -224,10 +225,16 @@ MonoBehaviour:
   myAimPos: {x: 0, y: 0, z: 0}
   hasDead: 0
   feature: 0
+  _featureCDTimer: 0
+  featureCD: 0
+  canUseFeature: 0
   DistanceThreshold: 99999
-  isDigging: 0
+  _hasConnected: 0
+  _obiRope: {fileID: 0}
+  switchStateBufferTime: 0
   item: {fileID: 0}
   selectedPlayer: {fileID: 0}
+  selectPlayerImage: {fileID: 0}
   overloadDuration: 6
   overloadCD: 15
   overloadPower: 7
@@ -243,6 +250,7 @@ MonoBehaviour:
   chargePower: 20
   logisticsPower: 12
   logisticsCD: 25
+  readyToRebornPlayers: []
 --- !u!114 &-9115326595532701369
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -255,7 +263,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 776a715df9d07124eb97d159deb4ae51, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxPower: 1000
+  maxPower: 10000
   decayValue: 1
   currentPower: 0
 --- !u!54 &8306476347045371623

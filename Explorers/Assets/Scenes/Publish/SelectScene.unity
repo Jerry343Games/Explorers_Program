@@ -515,7 +515,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92878fb4fa0ec3e4c9ddb15aade2967f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxPlayerCount: 2
+  maxPlayerCount: 3
   players: []
   hasMainBattary: 0
   gamePlayers: []
@@ -935,6 +935,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 4721152687100693663, guid: d78268db5a3d90945a00a856775b068c,
+        type: 3}
+      propertyPath: sonicWaveCD
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d78268db5a3d90945a00a856775b068c, type: 3}
