@@ -1,10 +1,8 @@
 using DG.Tweening;
+using DG.Tweening.Plugins.Core.PathCore;
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class Resource : MonoBehaviour
 {
@@ -15,62 +13,58 @@ public class Resource : MonoBehaviour
     public int spawnMineralAmount;//单次开采生成的矿物个数
 
     public int canMiningTimes;//可以开采的次数
-    //[HideInInspector]
-    //public bool beDigging;
-    //[SerializeField]
-    //private float currentProcess;
-
-    //public float maxProcess;
-
-    //public float speed;
-
-    //[SerializeField]
-    //private bool hasDigged;//是否已经开采过了
-
-    //public PlayerController _diger;
-
-    //private BoxCollider coll;
-
-
-    private void Update()
-    {
-        //if (hasDigged) return;
-        //if(maxProcess - currentProcess < 0.1f)
-        //{
-        //    hasDigged = true;
-        //    _diger = null;
-        //    coll.enabled = false;
-        //    //增加收集物数量
-        //    SceneManager.Instance.resTasks.Find(x => x.type == resType).taskUI.GetComponent<UIResPanel>().currentNum++;
-        //    //Destroy(gameObject);
-        //}
-
-        //if(beDigging)
-        //{
-        //    currentProcess += Time.deltaTime * speed;
-        //    currentProcess = Mathf.Clamp(currentProcess,0, maxProcess);
-        //}
-    }
-
-
-    //public void SetDiager(PlayerController digger)
-    //{
-    //    _diger = digger;
-    //}
 
     public void SpawnMineralCollections()
     {
         canMiningTimes--;
-        for(int i = 0; i < spawnMineralAmount; i++)
+        Vector3 startPos = transform.position;
+        for (int i = 0; i < spawnMineralAmount; i++)
         {
+
             //爆出矿
             GameObject mineral = Instantiate(Resources.Load<GameObject>("Item/" + resType.ToString()), transform.position, Quaternion.identity);
-            mineral.GetComponent<Rigidbody>().AddForce(new Vector3((i - spawnMineralAmount / 2) * 5, 5, 0),ForceMode.Impulse);
+            mineral.GetComponent<ResToCollecting>().Init(resType);
+            mineral.GetComponent<BoxCollider>().enabled = false;
+
+
+            // 计算贝塞尔曲线路径点
+            float xOffset = (i - spawnMineralAmount / 2);
+            // 计算贝塞尔曲线路径点
+            Vector3 midPos_1 = new Vector3(startPos.x + xOffset, startPos.y, startPos.z);
+            Vector3 midPos_2 = new Vector3(startPos.x + xOffset, startPos.y - 0.5f, startPos.z);
+            Vector3 endPos = new Vector3(startPos.x + xOffset, startPos.y - 1, startPos.z);
+
+            // 创建贝塞尔曲线路径点数组
+            Vector3[] pathPoints = new Vector3[] { startPos, midPos_1, midPos_2, endPos };
+
+            DOTween.To((t) =>
+            {
+                mineral.transform.position = BesselCurve(pathPoints, t);
+            }, 0, 1, 2f).OnComplete(()=> mineral.GetComponent<BoxCollider>().enabled = true);
+
         }
-        if(canMiningTimes==0)
+        if (canMiningTimes==0)
         {
             //
             Destroy(gameObject);
+        }
+    }
+
+    public Vector3 BesselCurve(Vector3[] pos, float t)
+    {
+        Vector3[] arr = new Vector3[pos.Length - 1];
+        for (int i = 0; i < arr.Length; i++)
+        {
+            arr[i] = pos[i] * (1 - t) + pos[i + 1] * t;
+            Debug.DrawLine(pos[i], pos[i + 1], Color.red);
+        }
+        if (arr.Length == 1)
+        {
+            return arr[0];
+        }
+        else
+        {
+            return BesselCurve(arr, t);
         }
     }
 }

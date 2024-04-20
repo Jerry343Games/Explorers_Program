@@ -89,9 +89,17 @@ public class Shooter : PlayerController
 
         //�������������UI
         CreatBubbleUI(other.gameObject);
-        if(other.gameObject.tag== "Item")
+
+        switch (other.gameObject.tag)
         {
-            other.GetComponent<Item>().Apply(gameObject);
+            case "Item":
+                other.GetComponent<Item>().Apply(gameObject);
+                break;
+            case "ResToCollecting":
+                other.GetComponent<ResToCollecting>().Collecting();
+                break;
+            default:
+                break;
         }
     }
 

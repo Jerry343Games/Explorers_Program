@@ -183,13 +183,19 @@ public class Fighter : PlayerController
         }
 
         CreatBubbleUI(other.gameObject);
-        if (other.gameObject.CompareTag("Enemy"))
+        switch (other.gameObject.tag)
         {
-            _enemyInArea.Add(other.gameObject);
-        }
-        if (other.gameObject.tag == "Item")
-        {
-            other.GetComponent<Item>().Apply(gameObject);
+            case "Item":
+                other.GetComponent<Item>().Apply(gameObject);
+                break;
+            case "ResToCollecting":
+                other.GetComponent<ResToCollecting>().Collecting();
+                break;
+            case "Enemy":
+                _enemyInArea.Add(other.gameObject);
+                break;
+            default:
+                break;
         }
     }
     private void OnTriggerExit(Collider other)
