@@ -18,17 +18,20 @@ public class UIStartPage : MonoBehaviour
     
     public float intensity;
 
-    private bool _isClick;
+    private bool _isReady;
     public Image maskImage;
+
+    public GameObject defaultPanel;
+    public GameObject playerNumPanel;
 
     private void Awake()
     {
-        _isClick = false;
+        _isReady = false;
     }
 
     void Update()
     {
-        if (!_isClick)
+        if (!_isReady)
         {
             MouseActions();    
         }
@@ -95,18 +98,54 @@ public class UIStartPage : MonoBehaviour
     private void OnClick(GameObject gameObject)
     {
         // 这里添加点击时的操作
-        _isClick = true;
         Sequence seq = DOTween.Sequence();
         seq.Append(gameObject.transform.DOScale(BtnEndScale + new Vector3(0.02f, 0.02f, 0.02f), 0.2f));
         seq.Append(gameObject.transform.DOScale(BtnEndScale, 0.2f));
-        if (gameObject.name=="start")
+
+        switch (gameObject.name)
         {
-            seq.Append(maskImage.DOFade(1, 0.5f).OnComplete(() =>
-            {
-                UnityEngine.SceneManagement.SceneManager.LoadScene("SelectScene");
-            })
-            );
+            case "start":
+                defaultPanel.transform.DOLocalMove(new Vector3(0, -1.46f, 0), 0.5f)
+                    .OnComplete(()=>
+                    {
+                        defaultPanel.SetActive(false);
+                        playerNumPanel.SetActive(true);
+                        playerNumPanel.transform.DOLocalMove(new Vector3(0.32f, -0.32f, 0.62f), 0.5f);
+                    });
+                break;
+            case "options":
+                break;
+            case "exit":
+                break;
+            case "2PBtn":
+                _isReady = true;
+                seq.Append(maskImage.DOFade(1, 0.5f).OnComplete(() =>
+                    {
+                        UnityEngine.SceneManagement.SceneManager.LoadScene("SelectScene");
+                        GameObject.Find("PlayerManager").GetComponent<PlayerManager>().maxPlayerCount = 2;
+                    })
+                );
+                break;
+            case "3PBtn":
+                _isReady = true;
+                seq.Append(maskImage.DOFade(1, 0.5f).OnComplete(() =>
+                    {
+                        UnityEngine.SceneManagement.SceneManager.LoadScene("SelectScene");
+                        GameObject.Find("PlayerManager").GetComponent<PlayerManager>().maxPlayerCount = 3;
+                    })
+                );
+                break;
+            case "4PBtn":
+                _isReady = true;
+                seq.Append(maskImage.DOFade(1, 0.5f).OnComplete(() =>
+                    {
+                        UnityEngine.SceneManagement.SceneManager.LoadScene("SelectScene");
+                        GameObject.Find("PlayerManager").GetComponent<PlayerManager>().maxPlayerCount = 4;
+                    })
+                );
+                break;
         }
+        
         if (gameObject.name=="exit")
         {
             
@@ -115,5 +154,6 @@ public class UIStartPage : MonoBehaviour
         {
             
         }
+        
     }
 }

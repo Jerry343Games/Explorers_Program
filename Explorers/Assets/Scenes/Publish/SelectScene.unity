@@ -391,6 +391,75 @@ MonoBehaviour:
   m_RequiresDepthTexture: 0
   m_RequiresColorTexture: 0
   m_Version: 2
+--- !u!1001 &392900685
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 5489788621176370284, guid: d42b67aee7d9ba1469e01d3c60ea6003,
+        type: 3}
+      propertyPath: m_Name
+      value: PlayerManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 5489788621176370285, guid: d42b67aee7d9ba1469e01d3c60ea6003,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 5489788621176370285, guid: d42b67aee7d9ba1469e01d3c60ea6003,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5489788621176370285, guid: d42b67aee7d9ba1469e01d3c60ea6003,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5489788621176370285, guid: d42b67aee7d9ba1469e01d3c60ea6003,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5489788621176370285, guid: d42b67aee7d9ba1469e01d3c60ea6003,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5489788621176370285, guid: d42b67aee7d9ba1469e01d3c60ea6003,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5489788621176370285, guid: d42b67aee7d9ba1469e01d3c60ea6003,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5489788621176370285, guid: d42b67aee7d9ba1469e01d3c60ea6003,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5489788621176370285, guid: d42b67aee7d9ba1469e01d3c60ea6003,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5489788621176370285, guid: d42b67aee7d9ba1469e01d3c60ea6003,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5489788621176370285, guid: d42b67aee7d9ba1469e01d3c60ea6003,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: d42b67aee7d9ba1469e01d3c60ea6003, type: 3}
 --- !u!1001 &585846416
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -411,7 +480,7 @@ PrefabInstance:
     - target: {fileID: 7029186972641855435, guid: 3911f10229e26bd4c9c97bbf46a3d05a,
         type: 3}
       propertyPath: m_RootOrder
-      value: 8
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 7029186972641855435, guid: 3911f10229e26bd4c9c97bbf46a3d05a,
         type: 3}
@@ -471,91 +540,6 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 5986723144579750283}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &811260732
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 811260733}
-  - component: {fileID: 811260734}
-  m_Layer: 0
-  m_Name: PlayerManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &811260733
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 811260732}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 7
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &811260734
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 811260732}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 92878fb4fa0ec3e4c9ddb15aade2967f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxPlayerCount: 2
-  players: []
-  hasMainBattary: 0
-  gamePlayers: []
-  mappings:
-  - animationName: 2
-    texture: {fileID: 2800000, guid: 9ddb3457c2fbeb3408fa1f8224003bbe, type: 3}
-  - animationName: 3
-    texture: {fileID: 2800000, guid: 9105eb153cd89ae4eb67630e1c3b76cb, type: 3}
-  - animationName: 0
-    texture: {fileID: 2800000, guid: 3b5116dca1252a245bd275bfbcf17abe, type: 3}
-  - animationName: 1
-    texture: {fileID: 2800000, guid: 1525ddbd879d58f4ba548504f9c5bfda, type: 3}
-  - animationName: 4
-    texture: {fileID: 2800000, guid: c4faa1e98f5be414d889c7b37bbb9567, type: 3}
-  - animationName: 5
-    texture: {fileID: 2800000, guid: 4c3e7944011e6114696cd97737f25e71, type: 3}
-  - animationName: 6
-    texture: {fileID: 2800000, guid: 86b681a0c5c567744b5fb5dd674d54d4, type: 3}
-  - animationName: 7
-    texture: {fileID: 2800000, guid: 18ce72e42ff1bf44ab85ed88e06f8070, type: 3}
-  - animationName: 8
-    texture: {fileID: 2800000, guid: 65f9299ec6002064488f0a3dc5ac0e15, type: 3}
-  - animationName: 9
-    texture: {fileID: 2800000, guid: 55e46db895fe1bf419e1069e0d992561, type: 3}
-  - animationName: 10
-    texture: {fileID: 2800000, guid: 3d795e3a8edf53f44bf02b65219294a6, type: 3}
-  - animationName: 11
-    texture: {fileID: 2800000, guid: b4ff77f5e8d47ae40b13cc01d10890c9, type: 3}
-  - animationName: 12
-    texture: {fileID: 2800000, guid: d679017d9486dde4c853aa307cec51d5, type: 3}
-  - animationName: 13
-    texture: {fileID: 2800000, guid: d7fce429a92306343aea5db74b6f056f, type: 3}
-  - animationName: 14
-    texture: {fileID: 2800000, guid: eea28e25f377d564ab04243f1065dfa1, type: 3}
-  - animationName: 15
-    texture: {fileID: 2800000, guid: ea0058f364dcc0645867f40d993f0538, type: 3}
-  - animationName: 16
-    texture: {fileID: 2800000, guid: 354be4adf30dff746b0c57e484430eff, type: 3}
-  - animationName: 17
-    texture: {fileID: 2800000, guid: cd365a63593044f4b82811158d8fa73a, type: 3}
 --- !u!1 &831284775
 GameObject:
   m_ObjectHideFlags: 0
