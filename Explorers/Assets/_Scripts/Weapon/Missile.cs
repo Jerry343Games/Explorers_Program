@@ -6,7 +6,7 @@ public class Missile : MonoBehaviour
 {
     private float _speed;
     private int _damage;
-    private GameObject _target;
+    public GameObject _target;
     private Rigidbody _rb;
 
 
