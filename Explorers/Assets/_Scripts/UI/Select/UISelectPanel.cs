@@ -21,7 +21,7 @@ public class UISelectPanel : MonoBehaviour
     private bool _hasBattary;
     public Image mask;
     
-    private float _countDown=3f;
+    private float _countDown=7.8f;
     private string _countDownText;
     //public SceneManager sceneManager;
 
@@ -115,12 +115,13 @@ public class UISelectPanel : MonoBehaviour
             }
             else
             {
+                MusicManager.Instance.PlaySound("角色界面发射");
                 EventCenter.CallGameStartedEvent();
                 Sequence q = DOTween.Sequence();
                 infoLine1.rectTransform.DOAnchorPos(new Vector2(infoLine1.rectTransform.anchoredPosition.x, -10), 0.2f);
                 infoLine1.rectTransform.DOScale(_line1EndValue, 0.2f);
                 infoLine2.text = null;
-                q.AppendInterval(1f);
+                q.AppendInterval(4f);
                 isLaunch = true;
                 q.Append(battaryBtn.GetComponent<RectTransform>()
                     .DOAnchorPos(new Vector2(battaryBtn.GetComponent<RectTransform>().anchoredPosition.x, _btnEndAnchorPosY), _btnAniDuration));
@@ -130,7 +131,7 @@ public class UISelectPanel : MonoBehaviour
                     .DOAnchorPos(new Vector2(fighterBtn.GetComponent<RectTransform>().anchoredPosition.x, _btnEndAnchorPosY), _btnAniDuration));
                 q.Append(healerBtn.GetComponent<RectTransform>()
                     .DOAnchorPos(new Vector2(healerBtn.GetComponent<RectTransform>().anchoredPosition.x, _btnEndAnchorPosY), _btnAniDuration));
-                q.AppendInterval(1f);
+                q.AppendInterval(2f);
                 q.Append(mask.DOFade(1, _btnAniDuration)).OnComplete(() =>
                 {
                     //完成动画回调
@@ -152,6 +153,7 @@ public class UISelectPanel : MonoBehaviour
     /// </summary>
     private void ClickBattary()
     {
+
         battaryEventSystem = MultiplayerEventSystem.current.gameObject.GetComponent<MultiplayerEventSystem>();
         _hasBattary = true;
         //通知已经赋值，可以获取事件系统
@@ -160,18 +162,21 @@ public class UISelectPanel : MonoBehaviour
 
     private void ClickShooter()
     {
+
         shooterEventSystem = MultiplayerEventSystem.current.gameObject.GetComponent<MultiplayerEventSystem>();
         confirmPlayer?.Invoke();
     }
 
     private void ClickFighter()
     {
+
         fighterEventSystem = MultiplayerEventSystem.current.gameObject.GetComponent<MultiplayerEventSystem>();
         confirmPlayer?.Invoke();
     }
 
     private void ClickHealer()
     {
+
         healerEventSystem = MultiplayerEventSystem.current.gameObject.GetComponent<MultiplayerEventSystem>();
         confirmPlayer?.Invoke();
     }

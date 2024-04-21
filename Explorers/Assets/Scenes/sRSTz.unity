@@ -8279,13 +8279,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   resType: 0
-  beDigging: 0
-  currentProcess: 0
-  maxProcess: 20
-  speed: 2
   bubblePos: {fileID: 0}
-  hasDigged: 0
-  _diger: {fileID: 0}
+  spawnMineralAmount: 0
+  canMiningTimes: 0
 --- !u!1 &1817636957
 GameObject:
   m_ObjectHideFlags: 0
@@ -8453,8 +8449,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   musicAudio: {fileID: 0}
   soundAudioList: []
-  musicVolumn: 1
-  soundVolumn: 1
+  musicVolumnMultiplier: 1
+  soundVolumnMultiplier: 1
 --- !u!1 &1892493070
 GameObject:
   m_ObjectHideFlags: 0

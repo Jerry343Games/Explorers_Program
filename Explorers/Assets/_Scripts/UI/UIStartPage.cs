@@ -80,6 +80,8 @@ public class UIStartPage : MonoBehaviour
 
     private void OnMouseEnter(GameObject gameObject)
     {
+        MusicManager.Instance.PlaySound("开始界面悬停");
+
         // 这里添加鼠标悬停时的操作
         gameObject.transform.DOScale(BtnEndScale, 0.2f);
         float factor = Mathf.Pow(2, intensity);
@@ -97,6 +99,7 @@ public class UIStartPage : MonoBehaviour
 
     private void OnClick(GameObject gameObject)
     {
+        MusicManager.Instance.PlaySound("开始界面按钮");
         // 这里添加点击时的操作
         Sequence seq = DOTween.Sequence();
         seq.Append(gameObject.transform.DOScale(BtnEndScale + new Vector3(0.02f, 0.02f, 0.02f), 0.2f));

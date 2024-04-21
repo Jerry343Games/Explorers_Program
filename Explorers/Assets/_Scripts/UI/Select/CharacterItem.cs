@@ -63,6 +63,9 @@ public class CharacterItem : MonoBehaviour
     {
         if (!isSelected)
         {
+            MusicManager.Instance.PlaySound("角色界面选中角色");
+
+
             confirmLightImg.color = selectedColor;
             isSelected = true;
             weaponInfoItem.transform.GetChild(0).GetComponent<Button>().Select();
@@ -89,6 +92,8 @@ public class CharacterItem : MonoBehaviour
         else
         {
             info.text = "请勿选择和队友相同的角色";
+            MusicManager.Instance.PlaySound("角色界面选中了相同角色");
+
             Invoke("ClearInfoText",1f);
         }
     }

@@ -41,10 +41,14 @@ public class OptionalFeatureItem : MonoBehaviour
     public PlayerType targetType;
 
     private bool _hasConfirmed;
+
+    private string lastSelectFeature;
     
     
     void Start()
     {
+        lastSelectFeature = "";
+
         _mainWeaponBtn = mainWeapon.GetComponent<Button>();
         _secondaryWeaponBtn = secondaryWeapon.GetComponent<Button>();
         _optionalFeature1Btn = optionalFeature1.GetComponent<Button>();
@@ -80,6 +84,11 @@ public class OptionalFeatureItem : MonoBehaviour
             switch (myEventsystem.currentSelectedGameObject.name)
             {
                 case "MainWeaponInfo":
+                    if(lastSelectFeature=="" || lastSelectFeature!= "MainWeaponInfo")
+                    {
+                        lastSelectFeature = "MainWeaponInfo";
+                        MusicManager.Instance.PlaySound("角色界面切换功能");
+                    }
                     mainWeaponSelectImg.color = _selectColor;
                     secondaryWeaponSelectImg.color = _unSelectColor;
                     optionalFeatureSelectImg.color = _unSelectColor;
@@ -87,6 +96,11 @@ public class OptionalFeatureItem : MonoBehaviour
                     optionalFeatureImg.color = new Color(0, 0, 0, 0);
                     break;
                 case "SecondaryWeaponInfo":
+                    if (lastSelectFeature == "" || lastSelectFeature != "SecondaryWeaponInfo")
+                    {
+                        lastSelectFeature = "SecondaryWeaponInfo";
+                        MusicManager.Instance.PlaySound("角色界面切换功能");
+                    }
                     mainWeaponSelectImg.color = _unSelectColor;
                     secondaryWeaponSelectImg.color = _selectColor;
                     optionalFeatureSelectImg.color = _unSelectColor;
@@ -94,6 +108,11 @@ public class OptionalFeatureItem : MonoBehaviour
                     optionalFeatureImg.color = new Color(0, 0, 0, 0);
                     break;
                 case "OptionalFeature1":
+                    if (lastSelectFeature == "" || lastSelectFeature != "OptionalFeature1")
+                    {
+                        lastSelectFeature = "OptionalFeature1";
+                        MusicManager.Instance.PlaySound("角色界面切换功能");
+                    }
                     mainWeaponSelectImg.color = _unSelectColor;
                     secondaryWeaponSelectImg.color = _unSelectColor;
                     optionalFeatureSelectImg.color = _selectColor;
@@ -101,6 +120,11 @@ public class OptionalFeatureItem : MonoBehaviour
                     optionalFeatureImg.color = new Color(1, 1, 1, 1);
                     break;
                 case "OptionalFeature2":
+                    if (lastSelectFeature == "" || lastSelectFeature != "OptionalFeature2")
+                    {
+                        lastSelectFeature = "OptionalFeature2";
+                        MusicManager.Instance.PlaySound("角色界面切换功能");
+                    }
                     mainWeaponSelectImg.color = _unSelectColor;
                     secondaryWeaponSelectImg.color = _unSelectColor;
                     optionalFeatureSelectImg.color = _selectColor;
@@ -135,6 +159,7 @@ public class OptionalFeatureItem : MonoBehaviour
 
     private void SetOptionalFeature(OptionalFeature feature)
     {
+        MusicManager.Instance.PlaySound("角色界面确定角色");
         if(!PlayerManager.Instance.playerFeaturesDic.ContainsKey((int)targetType))
         {
             PlayerManager.Instance.playerFeaturesDic.Add((int)targetType,feature);
