@@ -593,7 +593,6 @@ MonoBehaviour:
   damage: 10
   canMove: 1
   vertigoTime: 0.2
-  detectionRange: 12
   stayTime: 4
   isReturning: 0
   stayTimer: 0
@@ -618,10 +617,11 @@ MonoBehaviour:
   aniEvent: {fileID: 2948842186776904643}
   isAttack: 0
   speedOffset: 3
+  slowSpeed: 0
   dashDetectionRadius: 15
   prepareTime: 1.5
-  dashTime: 1.5
-  dashForce: 20
+  dashTime: 1
+  dashForce: 15
 --- !u!136 &8406583145305039360
 CapsuleCollider:
   m_ObjectHideFlags: 0

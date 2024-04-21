@@ -910,11 +910,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1017834249, guid: d78268db5a3d90945a00a856775b068c, type: 3}
-      propertyPath: m_ScrollWheelAction
-      value: 
-      objectReference: {fileID: -7149004088130860943, guid: cec157f197c081640835571d375f4a76,
-        type: 3}
     - target: {fileID: 1017834250, guid: d78268db5a3d90945a00a856775b068c, type: 3}
       propertyPath: m_PlayerRoot
       value: 
@@ -982,6 +977,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 4721152687100693663, guid: d78268db5a3d90945a00a856775b068c,
+        type: 3}
+      propertyPath: force
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d78268db5a3d90945a00a856775b068c, type: 3}

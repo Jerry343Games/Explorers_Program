@@ -200,9 +200,9 @@ MonoBehaviour:
   restoreCD: 1
   timeToRepairArmor: 5
   mainWeapon: {fileID: 11400000, guid: e619acaa6d7b194419d154af202ddefd, type: 2}
-  secondaryWeapons: {fileID: 11400000, guid: 19e482ec8dcc115479a7ad3a26d79d83, type: 2}
-  _mainAttackTimer: 0
-  _secondaryAttackTimer: 0
+  secondaryWeapon: {fileID: 0}
+  _mainAttackTimer: 0.5
+  _secondaryAttackTimer: 0.5
   canMainAttack: 0
   canSecondaryAttack: 0
   myAimPos: {x: 0, y: 0, z: 0}
@@ -212,16 +212,19 @@ MonoBehaviour:
   featureCD: 0
   canUseFeature: 0
   DistanceThreshold: 15
-  isDigging: 0
+  _hasConnected: 0
+  _obiRope: {fileID: 0}
+  switchStateBufferTime: 0
   item: {fileID: 0}
   attackAngle: 90
   enemyLayer:
     serializedVersion: 2
     m_Bits: 8
-  force: 20
+  force: 1
   shootTransform: {fileID: 5971270936727361518}
   tempArmor: 0
   canFusionBomb: 1
+  hasUseBomb: 0
   sonicWaveAttack: {fileID: 6471543263485355706}
   startRadius: 0.2
   targetRadius: 20

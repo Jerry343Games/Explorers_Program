@@ -281,7 +281,6 @@ public class Fighter : PlayerController
     /// </summary>
     private void OnHack()
     {
-        Debug.Log("Before hack, number of enemies in the area: " + _enemyInArea.Count);
 
         // 创建一个新的列表，用于存储仍然存活的敌人
         List<GameObject> aliveEnemies = new List<GameObject>(_enemyInArea.Count);
@@ -293,7 +292,7 @@ public class Fighter : PlayerController
             {
                 enemy.TakeDamage((int)mainWeapon.attackDamage);
                 // 对敌人造成伤害后震慑它们
-                enemy.Vertigo(attackAreaCollider.transform.right.normalized * force);
+                enemy.Vertigo(attackAreaCollider.transform.right.normalized * force,ForceMode.Impulse,0.1f);
                 aliveEnemies.Add(enemy.gameObject);
             }
         }
@@ -301,7 +300,7 @@ public class Fighter : PlayerController
         // 更新列表，剔除已被消灭的敌人
         _enemyInArea = aliveEnemies;
 
-        Debug.Log("After hack, number of enemies in the area: " + _enemyInArea.Count);
+        
     }
 
 

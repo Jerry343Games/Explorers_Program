@@ -13,7 +13,7 @@ public class Piranha:Enemy
     {
         //GetClosestPlayer();
         //*************************************************
-        if (isSleeping) { 
+        if (isSleeping||!canMove) { 
             //rb.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationZ;
             return;
         }

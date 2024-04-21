@@ -47,16 +47,5 @@ public class EnemyAvoidBehavior : SteeringBehaviour
 
         return (danger, interest);
     }
-    private void OnDrawGizmos()
-    {
-        if (Application.isPlaying && dangersResultTemp != null)
-        {
-            Gizmos.color = Color.white;
-            for (int i = 0; i < dangersResultTemp.Length; i++)
-            {
-                Vector3 direction = transform.TransformDirection(Directions.eightDirections[i]);
-                Gizmos.DrawRay(transform.position, direction * dangersResultTemp[i] * 2);
-            }
-        }
-    }
+    
 }

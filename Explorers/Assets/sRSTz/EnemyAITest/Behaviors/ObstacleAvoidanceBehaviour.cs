@@ -44,7 +44,7 @@ public class ObstacleAvoidanceBehaviour : SteeringBehaviour
         return (danger, interest);
     }
 
-
+    /*
     private void OnDrawGizmos()
     {
         if (showGizmo == false)
@@ -60,7 +60,7 @@ public class ObstacleAvoidanceBehaviour : SteeringBehaviour
             }
         }
     }
-
+    */
 }
 
 public static class Directions
