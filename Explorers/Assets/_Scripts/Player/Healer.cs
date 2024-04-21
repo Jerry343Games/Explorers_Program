@@ -195,10 +195,10 @@ public class Healer : PlayerController
     public override bool MainAttack()
     {
 
-        if (!base.MainAttack())
-        {
-            return false;
-        }
+        //if (!base.MainAttack())
+        //{
+        //    return false;
+        //}
         if (mainWeaponChargedAmount>0)
         {
             mainWeaponChargedAmount--;
