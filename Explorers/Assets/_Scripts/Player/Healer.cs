@@ -110,7 +110,7 @@ public class Healer : PlayerController
                 break;
         }
     }
-    
+
     private void OnTriggerStay(Collider other)
     {
         if (hasDead) return;
@@ -118,31 +118,34 @@ public class Healer : PlayerController
         {
             //�����������������
             case "ReconnectArea":
-                if (!_hasConnected && playerInputSetting.GetCableButtonDown() && switchStateBufferTimer < 0)
+                if (!_hasConnected)
                 {
-                    switchStateBufferTimer = switchStateBufferTime;
-                    ReconnectRope();
-                    //����������������ʾ����
-                    //UIBubblePanel.Instance.reconnectCableBuffer.GetComponent<UIBubbleItem>().DestoryBubble();
+                    if (playerInputSetting.GetCableButtonDown() && switchStateBufferTimer < 0)
+                    {
+                        switchStateBufferTimer = switchStateBufferTime;
+                        ReconnectRope();
+                        //UIBubblePanel.Instance.reconnectCableBuffer.GetComponent<UIBubbleItem>().DestoryBubble();
+                    }
                 }
                 break;
-            ////�ռ���������Ʒ
-            //case "Item":
-            //    other.GetComponent<Item>().Apply(gameObject);
-            //    break;
             case "Resource":
-                
                 if (playerInputSetting.GetInteractButtonDown())
                 {
-
                     other.GetComponent<Resource>().SpawnMineralCollections();
                 }
+                break;
+            case "Chest":
+                if (playerInputSetting.GetInteractButtonDown())
+                {
+                    other.GetComponent<PropChest>().OpenChest();
+                }
+
                 break;
             default:
                 break;
         }
     }
-    
+
     private void OnTriggerExit(Collider other)
     {
         if (hasDead && other.gameObject.tag == "ReconnectArea")
@@ -199,6 +202,8 @@ public class Healer : PlayerController
         //{
         //    return false;
         //}
+        MusicManager.Instance.PlaySound("医者");
+
         if (mainWeaponChargedAmount>0)
         {
             mainWeaponChargedAmount--;

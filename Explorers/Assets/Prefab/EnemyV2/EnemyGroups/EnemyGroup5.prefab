@@ -24,7 +24,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6836457720832006704}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 46.7, y: -25.7, z: 0}
+  m_LocalPosition: {x: -12.9, y: 4.6, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -106,16 +106,37 @@ PrefabInstance:
       propertyPath: m_Name
       value: TestPiranha (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 4462179796799115249, guid: 043eb32a003bf624287f1696de8f176f,
+        type: 3}
+      propertyPath: m_Constraints
+      value: 56
+      objectReference: {fileID: 0}
+    - target: {fileID: 4462179797927865590, guid: 043eb32a003bf624287f1696de8f176f,
+        type: 3}
+      propertyPath: enemyDetectionRange
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 7599928205910551937, guid: 043eb32a003bf624287f1696de8f176f,
+        type: 3}
+      propertyPath: rb
+      value: 
+      objectReference: {fileID: 4499080084321839703}
     - target: {fileID: 7599928205910551937, guid: 043eb32a003bf624287f1696de8f176f,
         type: 3}
       propertyPath: isSleeping
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 043eb32a003bf624287f1696de8f176f, type: 3}
 --- !u!4 &4499080084321839694 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4462179796799115240, guid: 043eb32a003bf624287f1696de8f176f,
+    type: 3}
+  m_PrefabInstance: {fileID: 253091761875543462}
+  m_PrefabAsset: {fileID: 0}
+--- !u!54 &4499080084321839703 stripped
+Rigidbody:
+  m_CorrespondingSourceObject: {fileID: 4462179796799115249, guid: 043eb32a003bf624287f1696de8f176f,
     type: 3}
   m_PrefabInstance: {fileID: 253091761875543462}
   m_PrefabAsset: {fileID: 0}
@@ -186,13 +207,34 @@ PrefabInstance:
       propertyPath: m_Name
       value: TestPiranha (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 4462179796799115249, guid: 043eb32a003bf624287f1696de8f176f,
+        type: 3}
+      propertyPath: m_Constraints
+      value: 56
+      objectReference: {fileID: 0}
+    - target: {fileID: 4462179797927865590, guid: 043eb32a003bf624287f1696de8f176f,
+        type: 3}
+      propertyPath: enemyDetectionRange
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 7599928205910551937, guid: 043eb32a003bf624287f1696de8f176f,
+        type: 3}
+      propertyPath: rb
+      value: 
+      objectReference: {fileID: 3747691965946785601}
     - target: {fileID: 7599928205910551937, guid: 043eb32a003bf624287f1696de8f176f,
         type: 3}
       propertyPath: isSleeping
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 043eb32a003bf624287f1696de8f176f, type: 3}
+--- !u!54 &3747691965946785601 stripped
+Rigidbody:
+  m_CorrespondingSourceObject: {fileID: 4462179796799115249, guid: 043eb32a003bf624287f1696de8f176f,
+    type: 3}
+  m_PrefabInstance: {fileID: 715686543535448240}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &3747691965946785624 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4462179796799115240, guid: 043eb32a003bf624287f1696de8f176f,
@@ -266,16 +308,37 @@ PrefabInstance:
       propertyPath: m_Name
       value: TestPiranha (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 4462179796799115249, guid: 043eb32a003bf624287f1696de8f176f,
+        type: 3}
+      propertyPath: m_Constraints
+      value: 56
+      objectReference: {fileID: 0}
+    - target: {fileID: 4462179797927865590, guid: 043eb32a003bf624287f1696de8f176f,
+        type: 3}
+      propertyPath: enemyDetectionRange
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 7599928205910551937, guid: 043eb32a003bf624287f1696de8f176f,
+        type: 3}
+      propertyPath: rb
+      value: 
+      objectReference: {fileID: 3511585618237353407}
     - target: {fileID: 7599928205910551937, guid: 043eb32a003bf624287f1696de8f176f,
         type: 3}
       propertyPath: isSleeping
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 043eb32a003bf624287f1696de8f176f, type: 3}
 --- !u!4 &3511585618237353382 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4462179796799115240, guid: 043eb32a003bf624287f1696de8f176f,
+    type: 3}
+  m_PrefabInstance: {fileID: 961360609751507534}
+  m_PrefabAsset: {fileID: 0}
+--- !u!54 &3511585618237353407 stripped
+Rigidbody:
+  m_CorrespondingSourceObject: {fileID: 4462179796799115249, guid: 043eb32a003bf624287f1696de8f176f,
     type: 3}
   m_PrefabInstance: {fileID: 961360609751507534}
   m_PrefabAsset: {fileID: 0}
@@ -346,13 +409,34 @@ PrefabInstance:
       propertyPath: m_Name
       value: TestPiranha (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 4462179796799115249, guid: 043eb32a003bf624287f1696de8f176f,
+        type: 3}
+      propertyPath: m_Constraints
+      value: 56
+      objectReference: {fileID: 0}
+    - target: {fileID: 4462179797927865590, guid: 043eb32a003bf624287f1696de8f176f,
+        type: 3}
+      propertyPath: enemyDetectionRange
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 7599928205910551937, guid: 043eb32a003bf624287f1696de8f176f,
+        type: 3}
+      propertyPath: rb
+      value: 
+      objectReference: {fileID: 2781255563415719427}
     - target: {fileID: 7599928205910551937, guid: 043eb32a003bf624287f1696de8f176f,
         type: 3}
       propertyPath: isSleeping
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 043eb32a003bf624287f1696de8f176f, type: 3}
+--- !u!54 &2781255563415719427 stripped
+Rigidbody:
+  m_CorrespondingSourceObject: {fileID: 4462179796799115249, guid: 043eb32a003bf624287f1696de8f176f,
+    type: 3}
+  m_PrefabInstance: {fileID: 1978727102146134514}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &2781255563415719450 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4462179796799115240, guid: 043eb32a003bf624287f1696de8f176f,
@@ -366,6 +450,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7573470012055077555}
     m_Modifications:
+    - target: {fileID: 3059179246831713547, guid: 1120eaa1a62e7e7479d681eab07205e0,
+        type: 3}
+      propertyPath: enemyDetectionRange
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 3059179247859817996, guid: 1120eaa1a62e7e7479d681eab07205e0,
+        type: 3}
+      propertyPath: m_Constraints
+      value: 56
+      objectReference: {fileID: 0}
     - target: {fileID: 3059179247859818004, guid: 1120eaa1a62e7e7479d681eab07205e0,
         type: 3}
       propertyPath: m_Name
@@ -426,11 +520,27 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7837299486722973192, guid: 1120eaa1a62e7e7479d681eab07205e0,
+        type: 3}
+      propertyPath: rb
+      value: 
+      objectReference: {fileID: 499221734900950174}
+    - target: {fileID: 7837299486722973192, guid: 1120eaa1a62e7e7479d681eab07205e0,
+        type: 3}
+      propertyPath: isSleeping
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1120eaa1a62e7e7479d681eab07205e0, type: 3}
 --- !u!4 &499221734900950151 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3059179247859818005, guid: 1120eaa1a62e7e7479d681eab07205e0,
+    type: 3}
+  m_PrefabInstance: {fileID: 3213869002757683858}
+  m_PrefabAsset: {fileID: 0}
+--- !u!54 &499221734900950174 stripped
+Rigidbody:
+  m_CorrespondingSourceObject: {fileID: 3059179247859817996, guid: 1120eaa1a62e7e7479d681eab07205e0,
     type: 3}
   m_PrefabInstance: {fileID: 3213869002757683858}
   m_PrefabAsset: {fileID: 0}
@@ -501,16 +611,37 @@ PrefabInstance:
       propertyPath: m_Name
       value: TestPiranha (6)
       objectReference: {fileID: 0}
+    - target: {fileID: 4462179796799115249, guid: 043eb32a003bf624287f1696de8f176f,
+        type: 3}
+      propertyPath: m_Constraints
+      value: 56
+      objectReference: {fileID: 0}
+    - target: {fileID: 4462179797927865590, guid: 043eb32a003bf624287f1696de8f176f,
+        type: 3}
+      propertyPath: enemyDetectionRange
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 7599928205910551937, guid: 043eb32a003bf624287f1696de8f176f,
+        type: 3}
+      propertyPath: rb
+      value: 
+      objectReference: {fileID: 8486268308212475281}
     - target: {fileID: 7599928205910551937, guid: 043eb32a003bf624287f1696de8f176f,
         type: 3}
       propertyPath: isSleeping
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 043eb32a003bf624287f1696de8f176f, type: 3}
 --- !u!4 &8486268308212475272 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4462179796799115240, guid: 043eb32a003bf624287f1696de8f176f,
+    type: 3}
+  m_PrefabInstance: {fileID: 5199846615368215136}
+  m_PrefabAsset: {fileID: 0}
+--- !u!54 &8486268308212475281 stripped
+Rigidbody:
+  m_CorrespondingSourceObject: {fileID: 4462179796799115249, guid: 043eb32a003bf624287f1696de8f176f,
     type: 3}
   m_PrefabInstance: {fileID: 5199846615368215136}
   m_PrefabAsset: {fileID: 0}
@@ -581,13 +712,34 @@ PrefabInstance:
       propertyPath: m_Name
       value: TestPiranha (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 4462179796799115249, guid: 043eb32a003bf624287f1696de8f176f,
+        type: 3}
+      propertyPath: m_Constraints
+      value: 56
+      objectReference: {fileID: 0}
+    - target: {fileID: 4462179797927865590, guid: 043eb32a003bf624287f1696de8f176f,
+        type: 3}
+      propertyPath: enemyDetectionRange
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 7599928205910551937, guid: 043eb32a003bf624287f1696de8f176f,
+        type: 3}
+      propertyPath: rb
+      value: 
+      objectReference: {fileID: 7907399625175330213}
     - target: {fileID: 7599928205910551937, guid: 043eb32a003bf624287f1696de8f176f,
         type: 3}
       propertyPath: isSleeping
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 043eb32a003bf624287f1696de8f176f, type: 3}
+--- !u!54 &7907399625175330213 stripped
+Rigidbody:
+  m_CorrespondingSourceObject: {fileID: 4462179796799115249, guid: 043eb32a003bf624287f1696de8f176f,
+    type: 3}
+  m_PrefabInstance: {fileID: 5787234314496451156}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &7907399625175330236 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4462179796799115240, guid: 043eb32a003bf624287f1696de8f176f,
@@ -661,16 +813,37 @@ PrefabInstance:
       propertyPath: m_Name
       value: TestPiranha
       objectReference: {fileID: 0}
+    - target: {fileID: 4462179796799115249, guid: 043eb32a003bf624287f1696de8f176f,
+        type: 3}
+      propertyPath: m_Constraints
+      value: 56
+      objectReference: {fileID: 0}
+    - target: {fileID: 4462179797927865590, guid: 043eb32a003bf624287f1696de8f176f,
+        type: 3}
+      propertyPath: enemyDetectionRange
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 7599928205910551937, guid: 043eb32a003bf624287f1696de8f176f,
+        type: 3}
+      propertyPath: rb
+      value: 
+      objectReference: {fileID: 5257606540646860784}
     - target: {fileID: 7599928205910551937, guid: 043eb32a003bf624287f1696de8f176f,
         type: 3}
       propertyPath: isSleeping
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 043eb32a003bf624287f1696de8f176f, type: 3}
 --- !u!4 &5257606540646860777 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4462179796799115240, guid: 043eb32a003bf624287f1696de8f176f,
+    type: 3}
+  m_PrefabInstance: {fileID: 8438089462447343617}
+  m_PrefabAsset: {fileID: 0}
+--- !u!54 &5257606540646860784 stripped
+Rigidbody:
+  m_CorrespondingSourceObject: {fileID: 4462179796799115249, guid: 043eb32a003bf624287f1696de8f176f,
     type: 3}
   m_PrefabInstance: {fileID: 8438089462447343617}
   m_PrefabAsset: {fileID: 0}

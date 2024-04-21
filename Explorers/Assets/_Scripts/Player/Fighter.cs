@@ -143,14 +143,14 @@ public class Fighter : PlayerController
         }
 
     }
-    
+
 
     private void OnTriggerStay(Collider other)
     {
         if (hasDead) return;
         switch (other.tag)
         {
-            //进入可重连绳子区域
+            //?????????????????
             case "ReconnectArea":
                 if (!_hasConnected)
                 {
@@ -158,17 +158,22 @@ public class Fighter : PlayerController
                     {
                         switchStateBufferTimer = switchStateBufferTime;
                         ReconnectRope();
-                        
-                        //重连后销毁重连提示气泡
                         //UIBubblePanel.Instance.reconnectCableBuffer.GetComponent<UIBubbleItem>().DestoryBubble();
                     }
                 }
                 break;
             case "Resource":
-                if(playerInputSetting.GetInteractButtonDown())
+                if (playerInputSetting.GetInteractButtonDown())
                 {
                     other.GetComponent<Resource>().SpawnMineralCollections();
                 }
+                break;
+            case "Chest":
+                if (playerInputSetting.GetInteractButtonDown())
+                {
+                    other.GetComponent<PropChest>().OpenChest();
+                }
+
                 break;
             default:
                 break;
