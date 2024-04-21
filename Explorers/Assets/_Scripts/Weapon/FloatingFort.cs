@@ -43,6 +43,9 @@ public class FloatingFort : MonoBehaviour
             int randomIndex = Random.Range(0, colls.Length);
             GameObject bullet = Instantiate(Resources.Load<GameObject>("Bullet"), transform.position, Quaternion.identity);
             bullet.GetComponent<Bullet>().Init(_data, (colls[randomIndex].transform.position - transform.position).normalized);
+
+            MusicManager.Instance.PlaySound("∏°”Œ≈⁄Ã®…‰ª˜");
+
         }
         else
         {

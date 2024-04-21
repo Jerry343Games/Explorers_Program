@@ -32,6 +32,8 @@ public class GravityWell : PropItem
     }
     public override void Use(GameObject user)
     {
+
+        MusicManager.Instance.PlaySound("ÒýÁ¦¾®");
         sprite.SetActive(true);
         transform.position = user.transform.position;
         userAimPos = new Vector3(user.GetComponent<PlayerController>(). playerInputSetting.aimPos.x, user.GetComponent<PlayerController>().playerInputSetting.aimPos.y, 0);

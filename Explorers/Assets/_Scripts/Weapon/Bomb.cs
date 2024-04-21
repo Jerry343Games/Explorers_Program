@@ -65,6 +65,7 @@ public class Bomb : MonoBehaviour
                 character.GetComponent<Enemy>().TakeDamage(20);
             }
             (_controller as Fighter).hasUseBomb = false;
+            MusicManager.Instance.PlaySound("Υπ±¬");
             Destroy(gameObject);
 
         }

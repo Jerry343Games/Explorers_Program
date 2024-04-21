@@ -219,6 +219,8 @@ public class Shooter : PlayerController
         if (!canUseFeature) return;
         Collider[] colliders = Physics.OverlapSphere(transform.position, salvoRange, enemyLayer);
         if (colliders.Length == 0) return;
+        MusicManager.Instance.PlaySound("齐射");
+
         canUseFeature = false;
         _featureCDTimer = featureCD;
         //找最近的敌人
@@ -246,6 +248,7 @@ public class Shooter : PlayerController
     public void DestroyTorpedoes()
     {
         if (!canUseFeature) return;
+
         canUseFeature = false;
         _featureCDTimer = featureCD;
         GameObject bullet = Instantiate(Resources.Load<GameObject>("Torpedoes"), gun.transform.position + gun.transform.forward*2, Quaternion.identity);

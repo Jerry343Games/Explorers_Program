@@ -237,6 +237,8 @@ public class Healer : PlayerController
         if (!canUseFeature) return;
         canUseFeature = false;
         _featureCDTimer = featureCD;
+        MusicManager.Instance.PlaySound("麻醉枪");
+
         GetComponent<CellBattery>().ChangePower(-tranquilizerPower);
         //
         GameObject bullet = Instantiate(Resources.Load<GameObject>("TranquilizerBullet"), shootTransform.position, Quaternion.identity);

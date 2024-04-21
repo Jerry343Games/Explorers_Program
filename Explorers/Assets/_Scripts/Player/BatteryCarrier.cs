@@ -56,6 +56,10 @@ public class BatteryCarrier : PlayerController
         //CheckKeys();
         TickTime();
         UpdateFeatureState();
+        if(playerInputSetting.GetAttackButtonDown())
+        {
+            Overload();
+        }
         if (playerInputSetting.GetAttackSecondaryDown())
         {
             Lightning();
@@ -114,6 +118,7 @@ public class BatteryCarrier : PlayerController
         _overloadTimer = overloadDuration;
         _overloadCDTimer = overloadCD;
         _overloadPlayer = selectedPlayer;
+        MusicManager.Instance.PlaySound("超载");
 
         GetComponent<MainBattery>().ChangePower(-overloadPower);
         switch (selectedPlayer.myIndex)
@@ -159,6 +164,8 @@ public class BatteryCarrier : PlayerController
         if (!canLightningAttack) return;
         Collider[] colliders = Physics.OverlapSphere(transform.position, lightningAttackRange, enemyLayer);
         if (colliders.Length == 0) return;
+
+        MusicManager.Instance.PlaySound("电弧打击");
         canLightningAttack = false;
         _lightningAttackTimer = lightningAttackCD;
         Instantiate(Resources.Load<GameObject>("Effect/SparkBlue"), transform.position, Quaternion.identity);
@@ -184,7 +191,8 @@ public class BatteryCarrier : PlayerController
         canUseFeature = false;
         _featureCDTimer = featureCD;
         GetComponent<MainBattery>().ChangePower(-chargePower);
-        foreach(var player in FindObjectsOfType<PlayerController>())
+        MusicManager.Instance.PlaySound("充能");
+        foreach (var player in FindObjectsOfType<PlayerController>())
         {
             if (player == this) continue;
             player.currentArmor = player.maxArmor;
@@ -200,6 +208,8 @@ public class BatteryCarrier : PlayerController
         canUseFeature = false;
         _featureCDTimer = featureCD;
         GetComponent<MainBattery>().ChangePower(-logisticsPower);
+        //MusicManager.Instance.PlaySound("超载");
+
         //没有就获得道具 有了就替换原来的道具
         int randomItem = Random.Range(0, 6);
         //最喜欢的swith 获得道具 这样行？

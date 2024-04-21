@@ -315,6 +315,7 @@ public class Fighter : PlayerController
         hasUseBomb = true;
         GameObject bomb = Instantiate(Resources.Load<GameObject>("Bomb"), transform.position, Quaternion.identity);
         bomb.GetComponent<Bomb>().Init(secondaryWeapon, attackAreaCollider.transform.right,1,this);
+
         return true;
     }
 
@@ -368,6 +369,8 @@ public class Fighter : PlayerController
     public void SonicWaveAttack()
     {
         if (!canUseFeature) return;
+        MusicManager.Instance.PlaySound("´ÎÉù²¨");
+
         canUseFeature = false;
         _featureCDTimer = featureCD;
         sonicWaveAttack.AttactStart(this,startRadius, targetRadius, enemyVertigoTime,transitionDuration);

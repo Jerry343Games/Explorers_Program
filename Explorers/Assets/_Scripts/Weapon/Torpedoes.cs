@@ -55,6 +55,7 @@ public class Torpedoes : MonoBehaviour
                 coll.GetComponent<PlayerController>().TakeDamage(_damage);
                 coll.GetComponent<Rigidbody>().AddForce(Random.insideUnitCircle * _force * 0.01f, ForceMode.Impulse);
             }
+            MusicManager.Instance.PlaySound("Υπ±¬");
             Destroy(gameObject);
         }
     }
@@ -82,6 +83,7 @@ public class Torpedoes : MonoBehaviour
                 coll.GetComponent<PlayerController>().TakeDamage(_damage);
                 coll.GetComponent<Rigidbody>().AddForce(Random.insideUnitCircle * _force *0.01f, ForceMode.Impulse);
             }
+            MusicManager.Instance.PlaySound("Υπ±¬");
             Destroy(gameObject);
         }
     }
