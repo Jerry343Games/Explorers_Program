@@ -78,4 +78,8 @@ public class TargetDetector : Detector
             Gizmos.DrawSphere(item.position, 0.3f);
         }
     }
+    public void ChangeRadius(float radius)
+    {
+        enemyDetectionRange = radius;
+    }
 }
