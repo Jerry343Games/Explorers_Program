@@ -13,6 +13,7 @@ public class EnemySpawner : MonoBehaviour
     public bool isAlwaysSpawn = false;
     private void Awake()
     {
+        if (gameObject.CompareTag("SpawnerInWall")) return;
         EnemyManager.Instance.spawners.Add(this);
     }
     /// <summary>
@@ -40,7 +41,7 @@ public class EnemySpawner : MonoBehaviour
     /// </summary>
     /// <param name="prefab"></param>
     /// <returns></returns>
-    public bool SpwanOnce(GameObject gameObject)
+    public bool SpawnOnce(GameObject gameObject)
     {
         
        // if (GetClosestPlayerDistance() < spawnRadius || !HasTimerArrived()) return false;
@@ -52,6 +53,24 @@ public class EnemySpawner : MonoBehaviour
             enemyPrefab = null;
             return true;
        // }
+    }
+    public bool SpawnOnce(GameObject gameObject,bool isSleep)
+    {
+        enemyPrefab = gameObject;
+        Instantiate(enemyPrefab);
+        enemyPrefab.transform.position = transform.position;
+        if (!isSleep)
+        {
+            Enemy[] enemies = enemyPrefab.GetComponentsInChildren<Enemy>();
+            foreach(var enemy in enemies)
+            {
+                enemy.StartledFromSleep();
+                enemy.ChangeDetectRadius(30f);
+            }
+        }
+            
+        enemyPrefab = null;
+        return true;
     }
     /// <summary>
     /// 检查是否到达生成时间

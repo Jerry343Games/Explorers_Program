@@ -140,7 +140,7 @@ public class Enemy : MonoBehaviour
     public bool canMove = true;
     public float vertigoTime = 0.2f;
     private float vertigoTimer = 0;
-    public float detectionRange = 5f;
+    
     public float stayTime = 4f;//如果丢失目标，原地等待的时间
     [HideInInspector]
     public bool isReturning = false;
@@ -201,6 +201,7 @@ public class Enemy : MonoBehaviour
         if (!isAttack&& Vector2.Distance(GetClosestPlayer().transform.position, transform.position) < dashToAttackDetectRadius)
         {
             moveSpeed = fasterSpeed;
+            ChangeDetectRadius(10f);
         }
         else if(!isAttack)
         {
@@ -404,19 +405,27 @@ public class Enemy : MonoBehaviour
     {
         if ((GetClosestPlayer().transform.position - transform.position).magnitude < sleepDetectRadius)
         {
+            
             StartledFromSleep();
         }
     }
     //强制唤醒  如果在某个行为发生了，并且敌人正在睡觉，则调用此方法强制唤醒
     public void StartledFromSleep()
-    {        
+    {
+        
+            
+            //enemyAI.AIStart();
+        
+        
         isSleeping = false;
         //TODO 短暂显示被惊动的图标
         Debug.Log("被惊动");
         CancelInvoke(nameof(SleepAwakeCheck));
+        rb = GetComponent<Rigidbody>();
         rb.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY|RigidbodyConstraints.FreezePositionZ;
         Collider[] hitColliders = Physics.OverlapSphere(transform.position, awakeRadius);
-
+        
+        
         foreach (var hitCollider in hitColliders)
         {
             if (hitCollider.CompareTag("Enemy"))
@@ -432,7 +441,15 @@ public class Enemy : MonoBehaviour
 
 
     }
-
+    /// <summary>
+    /// 改变检测范围
+    /// </summary>
+    /// <param name="radius"></param>
+    public void ChangeDetectRadius(float radius)
+    {
+        TargetDetector targetDetector = GetComponentInChildren<TargetDetector>();
+        targetDetector.ChangeRadius(radius);
+    }
     //新攻击相关
 
     private void OnTriggerEnter(Collider other)

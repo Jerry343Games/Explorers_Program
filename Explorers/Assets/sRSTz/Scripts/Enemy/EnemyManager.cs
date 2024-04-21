@@ -53,22 +53,24 @@ public class EnemyManager : SingletonPersistent<EnemyManager>
             
             foreach(var spwaner in spawners)
             {
-               spwaner.SpwanOnce(SelectRandomMonster());
+               spwaner.SpawnOnce(SelectRandomMonster());
                
             }
         }
 
 
     }
-    //刷一波怪潮//经过一段时间生成虫潮 TODO：随机选同一边，然后再从这一边的角度随机选三个方向刷怪（暂定），直接刷墙里应该是可以的（注意把敌人与墙的碰撞取消）
+    //刷一波虫潮 TODO：随机选同一边，然后再从这一边的角度随机选三个方向刷怪（暂定），直接刷墙里应该是可以的（注意把敌人与墙的碰撞取消）
     public void SpawnEnemyAfter()
     {
         if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name.Equals("SelectScene")) return;
-            spwanersNearToFar = GetFilteredAndSortedGenerators(spwanerDistanceToBattery);
+        spwanersNearToFar = GetFilteredAndSortedGeneratorsInWall (spwanerDistanceToBattery);
         for (int i = 0; i < 3; i++)
         {
             if (i > spwanersNearToFar.Count - 1) break;
-            spwanersNearToFar[i].GetComponent<EnemySpawner>().SpwanOnce(SelectRandomMonster());
+            spwanersNearToFar[i].GetComponent<EnemySpawner>().SpawnOnce(SelectRandomMonster(),false);
+            spwanersNearToFar[i].GetComponent<EnemySpawner>().SpawnOnce(SelectRandomMonster(), false);
+            spwanersNearToFar[i].GetComponent<EnemySpawner>().SpawnOnce(SelectRandomMonster(), false);
         }
         Debug.Log("after" + GameObject.FindGameObjectsWithTag("Enemy").Length);
     }
@@ -151,6 +153,28 @@ public class EnemyManager : SingletonPersistent<EnemyManager>
 
         return generatorsOutsideDistance;
     }
+    public List<Transform> GetFilteredAndSortedGeneratorsInWall(float distance)
+    {
+        List<Transform> generatorsOutsideDistance = new List<Transform>();
+        List<GameObject> spawnersInWall=new();
+        spawnersInWall.AddRange( GameObject.FindGameObjectsWithTag("SpawnerInWall"));
+        foreach (var generator in spawnersInWall)
+        {
+            
+                float distanceToBattery = Vector2.Distance(generator.transform.position, battery.transform.position);
+                if (distanceToBattery > distance)
+                {
+                    generatorsOutsideDistance.Add(generator.transform);
+                }
+            
+        }
 
+        // 按距离由近到远排序
+        generatorsOutsideDistance.Sort((gen1, gen2) =>
+            Vector3.Distance(gen1.position, battery.transform.position).CompareTo(Vector2.Distance(gen2.position, battery.transform.position))
+        );
+
+        return generatorsOutsideDistance;
+    }
 
 }

@@ -276,27 +276,29 @@ public class Fighter : PlayerController
     /// </summary>
     private void OnHack()
     {
-        Debug.Log("hit" + _enemyInArea.Count);
-        if (_enemyInArea.Count == 0) return;
-        
+        Debug.Log("Before hack, number of enemies in the area: " + _enemyInArea.Count);
 
-        for (int i = 0; i < _enemyInArea.Count; i++)
+        // 创建一个新的列表，用于存储仍然存活的敌人
+        List<GameObject> aliveEnemies = new List<GameObject>(_enemyInArea.Count);
+
+        foreach (GameObject enemyObj in _enemyInArea)
         {
-            _enemyInArea[i].GetComponent<Enemy>().TakeDamage((int)mainWeapon.attackDamage);
-            _enemyInArea[i].GetComponent<Enemy>().Vertigo(attackAreaCollider.transform.right.normalized*force);
-            if (_enemyInArea[i].GetComponent<Enemy>().HP <= 0) _enemyInArea.RemoveAt(i);
-            /*
-            if (isLeft)
+            Enemy enemy = enemyObj.GetComponent<Enemy>();
+            if (enemy.HP > 0)
             {
-                _enemyInArea[i].GetComponent<Enemy>().Vertigo(-transform.right * force);
+                enemy.TakeDamage((int)mainWeapon.attackDamage);
+                // 对敌人造成伤害后震慑它们
+                enemy.Vertigo(attackAreaCollider.transform.right.normalized * force);
+                aliveEnemies.Add(enemy.gameObject);
             }
-            else
-            {
-                _enemyInArea[i].GetComponent<Enemy>().Vertigo(transform.right * force);
-            }*/
-            
         }
+
+        // 更新列表，剔除已被消灭的敌人
+        _enemyInArea = aliveEnemies;
+
+        Debug.Log("After hack, number of enemies in the area: " + _enemyInArea.Count);
     }
+
 
     private void EndHack()
     {
