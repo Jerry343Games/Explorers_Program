@@ -41,7 +41,7 @@ public class EnemyAI : MonoBehaviour
 
     bool following = false;
 
-    private void Start()
+    public void Start()
     {
         //Detecting Player and Obstacles around
         InvokeRepeating("PerformDetection", 0, detectionDelay);
