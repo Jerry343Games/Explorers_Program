@@ -15,7 +15,7 @@ public class Missile : MonoBehaviour
     private void Awake()
     {
         _rb = GetComponent<Rigidbody>();
-        Destroy(gameObject, 1f);
+        //Destroy(gameObject, 1f);
     }
 
     public void Init(int salveMissileDamage, float salvoMissileSpeed, GameObject target)
