@@ -48,25 +48,26 @@ public class EnemyManager : SingletonPersistent<EnemyManager>
     //先刷新一波原生怪
     public void SpawnEnemyStart()
     {
-        if (GameObject.FindGameObjectsWithTag("Enemy").Length == 0)
-        {
+        
             
             foreach(var spwaner in spawners)
             {
                spwaner.SpawnOnce(SelectRandomMonster());
                
             }
-        }
+        
 
 
     }
     //刷一波虫潮 TODO：随机选同一边，然后再从这一边的角度随机选三个方向刷怪（暂定），直接刷墙里应该是可以的（注意把敌人与墙的碰撞取消）
     public void SpawnEnemyAfter()
     {
-        if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name.Equals("SelectScene")) return;
+        Debug.Log("before" + GameObject.FindGameObjectsWithTag("Enemy").Length);
+        //if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name.Equals("SelectScene")) return;
         spwanersNearToFar = GetFilteredAndSortedGeneratorsInWall (spwanerDistanceToBattery);
         for (int i = 0; i < 3; i++)
         {
+            Debug.Log("aaaaaaaaaa" + GameObject.FindGameObjectsWithTag("Enemy").Length+"aa"+i);
             if (i > spwanersNearToFar.Count - 1) break;
             spwanersNearToFar[i].GetComponent<EnemySpawner>().SpawnOnce(SelectRandomMonster(),false);
             spwanersNearToFar[i].GetComponent<EnemySpawner>().SpawnOnce(SelectRandomMonster(), false);
@@ -157,7 +158,7 @@ public class EnemyManager : SingletonPersistent<EnemyManager>
     {
         List<Transform> generatorsOutsideDistance = new List<Transform>();
         List<GameObject> spawnersInWall=new();
-        spawnersInWall.AddRange( GameObject.FindGameObjectsWithTag("SpawnerInWall"));
+        spawnersInWall.AddRange(GameObject.FindGameObjectsWithTag("SpawnerInWall"));
         foreach (var generator in spawnersInWall)
         {
             

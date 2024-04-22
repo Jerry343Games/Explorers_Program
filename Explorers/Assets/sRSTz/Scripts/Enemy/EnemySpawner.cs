@@ -62,10 +62,11 @@ public class EnemySpawner : MonoBehaviour
         if (!isSleep)
         {
             Enemy[] enemies = enemyPrefab.GetComponentsInChildren<Enemy>();
-            foreach(var enemy in enemies)
+            foreach (var enemy in enemies)
             {
                 enemy.StartledFromSleep();
-                enemy.ChangeDetectRadius(30f);
+                //enemy.ChangeDetectRadius(30f);
+                enemy.gameObject.GetComponentInChildren<TargetDetector>().AlwaysDetectOne(EnemyManager.Instance.battery);
             }
         }
             

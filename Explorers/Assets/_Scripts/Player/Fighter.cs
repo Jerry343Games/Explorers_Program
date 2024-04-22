@@ -106,7 +106,7 @@ public class Fighter : PlayerController
         if (isDashing)
         {
             _rb.angularVelocity = Vector3.zero;
-            if (_dashTimer < dashTime&&_rb.velocity.magnitude>0.1f)
+            if (_dashTimer < dashTime&&_rb.velocity.magnitude>1f)
             {
                 _dashTimer += Time.deltaTime;
             }

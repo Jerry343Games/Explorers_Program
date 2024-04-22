@@ -15,14 +15,23 @@ public class TargetDetector : Detector
     private float enemyDetectionRange = 5f;
     [SerializeField]
     private bool showGizmos = false;
-
+    public Collider[] playerColliderList;
+    public bool alwaysDetectOne = false;
     //gizmo parameters
     private List<Transform> colliders = new();
+    private Collider alwaysDetectedCollider;
+    public void AlwaysDetectOne(GameObject gameObject)
+    {
+        alwaysDetectOne = true;
+        alwaysDetectedCollider = gameObject.GetComponent<Collider>();
+    }
 
     public override void Detect(AIData aiData)
     {
+        
+       
         //Find out if player is near
-        Collider[] playerColliderList =
+        playerColliderList=
             Physics.OverlapSphere(transform.position, targetDetectionRange, playerLayerMask);
         Collider[] enemyColliderList =
             Physics.OverlapSphere(transform.position, enemyDetectionRange, enemyLayerMask);
@@ -52,6 +61,10 @@ public class TargetDetector : Detector
             colliders.Clear();
         }
         aiData.targets = colliders;
+        if (aiData.targets == null && alwaysDetectOne)
+        {
+            aiData.targets.Add(alwaysDetectedCollider.transform);
+        }
         if (enemyColliderList != null)
         {
             aiData.enemies.Clear();
