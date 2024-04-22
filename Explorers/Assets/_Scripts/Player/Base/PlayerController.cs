@@ -71,6 +71,11 @@ public class PlayerController : MonoBehaviour
     public float featureCD;
     [HideInInspector]
     public bool canUseFeature;
+    public float waterMoveSoundPlayInterval;
+    public float waterDashSoundPlayInterval;
+    private float waterMoveSoundPlayTimer;
+    private float waterDashSoundPlayTimer;
+
 
     [Header("绳子")]
     public float DistanceThreshold = 10;//绳子最大长度
@@ -177,12 +182,30 @@ public class PlayerController : MonoBehaviour
         {
             transform.Translate(-_moveDir * Time.deltaTime * speed * _speedFactor * _outSpeedFactor, Space.World);
         }
-        
+        if (_moveDir != Vector3.zero && waterMoveSoundPlayTimer < 0)
+        {
+            MusicManager.Instance.PlaySound("水下正常移动");
+            waterMoveSoundPlayTimer = waterMoveSoundPlayInterval;
+        }
+        else if(waterMoveSoundPlayTimer >=0)
+        {
+            waterMoveSoundPlayTimer -= Time.deltaTime;
+        }
+        if(waterDashSoundPlayTimer>=0)
+        {
+            waterDashSoundPlayTimer -= Time.deltaTime;
+        }
         
         //主动加速判断
         if (playerInputSetting.GetAccelerateButtonDown())
         {
             _speedFactor = accelerateFactor;
+            if(waterDashSoundPlayTimer<0)
+            {
+                MusicManager.Instance.PlaySound("水下快速移动");
+                waterDashSoundPlayTimer = waterDashSoundPlayInterval;
+            }
+
         }
         else
         {
@@ -260,6 +283,7 @@ public class PlayerController : MonoBehaviour
 
     public void DisconnectRope()
     {
+        MusicManager.Instance.PlaySound("断开电缆");
         _hasConnected = false;
         GetComponent<CellBattery>().ChangeConnectState(_hasConnected);
         ObiParticleAttachment[] attachment = _obiRope.GetComponents<ObiParticleAttachment>();
