@@ -222,6 +222,12 @@ public class Enemy : MonoBehaviour
 
             }
         }
+        if (playersInAttackArea.Count != 0&&!isAttack)
+        {
+            animator.Play("Attack");
+            isAttack = true;
+        }
+
     }
     Vector2 AngleToVector(float angle)
     {
@@ -422,7 +428,7 @@ public class Enemy : MonoBehaviour
         Debug.Log("±»¾ª¶¯");
         CancelInvoke(nameof(SleepAwakeCheck));
         rb = GetComponent<Rigidbody>();
-        rb.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY|RigidbodyConstraints.FreezePositionZ;
+        rb.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY|RigidbodyConstraints.FreezePositionZ|RigidbodyConstraints.FreezeRotationZ;
         Collider[] hitColliders = Physics.OverlapSphere(transform.position, awakeRadius);
         
         
@@ -457,11 +463,12 @@ public class Enemy : MonoBehaviour
         if (!isAttack&& other.CompareTag("Player") || other.CompareTag("Battery"))
         {
             playersInAttackArea.Add(other.gameObject);
-            animator.Play("Attack");
-            isAttack = true;
+           // animator.Play("Attack");
+            //isAttack = true;
         }
             
     }
+    
 
     private void OnTriggerExit(Collider other)
     {
