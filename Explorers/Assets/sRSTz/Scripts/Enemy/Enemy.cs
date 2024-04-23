@@ -459,7 +459,7 @@ public class Enemy : MonoBehaviour
     }
     //ÐÂ¹¥»÷Ïà¹Ø
 
-    private void OnTriggerEnter(Collider other)
+    protected virtual void OnTriggerEnter(Collider other)
     {
         if (!isAttack&& other.CompareTag("Player") || other.CompareTag("Battery"))
         {
@@ -471,7 +471,7 @@ public class Enemy : MonoBehaviour
     }
     
 
-    private void OnTriggerExit(Collider other)
+    protected virtual void OnTriggerExit(Collider other)
     {
         playersInAttackArea.Remove(other.gameObject);
     }

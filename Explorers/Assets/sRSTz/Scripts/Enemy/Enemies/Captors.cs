@@ -5,13 +5,14 @@ using UnityEngine;
 public class Captors : Enemy
 {
     private GameObject currentCatchPlayer;
-    private float damageCount;//累计受到的伤害
-    
+    private float damageCount=0;//累计受到的伤害
+    private float maxHP;
     protected override void Awake()
     {
         base.Awake();
         aniEvent.OnEnemyAttackEvent += Attack;
         aniEvent.OnEnemyAttackEvent += AttackEnd;
+        maxHP = HP;
     }
     private void FixedUpdate()
     {
@@ -44,14 +45,17 @@ public class Captors : Enemy
     {
         
         if (playersInAttackArea.Count == 0) return;
-        
-            if (currentCatchPlayer==null && canAttack)
-            {
+
+        if (currentCatchPlayer == null && canAttack)
+        {
             isAttack = true;
-                currentCatchPlayer = playersInAttackArea[0];
+            currentCatchPlayer = playersInAttackArea[0];
             //Vertigo(-transform.forward * 5f, ForceMode.Impulse, 0.3f);
             PlayerController playerController = currentCatchPlayer.GetComponent<PlayerController>();
             playerController.Vertigo(Vector3.zero, ForceMode.Force, 100f);
+            playerController.canMainAttack = false;
+            playerController.canSecondaryAttack = false;
+
         }
         
         
@@ -115,10 +119,10 @@ public class Captors : Enemy
             ReturnSpawnpoint();
         }*/
     }
-    public void AttackEnd()
+    public void AttackEnd()//攻击动画结束如果没咬到玩家，就重置能攻击bool
     {
         isAttack = false;
-        Debug.Log(currentCatchPlayer);
+        
         if (currentCatchPlayer == null)
         {
             canAttack = true;
@@ -128,16 +132,27 @@ public class Captors : Enemy
     {
         if (currentCatchPlayer != null)
         {
-            currentCatchPlayer.GetComponent<PlayerController>().canMove = true;
+            PlayerController playerController = currentCatchPlayer.GetComponent<PlayerController>();
+            playerController.canMove = true;
             canAttack = true;
             isAttack = false;
             currentCatchPlayer = null;
+            playerController.canMainAttack = false;
+            playerController.canSecondaryAttack = false;
         }
     }
     public override void TakeDamage(int damage)
     {
         base.TakeDamage(damage);
-        AttackStop();
+        damageCount += damage;
+        if (damageCount >= maxHP / 3)
+        {
+            AttackStop();
+            damageCount = 0;
+            Vertigo(Vector3.zero, ForceMode.Force, 3f);
+        }
+        
+
     }
     public override void Vertigo(Vector3 force, ForceMode forceMode = ForceMode.Impulse, float vertigoTime = 0.3F)
     {
@@ -145,4 +160,23 @@ public class Captors : Enemy
         AttackStop();
 
     }
+    protected override void OnTriggerEnter(Collider other)
+    {
+        if (!isAttack && other.CompareTag("Player") || other.CompareTag("Battery"))
+        {
+            PlayerController player = other.GetComponent<PlayerController>();
+            if (player == null && (!player.canMainAttack && !player.canSecondaryAttack && !player.canMove)) return;
+            playersInAttackArea.Add(other.gameObject);
+            // animator.Play("Attack");
+            //isAttack = true;
+        }
+
+    }
+
+
+    protected override void OnTriggerExit(Collider other)
+    {
+        playersInAttackArea.Remove(other.gameObject);
+    }
+
 }
