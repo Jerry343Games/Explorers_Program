@@ -10,6 +10,7 @@ public class ElectricEel : Enemy
     {
         base.Awake();
         aniEvent.OnEnemyAttackEvent += Attack;
+        aniEvent.EndEnemyAttackEvent += () => { isAttack = false; };
     }
     private void FixedUpdate()
     {

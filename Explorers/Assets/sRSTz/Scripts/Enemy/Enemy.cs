@@ -187,7 +187,7 @@ public class Enemy : MonoBehaviour
     {
         slowSpeed = moveSpeed - speedOffset;
         if(aniEvent!=null)
-        aniEvent.EndEnemyAttackEvent += () => { isAttack = false; };
+        
         fasterSpeed = moveSpeed + speedOffset;
         rb = GetComponent<Rigidbody>();
         spawnerPoint = gameObject.transform.position;
@@ -225,7 +225,8 @@ public class Enemy : MonoBehaviour
         if (playersInAttackArea.Count != 0&&!isAttack)
         {
             animator.Play("Attack");
-            isAttack = true;
+            moveSpeed = slowSpeed;
+           
         }
 
     }

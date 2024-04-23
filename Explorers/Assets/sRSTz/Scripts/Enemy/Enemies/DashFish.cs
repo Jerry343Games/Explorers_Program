@@ -15,6 +15,7 @@ public class DashFish : Enemy
     protected override void Awake()
     {
         base.Awake();
+        isFlipped = spriteRenderer.flipX;
         attackArea = transform.GetChild(0).gameObject;
         attackAraeOffset = attackArea.transform.position -transform.position;
     }
@@ -93,7 +94,35 @@ public class DashFish : Enemy
             else if(!isDashing)//如果还没冲刺
             {
                 // 将人物的方向设置为计算得到的方向
-                EnemyRotate();
+                //EnemyRotate();
+                if (isDefaultLeft)
+                {
+                    if (enemyAI.FinalMovement.x > 0 && !isFlipped) // 在 y 轴方向的右边，且当前没有翻转
+                    {
+                        // 翻转 Sprite
+                        spriteRenderer.flipX = true;
+                        isFlipped = true;
+                    }
+                    else if (enemyAI.FinalMovement.x < 0 && isFlipped) // 在 y 轴方向的左边，且当前已经翻转
+                    {
+                        // 取消翻转
+                        spriteRenderer.flipX = false;
+                        isFlipped = false;
+                    }
+                    return;
+                }
+                if (enemyAI.FinalMovement.x > 0 && isFlipped) // 在 y 轴方向的右边，且当前没有翻转
+                {
+                    // 翻转 Sprite
+                    spriteRenderer.flipX = false;
+                    isFlipped = false;
+                }
+                else if (enemyAI.FinalMovement.x < 0 && !isFlipped) // 在 y 轴方向的左边，且当前已经翻转
+                {
+                    // 取消翻转
+                    spriteRenderer.flipX = true;
+                    isFlipped = true;
+                }
                 if (prepareTimer < prepareTime)
                 {
                     attackArea.SetActive(true);
