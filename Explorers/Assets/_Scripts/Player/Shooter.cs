@@ -232,11 +232,11 @@ public class Shooter : PlayerController
                 nearest = coll;
             }
         }
-        Debug.Log(salveAmount);
+        Debug.Log(nearest.gameObject.name);
         for (int i = 0;i<salveAmount;i++)
         {
-            GameObject missile = Instantiate(Resources.Load<GameObject>("Missile"),
-                transform.position + new Vector3(-2 + (4f / salveAmount) * i,2,0),
+            GameObject missile = Instantiate(Resources.Load<GameObject>("Item/RocketTrail"),
+                transform.position + new Vector3(-2 + (4f / salveAmount) * i, 2,0),
                 Quaternion.Euler(new Vector3(0, 0, -45 - (90f / salveAmount) * i)));
 
             missile.GetComponent<Missile>().Init(salveMissileDamage,salvoMissileSpeed, nearest.gameObject);

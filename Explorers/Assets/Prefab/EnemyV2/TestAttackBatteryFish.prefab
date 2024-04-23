@@ -65,7 +65,7 @@ Transform:
   m_GameObject: {fileID: 1936099003532618553}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 10.81, y: 6.62, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1936099004647841691}
@@ -148,7 +148,6 @@ MonoBehaviour:
   damage: 10
   canMove: 1
   vertigoTime: 0.2
-  detectionRange: 15
   stayTime: 4
   isReturning: 0
   stayTimer: 0
@@ -173,6 +172,7 @@ MonoBehaviour:
   aniEvent: {fileID: 303810437220032339}
   isAttack: 0
   speedOffset: 2
+  slowSpeed: 0
 --- !u!136 &8290364460762954042
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -197,8 +197,8 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
-  m_Radius: 0.14
-  m_Height: 0.51
+  m_Radius: 0.28
+  m_Height: 0.81
   m_Direction: 0
   m_Center: {x: 0.6, y: 0, z: 0}
 --- !u!1 &1936099003940882184
@@ -398,6 +398,8 @@ MonoBehaviour:
     m_Bits: 0
   enemyDetectionRange: 5
   showGizmos: 0
+  playerColliderList: []
+  alwaysDetectOne: 0
 --- !u!1 &1936099004647841692
 GameObject:
   m_ObjectHideFlags: 0
