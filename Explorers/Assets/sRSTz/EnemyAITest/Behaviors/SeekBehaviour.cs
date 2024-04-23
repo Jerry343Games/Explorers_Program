@@ -118,7 +118,10 @@ public class SeekBehaviour : SteeringBehaviour
         interestsTemp = interest;
         return (danger, interest);
     }
+    public void DodgePlayer()
+    {
 
+    }
     private void OnDrawGizmos()
     {
 

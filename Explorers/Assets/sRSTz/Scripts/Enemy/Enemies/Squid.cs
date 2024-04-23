@@ -25,6 +25,7 @@ public class Squid : Enemy
         aniEvent.OnEnemyAttackEvent += Attack;
         spawnerPoint = gameObject.transform.position;
         spriteRenderer = gameObject.GetComponentInChildren<SpriteRenderer>();
+        aniEvent.EndEnemyAttackEvent += () => { isAttack = false; };
         //isFlipped = spriteRenderer.flipX;
     }
     /*

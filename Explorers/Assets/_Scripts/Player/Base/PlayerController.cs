@@ -39,7 +39,7 @@ public class PlayerController : MonoBehaviour
     private Vector3 _moveDir;//移动方向
     public float vertigoTime = 0.3f;//被攻击后眩晕的时间（不能操作）
     private float _vertigoTimer = 0;
-    private bool _canMove = true;//是否能移动
+    public bool canMove = true;//是否能移动
     public bool isMoveReverse = false;
     public bool _isAniLeft = false;//动画向左
     [Header("护盾")]
@@ -161,12 +161,12 @@ public class PlayerController : MonoBehaviour
     {
         
         //判断是否不能移动，如果不能，就计时眩晕时长，到达上限回复移动
-        if (!_canMove)
+        if (!canMove)
         {
             _vertigoTimer += Time.deltaTime;
             if (_vertigoTimer >= vertigoTime)
             {
-                _canMove = true;
+                canMove = true;
                 _vertigoTimer = 0;
                 _rigidbody.velocity = new(0, 0, 0);
             }
@@ -478,7 +478,7 @@ public class PlayerController : MonoBehaviour
     public virtual void Vertigo(Vector3 force,ForceMode forceMode=ForceMode.Impulse,float vertigoTime = 0.3f)
     {
         this.vertigoTime = vertigoTime;
-        _canMove = false;
+        canMove = false;
         _rigidbody.AddForce(force, forceMode);
     }
 

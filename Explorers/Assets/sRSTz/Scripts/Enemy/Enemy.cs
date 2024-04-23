@@ -187,7 +187,7 @@ public class Enemy : MonoBehaviour
     {
         slowSpeed = moveSpeed - speedOffset;
         if(aniEvent!=null)
-        aniEvent.EndEnemyAttackEvent += () => { isAttack = false; };
+        
         fasterSpeed = moveSpeed + speedOffset;
         rb = GetComponent<Rigidbody>();
         spawnerPoint = gameObject.transform.position;
@@ -225,7 +225,8 @@ public class Enemy : MonoBehaviour
         if (playersInAttackArea.Count != 0&&!isAttack)
         {
             animator.Play("Attack");
-            isAttack = true;
+            moveSpeed = slowSpeed;
+           
         }
 
     }
@@ -472,6 +473,6 @@ public class Enemy : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (playersInAttackArea.Contains(other.gameObject)) playersInAttackArea.Remove(other.gameObject);
+        playersInAttackArea.Remove(other.gameObject);
     }
 }

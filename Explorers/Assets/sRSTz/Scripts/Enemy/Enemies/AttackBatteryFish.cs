@@ -8,6 +8,7 @@ public class AttackBatteryFish : Enemy
     {
         base.Awake();
         aniEvent.OnEnemyAttackEvent += Attack;
+        aniEvent.EndEnemyAttackEvent += () => { isAttack = false; };
     }
     private void FixedUpdate()
     {

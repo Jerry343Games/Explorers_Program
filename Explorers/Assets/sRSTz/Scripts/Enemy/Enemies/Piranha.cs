@@ -8,6 +8,7 @@ public class Piranha:Enemy
     {
         base.Awake();
         aniEvent.OnEnemyAttackEvent += Attack;
+        aniEvent.EndEnemyAttackEvent += () => { isAttack = false; };
     }
     private void FixedUpdate()
     {
@@ -33,7 +34,7 @@ public class Piranha:Enemy
     }*/
     public void Attack()
     {
-        moveSpeed = slowSpeed;
+        
         if (playersInAttackArea.Count == 0) return;
         foreach (var player in playersInAttackArea)
         {
