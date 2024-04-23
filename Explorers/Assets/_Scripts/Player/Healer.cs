@@ -101,9 +101,13 @@ public class Healer : PlayerController
         switch (other.gameObject.tag)
         {
             case "Item":
+                MusicManager.Instance.PlaySound("收集");
+
                 other.GetComponent<Item>().Apply(gameObject);
                 break;
             case "ResToCollecting":
+                MusicManager.Instance.PlaySound("收集");
+
                 other.GetComponent<ResToCollecting>().Collecting();
                 break;
             default:
@@ -131,6 +135,8 @@ public class Healer : PlayerController
             case "Resource":
                 if (playerInputSetting.GetInteractButtonDown())
                 {
+                    MusicManager.Instance.PlaySound("采矿");
+
                     other.GetComponent<Resource>().SpawnMineralCollections();
                 }
                 break;

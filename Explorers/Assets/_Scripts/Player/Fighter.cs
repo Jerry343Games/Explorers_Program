@@ -165,6 +165,8 @@ public class Fighter : PlayerController
             case "Resource":
                 if (playerInputSetting.GetInteractButtonDown())
                 {
+                    MusicManager.Instance.PlaySound("采矿");
+
                     other.GetComponent<Resource>().SpawnMineralCollections();
                 }
                 break;
@@ -191,9 +193,13 @@ public class Fighter : PlayerController
         switch (other.gameObject.tag)
         {
             case "Item":
+                MusicManager.Instance.PlaySound("收集");
+
                 other.GetComponent<Item>().Apply(gameObject);
                 break;
             case "ResToCollecting":
+                MusicManager.Instance.PlaySound("收集");
+
                 other.GetComponent<ResToCollecting>().Collecting();
                 break;
             case "Enemy":
@@ -357,7 +363,7 @@ public class Fighter : PlayerController
         if (!canUseFeature) return;
         canUseFeature = false;
         _featureCDTimer = featureCD;
-
+        MusicManager.Instance.PlaySound("冲锋");
         Vector3 moveDir = new Vector3(playerInputSetting.inputDir.x, playerInputSetting.inputDir.y, 0).normalized;
         if (moveDir.Equals(Vector3.zero)) return;
         isDashing = true;

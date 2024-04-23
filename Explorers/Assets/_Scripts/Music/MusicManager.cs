@@ -84,13 +84,28 @@ public class MusicManager : Singleton<MusicManager>
                 soundAudio.volume = 0.5f;
                 break;
             case "手枪射击":
-                soundAudio.volume = 0.8f;
+                soundAudio.volume = 0.6f;
+                break;
+            case "导弹爆炸":
+                soundAudio.volume = 0.4f;
                 break;
             case "水下正常移动":
+                soundAudio.volume = 0.4f;
+                break;
+            case "水下快速移动":
+                soundAudio.volume = 0.6f;
+                break;
+            case "角色界面发射":
                 soundAudio.volume = 0.6f;
                 break;
             case "角色界面切换功能":
                 soundAudio.volume = 0.5f;
+                break;
+            case "充能":
+                soundAudio.volume = 0.5f;
+                break;
+            case "收集":
+                soundAudio.volume = 0.7f;
                 break;
             default:
                 soundAudio.volume = 1;

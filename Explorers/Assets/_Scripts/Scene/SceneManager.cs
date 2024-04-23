@@ -165,6 +165,8 @@ public class SceneManager : Singleton<SceneManager>
             attachment[1].target = player.transform.GetChild(index);
             controller.SetRope(obiRope);
         }
+
+        MusicManager.Instance.PlayBackMusic("º£µ×·ÕÎ§");
     }
    
 }
