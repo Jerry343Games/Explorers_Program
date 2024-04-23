@@ -473,6 +473,6 @@ public class Enemy : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (playersInAttackArea.Contains(other.gameObject)) playersInAttackArea.Remove(other.gameObject);
+        playersInAttackArea.Remove(other.gameObject);
     }
 }
