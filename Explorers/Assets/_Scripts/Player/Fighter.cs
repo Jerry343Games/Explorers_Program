@@ -165,9 +165,8 @@ public class Fighter : PlayerController
             case "Resource":
                 if (playerInputSetting.GetInteractButtonDown())
                 {
-                    MusicManager.Instance.PlaySound("²É¿ó");
 
-                    other.GetComponent<Resource>().SpawnMineralCollections();
+                    other.GetComponent<Resource>().BeginingDigging();
                 }
                 break;
             case "Chest":

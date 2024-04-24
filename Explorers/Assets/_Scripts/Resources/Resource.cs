@@ -14,7 +14,25 @@ public class Resource : MonoBehaviour
 
     public int canMiningTimes;//可以开采的次数
 
-    public void SpawnMineralCollections()
+    public int miningDuration;
+
+    private BoxCollider _coll;
+
+    private void Awake()
+    {
+        _coll = GetComponent<BoxCollider>();
+    }
+
+    public void BeginingDigging()
+    {
+        _coll.enabled = false;
+
+        GameObject excavator = Instantiate(Resources.Load<GameObject>("Item/Excavator"), transform.position + new Vector3(-0.5f, 2, 0), Quaternion.identity);
+
+        excavator.GetComponent<Excavator>().Init(this, miningDuration);
+    }
+
+    public void SpawnMinerals()
     {
         canMiningTimes--;
         Vector3 startPos = transform.position;
@@ -24,7 +42,6 @@ public class Resource : MonoBehaviour
             //爆出矿
             GameObject mineral = Instantiate(Resources.Load<GameObject>("Item/" + resType.ToString()), transform.position, Quaternion.identity);
             mineral.GetComponent<ResToCollecting>().Init(resType);
-            mineral.GetComponent<BoxCollider>().enabled = false;
 
 
             // 计算贝塞尔曲线路径点
@@ -40,15 +57,16 @@ public class Resource : MonoBehaviour
             DOTween.To((t) =>
             {
                 mineral.transform.position = BesselCurve(pathPoints, t);
-            }, 0, 1, 2f).OnComplete(()=> mineral.GetComponent<BoxCollider>().enabled = true);
+            }, 0, 1, 2f);
 
         }
-        if (canMiningTimes==0)
+        if (canMiningTimes == 0)
         {
             //
             Destroy(gameObject);
         }
     }
+
 
     public Vector3 BesselCurve(Vector3[] pos, float t)
     {
@@ -67,4 +85,6 @@ public class Resource : MonoBehaviour
             return BesselCurve(arr, t);
         }
     }
+
+
 }
