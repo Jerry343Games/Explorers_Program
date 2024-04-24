@@ -127,8 +127,7 @@ public class Shooter : PlayerController
             case "Resource":
                 if ( playerInputSetting.GetInteractButtonDown())
                 {
-                    MusicManager.Instance.PlaySound("采矿");
-                    other.GetComponent<Resource>().SpawnMineralCollections();
+                    other.GetComponent<Resource>().BeginingDigging();
                 }
                 break;
             case "Chest":
