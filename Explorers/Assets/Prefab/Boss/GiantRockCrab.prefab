@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 479773557820986048}
   - component: {fileID: 479773557820986055}
   - component: {fileID: 479773557820986054}
-  - component: {fileID: 479773557820986053}
   - component: {fileID: 479773557820986052}
   - component: {fileID: 27465929078074719}
   m_Layer: 0
@@ -86,20 +85,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &479773557820986053
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 479773557820986075}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!114 &479773557820986052
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -162,5 +147,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dab664a8eac2cf74abfa0487f4c40c3d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  animPlayOver: 0
   maxHealth: 0
-  moveSpeed: 0
+  normalSpeed: 0
+  actionChangeInterval: 0
+  maxArmor: 0
+  curingTriggerHealth: 150
+  closePlayerSpeed: 0
+  strikePoint: {fileID: 0}
+  strikeRadius: 0
+  strikeDamage: 0
+  strikeForce: 0
+  rushSpeed: 0
+  rushDamage: 0
+  rushDuration: 0
+  rushForce: 0
+  stoneSpeed: 0
+  stoneDuration: 0
+  stoneFlyingDamage: 0
+  stoneBoomDamage: 0
+  stoneBoomRange: 0
+  stoneForce: 0
+  acidDamage: 0
+  acidCorrodeDuration: 0
+  acidCorrodeRange: 0
+  curingStoneDamage: 0
+  curingStoneAmount: 8
+  curingStoneForce: 0
+  curingStoneSpeed: 0
+  curingStoneDuration: 0

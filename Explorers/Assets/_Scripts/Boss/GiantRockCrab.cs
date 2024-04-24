@@ -1,4 +1,5 @@
 using BehaviorDesigner.Runtime;
+using System.Collections.Generic;
 using UnityEngine;
 
 //巨岩蟹	
@@ -27,6 +28,13 @@ public class GiantRockCrab : Singleton<GiantRockCrab>
 
     public float actionChangeInterval;//两种行为的间隔时间（至少要有一个行为的完整的动画时间 保证动画播完才进行下一个行为）
 
+    private float _currentArmor;
+
+    public float maxArmor;
+
+    public int curingTriggerHealth = 150;//触发固化单次要损失的血量 设计中为150
+
+    private List<bool> curingStageFlags;//标记血量每次扣150触发
 
     [Header("钳击")]
     public float closePlayerSpeed;
@@ -61,9 +69,25 @@ public class GiantRockCrab : Singleton<GiantRockCrab>
 
     public float stoneForce;//飞石击飞角色的力量
 
-    //[Header("吐酸")]
+    [Header("吐酸")]
+    public int acidDamage;
 
-    //[Header("固化")]
+    public float acidCorrodeDuration;//腐蚀护盾的时间
+
+    public float acidCorrodeRange;//酸雾范围（圆形半径）
+
+    [Header("固化")]
+
+    public  int curingStoneDamage;
+
+    public int curingStoneAmount=8;
+
+    public float curingStoneForce;
+
+    public float curingStoneSpeed;
+
+    public float curingStoneDuration;
+
 
     //[Header("震慑")]
 
@@ -83,11 +107,39 @@ public class GiantRockCrab : Singleton<GiantRockCrab>
     private void Start()
     {
         _speed = normalSpeed;
-    }
+        _currentArmor = maxArmor;
+        curingStageFlags = new List<bool>() { false, false, false, false };
 
+        Curing();
+    }
     private void FixedUpdate()
     {
         _rb.velocity = _dir * _speed;
+    }
+
+    public void TakeDamage(int damage)
+    {
+        _currentHealth = Mathf.Clamp(_currentHealth - damage, 0, maxHealth);
+        if (_currentHealth < maxHealth-curingTriggerHealth && !curingStageFlags[0])
+        {
+            curingStageFlags[0] = true;
+            Curing();
+        }
+        else if(_currentHealth < maxHealth - curingTriggerHealth*2 && !curingStageFlags[1])
+        {
+            curingStageFlags[1] = true;
+            Curing();
+        }
+        else if (_currentHealth < maxHealth - curingTriggerHealth * 3 && !curingStageFlags[2])
+        {
+            curingStageFlags[2] = true;
+            Curing();
+        }
+        else if (_currentHealth < maxHealth - curingTriggerHealth * 4 && !curingStageFlags[3])
+        {
+            curingStageFlags[3] = true;
+            Curing();
+        }
     }
 
     public GameObject FindNearestPlayer()
@@ -183,6 +235,36 @@ public class GiantRockCrab : Singleton<GiantRockCrab>
 
     #endregion
 
+    #region 吐酸
+    public void SpitAcid()
+    {
+
+        //生成酸雾区域
+        GameObject target = FindNearestPlayer();
+        Vector3 dir = (target.transform.position - transform.position).normalized;
+    }
+
+    #endregion
+
+    #region 固化
+
+    public void Curing()
+    {
+        _currentArmor = maxArmor;
 
 
+        float angleIncrement = 360f / curingStoneAmount;
+
+        for (int i = 0; i < curingStoneAmount; i++)
+        {
+            Debug.Log(1);
+            float angle = i * angleIncrement;
+            float x = Mathf.Cos(Mathf.Deg2Rad * angle)*3;
+            float y = Mathf.Sin(Mathf.Deg2Rad * angle)*3;
+            GameObject brokenStone = Instantiate(Resources.Load<GameObject>("Item/BrokenStone"), transform.position + new Vector3(x, y, 0), Quaternion.identity);
+            Vector3 dir = (brokenStone.transform.position - transform.position).normalized;
+            brokenStone.GetComponent<BrokenStone>().Init(dir, curingStoneDamage, curingStoneForce, curingStoneSpeed, curingStoneDuration);
+        }
+    }
+    #endregion
 }

@@ -74,7 +74,7 @@ public class Stone : MonoBehaviour
         _rb.velocity = _dir * _speed;
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnCollisionEnter(Collision other)
     {
         if (flyingTimer <= 0) return;
         switch(other.gameObject.tag)
