@@ -16,7 +16,6 @@ public class Shield : MonoBehaviour
         shieldEffect.transform.localScale = Vector3.zero;
         playerController = transform.parent.GetComponent<PlayerController>();
         playerController.OnShieldDamage += ResetShieldTimeout; // 订阅事件
-        shieldEffect.
         shieldEffect.transform.DOScale(new Vector3(1.3f, 1.3f, 1.3f), 0.2f);
         ResetShieldTimeout();
     }
