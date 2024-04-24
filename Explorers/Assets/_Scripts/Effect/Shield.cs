@@ -1,18 +1,23 @@
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 
 public class Shield : MonoBehaviour
 {
-    public PlayerController playerController; // 玩家健康组件的引用
-
+    private PlayerController playerController; // 玩家引用
+    public GameObject shieldEffect;
     private Coroutine timeoutCoroutine;
 
     public float waitForSecond;
 
     void OnEnable()
     {
+        shieldEffect.transform.localScale = Vector3.zero;
+        playerController = transform.parent.GetComponent<PlayerController>();
         playerController.OnShieldDamage += ResetShieldTimeout; // 订阅事件
+        shieldEffect.
+        shieldEffect.transform.DOScale(new Vector3(1.3f, 1.3f, 1.3f), 0.2f);
         ResetShieldTimeout();
     }
 
@@ -38,6 +43,6 @@ public class Shield : MonoBehaviour
 
     private void DestroyShield()
     {
-        Destroy(gameObject); // 销毁护盾对象或执行其他清理操作
+        shieldEffect.transform.DOScale(Vector3.zero, 0.2f).OnComplete(() => { Destroy(gameObject); });
     }
 }
