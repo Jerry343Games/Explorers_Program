@@ -22,6 +22,8 @@ public class Stone : MonoBehaviour
 
     private float flyingTimer;
 
+    public LayerMask playerLayer;
+
     public void Init(Vector3 dir,float speed,int flyingDamage,float force,float duration,int boomDamage,float boomRange)
     {
         _rb = GetComponent<Rigidbody>();
@@ -45,7 +47,7 @@ public class Stone : MonoBehaviour
         }
         else
         {
-            Collider[] colls = Physics.OverlapSphere(transform.position, _boomRange);
+            Collider[] colls = Physics.OverlapSphere(transform.position, _boomRange, playerLayer);
 
             foreach(var coll in colls)
             {

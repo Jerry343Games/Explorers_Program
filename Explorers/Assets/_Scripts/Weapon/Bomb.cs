@@ -84,14 +84,14 @@ public class Bomb : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         Debug.Log(other.name);
-        if ( other.CompareTag("Enemy"))
+        if ( other.CompareTag("Enemy") || other.CompareTag("Boss"))
             characters.Add(other.gameObject);
     }
 
 
     private void OnTriggerExit(Collider other)
     {
-        if ( other.CompareTag("Enemy"))
+        if ( other.CompareTag("Enemy") || other.CompareTag("Boss"))
             characters.Remove(other.gameObject);
     }
 }

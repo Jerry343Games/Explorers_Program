@@ -14,6 +14,6 @@ public class SpitAcid : Action
 
     public override TaskStatus OnUpdate()
     {
-        return TaskStatus.Running;  
+        return TaskStatus.Success;
     }
 }
