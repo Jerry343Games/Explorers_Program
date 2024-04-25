@@ -110,7 +110,6 @@ public class GiantRockCrab : Singleton<GiantRockCrab>
         _currentArmor = maxArmor;
         curingStageFlags = new List<bool>() { false, false, false, false };
 
-        Curing();
     }
     private void FixedUpdate()
     {
@@ -238,10 +237,12 @@ public class GiantRockCrab : Singleton<GiantRockCrab>
     #region Õ¬À·
     public void SpitAcid()
     {
-
         //…˙≥…À·ŒÌ«¯”Ú
         GameObject target = FindNearestPlayer();
         Vector3 dir = (target.transform.position - transform.position).normalized;
+
+        GameObject acidArea = Instantiate(Resources.Load<GameObject>("Effect/AicdFlow"),transform.position,Quaternion.identity);
+        acidArea.transform.LookAt(Vector3.right, Vector3.up);
     }
 
     #endregion

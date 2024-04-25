@@ -31,7 +31,7 @@ public class UIHealthPanel : MonoBehaviour
     {
         switch (transform.name)
         {
-            case "BatteryCarrierPanel":
+            case "BatteryCarrierPanel(Clone)":
                 GameObject BatteryCarrier= GameObject.Find("BatteryCarrier");
                 if (BatteryCarrier)
                 {
@@ -41,7 +41,7 @@ public class UIHealthPanel : MonoBehaviour
 
                 }
                 break;
-            case "ShooterPanel":
+            case "ShooterPanel(Clone)":
                 GameObject Shooter = GameObject.Find("Shooter");
                 if (Shooter)
                 {
@@ -51,7 +51,7 @@ public class UIHealthPanel : MonoBehaviour
 
                 }
                 break;
-             case "HealerPanel":
+             case "HealerPanel(Clone)":
                 GameObject Healer = GameObject.Find("Healer");
                 if (Healer)
                 {
@@ -61,7 +61,7 @@ public class UIHealthPanel : MonoBehaviour
 
                 }
                 break;
-             case "FighterPanel":
+             case "FighterPanel(Clone)":
                 GameObject Fighter = GameObject.Find("Fighter");
                 if (Fighter)
                 {

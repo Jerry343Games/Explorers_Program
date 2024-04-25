@@ -39,8 +39,10 @@ public class SceneManager : Singleton<SceneManager>
     public List<CollectionTask> collectionTasks = new List<CollectionTask>();//采集物收集任务列表
 
     public List<ResTask> resTasks = new List<ResTask>();//资源收集任务列表
-    
-    //public List<GameObject> players = new List<GameObject>();//玩家列表
+
+    public GameObject healthPanel;
+
+    public List<Vector3> panelPoints = new List<Vector3>();
 
     private void OnEnable()
     {
@@ -123,7 +125,7 @@ public class SceneManager : Singleton<SceneManager>
 
     public void GameInit()
     {
-
+        int uiIndex = 0;
         foreach (var player in _players)
         {
             PlayerController controller = null;
@@ -143,6 +145,15 @@ public class SceneManager : Singleton<SceneManager>
             controller.SetFeatureCD();
 
             controller.transform.position = bornTransform.position;
+
+
+            //角色UI面板生成
+            GameObject playerHealthPanel = Instantiate(Resources.Load<GameObject>("UI/" + controller.gameObject.name + "Panel"));
+
+            playerHealthPanel.transform.SetParent(healthPanel.transform, false);
+
+            playerHealthPanel.GetComponent<RectTransform>().anchoredPosition = panelPoints[uiIndex];
+            uiIndex++;
             //电池不连电池
             if (player == BatteryTransform.parent.gameObject)
             {
@@ -164,6 +175,7 @@ public class SceneManager : Singleton<SceneManager>
             attachment[0].target = BatteryTransform;
             attachment[1].target = player.transform.GetChild(index);
             controller.SetRope(obiRope);
+
         }
 
         MusicManager.Instance.PlayBackMusic("海底氛围");

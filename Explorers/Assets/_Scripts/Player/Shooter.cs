@@ -239,13 +239,10 @@ public class Shooter : PlayerController
         }
 
 
-        GameObject missileCollection = Instantiate(Resources.Load<GameObject>("Item/RocketMissileCollection"), transform.position + new Vector3(1, 0, 0), Quaternion.identity);
+        GameObject missileCollection = Instantiate(Resources.Load<GameObject>("RocketMissileCollection"), transform.position + new Vector3(1, 0, 0), Quaternion.identity);
 
-        for(int i =0;i< missileCollection.transform.childCount;i++)
-        {
-            missileCollection.transform.GetChild(i).GetComponent<Missile>().Init(salveMissileDamage, salvoMissileSpeed, nearest.gameObject);
-        }
-
+        missileCollection.GetComponent<MissileControl>().target = nearest.gameObject;
+        missileCollection.GetComponent<MissileControl>().singleMissileDamage  = salveMissileDamage;
 
         //for (int i = 0;i<salveAmount;i++)
         //{

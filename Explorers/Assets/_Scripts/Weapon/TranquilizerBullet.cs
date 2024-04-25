@@ -39,8 +39,8 @@ public class TranquilizerBullet : MonoBehaviour
         switch (other.tag)
         {
             case "Enemy":
-                other.GetComponent<Enemy>().TakeDamage((int)_damage);
                 other.GetComponent<Enemy>().Paralysis(_tranquilizerEffectTime);
+                other.GetComponent<Enemy>().TakeDamage((int)_damage);
                 Instantiate(Resources.Load<GameObject>("Effect/AnaesthesiaBulletExplosion"), transform.position, Quaternion.identity);
                 Destroy(gameObject);
                 break;
