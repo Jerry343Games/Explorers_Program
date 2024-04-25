@@ -64,7 +64,7 @@ public class Healer : PlayerController
         RestroeDefence();
         UseItem();
         CheckDistanceToBattery();
-        MoveAnimationControlTest(CharacterAnimation.HealerLeft_Run, CharacterAnimation.HealerRight_Run, CharacterAnimation.HealerLeft_Idle, CharacterAnimation.HealerRight_Idle);
+        MoveAnimationControl(CharacterAnimation.HealerLeft_Run, CharacterAnimation.HealerRight_Run, CharacterAnimation.HealerLeft_Idle, CharacterAnimation.HealerRight_Idle);
         WeaponLayerChange();
 
         //CheckKeys();

@@ -96,7 +96,7 @@ public class Fighter : PlayerController
         //防止动画干扰，攻击结束后再做移动动画
         if (!_isAttack)
         {
-            MoveAnimationControlTest(CharacterAnimation.FighterLeft_Run, CharacterAnimation.FighterRight_Run, CharacterAnimation.FighterLeft_Walk, CharacterAnimation.FighterRight_Walk);
+            MoveAnimationControl(CharacterAnimation.FighterLeft_Run, CharacterAnimation.FighterRight_Run, CharacterAnimation.FighterLeft_Walk, CharacterAnimation.FighterRight_Walk);
 
         }
         //UseItem();

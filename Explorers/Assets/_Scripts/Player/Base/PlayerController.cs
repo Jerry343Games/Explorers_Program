@@ -223,7 +223,7 @@ public class PlayerController : MonoBehaviour
         isMoveReverse = false;
     }
     
-    public void MoveAnimationControlTest(CharacterAnimation run_left,CharacterAnimation run_right,CharacterAnimation idle_left,CharacterAnimation idle_right)
+    public void MoveAnimationControl(CharacterAnimation run_left,CharacterAnimation run_right,CharacterAnimation idle_left,CharacterAnimation idle_right)
     {
         if (playerInputSetting.inputDir.x != 0)
         {
@@ -231,13 +231,13 @@ public class PlayerController : MonoBehaviour
             {
                 _isAniLeft = true;
                 animator.CrossFade(run_left.ToString(), 0f);
-                _spriteRenderer.material.SetTexture("_Normal", PlayerManager.Instance.GetTextureByAnimationName(run_left));
+                //_spriteRenderer.material.SetTexture("_Normal", PlayerManager.Instance.GetTextureByAnimationName(run_left));
             }
             else
             {
                 _isAniLeft = false;
                 animator.CrossFade(run_right.ToString(), 0f);
-                _spriteRenderer.material.SetTexture("_Normal", PlayerManager.Instance.GetTextureByAnimationName(run_right));
+                //_spriteRenderer.material.SetTexture("_Normal", PlayerManager.Instance.GetTextureByAnimationName(run_right));
             }
             
         }
@@ -246,12 +246,12 @@ public class PlayerController : MonoBehaviour
             if (_isAniLeft)
             {
                 animator.CrossFade(idle_left.ToString(),0);
-                _spriteRenderer.material.SetTexture("_Normal", PlayerManager.Instance.GetTextureByAnimationName(idle_left));
+                //_spriteRenderer.material.SetTexture("_Normal", PlayerManager.Instance.GetTextureByAnimationName(idle_left));
             }
             else
             {
                 animator.CrossFade(idle_right.ToString(),0);
-                _spriteRenderer.material.SetTexture("_Normal", PlayerManager.Instance.GetTextureByAnimationName(idle_right));
+                //_spriteRenderer.material.SetTexture("_Normal", PlayerManager.Instance.GetTextureByAnimationName(idle_right));
             }
             
         }

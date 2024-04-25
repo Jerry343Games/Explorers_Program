@@ -80,7 +80,7 @@ public class BatteryCarrier : PlayerController
 
             }
         }
-        MoveAnimationControlTest(CharacterAnimation.BatteryLeft_Run, CharacterAnimation.BatteryRight_Run, CharacterAnimation.BatteryLeft_Walk, CharacterAnimation.BatteryRight_Walk);
+        MoveAnimationControl(CharacterAnimation.BatteryLeft_Run, CharacterAnimation.BatteryRight_Run, CharacterAnimation.BatteryLeft_Walk, CharacterAnimation.BatteryRight_Walk);
 
         if (playerInputSetting.GetSelectCombination()==Vector3.right)
         {
