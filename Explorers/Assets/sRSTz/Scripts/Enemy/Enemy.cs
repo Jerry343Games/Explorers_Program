@@ -417,7 +417,7 @@ public class Enemy : MonoBehaviour
         }
     }
     //强制唤醒  如果在某个行为发生了，并且敌人正在睡觉，则调用此方法强制唤醒
-    public void StartledFromSleep()
+    public virtual void StartledFromSleep()
     {
         
             
