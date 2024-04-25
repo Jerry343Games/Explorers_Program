@@ -50,7 +50,7 @@ GameObject:
   - component: {fileID: 1120133155039928717}
   - component: {fileID: 7801180011585174882}
   m_Layer: 3
-  m_Name: Custor
+  m_Name: Captors
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -200,6 +200,9 @@ MonoBehaviour:
   isAttack: 0
   speedOffset: 1
   slowSpeed: 0
+  damageToBattery: 30
+  damageToPlayer: 50
+  killTime: 4
 --- !u!1 &3879093248258392282
 GameObject:
   m_ObjectHideFlags: 0

@@ -40,16 +40,17 @@ public class TargetDetector : Detector
             colliders.Clear();
             foreach (Collider playerCollider in playerColliderList)
             {
-
-                //Check if you see the player
-                Vector3 direction = (playerCollider.transform.position - transform.position).normalized;
+                if (playerCollider.GetComponent<PlayerController>().hasDead) continue;
+                    //Check if you see the player
+                    Vector3 direction = (playerCollider.transform.position - transform.position).normalized;
                 RaycastHit hit;
                 if (Physics.Raycast(transform.position, direction, out hit, targetDetectionRange, obstaclesLayerMask))
                 {
                     //Make sure that the collider we see is on the "Player" layer
                     if ((playerLayerMask & (1 << hit.collider.gameObject.layer)) != 0)
                     {
-                        Debug.DrawRay(transform.position, direction * targetDetectionRange, Color.magenta);
+                        //Debug.DrawRay(transform.position, direction * targetDetectionRange, Color.magenta);
+                        
                         colliders.Add(playerCollider.transform); /*= new List<Transform>() { playerCollider.transform };*/
                     }
                 }

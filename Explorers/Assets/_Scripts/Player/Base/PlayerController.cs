@@ -76,7 +76,7 @@ public class PlayerController : MonoBehaviour
     public float waterDashSoundPlayInterval;
     private float waterMoveSoundPlayTimer;
     private float waterDashSoundPlayTimer;
-
+    public bool beCatched = false;
 
     [Header("绳子")]
     public float DistanceThreshold = 10;//绳子最大长度
@@ -284,6 +284,7 @@ public class PlayerController : MonoBehaviour
 
     public void DisconnectRope()
     {
+        if (_obiRope == null) return;
         MusicManager.Instance.PlaySound("断开电缆");
         _hasConnected = false;
         GetComponent<CellBattery>().ChangeConnectState(_hasConnected);
@@ -549,7 +550,7 @@ public class PlayerController : MonoBehaviour
     public virtual bool MainAttack()
     {
         //if (isDigging) return false;
-        if (!canMainAttack) return false;
+        if (!canMainAttack||beCatched) return false;
         canMainAttack = false;
         _mainAttackTimer = mainWeapon.attackCD;
         return true;
@@ -561,7 +562,7 @@ public class PlayerController : MonoBehaviour
     public virtual bool SecondaryAttack() 
     {
         //if (isDigging) return false;
-        if (!canSecondaryAttack) return false;
+        if (!canSecondaryAttack||beCatched) return false;
         canSecondaryAttack = false;
         _secondaryAttackTimer = secondaryWeapon.attackCD;
         return true;

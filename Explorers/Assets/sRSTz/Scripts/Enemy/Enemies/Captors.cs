@@ -7,6 +7,9 @@ public class Captors : Enemy
     private GameObject currentCatchPlayer;
     private float damageCount=0;//累计受到的伤害
     private float maxHP;
+    public int damageToBattery = 20;
+    public int damageToPlayer = 10;
+    public float killTime = 10;
     protected override void Awake()
     {
         base.Awake();
@@ -48,27 +51,47 @@ public class Captors : Enemy
 
         if (currentCatchPlayer == null && canAttack)
         {
+            CancelInvoke(nameof(KillPlayer));
             isAttack = true;
             currentCatchPlayer = playersInAttackArea[0];
             //Vertigo(-transform.forward * 5f, ForceMode.Impulse, 0.3f);
             PlayerController playerController = currentCatchPlayer.GetComponent<PlayerController>();
             playerController.Vertigo(Vector3.zero, ForceMode.Force, 100f);
-            playerController.canMainAttack = false;
-            playerController.canSecondaryAttack = false;
+            playerController.beCatched = true;
+            Invoke(nameof(KillPlayer), killTime);
 
         }
         
         
 
     }
+    public void KillPlayer()
+    {
 
+        Debug.Log("Kill");
+        if (currentCatchPlayer != null)
+        {
+            PlayerController playerController = currentCatchPlayer.GetComponent<PlayerController>();
+            if (currentCatchPlayer.CompareTag("Battery"))
+            {
+                playerController.TakeDamage(damageToBattery);
+                
+            }else if (currentCatchPlayer.CompareTag("Player"))
+            {
+                playerController.DisconnectRope();
+                playerController.TakeDamage(damageToPlayer);
+                
+            }
+            AttackStop();
+        }
+    }
     public void Move()
     {
-        if (canMove)// 确保玩家存在
+        if (canMove)
         {
-            if (!canAttack)
+            if (!canAttack)//如果不能攻击
             {
-                rb.velocity = -enemyAI.FinalMovement * moveSpeed; // 沿着影响因子计算出的方向移动
+                rb.velocity = enemyAI.FinalMovement * moveSpeed; // 沿着影响因子计算出的方向移动
                 if (enemyAI.FinalMovement != Vector2.zero)
                 {
                     float targetAngle = Mathf.Atan2(enemyAI.FinalMovement.y, enemyAI.FinalMovement.x) * Mathf.Rad2Deg;
@@ -113,13 +136,9 @@ public class Captors : Enemy
             
             EnemyRotate();
         }
-        /*
-        else if(canMove) //如果丢失玩家并且能移动，那么回到出生点
-        {
-            ReturnSpawnpoint();
-        }*/
+       
     }
-    public void AttackEnd()//攻击动画结束如果没咬到玩家，就重置能攻击bool
+    public void AttackEnd()//攻击动画结束如果没咬到玩家，就重置能攻击bool 给动画用的
     {
         isAttack = false;
         
@@ -128,7 +147,7 @@ public class Captors : Enemy
             canAttack = true;
         }
     }
-    public void AttackStop()
+    public void AttackStop()//松口
     {
         if (currentCatchPlayer != null)
         {
@@ -137,8 +156,7 @@ public class Captors : Enemy
             canAttack = true;
             isAttack = false;
             currentCatchPlayer = null;
-            playerController.canMainAttack = false;
-            playerController.canSecondaryAttack = false;
+            playerController.beCatched = false;
         }
     }
     public override void TakeDamage(int damage)
