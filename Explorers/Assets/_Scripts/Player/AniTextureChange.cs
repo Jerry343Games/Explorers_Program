@@ -12,46 +12,31 @@ public struct FrameTextureData
 
 public class AniTextureChange : MonoBehaviour
 {
-    public FrameTextureData[] texturesData;
-    public int totalFrames;
-    private Animator animator;
-    private Material material;
+    public FrameTextureData[] texturesData; // 存储每帧对应的贴图信息
+    private Material material;              // 存储材质，用以更新贴图
 
     void Start()
     {
-        animator = GetComponent<Animator>();
+        // 获取SpriteRenderer组件的材质
         if (GetComponent<SpriteRenderer>() != null)
         {
             material = GetComponent<SpriteRenderer>().material;
         }
-
-        // 注册动画事件监听
-        animator.GetBehaviour<AnimationEventsListener>().OnSpriteChange += HandleSpriteChange;
     }
 
-    void HandleSpriteChange(int frameIndex)
+    // Animation Event触发的方法
+    public void OnSpriteChange(int frameIndex)
     {
-        // 根据传入的frameIndex查找对应的贴图并更新材质
+        // 遍历texturesData，找到对应帧索引的贴图并更新材质
         foreach (var data in texturesData)
         {
             if (data.frameIndex == frameIndex)
             {
-                if (material != null)
-                {
-                    material.SetTexture("_EmissionMap", data.emissionTexture);
-                    material.SetTexture("_BumpMap", data.normalTexture);
-                }
+                // 设置自发光和法线贴图
+                material.SetTexture("_EmissionMap", data.emissionTexture);
+                material.SetTexture("_BumpMap", data.normalTexture);
                 break;
             }
-        }
-    }
-
-    void OnDestroy()
-    {
-        // 移除事件监听，防止内存泄漏
-        if (animator != null && animator.GetBehaviour<AnimationEventsListener>() != null)
-        {
-            animator.GetBehaviour<AnimationEventsListener>().OnSpriteChange -= HandleSpriteChange;
         }
     }
 }
