@@ -44,6 +44,7 @@ public class PlayerController : MonoBehaviour
     public bool _isAniLeft = false;//动画向左
     [Header("护盾")]
     public int maxArmor;//电池护盾量
+    public event Action OnShieldDamage;
     [HideInInspector]
     public int currentArmor;//电池护盾量
     public int restoreAmount;//单次护盾修复量
@@ -351,6 +352,8 @@ public class PlayerController : MonoBehaviour
         if (damage < currentArmor)
         {
             currentArmor -= damage;
+            Instantiate(Resources.Load<GameObject>("Effect/Shield"),transform.position,Quaternion.identity,transform);
+            OnShieldDamage?.Invoke();
         }
         else
         {
