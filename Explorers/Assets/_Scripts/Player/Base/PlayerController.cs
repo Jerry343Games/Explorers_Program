@@ -621,12 +621,10 @@ public class PlayerController : MonoBehaviour
     }
 
 
-    //public void DiggingOver()
-    //{
-    //    isDigging = false;
-    //    _curDigRes = null;
-    //    UIBubblePanel.Instance.interectBubbleBuffer.GetComponent<UIBubbleItem>().DestoryBubble();
-    //}
+    public void ChangeSpeed(float ratio)
+    {
+        speed *= ratio;
+    }
     
     public void CheckKeys()
 

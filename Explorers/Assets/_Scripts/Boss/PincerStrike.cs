@@ -6,10 +6,10 @@ using UnityEngine;
 //钳击
 public class PincerStrike : Action
 {
-    private GameObject _target;//选择最近的角色
+    private Vector3 _target;//选择最近的角色
     public override void OnStart()
     {
-        _target = GiantRockCrab.Instance.FindNearestPlayer();
+        _target = GiantRockCrab.Instance.FindNearestPlayer().transform.position;
 
         GiantRockCrab.Instance.SetMoveSpeed(GiantRockCrab.Instance.closePlayerSpeed);
 
@@ -25,13 +25,12 @@ public class PincerStrike : Action
 
     public override TaskStatus OnUpdate()
     {
-        Vector3 targetPos = _target.transform.position;
 
-        Vector3 dir = (targetPos - GiantRockCrab.Instance.transform.position).normalized;
+        Vector3 dir = (_target - GiantRockCrab.Instance.transform.position).normalized;
 
         GiantRockCrab.Instance.SetMoveDirection(dir);
 
-        if(Vector3.Distance(targetPos, GiantRockCrab.Instance.transform.position)<0.1f)
+        if(Vector3.Distance(_target, GiantRockCrab.Instance.transform.position) < 5f)//大一点 因为怪物体型大
         {
             GiantRockCrab.Instance.SetMoveSpeed(0);
 

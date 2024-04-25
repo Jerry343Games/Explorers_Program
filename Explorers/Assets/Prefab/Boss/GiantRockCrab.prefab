@@ -12,10 +12,13 @@ GameObject:
   - component: {fileID: 479773557820986055}
   - component: {fileID: 479773557820986054}
   - component: {fileID: 479773557820986052}
+  - component: {fileID: 7659446673860670797}
   - component: {fileID: 27465929078074719}
+  - component: {fileID: 1432489469666532088}
+  - component: {fileID: 3246097741411947338}
   m_Layer: 0
   m_Name: GiantRockCrab
-  m_TagString: Untagged
+  m_TagString: Boss
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -29,9 +32,10 @@ Transform:
   m_GameObject: {fileID: 479773557820986075}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -25.613594, y: -8.609616, z: 55.264923}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_LocalScale: {x: 5, y: 5, z: 5}
+  m_ConstrainProportionsScale: 1
+  m_Children:
+  - {fileID: 8006094813697087404}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -106,24 +110,64 @@ MonoBehaviour:
   resetValuesOnRestart: 0
   externalBehavior: {fileID: 0}
   mBehaviorSource:
-    behaviorName: Giant rock crab behavior tree
+    behaviorName: GiantRockCrabBehaviorTree_Stage1
     behaviorDescription: 
     mTaskData:
       types: []
       parentIndex: 
       startIndex: 
       variableStartIndex: 
-      JSONSerialization: '{"EntryTask":{"Type":"BehaviorDesigner.Runtime.Tasks.EntryTask","NodeData":{"Offset":"(472.111145,-373.006622)"},"ID":0,"Name":"Entry","Instant":true},"RootTask":{"Type":"BehaviorDesigner.Runtime.Tasks.Parallel","NodeData":{"Offset":"(-7.833951,265.320526)"},"ID":1,"Name":"Parallel","Instant":true,"AbortTypeabortType":"None","Children":[{"Type":"BehaviorDesigner.Runtime.Tasks.Selector","NodeData":{"Offset":"(-2.222004,276.513031)"},"ID":2,"Name":"Selector","Instant":true,"AbortTypeabortType":"None","Children":[{"Type":"BehaviorDesigner.Runtime.Tasks.Repeater","NodeData":{"Offset":"(-429.596344,314.646973)"},"ID":3,"Name":"Repeater","Instant":true,"SharedIntcount":{"Type":"BehaviorDesigner.Runtime.SharedInt","Name":null,"Int32mValue":0},"SharedBoolrepeatForever":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":null,"BooleanmValue":false},"SharedBoolendOnFailure":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":null,"BooleanmValue":true},"Children":[{"Type":"BehaviorDesigner.Runtime.Tasks.Sequence","NodeData":{"Offset":"(4.665209,291.0931)"},"ID":4,"Name":"Sequence","Instant":true,"AbortTypeabortType":"None","Children":[{"Type":"Rush","NodeData":{"Offset":"(-304.61554,338.894653)"},"ID":5,"Name":"Rush","Instant":true},{"Type":"PincerStrike","NodeData":{"Offset":"(-190,338.205017)"},"ID":6,"Name":"Pincer
-        Strike","Instant":true},{"Type":"SpitAcid","NodeData":{"Offset":"(-83.47202,342.3001)"},"ID":7,"Name":"Spit
-        Acid","Instant":true},{"Type":"Rush","NodeData":{"Offset":"(35.9582367,339.279236)"},"ID":8,"Name":"Rush","Instant":true},{"Type":"SpitAcid","NodeData":{"Offset":"(154.823013,333.6383)"},"ID":9,"Name":"Spit
-        Acid","Instant":true},{"Type":"PincerStrike","NodeData":{"Offset":"(255.691681,332.8742)"},"ID":10,"Name":"Pincer
-        Strike","Instant":true},{"Type":"PincerStrike","NodeData":{"Offset":"(384.113159,330.827942)"},"ID":11,"Name":"Pincer
-        Strike","Instant":true}]}]},{"Type":"BehaviorDesigner.Runtime.Tasks.Repeater","NodeData":{"Offset":"(50.0335,253.086761)"},"ID":12,"Name":"Repeater","Instant":true,"SharedIntcount":{"Type":"BehaviorDesigner.Runtime.SharedInt","Name":null,"Int32mValue":0},"SharedBoolrepeatForever":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":null,"BooleanmValue":false},"SharedBoolendOnFailure":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":null,"BooleanmValue":true},"Children":[{"Type":"BehaviorDesigner.Runtime.Tasks.Sequence","NodeData":{"Offset":"(5.792263,198.408051)"},"ID":13,"Name":"Sequence","Instant":true,"AbortTypeabortType":"None","Children":[{"Type":"Rush","NodeData":{"Offset":"(-225.78949,305.000061)"},"ID":14,"Name":"Rush","Instant":true},{"Type":"PincerStrike","NodeData":{"Offset":"(-105.834923,302.6466)"},"ID":15,"Name":"Pincer
-        Strike","Instant":true},{"Type":"FlyingStones","NodeData":{"Offset":"(11.2702942,301.3308)"},"ID":16,"Name":"Flying
-        Stones","Instant":true},{"Type":"Rush","NodeData":{"Offset":"(134.954468,302.646545)"},"ID":17,"Name":"Rush","Instant":true},{"Type":"SpitAcid","NodeData":{"Offset":"(256.193237,294.674866)"},"ID":18,"Name":"Spit
-        Acid","Instant":true},{"Type":"PincerStrike","NodeData":{"Offset":"(368.693176,290.508148)"},"ID":19,"Name":"Pincer
-        Strike","Instant":true},{"Type":"Rush","NodeData":{"Offset":"(475.637573,291.897034)"},"ID":20,"Name":"Rush","Instant":true},{"Type":"FlyingStones","NodeData":{"Offset":"(597.859741,284.9526)"},"ID":21,"Name":"Flying
-        Stones","Instant":true}]}]}]}]}}'
+      JSONSerialization: '{"EntryTask":{"Type":"BehaviorDesigner.Runtime.Tasks.EntryTask","NodeData":{"Offset":"(472.111145,-373.006622)"},"ID":0,"Name":"Entry","Instant":true},"RootTask":{"Type":"BehaviorDesigner.Runtime.Tasks.Repeater","NodeData":{"Offset":"(-5.555504,132.2226)"},"ID":1,"Name":"Repeater","Instant":true,"SharedIntcount":{"Type":"BehaviorDesigner.Runtime.SharedInt","Name":null,"Int32mValue":0},"SharedBoolrepeatForever":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":null,"BooleanmValue":true},"SharedBoolendOnFailure":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":null,"BooleanmValue":true},"Children":[{"Type":"BehaviorDesigner.Runtime.Tasks.Sequence","NodeData":{"Offset":"(4.665209,111.093269)"},"ID":2,"Name":"Sequence","Instant":true,"AbortTypeabortType":"None","Children":[{"Type":"Rush","NodeData":{"Offset":"(-327.342773,157.0767)"},"ID":3,"Name":"Rush","Instant":true},{"Type":"PincerStrike","NodeData":{"Offset":"(-212.727249,156.38707)"},"ID":4,"Name":"Pincer
+        Strike","Instant":true},{"Type":"SpitAcid","NodeData":{"Offset":"(-106.199272,160.482162)"},"ID":5,"Name":"Spit
+        Acid","Instant":true},{"Type":"Rush","NodeData":{"Offset":"(13.2309895,157.461288)"},"ID":6,"Name":"Rush","Instant":true},{"Type":"SpitAcid","NodeData":{"Offset":"(132.095764,151.820358)"},"ID":7,"Name":"Spit
+        Acid","Instant":true},{"Type":"PincerStrike","NodeData":{"Offset":"(232.964432,151.056259)"},"ID":8,"Name":"Pincer
+        Strike","Instant":true},{"Type":"PincerStrike","NodeData":{"Offset":"(361.385925,149.01)"},"ID":9,"Name":"Pincer
+        Strike","Instant":true}]}]}}'
+      fieldSerializationData:
+        typeName: []
+        fieldNameHash: 
+        startIndex: 
+        dataPosition: 
+        unityObjects: []
+        byteData: 
+        byteDataArray: 
+      Version: 1.7.1
+  gizmoViewMode: 2
+  showBehaviorDesignerGizmo: 1
+--- !u!114 &7659446673860670797
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 479773557820986075}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d7b55c7ecdb49a4a89fa5e6f9022861, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startWhenEnabled: 1
+  asynchronousLoad: 0
+  pauseWhenDisabled: 0
+  restartWhenComplete: 0
+  logTaskChanges: 0
+  group: 0
+  resetValuesOnRestart: 0
+  externalBehavior: {fileID: 0}
+  mBehaviorSource:
+    behaviorName: GiantRockCrabBehaviorTree_Stage2
+    behaviorDescription: 
+    mTaskData:
+      types: []
+      parentIndex: 
+      startIndex: 
+      variableStartIndex: 
+      JSONSerialization: '{"EntryTask":{"Type":"BehaviorDesigner.Runtime.Tasks.EntryTask","NodeData":{"Offset":"(384.541229,-259.242249)"},"ID":0,"Name":"Entry","Instant":true},"RootTask":{"Type":"BehaviorDesigner.Runtime.Tasks.Repeater","NodeData":{"Offset":"(-6.666504,126.296562)"},"ID":1,"Name":"Repeater","Instant":true,"SharedIntcount":{"Type":"BehaviorDesigner.Runtime.SharedInt","Name":null,"Int32mValue":0},"SharedBoolrepeatForever":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":null,"BooleanmValue":true},"SharedBoolendOnFailure":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":null,"BooleanmValue":true},"Children":[{"Type":"BehaviorDesigner.Runtime.Tasks.Sequence","NodeData":{"Offset":"(10,107.407516)"},"ID":2,"Name":"Sequence","Instant":true,"AbortTypeabortType":"None","Children":[{"Type":"Rush","NodeData":{"Offset":"(-334.166565,185.000122)"},"ID":3,"Name":"Rush","Instant":true},{"Type":"PincerStrike","NodeData":{"Offset":"(-214.166565,175.000122)"},"ID":4,"Name":"Pincer
+        Strike","Instant":true},{"Type":"FlyingStones","NodeData":{"Offset":"(-94.16656,175.000122)"},"ID":5,"Name":"Flying
+        Stones","Instant":true},{"Type":"Rush","NodeData":{"Offset":"(25.833437,175.000122)"},"ID":6,"Name":"Rush","Instant":true},{"Type":"SpitAcid","NodeData":{"Offset":"(155.833435,165.000122)"},"ID":7,"Name":"Spit
+        Acid","Instant":true},{"Type":"PincerStrike","NodeData":{"Offset":"(265.833435,165.000122)"},"ID":8,"Name":"Pincer
+        Strike","Instant":true},{"Type":"Rush","NodeData":{"Offset":"(375.833557,165.000122)"},"ID":9,"Name":"Rush","Instant":true},{"Type":"FlyingStones","NodeData":{"Offset":"(495.833435,155.000122)"},"ID":10,"Name":"Flying
+        Stones","Instant":true}]}]}}'
       fieldSerializationData:
         typeName: []
         fieldNameHash: 
@@ -148,31 +192,97 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animPlayOver: 0
-  maxHealth: 0
-  normalSpeed: 0
-  actionChangeInterval: 0
-  maxArmor: 0
+  maxHealth: 600
+  normalSpeed: 4
+  actionChangeInterval: 2
+  maxArmor: 150
   curingTriggerHealth: 150
-  closePlayerSpeed: 0
-  strikePoint: {fileID: 0}
-  strikeRadius: 0
-  strikeDamage: 0
-  strikeForce: 0
-  rushSpeed: 0
-  rushDamage: 0
-  rushDuration: 0
-  rushForce: 0
-  stoneSpeed: 0
-  stoneDuration: 0
-  stoneFlyingDamage: 0
-  stoneBoomDamage: 0
-  stoneBoomRange: 0
-  stoneForce: 0
-  acidDamage: 0
+  playerLayer:
+    serializedVersion: 2
+    m_Bits: 64
+  closePlayerSpeed: 6
+  strikePoint: {fileID: 8006094813697087404}
+  strikeRadius: 6
+  strikeDamage: 8
+  strikeForce: 8
+  rushSpeed: 8
+  rushDamage: 10
+  rushDuration: 3
+  rushForce: 8
+  stoneSpeed: 10
+  stoneDuration: 2
+  stoneFlyingDamage: 8
+  stoneBoomDamage: 14
+  stoneBoomRange: 3
+  stoneForce: 8
+  acidDamage: 3
   acidCorrodeDuration: 0
   acidCorrodeRange: 0
-  curingStoneDamage: 0
+  curingStoneDamage: 15
   curingStoneAmount: 8
-  curingStoneForce: 0
-  curingStoneSpeed: 0
-  curingStoneDuration: 0
+  curingStoneForce: 8
+  curingStoneSpeed: 6
+  curingStoneDuration: 1.5
+  deterInterval: 5
+  deterHitRange: 7
+  deterHitForce: 8
+--- !u!65 &1432489469666532088
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 479773557820986075}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 0.19123402}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!54 &3246097741411947338
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 479773557820986075}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 120
+  m_CollisionDetection: 0
+--- !u!1 &8976093670886662802
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8006094813697087404}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8006094813697087404
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8976093670886662802}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.903, y: 0.596, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 479773557820986048}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

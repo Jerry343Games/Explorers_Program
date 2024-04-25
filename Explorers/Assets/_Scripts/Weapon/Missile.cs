@@ -55,6 +55,12 @@ public class Missile : MonoBehaviour
                 MusicManager.Instance.PlaySound("µ¼µ¯±¬Õ¨");
                 Destroy(gameObject);
                 break;
+            case "Boss":
+                Instantiate(Resources.Load<GameObject>("Effect/SmallRocketExplosion"), transform.position, Quaternion.identity);
+                GiantRockCrab.Instance.TakeDamage(_damage);
+                MusicManager.Instance.PlaySound("µ¼µ¯±¬Õ¨");
+                Destroy(gameObject);
+                break;
             default:
                 break;
         }

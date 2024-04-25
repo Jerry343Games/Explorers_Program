@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 1420943004947233299}
   - component: {fileID: 1420943004947233296}
   - component: {fileID: 8451177168437140804}
+  - component: {fileID: 382456160293184232}
   m_Layer: 0
   m_Name: FlyingStone
   m_TagString: Untagged
@@ -110,3 +111,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc46508df814d894286543ab5a0dc641, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!54 &382456160293184232
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1420943004947233297}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0

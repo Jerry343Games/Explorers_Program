@@ -1,11 +1,16 @@
 using BehaviorDesigner.Runtime;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 //巨岩蟹	
 public class GiantRockCrab : Singleton<GiantRockCrab>
 {
-    private BehaviorTree _behaviorTree;
+
+    private BehaviorTree _firstBehaviorTree;
+
+    private BehaviorTree _secondBehaviorTree;
+
 
     private Rigidbody _rb;
 
@@ -35,6 +40,12 @@ public class GiantRockCrab : Singleton<GiantRockCrab>
     public int curingTriggerHealth = 150;//触发固化单次要损失的血量 设计中为150
 
     private List<bool> curingStageFlags;//标记血量每次扣150触发
+
+    private bool isSecondStage;//是否处于第二阶段
+
+    private bool hasEnteredSecondStage;
+
+    public LayerMask playerLayer;
 
     [Header("钳击")]
     public float closePlayerSpeed;
@@ -89,14 +100,35 @@ public class GiantRockCrab : Singleton<GiantRockCrab>
     public float curingStoneDuration;
 
 
-    //[Header("震慑")]
+    [Header("震慑")]
+    public float deterInterval;
+
+    private bool hasDecreaseSpeedOfPlayers;
+
+
+    private float deterTimer;
+
+    public float deterHitRange = 7;
+
+    public float deterHitForce;
 
 
     protected override void Awake()
     {
         base.Awake();
 
-        _behaviorTree = GetComponent<BehaviorTree>();
+        BehaviorTree[] trees = GetComponents<BehaviorTree>();
+        foreach(var tree in trees)
+        {
+            if(tree.BehaviorName== "GiantRockCrabBehaviorTree_Stage1")
+            {
+                _firstBehaviorTree = tree;
+            }
+            else
+            {
+                _secondBehaviorTree = tree;
+            }
+        }
 
         _rb = GetComponent<Rigidbody>();
 
@@ -109,7 +141,27 @@ public class GiantRockCrab : Singleton<GiantRockCrab>
         _speed = normalSpeed;
         _currentArmor = maxArmor;
         curingStageFlags = new List<bool>() { false, false, false, false };
+        deterTimer = deterInterval;
+        _currentHealth = maxHealth;
+        //激活第一个树
+        _firstBehaviorTree.Start();
+    }
 
+    private void Update()
+    {
+        //二阶段震慑计时
+        if(isSecondStage)
+        {
+            if(deterTimer<0)
+            {
+                Deter();
+                deterTimer = deterInterval;
+            }
+            else
+            {
+                deterTimer -= Time.deltaTime;
+            }
+        }
     }
     private void FixedUpdate()
     {
@@ -119,6 +171,8 @@ public class GiantRockCrab : Singleton<GiantRockCrab>
     public void TakeDamage(int damage)
     {
         _currentHealth = Mathf.Clamp(_currentHealth - damage, 0, maxHealth);
+
+        //固化判断
         if (_currentHealth < maxHealth-curingTriggerHealth && !curingStageFlags[0])
         {
             curingStageFlags[0] = true;
@@ -138,6 +192,14 @@ public class GiantRockCrab : Singleton<GiantRockCrab>
         {
             curingStageFlags[3] = true;
             Curing();
+        }
+        //判断是否处于第二阶段 是的话就切换行为树 并且只切换一次
+        if(_currentHealth<maxHealth/2 && !hasEnteredSecondStage)
+        {
+            hasEnteredSecondStage = true;
+            isSecondStage = true;
+            _firstBehaviorTree.StopAllCoroutines();
+            _secondBehaviorTree.Start();
         }
     }
 
@@ -182,7 +244,7 @@ public class GiantRockCrab : Singleton<GiantRockCrab>
     //因为钳击伤害的触发点要用帧动画事件 这个方法要挂在钳子击打的那一帧
     public void PincerStrikeAction()
     {
-        Collider[] colls = Physics.OverlapSphere(strikePoint.transform.position, strikeRadius);
+        Collider[] colls = Physics.OverlapSphere(strikePoint.transform.position, strikeRadius, playerLayer);
 
         if (colls.Length == 0) return;
 
@@ -200,7 +262,7 @@ public class GiantRockCrab : Singleton<GiantRockCrab>
     #region 疾行
     public void Rush()
     {
-        Collider[] colls =  Physics.OverlapBox(_coll.center, _coll.size/2f);
+        Collider[] colls =  Physics.OverlapSphere(transform.position, 2f, playerLayer);
 
         if (colls.Length == 0) return;
 
@@ -241,13 +303,21 @@ public class GiantRockCrab : Singleton<GiantRockCrab>
         GameObject target = FindNearestPlayer();
         Vector3 dir = (target.transform.position - transform.position).normalized;
 
+        float angle = Vector3.Angle(dir, Vector3.right);
+
         GameObject acidArea = Instantiate(Resources.Load<GameObject>("Effect/AicdFlow"),transform.position,Quaternion.identity);
-        acidArea.transform.LookAt(Vector3.right, Vector3.up);
+
+        Debug.Log(dir);
+        Debug.Log(angle);
+
+        acidArea.transform.rotation = Quaternion.Euler(angle, 90, 0);
+
+        Destroy(acidArea, 1f);
     }
 
     #endregion
 
-    #region 固化
+    #region 固化（被动）
 
     public void Curing()
     {
@@ -268,4 +338,39 @@ public class GiantRockCrab : Singleton<GiantRockCrab>
         }
     }
     #endregion
+
+    #region 震慑（被动）
+    public void Deter()
+    {
+        if(!hasDecreaseSpeedOfPlayers)
+        {
+            hasDecreaseSpeedOfPlayers = true;
+            foreach(var player in PlayerManager.Instance.gamePlayers)
+            {
+                player.GetComponent<PlayerController>().ChangeSpeed(0.7f);
+            }
+        }
+        Collider[] colls = Physics.OverlapSphere(transform.position, deterHitRange,playerLayer);
+        //特效
+        if (colls.Length == 0) return;
+        foreach(var coll in colls)
+        {
+            Vector3 dir = (coll.transform.position - transform.position).normalized;
+            coll.GetComponent<Rigidbody>().AddForce(dir * deterHitForce, ForceMode.Impulse);
+        }
+    }
+
+    #endregion
+
+    public virtual void Paralysis(float continuedTime)
+    {
+        StartCoroutine(ParalysiseEffect(continuedTime));
+    }
+
+    IEnumerator ParalysiseEffect(float continuedTime)
+    {
+        _speed *= 0.1f;
+        yield return new WaitForSeconds(continuedTime);
+        _speed /= 0.1f;
+    }
 }
