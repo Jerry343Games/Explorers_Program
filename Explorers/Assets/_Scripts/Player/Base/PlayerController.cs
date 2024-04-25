@@ -94,7 +94,9 @@ public class PlayerController : MonoBehaviour
     [HideInInspector]
     public Vector3 mouseWorldPS => Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0));
 
-
+    //气泡组件
+    [HideInInspector]
+    public BubbleManager bubbleManager;
 
 
     /// <summary>
@@ -107,6 +109,7 @@ public class PlayerController : MonoBehaviour
         playerInputSetting = transform.parent.GetComponent<PlayerInputSetting>();
         Debug.Log("Clone: "+transform.name+" / Index: "+myIndex);
         PlayerManager.Instance.gamePlayers.Add(gameObject);
+        bubbleManager = GetComponent<BubbleManager>();
         //if (gameObject.CompareTag("Battery")) EnemyManager.Instance.battery = gameObject;
         myIndex = playerInput.playerIndex;
         currentArmor = maxArmor;
@@ -280,6 +283,8 @@ public class PlayerController : MonoBehaviour
         attachment[1].target = transform;
 
         MusicManager.Instance.PlaySound("连接电缆");
+        
+        bubbleManager.DestroyBubble();
     }
 
     public void DisconnectRope()
@@ -579,39 +584,39 @@ public class PlayerController : MonoBehaviour
             case "Resource":
                 if (!hasDead)
                 {
-                    BubbleInfo resInfo = new BubbleInfo
+                    BubbleInfo info = new BubbleInfo
                     {
-                        Type = BubbleType.ResourceCollectionBubble,
+                        Type = BubbleType.Press,
                         Obj1 = gameObject,
                         Obj2 = other.gameObject,
                         Content = "采集"
                     };
-                    UIBubblePanel.Instance.CreateBubble(resInfo);
+                    bubbleManager.CreateBubble(info);
                 }
                 break;
             case "ReconnectArea":
                 if (!_hasConnected&&!hasDead){
-                BubbleInfo recInfo = new BubbleInfo
+                BubbleInfo info = new BubbleInfo
                 {
-                    Type = BubbleType.ReconnectCableBubble,
+                    Type = BubbleType.Hold,
                     Obj1 = gameObject,
                     Obj2= other.gameObject,
                     Content = "重新连接"
                 };
-                UIBubblePanel.Instance.CreateBubble(recInfo);
+                bubbleManager.CreateBubble(info);
                 }
                 break;
             case "Chest":
                 if (!hasDead)
                 {
-                    BubbleInfo recInfo = new BubbleInfo
+                    BubbleInfo info = new BubbleInfo
                     {
-                        Type = BubbleType.ChestOpenBubble,
+                        Type = BubbleType.Press,
                         Obj1 = gameObject,
                         Obj2 = other.gameObject,
                         Content = "打开"
                     };
-                    UIBubblePanel.Instance.CreateBubble(recInfo);
+                    bubbleManager.CreateBubble(info);
                 }
 
 

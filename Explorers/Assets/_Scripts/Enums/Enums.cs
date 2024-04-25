@@ -18,9 +18,8 @@ public enum PlayerType
 /// </summary>
 public enum BubbleType
 {
-    ResourceCollectionBubble,
-    ReconnectCableBubble,
-    ChestOpenBubble,
+    Press,
+    Hold
 }
 
 public enum CharacterAnimation

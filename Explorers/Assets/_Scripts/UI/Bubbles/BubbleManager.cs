@@ -2,23 +2,28 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BubbleManager : Singleton<SceneManager>
+public class BubbleManager:MonoBehaviour
 {
     public GameObject bubblePrefab; // 气泡的预制体
 
+    private GameObject currentBubble;
     public delegate void BubbleCreateHandler(BubbleInfo info);
     public event BubbleCreateHandler OnBubbleCreate;
-    protected override void Awake()
+    private void Awake()
     {
-        base.Awake();
         OnBubbleCreate += CreateBubble;
     }
 
-    private void CreateBubble(BubbleInfo info)
+    public void CreateBubble(BubbleInfo info)
     {
         // 实例化气泡
-        GameObject bubbleInstance = Instantiate(bubblePrefab);
-        UIBubbleItem bubbleItem = bubbleInstance.GetComponent<UIBubbleItem>();
+        // 销毁已有的气泡
+        if (currentBubble != null)
+        {
+            Destroy(currentBubble);
+        }
+        currentBubble = Instantiate(bubblePrefab);
+        UIBubbleItem bubbleItem = currentBubble.GetComponent<UIBubbleItem>();
         
         if (bubbleItem != null)
         {
@@ -30,8 +35,11 @@ public class BubbleManager : Singleton<SceneManager>
         }
     }
 
-    private void OnDestroy()
+    public void DestroyBubble()
     {
-        OnBubbleCreate -= CreateBubble;
+        if (currentBubble)
+        {
+            currentBubble.GetComponent<UIBubbleItem>().DestoryBubble();
+        }
     }
 }

@@ -121,7 +121,6 @@ public class Shooter : PlayerController
                     {
                         switchStateBufferTimer = switchStateBufferTime;
                         ReconnectRope();
-                        //UIBubblePanel.Instance.reconnectCableBuffer.GetComponent<UIBubbleItem>().DestoryBubble();
                     }
                 }
                 break;
@@ -129,6 +128,8 @@ public class Shooter : PlayerController
                 if ( playerInputSetting.GetInteractButtonDown())
                 {
                     other.GetComponent<Resource>().BeginingDigging();
+                    
+                    
                 }
                 break;
             case "Chest":
@@ -153,13 +154,10 @@ public class Shooter : PlayerController
         switch (other.tag)
         {
             case "Resource":
-                //UIBubblePanel.Instance.interectBubbleBuffer.GetComponent<UIBubbleItem>().DestoryBubble();
+                bubbleManager.DestroyBubble();
                 break;
             case "ReconnectArea":
-                if (UIBubblePanel.Instance.reconnectCableBuffer)
-                {
-                    UIBubblePanel.Instance.reconnectCableBuffer.GetComponent<UIBubbleItem>().DestoryBubble();    
-                }
+                bubbleManager.DestroyBubble();
                 break;
         }
 

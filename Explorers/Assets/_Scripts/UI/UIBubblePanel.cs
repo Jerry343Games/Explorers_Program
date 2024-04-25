@@ -60,14 +60,14 @@ public class UIBubblePanel : MonoBehaviour
         
         switch (info.Type)
         {
-            case BubbleType.ResourceCollectionBubble:
-                interectBubbleBuffer = Instantiate(Resources.Load<GameObject>("UI/InteractBubble"),pos,quaternion.identity,transform);
-                _bubbleItem = interectBubbleBuffer.GetComponent<UIBubbleItem>();
-                break;
-            case BubbleType.ReconnectCableBubble:
-                reconnectCableBuffer = Instantiate(Resources.Load<GameObject>("UI/ReconnectBubble"),pos,quaternion.identity,transform);
-                _bubbleItem = reconnectCableBuffer.GetComponent<UIBubbleItem>();
-                break;
+            // case BubbleType.ResourceCollectionBubble:
+            //     interectBubbleBuffer = Instantiate(Resources.Load<GameObject>("UI/InteractBubble"),pos,quaternion.identity,transform);
+            //     _bubbleItem = interectBubbleBuffer.GetComponent<UIBubbleItem>();
+            //     break;
+            // case BubbleType.ReconnectCableBubble:
+            //     reconnectCableBuffer = Instantiate(Resources.Load<GameObject>("UI/ReconnectBubble"),pos,quaternion.identity,transform);
+            //     _bubbleItem = reconnectCableBuffer.GetComponent<UIBubbleItem>();
+            //     break;
             //case BubbleType.ChestOpenBubble:
             //    interectBubbleBuffer = Instantiate(Resources.Load<GameObject>("UI/InteractBubble"), pos, quaternion.identity, transform);
             //    _bubbleItem = interectBubbleBuffer.GetComponent<UIBubbleItem>();

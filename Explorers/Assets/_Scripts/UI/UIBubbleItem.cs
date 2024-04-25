@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,7 +7,7 @@ using TMPro;
 
 public class UIBubbleItem : MonoBehaviour
 {
-    public TextMeshProUGUI contentText;
+    public TMP_Text contentText;
     
     [HideInInspector]
     public GameObject gameObject1;
@@ -22,6 +23,12 @@ public class UIBubbleItem : MonoBehaviour
         contentText.text = instruction;
         transform.localScale = Vector3.zero;
         transform.DOScale(Vector3.one, 0.2f);
+        transform.parent = GameObject.FindWithTag("BubbleManager").transform;
+    }
+
+    private void Update()
+    {
+        SetPosition(gameObject1,gameObject2);
     }
 
     /// <summary>
