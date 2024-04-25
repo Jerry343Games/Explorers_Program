@@ -9,6 +9,8 @@ public class ResToCollecting : MonoBehaviour
 
     private ResourceType _resType;
 
+    public int collectingAmount = 10;
+
     public void Init(ResourceType type)
     {
         _resType = type;
@@ -16,7 +18,7 @@ public class ResToCollecting : MonoBehaviour
 
     public void Collecting()
     {
-        SceneManager.Instance.resTasks.Find(x => x.type == _resType).taskUI.GetComponent<UIResPanel>().currentNum++;
+        SceneManager.Instance.resTasks.Find(x => x.type == _resType).taskUI.GetComponent<UIResPanel>().currentNum+= collectingAmount;
         //ÒôĞ§ÌØĞ§
         Destroy(gameObject);
     }
