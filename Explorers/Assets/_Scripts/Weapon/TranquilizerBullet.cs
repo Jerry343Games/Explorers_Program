@@ -41,11 +41,11 @@ public class TranquilizerBullet : MonoBehaviour
             case "Enemy":
                 other.GetComponent<Enemy>().TakeDamage((int)_damage);
                 other.GetComponent<Enemy>().Paralysis(_tranquilizerEffectTime);
-                Instantiate(Resources.Load<GameObject>("Effect/BulletExplosion"), transform.position, Quaternion.identity);
+                Instantiate(Resources.Load<GameObject>("Effect/AnaesthesiaBulletExplosion"), transform.position, Quaternion.identity);
                 Destroy(gameObject);
                 break;
             case "Barrier":
-                Instantiate(Resources.Load<GameObject>("Effect/BulletExplosion"), transform.position, Quaternion.identity);
+                Instantiate(Resources.Load<GameObject>("Effect/AnaesthesiaBulletExplosion"), transform.position, Quaternion.identity);
                 Destroy(gameObject);
                 break;
             default:

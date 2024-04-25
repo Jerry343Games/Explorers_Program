@@ -382,6 +382,7 @@ public class Fighter : PlayerController
 
         canUseFeature = false;
         _featureCDTimer = featureCD;
+        Instantiate(Resources.Load<GameObject>("Effect/WaterDistortion"), transform.position,Quaternion.identity);
         sonicWaveAttack.AttactStart(this,startRadius, targetRadius, enemyVertigoTime,transitionDuration);
     }
 

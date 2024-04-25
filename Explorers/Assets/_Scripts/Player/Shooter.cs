@@ -1,3 +1,4 @@
+using System.Reflection;
 using Unity.Mathematics;
 using UnityEngine;
 
@@ -236,15 +237,23 @@ public class Shooter : PlayerController
                 nearest = coll;
             }
         }
-        Debug.Log(nearest.gameObject.name);
-        for (int i = 0;i<salveAmount;i++)
-        {
-            GameObject missile = Instantiate(Resources.Load<GameObject>("Item/RocketTrail"),
-                transform.position + new Vector3(-2 + (4f / salveAmount) * i, 2,0),
-                Quaternion.Euler(new Vector3(0, 0, -45 - (90f / salveAmount) * i)));
 
-            missile.GetComponent<Missile>().Init(salveMissileDamage,salvoMissileSpeed, nearest.gameObject);
+
+        GameObject missileCollection = Instantiate(Resources.Load<GameObject>("Item/RocketMissileCollection"), transform.position + new Vector3(1, 0, 0), Quaternion.identity);
+
+        for(int i =0;i< missileCollection.transform.childCount;i++)
+        {
+            missileCollection.transform.GetChild(i).GetComponent<Missile>().Init(salveMissileDamage, salvoMissileSpeed, nearest.gameObject);
         }
+
+
+        //for (int i = 0;i<salveAmount;i++)
+        //{
+        //    GameObject missile = Instantiate(Resources.Load<GameObject>("Item/RocketTrail"),
+        //        transform.position + new Vector3(-2 + (4f / salveAmount) * i, 2,0),
+        //        Quaternion.Euler(new Vector3(0, 0, -45 - (90f / salveAmount) * i)));
+
+        //}
     }
 
 
