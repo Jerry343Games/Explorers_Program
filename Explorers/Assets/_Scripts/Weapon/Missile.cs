@@ -39,7 +39,7 @@ public class Missile : MonoBehaviour
         else
         {
             Instantiate(Resources.Load<GameObject>("Effect/SmallRocketExplosion"), transform.position, Quaternion.identity);
-            MusicManager.Instance.PlaySound("µΌµ―±¬Υ¨");
+            MusicManager.Instance.PlaySound("Υπ±¬");
 
             Destroy(gameObject);
         }
@@ -52,13 +52,13 @@ public class Missile : MonoBehaviour
             case "Enemy":
                 Instantiate(Resources.Load<GameObject>("Effect/SmallRocketExplosion"), transform.position, Quaternion.identity);
                 other.GetComponent<Enemy>().TakeDamage(_damage);
-                MusicManager.Instance.PlaySound("µΌµ―±¬Υ¨");
+                MusicManager.Instance.PlaySound("Υπ±¬");
                 Destroy(gameObject);
                 break;
             case "Boss":
                 Instantiate(Resources.Load<GameObject>("Effect/SmallRocketExplosion"), transform.position, Quaternion.identity);
                 GiantRockCrab.Instance.TakeDamage(_damage);
-                MusicManager.Instance.PlaySound("µΌµ―±¬Υ¨");
+                MusicManager.Instance.PlaySound("Υπ±¬");
                 Destroy(gameObject);
                 break;
             default:
@@ -68,7 +68,7 @@ public class Missile : MonoBehaviour
     private void Boom()
     {
         Instantiate(Resources.Load<GameObject>("Effect/SmallRocketExplosion"), transform.position, Quaternion.identity);
-        MusicManager.Instance.PlaySound("µΌµ―±¬Υ¨");
+        MusicManager.Instance.PlaySound("Υπ±¬");
 
         Destroy(gameObject);
     }
