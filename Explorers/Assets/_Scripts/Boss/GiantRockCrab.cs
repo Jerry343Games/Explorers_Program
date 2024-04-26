@@ -198,8 +198,8 @@ public class GiantRockCrab : Singleton<GiantRockCrab>
         {
             hasEnteredSecondStage = true;
             isSecondStage = true;
-            _firstBehaviorTree.StopAllCoroutines();
-            _secondBehaviorTree.Start();
+            _firstBehaviorTree.enabled = false;
+            _secondBehaviorTree.enabled = true;
         }
     }
 
@@ -271,11 +271,11 @@ public class GiantRockCrab : Singleton<GiantRockCrab>
             if(coll.gameObject.tag=="Player")
             {
                 coll.gameObject.GetComponent<PlayerController>().TakeDamage(rushDamage);
-                coll.gameObject.GetComponent<Rigidbody>().AddForce((transform.position - coll.transform.position).normalized * rushForce,ForceMode.Impulse);
+                coll.gameObject.GetComponent<Rigidbody>().AddForce((coll.transform.position-transform.position).normalized * rushForce,ForceMode.Impulse);
             }
             else if(coll.gameObject.tag == "Enemy")
             {
-                coll.gameObject.GetComponent<Rigidbody>().AddForce((transform.position - coll.transform.position).normalized * rushForce,ForceMode.Impulse);
+                coll.gameObject.GetComponent<Rigidbody>().AddForce((coll.transform.position-transform.position).normalized * rushForce,ForceMode.Impulse);
             }
         }
     }
@@ -309,6 +309,7 @@ public class GiantRockCrab : Singleton<GiantRockCrab>
 
         Debug.Log(dir);
         Debug.Log(angle);
+        acidArea.transform.SetParent(transform);
 
         acidArea.transform.rotation = Quaternion.Euler(angle, 90, 0);
 

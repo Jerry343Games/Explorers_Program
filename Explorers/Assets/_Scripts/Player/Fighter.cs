@@ -158,21 +158,25 @@ public class Fighter : PlayerController
                     {
                         switchStateBufferTimer = switchStateBufferTime;
                         ReconnectRope();
-                        //UIBubblePanel.Instance.reconnectCableBuffer.GetComponent<UIBubbleItem>().DestoryBubble();
+                        bubbleManager.DestroyBubble();
+
                     }
                 }
                 break;
             case "Resource":
                 if (playerInputSetting.GetInteractButtonDown())
                 {
-
                     other.GetComponent<Resource>().BeginingDigging();
+                    bubbleManager.DestroyBubble();
+
                 }
                 break;
             case "Chest":
                 if (playerInputSetting.GetInteractButtonDown())
                 {
                     other.GetComponent<PropChest>().OpenChest();
+                    bubbleManager.DestroyBubble();
+
                 }
 
                 break;
@@ -219,10 +223,9 @@ public class Fighter : PlayerController
         switch (other.tag)
         {
             case "Resource":
+                bubbleManager.DestroyBubble();
 
 
-                //离开资源区域后销毁交互气泡
-                //UIBubblePanel.Instance.interectBubbleBuffer.GetComponent<UIBubbleItem>().DestoryBubble();
                 break;
             case "Enemy":
                 if(_enemyInArea.Contains(other.gameObject))
@@ -231,11 +234,9 @@ public class Fighter : PlayerController
                 }
                 break;
             case "ReconnectArea":
-                //离开重连区域后如果有重连气泡就销毁下
-                if (UIBubblePanel.Instance.reconnectCableBuffer)
-                {
-                    UIBubblePanel.Instance.reconnectCableBuffer.GetComponent<UIBubbleItem>().DestoryBubble();    
-                }
+                bubbleManager.DestroyBubble();
+
+
                 break;
             default:
                 break;

@@ -1,3 +1,4 @@
+using System.Linq;
 using System.Reflection;
 using Unity.Mathematics;
 using UnityEngine;
@@ -121,6 +122,8 @@ public class Shooter : PlayerController
                     {
                         switchStateBufferTimer = switchStateBufferTime;
                         ReconnectRope();
+                        bubbleManager.DestroyBubble();
+
                     }
                 }
                 break;
@@ -128,14 +131,17 @@ public class Shooter : PlayerController
                 if ( playerInputSetting.GetInteractButtonDown())
                 {
                     other.GetComponent<Resource>().BeginingDigging();
-                    
-                    
+                    bubbleManager.DestroyBubble();
+
+
                 }
                 break;
             case "Chest":
                 if (playerInputSetting.GetInteractButtonDown())
                 {
                     other.GetComponent<PropChest>().OpenChest();
+                    bubbleManager.DestroyBubble();
+
                 }
 
                 break;
