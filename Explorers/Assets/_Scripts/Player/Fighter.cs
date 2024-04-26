@@ -256,18 +256,18 @@ public class Fighter : PlayerController
         //动画控制
         animator.CrossFade("FighterAttack",0);
         playerSprite.GetComponent<SpriteRenderer>().material.SetTexture("_Normal",
-            PlayerManager.Instance.GetTextureByAnimationName(CharacterAnimation.FighterLeft_Attack));//???可能存在问题
+            PlayerManager.Instance.GetNormalByAnimationName(CharacterAnimation.FighterLeft_Attack));//???可能存在问题
         if (_isAniLeft)
         {
             animator.CrossFade("FighterLeft_Attack", 0f);
             playerSprite.GetComponent<SpriteRenderer>().material.SetTexture("_Normal",
-            PlayerManager.Instance.GetTextureByAnimationName(CharacterAnimation.FighterLeft_Attack));//???可能存在问题
+            PlayerManager.Instance.GetNormalByAnimationName(CharacterAnimation.FighterLeft_Attack));//???可能存在问题
         }
         else
         {
             animator.CrossFade("FighterRight_Attack", 0f);
             playerSprite.GetComponent<SpriteRenderer>().material.SetTexture("_Normal",
-            PlayerManager.Instance.GetTextureByAnimationName(CharacterAnimation.FighterRight_Attack));//???可能存在问题
+            PlayerManager.Instance.GetNormalByAnimationName(CharacterAnimation.FighterRight_Attack));//???可能存在问题
         }
 
 

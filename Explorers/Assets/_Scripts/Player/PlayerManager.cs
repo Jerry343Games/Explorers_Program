@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using UnityEngine.Serialization;
 
 public enum OptionalFeature
 {
@@ -19,7 +20,8 @@ public enum OptionalFeature
 public class AnimationTextureMapping
 {
     public CharacterAnimation animationName;
-    public Texture2D texture;
+    public Texture2D NormalMap;
+    public Texture2D EmissionMap;
 }
 public class   PlayerManager : SingletonPersistent<PlayerManager>
 {
@@ -41,13 +43,30 @@ public class   PlayerManager : SingletonPersistent<PlayerManager>
     /// </summary>
     /// <param name="animationName"></param>
     /// <returns></returns>
-    public Texture2D GetTextureByAnimationName(CharacterAnimation animationName)
+    public Texture2D GetNormalByAnimationName(CharacterAnimation animationName)
     {
         foreach (var mapping in mappings)
         {
             if (mapping.animationName == animationName)
             {
-                return mapping.texture;
+                return mapping.NormalMap;
+            }
+        }
+        return null; // 如果找不到对应的贴图，则返回null
+    }
+    
+    /// <summary>
+    /// 通过动画名查找法线贴图
+    /// </summary>
+    /// <param name="animationName"></param>
+    /// <returns></returns>
+    public Texture2D GetEmissionByAnimationName(CharacterAnimation animationName)
+    {
+        foreach (var mapping in mappings)
+        {
+            if (mapping.animationName == animationName)
+            {
+                return mapping.EmissionMap;
             }
         }
         return null; // 如果找不到对应的贴图，则返回null
