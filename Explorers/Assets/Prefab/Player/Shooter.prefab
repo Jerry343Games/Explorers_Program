@@ -111,7 +111,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3325688866815195291}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.167, y: 0, z: -0.1}
+  m_LocalPosition: {x: -0.167, y: 0, z: 0}
   m_LocalScale: {x: 1.4, y: 1.4, z: 1.4}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -179,7 +179,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -65541800, guid: 3df52487ca4b65a4ca6c95bb6d19830e, type: 3}
+  m_Sprite: {fileID: -626357159, guid: 51264d45e0642304aa66d6d69246d607, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -214,7 +214,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3946353639550936320}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.335, y: 0.019, z: 0.006}
+  m_LocalPosition: {x: -0.335, y: 0.019, z: -0.014}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -236,13 +236,14 @@ GameObject:
   - component: {fileID: 3159093272327093982}
   - component: {fileID: 5909638852487930072}
   - component: {fileID: 9081566840665714264}
+  - component: {fileID: 1820731330257921009}
   m_Layer: 6
   m_Name: Shooter
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &7477862984688049902
 Transform:
   m_ObjectHideFlags: 0
@@ -276,19 +277,20 @@ MonoBehaviour:
   playerInputSetting: {fileID: 0}
   playerSprite: {fileID: 3325688866815195291}
   animator: {fileID: 0}
-  bubblePanel: {fileID: 0}
   myIndex: 0
   speed: 6
   accelerateFactor: 1.5
   vertigoTime: 0.3
+  canMove: 1
   isMoveReverse: 0
+  _isAniLeft: 0
   maxArmor: 7
   currentArmor: 0
   restoreAmount: 1
   restoreCD: 2
   timeToRepairArmor: 5
   mainWeapon: {fileID: 11400000, guid: 26b10320b0a849c479c35af25f4c8db1, type: 2}
-  secondaryWeapons: {fileID: 11400000, guid: 5c896a5fadf9b244f817015269b81025, type: 2}
+  secondaryWeapon: {fileID: 11400000, guid: 5c896a5fadf9b244f817015269b81025, type: 2}
   _mainAttackTimer: 0
   _secondaryAttackTimer: 0
   canMainAttack: 0
@@ -299,16 +301,22 @@ MonoBehaviour:
   _featureCDTimer: 0
   featureCD: 0
   canUseFeature: 0
-  DistanceThreshold: 15
-  isDigging: 0
+  waterMoveSoundPlayInterval: 1
+  waterDashSoundPlayInterval: 0.5
+  beCatched: 0
+  DistanceThreshold: 14.5
+  _hasConnected: 0
+  _obiRope: {fileID: 0}
+  switchStateBufferTime: 0.5
   item: {fileID: 0}
+  bubbleManager: {fileID: 0}
   gun: {fileID: 4544587966547663270}
   shootTransform: {fileID: 3795479232929037764}
   salvoCD: 9
   salveAmount: 6
   salveMissileDamage: 8
-  salvoRange: 1
-  salvoMissileSpeed: 30
+  salvoRange: 3
+  salvoMissileSpeed: 15
   enemyLayer:
     serializedVersion: 2
     m_Bits: 8
@@ -398,6 +406,20 @@ MonoBehaviour:
   filter: -65535
   m_SourceCollider: {fileID: 3159093272327093982}
   m_DistanceField: {fileID: 0}
+--- !u!114 &1820731330257921009
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7951266776005374219}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 015d6e331002e6c429687edd88b8c80a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bubblePrefab: {fileID: 1487403280404247984, guid: 9ab787e99a8a2c0438ea4ae8ed662f21,
+    type: 3}
 --- !u!1001 &3733756205195830519
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -428,17 +450,17 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 18553e63fb0f9f04f8131cc192ebe3b8,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0
+      value: -0.056
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 18553e63fb0f9f04f8131cc192ebe3b8,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.102
+      value: -0.132
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 18553e63fb0f9f04f8131cc192ebe3b8,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 18553e63fb0f9f04f8131cc192ebe3b8,
         type: 3}
