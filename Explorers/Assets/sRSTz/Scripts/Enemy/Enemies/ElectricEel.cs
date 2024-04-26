@@ -15,7 +15,9 @@ public class ElectricEel : Enemy
     private void FixedUpdate()
     {
         //GetClosestPlayer();
-        Move();
+        if (!isAttack)
+            Move();
+        else rb.velocity = Vector3.zero;
     }
     /*
     private void OnCollisionEnter(Collision collision)

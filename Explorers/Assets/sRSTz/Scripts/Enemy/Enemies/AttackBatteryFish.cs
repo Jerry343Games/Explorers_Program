@@ -18,22 +18,11 @@ public class AttackBatteryFish : Enemy
             //rb.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationZ;
             return;
         }
-        Move();
+        if (!isAttack)
+            Move();
+        else rb.velocity = Vector3.zero;
     }
-    /*
-    private void OnCollisionEnter(Collision collision)
-    {
-
-        if (collision.gameObject.CompareTag("Player") || collision.gameObject.CompareTag("Battery"))
-        {
-
-            touchedCollision = collision;
-            //Attack();
-            //if (enemyAI.GetCurrentTarget() == null) return;
-            animator.Play("Attack");
-            Invoke(nameof(Attack), GetAnimatorLength(animator, "Attack")/1.5f);
-        }
-    }*/
+    
     public  void Attack()
     {
 
