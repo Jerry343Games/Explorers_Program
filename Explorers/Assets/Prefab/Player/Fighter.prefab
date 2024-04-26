@@ -192,6 +192,7 @@ MonoBehaviour:
   speed: 5
   accelerateFactor: 1.5
   vertigoTime: 0
+  canMove: 1
   isMoveReverse: 0
   _isAniLeft: 0
   maxArmor: 12
@@ -200,7 +201,7 @@ MonoBehaviour:
   restoreCD: 1
   timeToRepairArmor: 5
   mainWeapon: {fileID: 11400000, guid: e619acaa6d7b194419d154af202ddefd, type: 2}
-  secondaryWeapon: {fileID: 0}
+  secondaryWeapon: {fileID: 11400000, guid: 19e482ec8dcc115479a7ad3a26d79d83, type: 2}
   _mainAttackTimer: 0.5
   _secondaryAttackTimer: 0.5
   canMainAttack: 0
@@ -211,20 +212,25 @@ MonoBehaviour:
   _featureCDTimer: 0
   featureCD: 0
   canUseFeature: 0
+  waterMoveSoundPlayInterval: 0
+  waterDashSoundPlayInterval: 0
+  beCatched: 0
   DistanceThreshold: 15
   _hasConnected: 0
   _obiRope: {fileID: 0}
   switchStateBufferTime: 0
   item: {fileID: 0}
+  bubbleManager: {fileID: 0}
   attackAngle: 90
   enemyLayer:
     serializedVersion: 2
     m_Bits: 8
-  force: 0.01
+  force: 1
   shootTransform: {fileID: 5971270936727361518}
   tempArmor: 0
   canFusionBomb: 1
   hasUseBomb: 0
+  attackVertigoTime: 0.3
   sonicWaveAttack: {fileID: 6471543263485355706}
   startRadius: 0.2
   targetRadius: 20

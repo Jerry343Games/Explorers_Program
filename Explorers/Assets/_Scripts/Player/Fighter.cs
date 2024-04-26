@@ -298,7 +298,7 @@ public class Fighter : PlayerController
             {
                 enemy.TakeDamage((int)mainWeapon.attackDamage);
                 // 对敌人造成伤害后震慑它们
-                enemy.Vertigo(attackAreaCollider.transform.right.normalized * force,ForceMode.Impulse,attackVertigoTime);
+                enemy.Vertigo(attackAreaCollider.transform.right * force,ForceMode.VelocityChange,attackVertigoTime);
                 aliveEnemies.Add(enemy.gameObject);
             }
         }
