@@ -170,7 +170,7 @@ public class Enemy : MonoBehaviour
     public EnemyType enemyType;
 
     [Header("沉睡相关")]
-    public bool isSleeping;//勾选上之后，出生时会睡觉（
+    public bool isSleeping;//勾选上之后，出生时会睡觉
     public float sleepDetectRadius=5f;//睡眠时的检测半径
    public float detectThread = 1f;
     public float awakeRadius = 6f;//叫醒周围敌人的半径
@@ -181,11 +181,11 @@ public class Enemy : MonoBehaviour
     public bool isAttack = false;
     private float fasterSpeed;
     public float speedOffset = 3f;
-    [HideInInspector]
+    
     public float slowSpeed;
     protected virtual void Awake()
     {
-        slowSpeed = moveSpeed - speedOffset;
+        
         if(aniEvent!=null)
         
         fasterSpeed = moveSpeed + speedOffset;
@@ -226,7 +226,10 @@ public class Enemy : MonoBehaviour
         {
             animator.Play("Attack");
             moveSpeed = slowSpeed;
-           
+            isAttack = true;
+            rb.velocity = Vector3.zero;
+            //**
+            //canMove = false;
         }
 
     }
