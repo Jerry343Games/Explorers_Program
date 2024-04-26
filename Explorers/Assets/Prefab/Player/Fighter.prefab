@@ -145,6 +145,7 @@ GameObject:
   - component: {fileID: 4577289767063409226}
   - component: {fileID: 2982483246865538985}
   - component: {fileID: 6010096317188208794}
+  - component: {fileID: 3322029340935042329}
   m_Layer: 6
   m_Name: Fighter
   m_TagString: Player
@@ -212,20 +213,20 @@ MonoBehaviour:
   _featureCDTimer: 0
   featureCD: 0
   canUseFeature: 0
-  waterMoveSoundPlayInterval: 0
-  waterDashSoundPlayInterval: 0
+  waterMoveSoundPlayInterval: 1
+  waterDashSoundPlayInterval: 0.5
   beCatched: 0
-  DistanceThreshold: 15
+  DistanceThreshold: 14.5
   _hasConnected: 0
   _obiRope: {fileID: 0}
-  switchStateBufferTime: 0
+  switchStateBufferTime: 0.5
   item: {fileID: 0}
   bubbleManager: {fileID: 0}
   attackAngle: 90
   enemyLayer:
     serializedVersion: 2
     m_Bits: 8
-  force: 1
+  force: 5
   shootTransform: {fileID: 5971270936727361518}
   tempArmor: 0
   canFusionBomb: 1
@@ -236,7 +237,7 @@ MonoBehaviour:
   targetRadius: 20
   enemyVertigoTime: 10
   transitionDuration: 2
-  sonicWaveCD: 0
+  sonicWaveCD: 10
   dashTime: 2
   dashForce: 20
   dashDamage: 10
@@ -319,6 +320,20 @@ MonoBehaviour:
   filter: -65535
   m_SourceCollider: {fileID: 4577289767063409226}
   m_DistanceField: {fileID: 0}
+--- !u!114 &3322029340935042329
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4138879642823132348}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 015d6e331002e6c429687edd88b8c80a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bubblePrefab: {fileID: 1487403280404247984, guid: 9ab787e99a8a2c0438ea4ae8ed662f21,
+    type: 3}
 --- !u!1 &5981240992430992209
 GameObject:
   m_ObjectHideFlags: 0

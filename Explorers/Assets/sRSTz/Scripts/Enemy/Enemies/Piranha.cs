@@ -18,7 +18,9 @@ public class Piranha:Enemy
             //rb.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationZ;
             return;
         }
-        Move();
+        if (!isAttack)
+            Move();
+        else rb.velocity = Vector3.zero;
     }
     /*
     private void OnCollisionEnter(Collision collision)
