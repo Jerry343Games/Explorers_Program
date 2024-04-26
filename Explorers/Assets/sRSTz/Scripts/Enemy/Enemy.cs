@@ -299,37 +299,7 @@ public class Enemy : MonoBehaviour
         yield return new WaitForSeconds(continuedTime);
         moveSpeed /= 0.1f;
     }
-    public virtual void ReturnSpawnpoint()
-    {
-        Vector3 randomPosition = new Vector3(spawnerPoint.x + Random.Range(0,5f), spawnerPoint.y + Random.Range(0, 5f), spawnerPoint.z);
-        if ( stayTimer < stayTime)
-        {
-            stayTimer += Time.fixedDeltaTime;
-        }
-        else
-        {
-            isReturning = true;
-
-        }
-        if ((randomPosition - transform.position).magnitude < 0.2f)
-        {
-            isReturning = false;
-            stayTimer = 0;
-            rb.velocity = Vector3.zero;
-            rb.angularVelocity = Vector3.zero;
-            return;
-        }
-
-        if (isReturning)
-        {
-            Vector2 direction = (spawnerPoint - transform.position).normalized;
-
-            rb.velocity = direction * moveSpeed;
-
-            // 将人物的方向设置为计算得到的方向
-            gameObject.transform.right = direction;
-        }
-    }
+    
     public void EnemyRotate()
     {
         if (enemyAI.FinalMovement  != Vector2.zero)
@@ -419,11 +389,7 @@ public class Enemy : MonoBehaviour
     //强制唤醒  如果在某个行为发生了，并且敌人正在睡觉，则调用此方法强制唤醒
     public virtual void StartledFromSleep()
     {
-        
-            
-            //enemyAI.AIStart();
-        
-        
+
         isSleeping = false;
         //TODO 短暂显示被惊动的图标
         Debug.Log("被惊动");
@@ -474,5 +440,37 @@ public class Enemy : MonoBehaviour
     protected virtual void OnTriggerExit(Collider other)
     {
         playersInAttackArea.Remove(other.gameObject);
+    }
+    public void EnemyRotateWithFlip()
+    {
+        // 判断 direction 是在 y 轴方向的左边还是右边
+        if (isDefaultLeft)
+        {
+            if (enemyAI.FinalMovement.x > 0 && !isFlipped) // 在 y 轴方向的右边，且当前没有翻转
+            {
+                // 翻转 Sprite
+                spriteRenderer.flipX = true;
+                isFlipped = true;
+            }
+            else if (enemyAI.FinalMovement.x < 0 && isFlipped) // 在 y 轴方向的左边，且当前已经翻转
+            {
+                // 取消翻转
+                spriteRenderer.flipX = false;
+                isFlipped = false;
+            }
+            return;
+        }
+        if (enemyAI.FinalMovement.x > 0 && isFlipped) // 在 y 轴方向的右边，且当前没有翻转
+        {
+            // 翻转 Sprite
+            spriteRenderer.flipX = false;
+            isFlipped = false;
+        }
+        else if (enemyAI.FinalMovement.x < 0 && !isFlipped) // 在 y 轴方向的左边，且当前已经翻转
+        {
+            // 取消翻转
+            spriteRenderer.flipX = true;
+            isFlipped = true;
+        }
     }
 }

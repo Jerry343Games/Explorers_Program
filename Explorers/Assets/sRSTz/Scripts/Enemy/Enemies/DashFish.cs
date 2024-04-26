@@ -60,6 +60,7 @@ public class DashFish : Enemy
         if (!canMove) return; // 确保玩家存在
         Vector2 distance = (target.transform.position - transform.position);
         Vector2 direction = enemyAI.FinalMovement; // 获取朝向玩家的单位向量
+        Debug.Log(enemyAI.FinalMovement);
         Vector2 targetDirection = distance.normalized;
         /*if (distance.magnitude > detectionRange && canMove)//如果丢失玩家并且能移动
         {
@@ -68,12 +69,12 @@ public class DashFish : Enemy
         else*/
         if (prepareTimer==0&& Mathf.Pow(distance.x, 2) + Mathf.Pow(distance.y, 2) >= Mathf.Pow(dashDetectionRadius, 2)){
             rb.velocity = direction * moveSpeed; // 沿着朝向玩家的方向移动
-
+            EnemyRotateWithFlip();
             // 将人物的方向设置为计算得到的方向
             //gameObject.transform.right = direction;
-            EnemyRotate();
+            
         }
-        else
+        else//进入冲刺范围后
         {
             
             //如果正在冲刺
@@ -93,37 +94,10 @@ public class DashFish : Enemy
             }
             else if(!isDashing)//如果还没冲刺
             {
-                // 将人物的方向设置为计算得到的方向
-                //EnemyRotate();
-                if (isDefaultLeft)
-                {
-                    if (enemyAI.FinalMovement.x > 0 && !isFlipped) // 在 y 轴方向的右边，且当前没有翻转
-                    {
-                        // 翻转 Sprite
-                        spriteRenderer.flipX = true;
-                        isFlipped = true;
-                    }
-                    else if (enemyAI.FinalMovement.x < 0 && isFlipped) // 在 y 轴方向的左边，且当前已经翻转
-                    {
-                        // 取消翻转
-                        spriteRenderer.flipX = false;
-                        isFlipped = false;
-                    }
-                    return;
-                }
-                if (enemyAI.FinalMovement.x > 0 && isFlipped) // 在 y 轴方向的右边，且当前没有翻转
-                {
-                    // 翻转 Sprite
-                    spriteRenderer.flipX = false;
-                    isFlipped = false;
-                }
-                else if (enemyAI.FinalMovement.x < 0 && !isFlipped) // 在 y 轴方向的左边，且当前已经翻转
-                {
-                    // 取消翻转
-                    spriteRenderer.flipX = true;
-                    isFlipped = true;
-                }
-                if (prepareTimer < prepareTime)
+                // 将人物的方向设置为计算得到的方向               
+                EnemyRotateWithFlip();
+                
+                if (prepareTimer < prepareTime)//准备冲刺中
                 {
                     attackArea.SetActive(true);
                     //AxisLookAt(attackArea.transform, (Vector2)attackArea.transform.position + direction, Vector3.right);
@@ -163,9 +137,7 @@ public class DashFish : Enemy
         base.Vertigo(force, forceMode, vertigoTime);
         attackArea.SetActive(false);
     }
-
-
-
+   
 
 
 }

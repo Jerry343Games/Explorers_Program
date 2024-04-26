@@ -606,12 +606,12 @@ MonoBehaviour:
   turnSmoothTime: 0.05
   turnSmoothVelocity: 0
   animator: {fileID: 241330015}
-  isFlipped: 0
+  isFlipped: 1
   spriteRenderer: {fileID: 241330014}
-  isDefaultLeft: 0
+  isDefaultLeft: 1
   enemyType: 5
   isSleeping: 1
-  sleepDetectRadius: 5
+  sleepDetectRadius: 10
   detectThread: 1
   awakeRadius: 6
   dashToAttackDetectRadius: 3
@@ -620,10 +620,10 @@ MonoBehaviour:
   isAttack: 0
   speedOffset: 3
   slowSpeed: 0
-  dashDetectionRadius: 15
+  dashDetectionRadius: 12
   prepareTime: 1.5
-  dashTime: 1
-  dashForce: 15
+  dashTime: 0.5
+  dashForce: 30
 --- !u!136 &8406583145305039360
 CapsuleCollider:
   m_ObjectHideFlags: 0
