@@ -29,7 +29,15 @@ public class Lightning : MonoBehaviour
         arcEnd.position = endPos.position;
         if (Vector3.Distance(arcEnd.position,endPos.position)<0.4&&!_hasDamaged)
         {
-            _enemy.GetComponent<Enemy>().TakeDamage((int)_damage);
+            //不是敌人就是BOSS 这样写的话不太好 但现在只有一个Boss 先用
+            if(_enemy.GetComponent<Enemy>())
+            {
+                _enemy.GetComponent<Enemy>().TakeDamage((int)_damage);
+            }
+            else
+            {
+                GiantRockCrab.Instance.TakeDamage((int)_damage);
+            }
             Instantiate(Resources.Load("Effect/ArcBuleExpolsion"), arcEnd.position, Quaternion.identity);
             _hasDamaged = true;
         }
