@@ -1,4 +1,5 @@
 using BehaviorDesigner.Runtime;
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -162,6 +163,8 @@ public class GiantRockCrab : Singleton<GiantRockCrab>
                 deterTimer -= Time.deltaTime;
             }
         }
+        //FindNearestPlayer();
+
     }
     private void FixedUpdate()
     {
@@ -206,15 +209,31 @@ public class GiantRockCrab : Singleton<GiantRockCrab>
     public GameObject FindNearestPlayer()
     {
         GameObject _target = PlayerManager.Instance.gamePlayers[0];
-        float nearestDis = Vector3.Distance(_target.transform.position, GiantRockCrab.Instance.gameObject.transform.position);
+        float nearestDis = Vector3.Distance(_target.transform.position, transform.position);
         foreach (var character in PlayerManager.Instance.gamePlayers)
         {
-            float curDis = Vector3.Distance(character.transform.position, GiantRockCrab.Instance.gameObject.transform.position);
+            float curDis = Vector3.Distance(character.transform.position, transform.position);
             if (curDis < nearestDis)
             {
                 nearestDis = curDis;
                 _target = character;
             }
+        }
+
+        Vector3 dir = (_target.transform.position - transform.position).normalized;
+        float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+        //transform.rotation = Quaternion.Euler(0f, 0f, 0f);
+
+        if (dir.x >= 0)
+        {
+            transform.localScale = new Vector3(1.5f, 1.5f, 1.5f);
+            transform.DORotate(new Vector3(-angle, 90, 0f), 1f);
+        }
+        else
+        {
+            transform.localScale = new Vector3(1.5f, 1.5f, -1.5f);
+            transform.DORotate(new Vector3(-(angle + 180f), 90, 0),1f);
+
         }
         return _target;
     }
@@ -300,19 +319,9 @@ public class GiantRockCrab : Singleton<GiantRockCrab>
     public void SpitAcid()
     {
         //…˙≥…À·ŒÌ«¯”Ú
-        GameObject target = FindNearestPlayer();
-        Vector3 dir = (target.transform.position - transform.position).normalized;
 
-        float angle = Vector3.Angle(dir, Vector3.right);
-
-        GameObject acidArea = Instantiate(Resources.Load<GameObject>("Effect/AicdFlow"),transform.position,Quaternion.identity);
-
-        Debug.Log(dir);
-        Debug.Log(angle);
+        GameObject acidArea = Instantiate(Resources.Load<GameObject>("Effect/AicdFlow"), transform.position + new Vector3(transform.lossyScale.x,0, 0), Quaternion.Euler(0,90,0));
         acidArea.transform.SetParent(transform);
-
-        acidArea.transform.rotation = Quaternion.Euler(angle, 90, 0);
-
         Destroy(acidArea, 1f);
     }
 

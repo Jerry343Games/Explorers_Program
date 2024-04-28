@@ -73,7 +73,7 @@ public class RandomGenerator : MonoBehaviour
             if (!pointHasItem[randomNum])
             {
                 GameObject obj = Instantiate(GetRandomObject(),
-    spawnPoints[randomNum].position, Quaternion.identity);
+    spawnPoints[randomNum].position, GetRandomObject().transform.rotation);
                 pointHasItem[randomNum] = true;
                 i++;
             }
