@@ -43,6 +43,8 @@ public class Archerfish : Enemy
     {
         if (touchedCollision != null && canAttack)
         {
+            MusicManager.Instance.PlaySound("怪物喷射");
+
             // 计算弹飞的方向
             Vector2 direction = (touchedCollision.transform.position - transform.position).normalized;
 

@@ -51,6 +51,7 @@ public class Captors : Enemy
 
         if (currentCatchPlayer == null && canAttack)
         {
+            MusicManager.Instance.PlaySound("π÷ŒÔÀ∫“ß");
             CancelInvoke(nameof(KillPlayer));
             isAttack = true;
             currentCatchPlayer = playersInAttackArea[0];

@@ -204,14 +204,9 @@ public class Healer : PlayerController
     public override bool MainAttack()
     {
 
-        //if (!base.MainAttack())
-        //{
-        //    return false;
-        //}
-        MusicManager.Instance.PlaySound("医者");
-
         if (mainWeaponChargedAmount>0)
         {
+            MusicManager.Instance.PlaySound("医者");
             mainWeaponChargedAmount--;
             chargedAmountText.text = mainWeaponChargedAmount.ToString();
 

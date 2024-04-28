@@ -52,6 +52,8 @@ public class ElectricEel : Enemy
         }
         */
         if (playersInAttackArea.Count == 0) return;
+        MusicManager.Instance.PlaySound("นึฮ๏หบาง");
+
         foreach (var player in playersInAttackArea)
         {
             if (player != null && canAttack)
