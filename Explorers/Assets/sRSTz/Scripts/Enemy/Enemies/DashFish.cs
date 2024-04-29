@@ -60,7 +60,7 @@ public class DashFish : Enemy
         if (!canMove) return; // 确保玩家存在
         Vector2 distance = (target.transform.position - transform.position);
         Vector2 direction = enemyAI.FinalMovement; // 获取朝向玩家的单位向量
-        Debug.Log(enemyAI.FinalMovement);
+        
         Vector2 targetDirection = distance.normalized;
         /*if (distance.magnitude > detectionRange && canMove)//如果丢失玩家并且能移动
         {

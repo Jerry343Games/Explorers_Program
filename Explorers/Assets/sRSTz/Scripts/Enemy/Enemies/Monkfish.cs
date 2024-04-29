@@ -4,11 +4,17 @@ using UnityEngine;
 
 public class Monkfish : Enemy
 {
+    [Header("MonkFish")]
+    public bool canJump = true;
+    public float jumpForce = 10f;
+    public float waitTime = 2f;
+    private bool isWaiting = false;
     protected override void Awake()
     {
         base.Awake();
         aniEvent.OnEnemyAttackEvent += Attack;
         aniEvent.EndEnemyAttackEvent += () => { isAttack = false; };
+        isFlipped = spriteRenderer.flipX;
     }
     private void FixedUpdate()
     {
@@ -22,7 +28,7 @@ public class Monkfish : Enemy
         Move();
         
     }
-    /*
+    
     private void OnCollisionEnter(Collision collision)
     {
 
@@ -30,11 +36,21 @@ public class Monkfish : Enemy
         {
 
             touchedCollision = collision;
-            animator.Play("Attack");
-            Invoke(nameof(Attack), GetAnimatorLength(animator, "Attack") / 1.5f);
+            Attack();
+            
+        }else if (collision.gameObject.layer.Equals(LayerMask.NameToLayer("Obstacle"))&&!isWaiting)
+        {
+            
+            Invoke(nameof(CanJump), waitTime);
+            rb.velocity = Vector3.zero;
+            isWaiting = true;
         }
-    }*/
-    
+    }
+    public void CanJump()
+    {
+        isWaiting = false;
+        canJump = true;
+    }
     public void Attack()
     {
 
@@ -56,31 +72,70 @@ public class Monkfish : Enemy
             }
         }
     }
-
+    bool isJumpAttacking = false;
     public void Move()
     {
-        if (canMove)// 确保玩家存在
+        if (!canMove) return;
+        //rb.velocity = enemyAI.FinalMovement * moveSpeed; // 沿着影响因子计算出的方向移动
+        Vector2 jumpDirection = enemyAI.FinalMovement.x < 0 ? Directions.eightDirections[7] : Directions.eightDirections[1];
+
+        // 将人物的方向设置为计算得到的方向
+        //gameObject.transform.right = direction;
+        EnemyRotateWithFlip();
+        if (canJump)
         {
+            Debug.Log("Jump");
+            animator.Play("Jump");
+            rb.AddForce(jumpDirection * jumpForce,ForceMode.VelocityChange);
+            canJump = false;
 
-            //Vector2 direction = (target.transform.position - transform.position).normalized; // 获取朝向玩家的单位向量
-
-            rb.velocity = enemyAI.FinalMovement * moveSpeed; // 沿着影响因子计算出的方向移动
-
-            // 将人物的方向设置为计算得到的方向
-            //gameObject.transform.right = direction;
-            EnemyRotate();
         }
-        /*
-        else if(canMove) //如果丢失玩家并且能移动，那么回到出生点
+        // 判断物体是往上运动还是往下运动
+       /* if (rb.velocity.y > 0)
         {
-            ReturnSpawnpoint();
-        }*/
+            // 往上运动时逐渐减速
+            rb.velocity = new Vector3(rb.velocity.x,rb. velocity.y - 0.3f, rb.velocity.z);
+        }
+        else
+        {
+            // 往下运动时加速
+            rb.velocity = new Vector3(rb.velocity.x, rb.velocity.y + 0.3f, rb.velocity.z);
+        }
+       */
     }
+    public void JumpAttack()
+    {
+
+        //执行跳跃
+
+
+    }
+
+
+
     public override void StartledFromSleep()
     {
-        base.StartledFromSleep();
-        // 
+        isSleeping = false;
+        //TODO 短暂显示被惊动的图标
+        Debug.Log("被惊动");
+        CancelInvoke(nameof(SleepAwakeCheck));
+        rb = GetComponent<Rigidbody>();
+        //rb.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezeRotationZ;
+        Collider[] hitColliders = Physics.OverlapSphere(transform.position, awakeRadius);
 
+
+        foreach (var hitCollider in hitColliders)
+        {
+            if (hitCollider.CompareTag("Enemy"))
+            {
+                Enemy enemy = hitCollider.GetComponent<Enemy>();
+                if (enemy.isSleeping)
+
+                    enemy.StartledFromSleep();
+
+
+            }
+        }
 
     }
     //public bool isSpawning = false;
