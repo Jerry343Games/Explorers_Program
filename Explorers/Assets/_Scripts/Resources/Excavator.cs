@@ -26,11 +26,9 @@ public class Excavator : MonoBehaviour
         if(_diggingTimer>0)
         {
             _diggingTimer -= Time.deltaTime;
-            transform.Translate(Vector3.down * diggingSpeed * Time.deltaTime);
         }
         else
         {
-            _res.SpawnMinerals();
             Destroy(gameObject);
         }
     }

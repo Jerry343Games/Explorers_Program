@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -19,16 +20,35 @@ public class PropChest : MonoBehaviour
     /// </summary>
     public void OpenChest()
     {
+        MusicManager.Instance.PlaySound("打开箱子");
+        GetComponent<Collider>().enabled = false;
         //开箱动画
+        transform.GetChild(0).GetComponent<Animator>().enabled = true;
+        StartCoroutine(DelayToSpawnItem());
+        //延迟消失
+        Destroy(gameObject, 3.5f);
+    }
 
+    IEnumerator DelayToSpawnItem()
+    {
+        yield return new WaitForSeconds(1.5f);
         GameObject selectedPropPrefab = ChooseRandomPropPrefab();
-        if(selectedPropPrefab != null)
+        if (selectedPropPrefab != null)
         {
-            Instantiate(selectedPropPrefab, transform.position, Quaternion.identity);
+            GameObject item = Instantiate(selectedPropPrefab, transform.position, Quaternion.identity);
+            item.GetComponent<Collider>().enabled = false;
+            Sequence s = DOTween.Sequence();
+
+            s.Append(item.transform.DOMoveY(transform.position.y + 1, 0.5f));
+            s.Append(item.transform.DOMoveY(transform.position.y -0.5f, 0.5f).OnComplete(() =>
+            {
+                item.GetComponent<Collider>().enabled = true;
+
+            }));
+
+
         }
 
-        //延迟消失
-        Destroy(gameObject, .5f);
     }
 
     /// <summary>

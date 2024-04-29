@@ -107,6 +107,9 @@ public class MusicManager : Singleton<MusicManager>
             case "收集":
                 soundAudio.volume = 0.7f;
                 break;
+            case "玩家受伤":
+                soundAudio.volume = 0.7f;
+                break;
             default:
                 soundAudio.volume = 1;
                 break;

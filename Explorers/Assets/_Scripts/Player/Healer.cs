@@ -50,6 +50,8 @@ public class Healer : PlayerController
         UpdateAttackState();
         UpdateFeatureState();
         UpdateSwitchRopeState();
+        UpdateHurtSoundState();
+
         Aim(gun);
         TimeTick();
         if (playerInputSetting.GetAttackButtonDown())
@@ -105,16 +107,19 @@ public class Healer : PlayerController
 
                 other.GetComponent<Item>().Apply(gameObject);
                 break;
-            case "ResToCollecting":
-                MusicManager.Instance.PlaySound("收集");
 
-                other.GetComponent<ResToCollecting>().Collecting();
-                break;
             default:
                 break;
         }
     }
-
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag == "ResToCollecting")
+        {
+            MusicManager.Instance.PlaySound("收集");
+            collision.gameObject.GetComponent<ResToCollecting>().Collecting();
+        }
+    }
     private void OnTriggerStay(Collider other)
     {
         if (hasDead) return;

@@ -76,7 +76,12 @@ public class PlayerController : MonoBehaviour
     public float waterDashSoundPlayInterval;
     private float waterMoveSoundPlayTimer;
     private float waterDashSoundPlayTimer;
+    public float hurtSoundPlayInterval;
+    [HideInInspector]
+    public float hurtSoundPlayTimer;
+
     public bool beCatched = false;
+
 
     [Header("绳子")]
     public float DistanceThreshold = 10;//绳子最大长度
@@ -351,13 +356,12 @@ public class PlayerController : MonoBehaviour
     {
         if (hasDead) return;
         Debug.Log(name);
-        //if(isDigging)
-        //{
-        //    isDigging = false;//打断状态
-        //    _curDigRes.GetComponent<Resource>().beDigging = false;
-        //    _curDigRes.SetDiager(null);
-        //    _curDigRes = null;
-        //}
+
+        if(hurtSoundPlayTimer<0)
+        {
+            MusicManager.Instance.PlaySound("玩家受伤");
+            hurtSoundPlayTimer = hurtSoundPlayInterval;
+        }
         lastHurtTimer = 0;
         if (damage < currentArmor)
         {
@@ -528,6 +532,14 @@ public class PlayerController : MonoBehaviour
         else
         {
             _secondaryAttackTimer -= Time.deltaTime;
+        }
+    }
+
+    public void UpdateHurtSoundState()
+    {
+        if(hurtSoundPlayTimer>=0)
+        {
+            hurtSoundPlayTimer -= Time.deltaTime;
         }
     }
 

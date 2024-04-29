@@ -67,7 +67,7 @@ public class Fighter : PlayerController
         UpdateAttackState();
         UpdateFeatureState();
         UpdateSwitchRopeState();
-
+        UpdateHurtSoundState();
         if (playerInputSetting.inputDir.x != 0)
         {
             if (playerInputSetting.inputDir.x < 0)
@@ -200,11 +200,6 @@ public class Fighter : PlayerController
 
                 other.GetComponent<Item>().Apply(gameObject);
                 break;
-            case "ResToCollecting":
-                MusicManager.Instance.PlaySound("收集");
-
-                other.GetComponent<ResToCollecting>().Collecting();
-                break;
             case "Enemy":
                 _enemyInArea.Add(other.gameObject);
                 break;
@@ -212,6 +207,8 @@ public class Fighter : PlayerController
                 break;
         }
     }
+
+
     private void OnTriggerExit(Collider other)
     {
         if (hasDead && other.gameObject.tag == "ReconnectArea")
@@ -333,6 +330,12 @@ public class Fighter : PlayerController
     public override void TakeDamage(int damage)
     {
         if (hasDead||isDashing) return;
+
+        if (hurtSoundPlayTimer < 0)
+        {
+            MusicManager.Instance.PlaySound("玩家受伤");
+            hurtSoundPlayTimer = hurtSoundPlayInterval;
+        }
         int realDamage = damage;
         if(damage<=tempArmor)
         {
@@ -392,6 +395,11 @@ public class Fighter : PlayerController
     {
         if (isDashing && collision.gameObject.CompareTag("Enemy")){
             collision.gameObject.GetComponent<Enemy>().TakeDamage(dashDamage);
+        }
+        if (collision.gameObject.tag == "ResToCollecting")
+        {
+            MusicManager.Instance.PlaySound("收集");
+            collision.gameObject.GetComponent<ResToCollecting>().Collecting();
         }
     }
 

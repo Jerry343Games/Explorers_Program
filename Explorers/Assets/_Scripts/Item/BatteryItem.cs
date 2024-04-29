@@ -9,6 +9,7 @@ public class BatteryItem : Item
     public override void Apply(GameObject user)
     {
         user.GetComponent<CellBattery>().ChangePower(power);
+        MusicManager.Instance.PlaySound("»ñµÃµç³Ø");
         Destroy(gameObject);
     }
 }

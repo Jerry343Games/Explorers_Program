@@ -1,6 +1,7 @@
 using DG.Tweening;
 using DG.Tweening.Plugins.Core.PathCore;
 using System;
+using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -18,6 +19,10 @@ public class Resource : MonoBehaviour
 
     private BoxCollider _coll;
 
+    public List<Transform> excavatorTrans = new List<Transform>();
+
+    public BoxCollider entityColl;
+
     private void Awake()
     {
         _coll = GetComponent<BoxCollider>();
@@ -26,10 +31,15 @@ public class Resource : MonoBehaviour
     public void BeginingDigging()
     {
         _coll.enabled = false;
+        entityColl.enabled = false;
+        foreach (var tran in excavatorTrans)
+        {
 
-        GameObject excavator = Instantiate(Resources.Load<GameObject>("Item/Excavator"), transform.position + new Vector3(-0.5f, 2, 0), Quaternion.identity);
+            GameObject excavator = Instantiate(Resources.Load<GameObject>("Item/Excavator"),tran.position, Quaternion.identity);
 
-        excavator.GetComponent<Excavator>().Init(this, miningDuration);
+            excavator.transform.GetChild(0).GetComponent<Excavator>().Init(this, miningDuration);
+        }
+        Invoke("SpawnMinerals", 2f);
     }
 
     public void SpawnMinerals()
@@ -47,9 +57,9 @@ public class Resource : MonoBehaviour
             // 计算贝塞尔曲线路径点
             float xOffset = (i - spawnMineralAmount / 2);
             // 计算贝塞尔曲线路径点
-            Vector3 midPos_1 = new Vector3(startPos.x + xOffset, startPos.y, startPos.z);
-            Vector3 midPos_2 = new Vector3(startPos.x + xOffset, startPos.y - 0.5f, startPos.z);
-            Vector3 endPos = new Vector3(startPos.x + xOffset, startPos.y - 1, startPos.z);
+            Vector3 midPos_1 = new Vector3(startPos.x + xOffset, startPos.y+0.5f, startPos.z);
+            Vector3 midPos_2 = new Vector3(startPos.x + xOffset, startPos.y+0.2f , startPos.z);
+            Vector3 endPos = new Vector3(startPos.x + xOffset, startPos.y, startPos.z);
 
             // 创建贝塞尔曲线路径点数组
             Vector3[] pathPoints = new Vector3[] { startPos, midPos_1, midPos_2, endPos };

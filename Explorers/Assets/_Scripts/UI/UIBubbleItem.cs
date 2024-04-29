@@ -28,7 +28,10 @@ public class UIBubbleItem : MonoBehaviour
 
     private void Update()
     {
-        SetPosition(gameObject1,gameObject2);
+        if(gameObject1 && gameObject2)
+        {
+            SetPosition(gameObject1, gameObject2);
+        }
     }
 
     /// <summary>
