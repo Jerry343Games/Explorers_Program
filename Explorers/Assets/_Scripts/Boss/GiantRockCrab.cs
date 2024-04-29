@@ -25,6 +25,9 @@ public class GiantRockCrab : Singleton<GiantRockCrab>
 
     public bool animPlayOver;
 
+
+    
+
     [Header("属性")]
     public int maxHealth;
 
@@ -47,6 +50,17 @@ public class GiantRockCrab : Singleton<GiantRockCrab>
     private bool hasEnteredSecondStage;
 
     public LayerMask playerLayer;
+
+    [Header("巡逻")]
+    public bool isPatrol;
+
+    public List<Transform> patrolPoints = new List<Transform>();
+
+    private int currentPatrolIndex;
+
+
+    [Header("玩家")]
+    public List<PlayerController> inRangePlayers = new List<PlayerController>();
 
     [Header("钳击")]
     public float closePlayerSpeed;
@@ -144,6 +158,9 @@ public class GiantRockCrab : Singleton<GiantRockCrab>
         curingStageFlags = new List<bool>() { false, false, false, false };
         deterTimer = deterInterval;
         _currentHealth = maxHealth;
+        currentPatrolIndex = 0;
+        isPatrol = true;
+        SetMoveDirection((patrolPoints[currentPatrolIndex].position - transform.position).normalized);
         //激活第一个树
         _firstBehaviorTree.Start();
     }
@@ -163,7 +180,20 @@ public class GiantRockCrab : Singleton<GiantRockCrab>
                 deterTimer -= Time.deltaTime;
             }
         }
-        //FindNearestPlayer();
+
+        if(isPatrol)
+        {
+            SetMoveDirection((patrolPoints[currentPatrolIndex].position - transform.position).normalized);
+            SetMoveSpeed(normalSpeed);
+            if(Vector3.Distance(patrolPoints[currentPatrolIndex].position, transform.position)<1f)
+            {
+                currentPatrolIndex = (currentPatrolIndex + 1) % patrolPoints.Count;
+            }
+        }
+        else
+        {
+            _dir = Vector3.zero;
+        }
 
     }
     private void FixedUpdate()
@@ -208,7 +238,9 @@ public class GiantRockCrab : Singleton<GiantRockCrab>
 
     public GameObject FindNearestPlayer()
     {
-        GameObject _target = PlayerManager.Instance.gamePlayers[0];
+
+        if (inRangePlayers.Count == 0) return null;
+        GameObject _target = inRangePlayers[0].gameObject;
         float nearestDis = Vector3.Distance(_target.transform.position, transform.position);
         foreach (var character in PlayerManager.Instance.gamePlayers)
         {
@@ -221,26 +253,27 @@ public class GiantRockCrab : Singleton<GiantRockCrab>
         }
 
         Vector3 dir = (_target.transform.position - transform.position).normalized;
-        float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
-        //transform.rotation = Quaternion.Euler(0f, 0f, 0f);
 
-        if (dir.x >= 0)
-        {
-            transform.localScale = new Vector3(1.5f, 1.5f, 1.5f);
-            transform.DORotate(new Vector3(-angle, 90, 0f), 1f);
-        }
-        else
-        {
-            transform.localScale = new Vector3(1.5f, 1.5f, -1.5f);
-            transform.DORotate(new Vector3(-(angle + 180f), 90, 0),1f);
+        SetFlip(dir.x >= 0);
 
-        }
         return _target;
     }
 
     public void SetMoveDirection(Vector3 dir)
     {
         _dir = dir;
+    }
+
+    public void SetFlip(bool right)
+    {
+        if(right)
+        {
+            transform.localScale = new Vector3(2, 2, 2);
+        }
+        else
+        {
+            transform.localScale = new Vector3(2, 2, -2);
+        }
     }
 
     public void SetMoveSpeed(float speed)
