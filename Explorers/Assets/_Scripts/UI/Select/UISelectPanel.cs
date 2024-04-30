@@ -141,7 +141,7 @@ public class UISelectPanel : MonoBehaviour
                         player.GetComponent<PlayerInput>().SwitchCurrentActionMap("Player");
                     }
                     //载入下一关
-                    UnityEngine.SceneManagement.SceneManager.LoadScene("JerryTest");
+                    UnityEngine.SceneManagement.SceneManager.LoadScene("StoreScene");
                     
                 });
             }

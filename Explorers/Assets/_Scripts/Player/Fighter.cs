@@ -53,6 +53,8 @@ public class Fighter : PlayerController
         _myAniEventControl.OnFighterAttackEvent += OnHack;
         _myAniEventControl.EndFighterAttackEvent += EndHack;
 
+        myPlayerInfo = new PlayerInfo(PlayerType.Fighter, speed, maxArmor, mainWeapon, secondaryWeapon);
+        Debug.Log(myPlayerInfo);
     }
 
     private void OnDestroy()

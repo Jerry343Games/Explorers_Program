@@ -103,7 +103,8 @@ public class PlayerController : MonoBehaviour
     [HideInInspector]
     public BubbleManager bubbleManager;
 
-
+    [HideInInspector] public PlayerInfo myPlayerInfo;
+    
     /// <summary>
     /// 初始化方法
     /// </summary>
@@ -146,6 +147,7 @@ public class PlayerController : MonoBehaviour
         {
             playerInput.SwitchCurrentActionMap("Player");
         }
+        
     }
     
     public void SetRope(ObiRope rope = null)

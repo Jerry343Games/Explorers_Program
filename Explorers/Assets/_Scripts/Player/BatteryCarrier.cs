@@ -48,6 +48,8 @@ public class BatteryCarrier : PlayerController
         canOverload = true;
         PlayerManager.Instance.hasMainBattary = true; //通知电池加入，给其他职业监听以获得主电池
         EnemyManager.Instance.battery = this.gameObject;
+        myPlayerInfo = new PlayerInfo(PlayerType.BatteryCarrier, speed, maxArmor, mainWeapon, secondaryWeapon);
+        Debug.Log(myPlayerInfo);
     }
     void Update()
     {

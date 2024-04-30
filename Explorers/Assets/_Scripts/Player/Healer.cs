@@ -42,7 +42,8 @@ public class Healer : PlayerController
         PlayerInit();
         //_currentTranquilizerAmmunition = tranquilizerWeaponData.initAmmunition;
         //canCallFort = true;
-
+        myPlayerInfo = new PlayerInfo(PlayerType.Healer, speed, maxArmor, mainWeapon, secondaryWeapon);
+        Debug.Log(myPlayerInfo);
     }
     void Update()
     {
