@@ -37,6 +37,10 @@ public class   PlayerManager : SingletonPersistent<PlayerManager>
     public List<GameObject> gamePlayers = new List<GameObject>();
     //预加载法线数据
     public List<AnimationTextureMapping> mappings = new List<AnimationTextureMapping>();
+    
+    public delegate void PlayerInfoHandler(List<PlayerInfo> playerData);
+    public event PlayerInfoHandler OnPlayerInfoUpdated;
+
 
     /// <summary>
     /// 通过动画名查找法线贴图

@@ -36,7 +36,6 @@ public struct PlayerInfo
         this.maxArmor = maxArmor;
         this.mainWeapon = mainWeapon;
         this.secondaryWeapon = secondaryWeapon;
-        //this.mainWeapon=
     }
     
     public override string ToString()
