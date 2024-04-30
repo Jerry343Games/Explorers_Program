@@ -11,7 +11,27 @@ public class Rush : Action
     private float _rushTime;
     public override void OnStart()
     {
+    }
+
+    public override void OnEnd()
+    {
+        GiantRockCrab.Instance.SetMoveDirection(Vector3.zero);
+
+        GiantRockCrab.Instance.SetMoveSpeed(GiantRockCrab.Instance.normalSpeed);
+
+        GiantRockCrab.Instance.isPatrol = true;
+    }
+
+    public override TaskStatus OnUpdate()
+    {
         _target = GiantRockCrab.Instance.FindNearestPlayer();
+
+        if(!_target)
+        {
+            return TaskStatus.Running;
+        }
+
+        GiantRockCrab.Instance.isPatrol = false;
 
         _rushTime = GiantRockCrab.Instance.rushDuration;
 
@@ -24,18 +44,17 @@ public class Rush : Action
         GiantRockCrab.Instance.SetMoveSpeed(GiantRockCrab.Instance.rushSpeed);
 
         //¶¯»­£¿
-    }
 
-    public override void OnEnd()
-    {
-        GiantRockCrab.Instance.SetMoveDirection(Vector3.zero);
 
-        GiantRockCrab.Instance.SetMoveSpeed(GiantRockCrab.Instance.normalSpeed);
-    }
 
-    public override TaskStatus OnUpdate()
-    {
-        if(_rushTimer>0)
+
+
+
+
+
+
+
+        if (_rushTimer>0)
         {
             GiantRockCrab.Instance.Rush();
             _rushTimer -= Time.deltaTime;

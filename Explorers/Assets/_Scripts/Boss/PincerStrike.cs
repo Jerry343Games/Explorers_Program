@@ -9,10 +9,10 @@ public class PincerStrike : Action
     private Vector3 _target;//选择最近的角色
     public override void OnStart()
     {
+
         _target = GiantRockCrab.Instance.FindNearestPlayer().transform.position;
 
         GiantRockCrab.Instance.SetMoveSpeed(GiantRockCrab.Instance.closePlayerSpeed);
-
     }
 
 
@@ -25,6 +25,7 @@ public class PincerStrike : Action
 
     public override TaskStatus OnUpdate()
     {
+
 
         Vector3 dir = (_target - GiantRockCrab.Instance.transform.position).normalized;
 

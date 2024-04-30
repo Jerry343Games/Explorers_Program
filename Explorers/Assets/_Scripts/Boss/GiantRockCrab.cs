@@ -17,9 +17,16 @@ public class GiantRockCrab : Singleton<GiantRockCrab>
 
     private BoxCollider _coll;
 
+    private Animator _anim;
+
     private Vector3 _dir;
 
     private float _speed;
+
+
+    [Header("实体")]
+    public GameObject entity;
+
 
     [Header("动画属性")]
 
@@ -145,9 +152,11 @@ public class GiantRockCrab : Singleton<GiantRockCrab>
             }
         }
 
-        _rb = GetComponent<Rigidbody>();
+        _rb = entity.GetComponent<Rigidbody>();
 
-        _coll = GetComponent<BoxCollider>();
+        _coll = entity.GetComponent<BoxCollider>();
+
+        _anim = entity.GetComponent<Animator>();
 
     }
 
@@ -158,12 +167,20 @@ public class GiantRockCrab : Singleton<GiantRockCrab>
         curingStageFlags = new List<bool>() { false, false, false, false };
         deterTimer = deterInterval;
         _currentHealth = maxHealth;
-        currentPatrolIndex = 0;
-        isPatrol = true;
-        SetMoveDirection((patrolPoints[currentPatrolIndex].position - transform.position).normalized);
         //激活第一个树
         _firstBehaviorTree.Start();
+
+        FindObjectOfType<UIBossPanel>().ShowPanel();
+
+        _anim.Play("Awake");
     }
+
+    public void StartPatrol()
+    {
+        currentPatrolIndex = 0;
+        isPatrol = true;
+    }
+
 
     private void Update()
     {
@@ -183,9 +200,11 @@ public class GiantRockCrab : Singleton<GiantRockCrab>
 
         if(isPatrol)
         {
-            SetMoveDirection((patrolPoints[currentPatrolIndex].position - transform.position).normalized);
+            SetMoveDirection((patrolPoints[currentPatrolIndex].position - entity.transform.position).normalized);
             SetMoveSpeed(normalSpeed);
-            if(Vector3.Distance(patrolPoints[currentPatrolIndex].position, transform.position)<1f)
+
+            _anim.SetFloat("Speed", _speed);
+            if(Vector3.Distance(patrolPoints[currentPatrolIndex].position, entity.transform.position)<1f)
             {
                 currentPatrolIndex = (currentPatrolIndex + 1) % patrolPoints.Count;
             }
@@ -203,7 +222,25 @@ public class GiantRockCrab : Singleton<GiantRockCrab>
 
     public void TakeDamage(int damage)
     {
+
+        if(_currentArmor >damage)
+        {
+            _currentArmor -= damage;
+            //UI
+            return;
+
+        }else if(_currentArmor<damage && _currentArmor>0)
+        {
+            _currentArmor = 0;
+            //UI
+            return;
+        }
+
         _currentHealth = Mathf.Clamp(_currentHealth - damage, 0, maxHealth);
+
+        //UI
+
+
 
         //固化判断
         if (_currentHealth < maxHealth-curingTriggerHealth && !curingStageFlags[0])
@@ -242,13 +279,13 @@ public class GiantRockCrab : Singleton<GiantRockCrab>
         if (inRangePlayers.Count == 0) return null;
         GameObject _target = inRangePlayers[0].gameObject;
         float nearestDis = Vector3.Distance(_target.transform.position, transform.position);
-        foreach (var character in PlayerManager.Instance.gamePlayers)
+        foreach (var character in inRangePlayers)
         {
             float curDis = Vector3.Distance(character.transform.position, transform.position);
             if (curDis < nearestDis)
             {
                 nearestDis = curDis;
-                _target = character;
+                _target = character.gameObject;
             }
         }
 
@@ -262,17 +299,18 @@ public class GiantRockCrab : Singleton<GiantRockCrab>
     public void SetMoveDirection(Vector3 dir)
     {
         _dir = dir;
+        SetFlip(dir.x >= 0);
     }
 
     public void SetFlip(bool right)
     {
         if(right)
         {
-            transform.localScale = new Vector3(2, 2, 2);
+            entity.transform.localScale = new Vector3(2,2, 2);
         }
         else
         {
-            transform.localScale = new Vector3(2, 2, -2);
+            entity.transform.localScale = new Vector3(2, 2, -2);
         }
     }
 
