@@ -272,7 +272,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.9245283, g: 0.9245283, b: 0.9245283, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -407,6 +407,9 @@ MonoBehaviour:
   - {fileID: 1013438079261463550}
   - {fileID: 7551537497989127098}
   - {fileID: 7051920427633832326}
+  buffList: {fileID: 1013438080124227346}
+  refreshBtn: {fileID: 1013438079434876486}
+  confirmBtn: {fileID: 1013438078265223267}
 --- !u!1 &1013438079434876484
 GameObject:
   m_ObjectHideFlags: 0
@@ -567,7 +570,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.03137207, y: 0.70944214}
+  m_AnchoredPosition: {x: 0.03137207, y: -224.7}
   m_SizeDelta: {x: 4.633199, y: -1.4187241}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1013438080124227436

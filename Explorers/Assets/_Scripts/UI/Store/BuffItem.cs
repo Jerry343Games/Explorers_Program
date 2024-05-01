@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using UnityEditor.UI;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -13,10 +14,12 @@ public class BuffItem : MonoBehaviour
     public Image icon;
     public TMP_Text name;
     public TMP_Text description;
+
+    private Button _myBtn;
     
     private void OnEnable()
     {
-        
+        _myBtn = GetComponent<Button>();
     }
     
     public void EnableRefresh()

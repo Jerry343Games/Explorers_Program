@@ -1,10 +1,14 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.UI;
 using UnityEngine.UI;
+using Random = UnityEngine.Random;
+using Sequence = DG.Tweening.Sequence;
 
 public class CharacterBuffPanel : MonoBehaviour
 {
@@ -19,32 +23,55 @@ public class CharacterBuffPanel : MonoBehaviour
 
     public List<UpgradeBuff> availableBuffs; // 所有可能的Buff
     private List<UpgradeBuff> _displayedBuffs = new List<UpgradeBuff>(); // 当前展示的Buff
+    private HashSet<BuffType> _allowedTypes;//当前允许的类型
 
     public GameObject[] buffSlots;//展示位
-    
-    
+    public RectTransform buffList;//整个展示列表
+
+    public Button refreshBtn;
+    public Button confirmBtn;
+
+    private Vector2 _listEndValue=new Vector2(-0.716601f, 2.109364f);
+    private Vector2 _listStartValue=new Vector2(-0.716601f,226.7094f);
+
+    private bool _isFirst;
+    private void OnEnable()
+    {
+        _isFirst = true;
+        _allowedTypes=new HashSet<BuffType>();
+        refreshBtn.onClick.AddListener(ClickRefreshBtn);
+        confirmBtn.onClick.AddListener(ClickConfirmBtn);
+        _listStartValue = buffList.anchoredPosition;
+    }
+
+    private void OnDestroy()
+    {
+        refreshBtn.onClick.RemoveListener(ClickRefreshBtn);
+        confirmBtn.onClick.RemoveListener(ClickConfirmBtn);
+    }
+
     public void Refresh()
     {
         myPlayerInfo = player.GetComponentInChildren<PlayerController>().myPlayerInfo;
-        HashSet<BuffType> allowedTypes=new HashSet<BuffType>();
+
         switch (myPlayerInfo.playerType)
         {
             case PlayerType.BatteryCarrier:
                 playerImg.sprite = Resources.Load<Sprite>("UI/Image/Battery - Copy");
-                allowedTypes=new HashSet<BuffType> { BuffType.Battery, BuffType.General };
-                RefreshBuffs(allowedTypes);
+                _allowedTypes=new HashSet<BuffType> { BuffType.Battery, BuffType.General };
+                RefreshBuffs(_allowedTypes);
                 break;
             case PlayerType.Shooter:
                 playerImg.sprite = Resources.Load<Sprite>("UI/Image/Shooter");
-                allowedTypes=new HashSet<BuffType> { BuffType.Shooter, BuffType.General,BuffType.Explorers };
+                _allowedTypes=new HashSet<BuffType> { BuffType.Shooter, BuffType.General,BuffType.Explorers };
                 break;
             case PlayerType.Fighter:
                 playerImg.sprite = Resources.Load<Sprite>("UI/Image/Fighter");
-                allowedTypes=new HashSet<BuffType> { BuffType.Fighter, BuffType.General,BuffType.Explorers };
+                _allowedTypes=new HashSet<BuffType> { BuffType.Fighter, BuffType.General,BuffType.Explorers };
                 break;
             case PlayerType.Healer:
                 playerImg.sprite = Resources.Load<Sprite>("UI/Image/Healer");
-                allowedTypes=new HashSet<BuffType> { BuffType.Healer, BuffType.General,BuffType.Explorers };
+                _allowedTypes=new HashSet<BuffType> { BuffType.Healer, BuffType.General,BuffType.Explorers };
                 break;
         }
         //操作分配到的玩家事件系统和输入系统
@@ -54,7 +81,8 @@ public class CharacterBuffPanel : MonoBehaviour
         multiEven.playerRoot = gameObject;
         multiEven.SetSelectedGameObject(firstbuff);
         
-        RefreshBuffs(allowedTypes);
+        RefreshBuffs(_allowedTypes);
+        _isFirst = false;
     }
     
     /// <summary>
@@ -77,7 +105,18 @@ public class CharacterBuffPanel : MonoBehaviour
             tempBuffs.RemoveAt(randIndex);
         }
 
-        ShowSlotsOnUI();
+        if (_isFirst)
+        {
+            buffList.DOAnchorPos(_listEndValue, 0.5f);
+            ShowSlotsOnUI();
+        }
+        else
+        {
+            Sequence q = DOTween.Sequence();
+            q.Append(buffList.DOAnchorPos(_listStartValue, 0.5f).OnComplete(ShowSlotsOnUI));
+            q.AppendInterval(0.2f);
+            q.Append(buffList.DOAnchorPos(_listEndValue, 0.5f));
+        }
     }
 
     /// <summary>
@@ -91,4 +130,16 @@ public class CharacterBuffPanel : MonoBehaviour
             buffSlots[i].GetComponent<BuffItem>().EnableRefresh();
         }
     }
+
+    private void ClickRefreshBtn()
+    {
+        RefreshBuffs(_allowedTypes);
+    }
+
+    private void ClickConfirmBtn()
+    {
+        
+    }
+    
+    
 }
