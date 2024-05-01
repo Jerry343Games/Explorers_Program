@@ -100,6 +100,10 @@ public class GiantRockCrab : Singleton<GiantRockCrab>
 
     public float stoneForce;//飞石击飞角色的力量
 
+    public int stoneAmount;
+
+    public Transform stoneSpawnCenterPoint;
+
     [Header("吐酸")]
     public int acidDamage;
 
@@ -414,14 +418,24 @@ public class GiantRockCrab : Singleton<GiantRockCrab>
     #region 飞石
     public void SpawnFlyingStones()
     {
+        //spawning stones in random position 
+        for(int i=0;i<stoneAmount;i++)
+        {
+            GameObject stone = Instantiate(Resources.Load<GameObject>("Item/FlyingStone"),
+                stoneSpawnCenterPoint.position+new Vector3(Random.Range(-20f,20f),0,0), 
+                Quaternion.identity);
+
+            stone.GetComponent<Stone>().Init(stoneSpeed, stoneFlyingDamage, stoneForce, stoneDuration, stoneBoomDamage, stoneBoomRange);
+        }
+
         //如果有扔石头的动画 要在那一帧生成 并且生成到手的位置
-        GameObject stone = Instantiate(Resources.Load<GameObject>("Item/FlyingStone"), transform.position, Quaternion.identity);
+        //GameObject stone = Instantiate(Resources.Load<GameObject>("Item/FlyingStone"), transform.position, Quaternion.identity);
 
-        GameObject target = FindNearestPlayer();
+        //GameObject target = FindNearestPlayer();
 
-        Vector3 dir = (target.transform.position - transform.position).normalized;
+        //Vector3 dir = (target.transform.position - transform.position).normalized;
 
-        stone.GetComponent<Stone>().Init(dir,stoneSpeed, stoneFlyingDamage, stoneForce, stoneDuration, stoneBoomDamage, stoneBoomRange);
+        //stone.GetComponent<Stone>().Init(dir,stoneSpeed, stoneFlyingDamage, stoneForce, stoneDuration, stoneBoomDamage, stoneBoomRange);
     }
 
     #endregion

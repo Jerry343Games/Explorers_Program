@@ -24,11 +24,10 @@ public class Stone : MonoBehaviour
 
     public LayerMask playerLayer;
 
-    public void Init(Vector3 dir,float speed,int flyingDamage,float force,float duration,int boomDamage,float boomRange)
+    public void Init(float speed,int flyingDamage,float force,float duration,int boomDamage,float boomRange)
     {
         _rb = GetComponent<Rigidbody>();
 
-        _dir = dir;
         _speed = speed;
         _flyingDamage = flyingDamage;
         _force = force;
@@ -71,10 +70,10 @@ public class Stone : MonoBehaviour
         }
     }
 
-    private void FixedUpdate()
-    {
-        _rb.velocity = _dir * _speed;
-    }
+    //private void FixedUpdate()
+    //{
+    //    _rb.velocity = _dir * _speed;
+    //}
 
     private void OnCollisionEnter(Collision other)
     {

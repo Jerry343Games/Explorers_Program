@@ -20,7 +20,6 @@ public class FlyingStones : Action
 
     public override void OnEnd()
     {
-        
     }
 
     public override TaskStatus OnUpdate()
@@ -33,6 +32,7 @@ public class FlyingStones : Action
         }
         else
         {
+
             return TaskStatus.Success; ;
         }
     }
