@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class WaringCheck : MonoBehaviour
 {
-
     private void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.tag=="Player")
+        if(other.gameObject.tag=="Battery"|| other.gameObject.tag == "Player")
         {
+            Debug.Log(other.name);
             PlayerController controller = other.gameObject.GetComponent<PlayerController>();
             if (!controller.hasDead)
             {
@@ -22,7 +22,7 @@ public class WaringCheck : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.tag == "Player")
+        if (other.gameObject.tag == "Battery" || other.gameObject.tag == "Player")
         {
             PlayerController controller = other.gameObject.GetComponent<PlayerController>();
             if (!GiantRockCrab.Instance.inRangePlayers.Contains(controller))

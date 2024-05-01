@@ -114,7 +114,7 @@ public class PlayerController : MonoBehaviour
         playerInput = transform.parent.GetComponent<PlayerInput>();
         playerInputSetting = transform.parent.GetComponent<PlayerInputSetting>();
         Debug.Log("Clone: "+transform.name+" / Index: "+myIndex);
-        PlayerManager.Instance.gamePlayers.Add(gameObject);
+        PlayerManager.Instance?.gamePlayers.Add(gameObject);
         bubbleManager = GetComponent<BubbleManager>();
         //if (gameObject.CompareTag("Battery")) EnemyManager.Instance.battery = gameObject;
         myIndex = playerInput.playerIndex;
@@ -132,9 +132,6 @@ public class PlayerController : MonoBehaviour
         animator = playerSprite.GetComponent<Animator>();
         _spriteRenderer = playerSprite.GetComponent<SpriteRenderer>();
         
-        ////获得自选功能
-        //feature = playerInputSetting.feature;
-        Debug.Log(playerInputSetting.feature);
         
         //bubblePanel = GameObject.Find("BubblePanel").GetComponents<UIBubblePanel>()[0];
         
@@ -241,15 +238,15 @@ public class PlayerController : MonoBehaviour
             {
                 _isAniLeft = true;
                 animator.CrossFade(run_left.ToString(), 0f);
-                _spriteRenderer.material.SetTexture("_Normal", PlayerManager.Instance.GetNormalByAnimationName(run_left));
-                _spriteRenderer.material.SetTexture("_Emission",PlayerManager.Instance.GetEmissionByAnimationName(run_left));
+                _spriteRenderer.material.SetTexture("_Normal", PlayerManager.Instance?.GetNormalByAnimationName(run_left));
+                _spriteRenderer.material.SetTexture("_Emission",PlayerManager.Instance?.GetEmissionByAnimationName(run_left));
             }
             else
             {
                 _isAniLeft = false;
                 animator.CrossFade(run_right.ToString(), 0f);
-                _spriteRenderer.material.SetTexture("_Normal", PlayerManager.Instance.GetNormalByAnimationName(run_right));
-                _spriteRenderer.material.SetTexture("_Emission",PlayerManager.Instance.GetEmissionByAnimationName(run_right));
+                _spriteRenderer.material.SetTexture("_Normal", PlayerManager.Instance?.GetNormalByAnimationName(run_right));
+                _spriteRenderer.material.SetTexture("_Emission",PlayerManager.Instance?.GetEmissionByAnimationName(run_right));
             }
             
         }
@@ -258,14 +255,14 @@ public class PlayerController : MonoBehaviour
             if (_isAniLeft)
             {
                 animator.CrossFade(idle_left.ToString(),0);
-                _spriteRenderer.material.SetTexture("_Normal", PlayerManager.Instance.GetNormalByAnimationName(idle_left));
-                _spriteRenderer.material.SetTexture("_Emission",PlayerManager.Instance.GetEmissionByAnimationName(idle_left));
+                _spriteRenderer.material.SetTexture("_Normal", PlayerManager.Instance?.GetNormalByAnimationName(idle_left));
+                _spriteRenderer.material.SetTexture("_Emission",PlayerManager.Instance?.GetEmissionByAnimationName(idle_left));
             }
             else
             {
                 animator.CrossFade(idle_right.ToString(),0);
-                _spriteRenderer.material.SetTexture("_Normal", PlayerManager.Instance.GetNormalByAnimationName(idle_right));
-                _spriteRenderer.material.SetTexture("_Emission",PlayerManager.Instance.GetEmissionByAnimationName(idle_right));
+                _spriteRenderer.material.SetTexture("_Normal", PlayerManager.Instance?.GetNormalByAnimationName(idle_right));
+                _spriteRenderer.material.SetTexture("_Emission",PlayerManager.Instance?.GetEmissionByAnimationName(idle_right));
             }
             
         }

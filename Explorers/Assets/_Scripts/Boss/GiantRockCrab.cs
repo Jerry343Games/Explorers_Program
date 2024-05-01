@@ -4,6 +4,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum BossActionStage
+{
+    PincerStrike,//钳击
+    SpitAcid,//吐酸
+    FlyingStones,//飞石
+}
+
 //巨岩蟹	
 public class GiantRockCrab : Singleton<GiantRockCrab>
 {
@@ -12,6 +19,7 @@ public class GiantRockCrab : Singleton<GiantRockCrab>
 
     private BehaviorTree _secondBehaviorTree;
 
+    
 
     private Rigidbody _rb;
 
@@ -31,9 +39,6 @@ public class GiantRockCrab : Singleton<GiantRockCrab>
     [Header("动画属性")]
 
     public bool animPlayOver;
-
-
-    
 
     [Header("属性")]
     public int maxHealth;
@@ -140,9 +145,9 @@ public class GiantRockCrab : Singleton<GiantRockCrab>
         base.Awake();
 
         BehaviorTree[] trees = GetComponents<BehaviorTree>();
-        foreach(var tree in trees)
+        foreach (var tree in trees)
         {
-            if(tree.BehaviorName== "GiantRockCrabBehaviorTree_Stage1")
+            if (tree.BehaviorName == "GiantRockCrabBehaviorTree_Stage1")
             {
                 _firstBehaviorTree = tree;
             }
@@ -181,6 +186,13 @@ public class GiantRockCrab : Singleton<GiantRockCrab>
         isPatrol = true;
     }
 
+    public void StopPatrol()
+    {
+        isPatrol = true;
+    }
+
+
+
 
     private void Update()
     {
@@ -196,6 +208,12 @@ public class GiantRockCrab : Singleton<GiantRockCrab>
             {
                 deterTimer -= Time.deltaTime;
             }
+        }
+
+
+        if(FindNearestPlayer())
+        {
+
         }
 
         if(isPatrol)
@@ -217,7 +235,11 @@ public class GiantRockCrab : Singleton<GiantRockCrab>
     }
     private void FixedUpdate()
     {
-        _rb.velocity = _dir * _speed;
+        if(isPatrol)
+        {
+            entity.transform.Translate(_dir * Time.deltaTime * _speed, Space.World);
+        }
+        //_rb.velocity = _dir * _speed;
     }
 
     public void TakeDamage(int damage)
@@ -296,6 +318,11 @@ public class GiantRockCrab : Singleton<GiantRockCrab>
         return _target;
     }
 
+    public void SwitchActionStage(BossActionStage newStage)
+    {
+
+    }
+
     public void SetMoveDirection(Vector3 dir)
     {
         _dir = dir;
@@ -326,10 +353,38 @@ public class GiantRockCrab : Singleton<GiantRockCrab>
 
     #region 钳击
 
-    public void PincerStrike()
+    public void PincerStrike(GameObject target)
     {
+        StartCoroutine(PincerStrikeAction(target));
+    }
+
+    IEnumerator PincerStrikeAction(GameObject target)
+    {
+        //钳击行为
+        _anim.Play("NormalAttack");
+        Vector3[] path = new Vector3[]
+        {
+                entity.transform.position,
+                target.transform.position,
+        };
+
+        Vector3[] path_2 = new Vector3[]
+        {
+                target.transform.position,
+                new Vector3( target.transform.position.x+entity.transform.localScale.z,entity.transform.position.y,0)
+        };
+
+
+        Sequence s = DOTween.Sequence();
+        s.Append(entity.transform.DOPath(path, 1).SetEase(Ease.InExpo));
+        s.Append(entity.transform.DOPath(path_2, 1).SetEase(Ease.InOutQuart));
+
+        yield return new WaitForSeconds(2f);
         //播放钳击动画即可
     }
+
+
+
 
     //因为钳击伤害的触发点要用帧动画事件 这个方法要挂在钳子击打的那一帧
     public void PincerStrikeAction()

@@ -44,7 +44,7 @@ public class PlayerInputSetting : MonoBehaviour
 
     private void Start()
     {
-        PlayerManager.Instance.RegisterPlayer(gameObject);
+        PlayerManager.Instance?.RegisterPlayer(gameObject);
     }
 
     private void Init()

@@ -46,8 +46,14 @@ public class BatteryCarrier : PlayerController
     {
         PlayerInit();
         canOverload = true;
-        PlayerManager.Instance.hasMainBattary = true; //通知电池加入，给其他职业监听以获得主电池
-        EnemyManager.Instance.battery = this.gameObject;
+        if(PlayerManager.Instance)
+        {
+            PlayerManager.Instance.hasMainBattary = true; //通知电池加入，给其他职业监听以获得主电池
+        }
+        if(EnemyManager.Instance)
+        {
+            EnemyManager.Instance.battery = this.gameObject;
+        }
         myPlayerInfo = new PlayerInfo(PlayerType.BatteryCarrier, speed, maxArmor, mainWeapon, secondaryWeapon);
         Debug.Log(myPlayerInfo);
     }
@@ -123,6 +129,10 @@ public class BatteryCarrier : PlayerController
         MusicManager.Instance.PlaySound("超载");
 
         GetComponent<MainBattery>().ChangePower(-overloadPower);
+        Instantiate(Resources.Load<GameObject>("Effect/SparkYellow"), transform.position, Quaternion.identity);
+        GameObject upEffect = Instantiate(Resources.Load<GameObject>("Effect/PowerUp"), selectedPlayer.transform.position, Quaternion.identity);
+        upEffect.transform.SetParent(selectedPlayer.transform);
+
         switch (selectedPlayer.myIndex)
         {
             case 1://射手
