@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.UI;
@@ -25,23 +26,27 @@ public class CharacterBuffPanel : MonoBehaviour
     public void Refresh()
     {
         myPlayerInfo = player.GetComponentInChildren<PlayerController>().myPlayerInfo;
-        
+        HashSet<BuffType> allowedTypes=new HashSet<BuffType>();
         switch (myPlayerInfo.playerType)
         {
             case PlayerType.BatteryCarrier:
                 playerImg.sprite = Resources.Load<Sprite>("UI/Image/Battery - Copy");
+                allowedTypes=new HashSet<BuffType> { BuffType.Battery, BuffType.General };
+                RefreshBuffs(allowedTypes);
                 break;
             case PlayerType.Shooter:
                 playerImg.sprite = Resources.Load<Sprite>("UI/Image/Shooter");
+                allowedTypes=new HashSet<BuffType> { BuffType.Shooter, BuffType.General,BuffType.Explorers };
                 break;
             case PlayerType.Fighter:
                 playerImg.sprite = Resources.Load<Sprite>("UI/Image/Fighter");
+                allowedTypes=new HashSet<BuffType> { BuffType.Fighter, BuffType.General,BuffType.Explorers };
                 break;
             case PlayerType.Healer:
                 playerImg.sprite = Resources.Load<Sprite>("UI/Image/Healer");
+                allowedTypes=new HashSet<BuffType> { BuffType.Healer, BuffType.General,BuffType.Explorers };
                 break;
         }
-
         //操作分配到的玩家事件系统和输入系统
         MultiplayerEventSystem multiEven = player.GetComponent<MultiplayerEventSystem>();
         player.GetComponent<PlayerInput>().SwitchCurrentActionMap("UI");
@@ -49,21 +54,29 @@ public class CharacterBuffPanel : MonoBehaviour
         multiEven.playerRoot = gameObject;
         multiEven.SetSelectedGameObject(firstbuff);
         
-        RefreshBuffs();
+        RefreshBuffs(allowedTypes);
     }
     
     /// <summary>
-    ///随机刷新Buff缓存
+    /// 根据允许的buffType随机分配
     /// </summary>
-    public void RefreshBuffs() 
+    /// <param name="allowedTypes"></param>
+    public void RefreshBuffs(HashSet<BuffType> allowedTypes) 
     {
         _displayedBuffs.Clear();
         List<UpgradeBuff> tempBuffs = new List<UpgradeBuff>(availableBuffs);
-        for (int i = 0; i < 3; i++) {
+        int buffsAdded = 0;
+
+        while (buffsAdded < 3 && tempBuffs.Count > 0) {
             int randIndex = Random.Range(0, tempBuffs.Count);
-            _displayedBuffs.Add(tempBuffs[randIndex]);
+            UpgradeBuff selectedBuff = tempBuffs[randIndex];
+            if (allowedTypes.Contains(selectedBuff.buffType)) {
+                _displayedBuffs.Add(selectedBuff);
+                buffsAdded++;
+            }
             tempBuffs.RemoveAt(randIndex);
         }
+
         ShowSlotsOnUI();
     }
 

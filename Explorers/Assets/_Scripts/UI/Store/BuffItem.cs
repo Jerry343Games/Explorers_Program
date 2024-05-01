@@ -16,9 +16,9 @@ public class BuffItem : MonoBehaviour
     
     private void OnEnable()
     {
-
+        
     }
-
+    
     public void EnableRefresh()
     {
         name.text = myBuff.buffName;
