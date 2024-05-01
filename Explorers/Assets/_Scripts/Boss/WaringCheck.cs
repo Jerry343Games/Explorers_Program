@@ -25,7 +25,7 @@ public class WaringCheck : MonoBehaviour
         if (other.gameObject.tag == "Battery" || other.gameObject.tag == "Player")
         {
             PlayerController controller = other.gameObject.GetComponent<PlayerController>();
-            if (!GiantRockCrab.Instance.inRangePlayers.Contains(controller))
+            if (GiantRockCrab.Instance.inRangePlayers.Contains(controller))
             {
                 GiantRockCrab.Instance.inRangePlayers.Remove(other.gameObject.GetComponent<PlayerController>());
             }

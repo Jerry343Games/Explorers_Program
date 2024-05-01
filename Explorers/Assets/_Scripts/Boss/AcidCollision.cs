@@ -7,7 +7,7 @@ public class AcidCollision : MonoBehaviour
     public List<GameObject> hasHitedPlayers = new List<GameObject>();
     private void OnParticleCollision(GameObject other)
     {
-        if(other.gameObject.tag=="Player" && hasHitedPlayers.Contains(other))
+        if((other.gameObject.tag == "Player"|| other.gameObject.tag == "Battery") && hasHitedPlayers.Contains(other))
         {
             hasHitedPlayers.Add(other);
             other.gameObject.GetComponent<PlayerController>().TakeDamage(GiantRockCrab.Instance.acidDamage);

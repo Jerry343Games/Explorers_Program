@@ -5,8 +5,6 @@ public class SpitAcid : Action
 {
     public override void OnStart()
     {
-        Debug.Log("Õ¬À·");
-        GiantRockCrab.Instance.SpitAcid();
     }
 
     public override void OnEnd()
@@ -16,6 +14,17 @@ public class SpitAcid : Action
 
     public override TaskStatus OnUpdate()
     {
-        return TaskStatus.Running;
+        if(GiantRockCrab.Instance.FindNearestPlayer())
+        {
+            GiantRockCrab.Instance.isPatrol = false;
+            GiantRockCrab.Instance.SpitAcid();
+            return TaskStatus.Success;
+        }
+        else
+        {
+            GiantRockCrab.Instance.isPatrol = true;
+            return TaskStatus.Running;
+
+        }
     }
 }

@@ -4,20 +4,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum BossActionStage
-{
-    PincerStrike,//钳击
-    SpitAcid,//吐酸
-    FlyingStones,//飞石
-}
-
 //巨岩蟹	
 public class GiantRockCrab : Singleton<GiantRockCrab>
 {
 
-    private BehaviorTree _firstBehaviorTree;
+    public BehaviorTree _firstBehaviorTree;
 
-    private BehaviorTree _secondBehaviorTree;
+    public BehaviorTree _secondBehaviorTree;
 
     
 
@@ -172,8 +165,6 @@ public class GiantRockCrab : Singleton<GiantRockCrab>
         curingStageFlags = new List<bool>() { false, false, false, false };
         deterTimer = deterInterval;
         _currentHealth = maxHealth;
-        //激活第一个树
-        _firstBehaviorTree.Start();
 
         FindObjectOfType<UIBossPanel>().ShowPanel();
 
@@ -182,6 +173,8 @@ public class GiantRockCrab : Singleton<GiantRockCrab>
 
     public void StartPatrol()
     {
+        //激活第一个树
+        _firstBehaviorTree.enabled = true;
         currentPatrolIndex = 0;
         isPatrol = true;
     }
@@ -210,11 +203,6 @@ public class GiantRockCrab : Singleton<GiantRockCrab>
             }
         }
 
-
-        if(FindNearestPlayer())
-        {
-
-        }
 
         if(isPatrol)
         {
@@ -300,10 +288,10 @@ public class GiantRockCrab : Singleton<GiantRockCrab>
 
         if (inRangePlayers.Count == 0) return null;
         GameObject _target = inRangePlayers[0].gameObject;
-        float nearestDis = Vector3.Distance(_target.transform.position, transform.position);
+        float nearestDis = Vector3.Distance(_target.transform.position, entity.transform.position);
         foreach (var character in inRangePlayers)
         {
-            float curDis = Vector3.Distance(character.transform.position, transform.position);
+            float curDis = Vector3.Distance(character.transform.position, entity.transform.position);
             if (curDis < nearestDis)
             {
                 nearestDis = curDis;
@@ -311,17 +299,13 @@ public class GiantRockCrab : Singleton<GiantRockCrab>
             }
         }
 
-        Vector3 dir = (_target.transform.position - transform.position).normalized;
+        Vector3 dir = (_target.transform.position - entity.transform.position).normalized;
 
         SetFlip(dir.x >= 0);
 
         return _target;
     }
 
-    public void SwitchActionStage(BossActionStage newStage)
-    {
-
-    }
 
     public void SetMoveDirection(Vector3 dir)
     {
@@ -353,13 +337,14 @@ public class GiantRockCrab : Singleton<GiantRockCrab>
 
     #region 钳击
 
-    public void PincerStrike(GameObject target)
+    public void PincerStrike()
     {
-        StartCoroutine(PincerStrikeAction(target));
+        StartCoroutine(PincerStrikeAction());
     }
 
-    IEnumerator PincerStrikeAction(GameObject target)
+    IEnumerator PincerStrikeAction()
     {
+        GameObject target = FindNearestPlayer();
         //钳击行为
         _anim.Play("NormalAttack");
         Vector3[] path = new Vector3[]
@@ -379,28 +364,28 @@ public class GiantRockCrab : Singleton<GiantRockCrab>
         s.Append(entity.transform.DOPath(path, 1).SetEase(Ease.InExpo));
         s.Append(entity.transform.DOPath(path_2, 1).SetEase(Ease.InOutQuart));
 
+
         yield return new WaitForSeconds(2f);
-        //播放钳击动画即可
     }
 
 
 
 
-    //因为钳击伤害的触发点要用帧动画事件 这个方法要挂在钳子击打的那一帧
-    public void PincerStrikeAction()
-    {
-        Collider[] colls = Physics.OverlapSphere(strikePoint.transform.position, strikeRadius, playerLayer);
+    ////因为钳击伤害的触发点要用帧动画事件 这个方法要挂在钳子击打的那一帧
+    //public void PincerStrikeAction()
+    //{
+    //    Collider[] colls = Physics.OverlapSphere(strikePoint.transform.position, strikeRadius, playerLayer);
 
-        if (colls.Length == 0) return;
+    //    if (colls.Length == 0) return;
 
-        foreach(var coll in colls)
-        {
-            coll.gameObject.GetComponent<PlayerController>().TakeDamage(strikeDamage);
-            coll.gameObject.GetComponent<PlayerController>().Vertigo(
-                new Vector3(Random.Range(-1, 1) * strikeForce, Random.Range(-1, 1) * strikeForce, 0),
-                ForceMode.Impulse, 2f); 
-        }
-    }
+    //    foreach(var coll in colls)
+    //    {
+    //        coll.gameObject.GetComponent<PlayerController>().TakeDamage(strikeDamage);
+    //        coll.gameObject.GetComponent<PlayerController>().Vertigo(
+    //            new Vector3(Random.Range(-1, 1) * strikeForce, Random.Range(-1, 1) * strikeForce, 0),
+    //            ForceMode.Impulse, 2f); 
+    //    }
+    //}
 
     #endregion
 
@@ -444,11 +429,8 @@ public class GiantRockCrab : Singleton<GiantRockCrab>
     #region 吐酸
     public void SpitAcid()
     {
-        //生成酸雾区域
-
-        GameObject acidArea = Instantiate(Resources.Load<GameObject>("Effect/AicdFlow"), transform.position + new Vector3(transform.lossyScale.x,0, 0), Quaternion.Euler(0,90,0));
-        acidArea.transform.SetParent(transform);
-        Destroy(acidArea, 1f);
+        //播放动画
+        _anim.Play("AcidAttack");
     }
 
     #endregion
