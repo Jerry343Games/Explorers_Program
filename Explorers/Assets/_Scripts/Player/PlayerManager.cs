@@ -37,9 +37,8 @@ public class   PlayerManager : SingletonPersistent<PlayerManager>
     public List<GameObject> gamePlayers = new List<GameObject>();
     //预加载法线数据
     public List<AnimationTextureMapping> mappings = new List<AnimationTextureMapping>();
-    
-    public delegate void PlayerInfoHandler(List<PlayerInfo> playerData);
-    public event PlayerInfoHandler OnPlayerInfoUpdated;
+
+    public List<PlayerInfo> allPlayerInfos = new List<PlayerInfo>();
 
 
     /// <summary>
@@ -86,6 +85,12 @@ public class   PlayerManager : SingletonPersistent<PlayerManager>
         players.Add(player);
     }
 
+    public void AddPlayerInfo(PlayerInfo playerInfo)
+    {
+        allPlayerInfos.Add(playerInfo);
+        //PrintAllPlayerInfos();
+    }
+
     /// <summary>
     /// 获得最后一个注册的玩家
     /// </summary>
@@ -112,5 +117,18 @@ public class   PlayerManager : SingletonPersistent<PlayerManager>
         }
         players.Clear();
     }
+    
+    /// <summary>
+    /// 打印玩家信息列表
+    /// </summary>
+    public void PrintAllPlayerInfos()
+    {
+        foreach (PlayerInfo playerInfo in allPlayerInfos)
+        {
+            Debug.Log(playerInfo.ToString());
+        }
+    }
 
+    
 }
+

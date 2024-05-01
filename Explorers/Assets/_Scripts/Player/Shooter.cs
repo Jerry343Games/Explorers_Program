@@ -34,8 +34,7 @@ public class Shooter : PlayerController
     {
         PlayerInit();
         myPlayerInfo = new PlayerInfo(PlayerType.Shooter, speed, maxArmor, mainWeapon, secondaryWeapon);
-        Debug.Log(myPlayerInfo);
-
+        PlayerManager.Instance.AddPlayerInfo(myPlayerInfo);
     }
     // Update is called once per frame
     void Update()
