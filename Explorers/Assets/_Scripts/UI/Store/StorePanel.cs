@@ -34,7 +34,9 @@ public class StorePanel : MonoBehaviour
             CharacterBuffPanel characterBuffPanel = item.GetComponentInChildren<CharacterBuffPanel>();
             characterBuffPanel.player = player;
             characterBuffPanel.Refresh();
+            
             //个性化设置
+            
         }
     }
 }
