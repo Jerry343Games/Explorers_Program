@@ -25,6 +25,7 @@ public class EnemyAvoidBehavior : SteeringBehaviour
             float distanceToEnemy = directionToEnemy.magnitude;
             
             float spcetor = enemySpectors.Find(enemySpector => enemySpector.enemyType == enemyCollider.GetComponent<Enemy>().enemyType).spector;
+            
             float weight = distanceToEnemy <= agentColliderSize ? spcetor : (radius - distanceToEnemy) / radius;
             Vector3 directionToEnemyNormalized = directionToEnemy.normalized;
             for (int i = 0; i < Directions.eightDirections.Count; i++)

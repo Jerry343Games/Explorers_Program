@@ -71,7 +71,8 @@ public class TargetDetector : Detector
             aiData.enemies.Clear();
             foreach(var enemyCollider in enemyColliderList)
             {
-                aiData.enemies.Add(enemyCollider);
+                if (enemyCollider.CompareTag("Enemy"))
+                    aiData.enemies.Add(enemyCollider);
             }
         }
             
