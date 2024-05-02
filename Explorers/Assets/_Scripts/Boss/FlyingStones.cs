@@ -11,6 +11,8 @@ public class FlyingStones : Action
     private float stoneExitTimer;
     public override void OnStart()
     {
+        GiantRockCrab.Instance.isPatrol = true;
+
         stoneExitTime = GiantRockCrab.Instance.stoneDuration;
 
         stoneExitTimer = stoneExitTime;

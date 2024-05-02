@@ -10,6 +10,6 @@ public class TestInsBoss : MonoBehaviour
 
     private void Start()
     {
-        Instantiate(bossPrefab, bossInsTran.position,Quaternion.Euler(0,90,0));
+        Instantiate(bossPrefab, bossInsTran.position,Quaternion.identity);
     }
 }

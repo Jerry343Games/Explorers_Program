@@ -68,24 +68,26 @@ public class GiantRockCrab : Singleton<GiantRockCrab>
     public List<PlayerController> inRangePlayers = new List<PlayerController>();
 
     [Header("钳击")]
-    public float closePlayerSpeed;
+    //public float closePlayerSpeed;
 
-    public Transform strikePoint;
+    //public Transform strikePoint;
 
-    public float strikeRadius;
+    //public float strikeRadius;
 
     public int strikeDamage;
 
     public float strikeForce;
 
-    [Header("疾行")]
-    public float rushSpeed;
+    public GameObject strikeCheckObject;
 
-    public int rushDamage;
+    //[Header("疾行")]
+    //public float rushSpeed;
 
-    public float rushDuration;
+    //public int rushDamage;
 
-    public float rushForce;
+    //public float rushDuration;
+
+    //public float rushForce;
 
     [Header("飞石")]
     public float stoneSpeed;
@@ -170,7 +172,7 @@ public class GiantRockCrab : Singleton<GiantRockCrab>
         deterTimer = deterInterval;
         _currentHealth = maxHealth;
 
-        FindObjectOfType<UIBossPanel>().ShowPanel();
+        //FindObjectOfType<UIBossPanel>().ShowPanel();
 
         _anim.Play("Awake");
     }
@@ -230,6 +232,10 @@ public class GiantRockCrab : Singleton<GiantRockCrab>
         if(isPatrol)
         {
             entity.transform.Translate(_dir * Time.deltaTime * _speed, Space.World);
+        }
+        else
+        {
+            _rb.velocity = Vector3.zero;
         }
         //_rb.velocity = _dir * _speed;
     }
@@ -348,6 +354,7 @@ public class GiantRockCrab : Singleton<GiantRockCrab>
 
     IEnumerator PincerStrikeAction()
     {
+        strikeCheckObject.SetActive(true);
         GameObject target = FindNearestPlayer();
         //钳击行为
         _anim.Play("NormalAttack");
@@ -367,53 +374,35 @@ public class GiantRockCrab : Singleton<GiantRockCrab>
         Sequence s = DOTween.Sequence();
         s.Append(entity.transform.DOPath(path, 1).SetEase(Ease.InExpo));
         s.Append(entity.transform.DOPath(path_2, 1).SetEase(Ease.InOutQuart));
-
-
         yield return new WaitForSeconds(2f);
+        strikeCheckObject.SetActive(false);
+
     }
 
 
+    #endregion
 
-
-    ////因为钳击伤害的触发点要用帧动画事件 这个方法要挂在钳子击打的那一帧
-    //public void PincerStrikeAction()
+    //#region 疾行
+    //public void Rush()
     //{
-    //    Collider[] colls = Physics.OverlapSphere(strikePoint.transform.position, strikeRadius, playerLayer);
+    //    Collider[] colls =  Physics.OverlapSphere(transform.position, 2f, playerLayer);
 
     //    if (colls.Length == 0) return;
 
     //    foreach(var coll in colls)
     //    {
-    //        coll.gameObject.GetComponent<PlayerController>().TakeDamage(strikeDamage);
-    //        coll.gameObject.GetComponent<PlayerController>().Vertigo(
-    //            new Vector3(Random.Range(-1, 1) * strikeForce, Random.Range(-1, 1) * strikeForce, 0),
-    //            ForceMode.Impulse, 2f); 
+    //        if(coll.gameObject.tag=="Player")
+    //        {
+    //            coll.gameObject.GetComponent<PlayerController>().TakeDamage(rushDamage);
+    //            coll.gameObject.GetComponent<Rigidbody>().AddForce((coll.transform.position-transform.position).normalized * rushForce,ForceMode.Impulse);
+    //        }
+    //        else if(coll.gameObject.tag == "Enemy")
+    //        {
+    //            coll.gameObject.GetComponent<Rigidbody>().AddForce((coll.transform.position-transform.position).normalized * rushForce,ForceMode.Impulse);
+    //        }
     //    }
     //}
-
-    #endregion
-
-    #region 疾行
-    public void Rush()
-    {
-        Collider[] colls =  Physics.OverlapSphere(transform.position, 2f, playerLayer);
-
-        if (colls.Length == 0) return;
-
-        foreach(var coll in colls)
-        {
-            if(coll.gameObject.tag=="Player")
-            {
-                coll.gameObject.GetComponent<PlayerController>().TakeDamage(rushDamage);
-                coll.gameObject.GetComponent<Rigidbody>().AddForce((coll.transform.position-transform.position).normalized * rushForce,ForceMode.Impulse);
-            }
-            else if(coll.gameObject.tag == "Enemy")
-            {
-                coll.gameObject.GetComponent<Rigidbody>().AddForce((coll.transform.position-transform.position).normalized * rushForce,ForceMode.Impulse);
-            }
-        }
-    }
-    #endregion
+    //#endregion
 
     #region 飞石
     public void SpawnFlyingStones()
@@ -424,18 +413,10 @@ public class GiantRockCrab : Singleton<GiantRockCrab>
             GameObject stone = Instantiate(Resources.Load<GameObject>("Item/FlyingStone"),
                 stoneSpawnCenterPoint.position+new Vector3(Random.Range(-20f,20f),0,0), 
                 Quaternion.identity);
+            stone.transform.localScale *= Random.Range(0.5f, 0.7f);
 
             stone.GetComponent<Stone>().Init(stoneSpeed, stoneFlyingDamage, stoneForce, stoneDuration, stoneBoomDamage, stoneBoomRange);
         }
-
-        //如果有扔石头的动画 要在那一帧生成 并且生成到手的位置
-        //GameObject stone = Instantiate(Resources.Load<GameObject>("Item/FlyingStone"), transform.position, Quaternion.identity);
-
-        //GameObject target = FindNearestPlayer();
-
-        //Vector3 dir = (target.transform.position - transform.position).normalized;
-
-        //stone.GetComponent<Stone>().Init(dir,stoneSpeed, stoneFlyingDamage, stoneForce, stoneDuration, stoneBoomDamage, stoneBoomRange);
     }
 
     #endregion
@@ -455,6 +436,7 @@ public class GiantRockCrab : Singleton<GiantRockCrab>
     {
         _currentArmor = maxArmor;
 
+        Debug.Log("固化");
 
         float angleIncrement = 360f / curingStoneAmount;
 
@@ -462,10 +444,10 @@ public class GiantRockCrab : Singleton<GiantRockCrab>
         {
             Debug.Log(1);
             float angle = i * angleIncrement;
-            float x = Mathf.Cos(Mathf.Deg2Rad * angle)*3;
-            float y = Mathf.Sin(Mathf.Deg2Rad * angle)*3;
-            GameObject brokenStone = Instantiate(Resources.Load<GameObject>("Item/BrokenStone"), transform.position + new Vector3(x, y, 0), Quaternion.identity);
-            Vector3 dir = (brokenStone.transform.position - transform.position).normalized;
+            float x = Mathf.Cos(Mathf.Deg2Rad * angle)*6;
+            float y = Mathf.Sin(Mathf.Deg2Rad * angle)*6;
+            GameObject brokenStone = Instantiate(Resources.Load<GameObject>("Item/BrokenStone"),entity.transform.position + new Vector3(x, y, 0), Quaternion.identity);
+            Vector3 dir = (brokenStone.transform.position - entity.transform.position).normalized;
             brokenStone.GetComponent<BrokenStone>().Init(dir, curingStoneDamage, curingStoneForce, curingStoneSpeed, curingStoneDuration);
         }
     }
@@ -474,7 +456,9 @@ public class GiantRockCrab : Singleton<GiantRockCrab>
     #region 震慑（被动）
     public void Deter()
     {
-        if(!hasDecreaseSpeedOfPlayers)
+        Debug.Log("震慑");
+
+        if (!hasDecreaseSpeedOfPlayers)
         {
             hasDecreaseSpeedOfPlayers = true;
             foreach(var player in PlayerManager.Instance.gamePlayers)
@@ -482,12 +466,12 @@ public class GiantRockCrab : Singleton<GiantRockCrab>
                 player.GetComponent<PlayerController>().ChangeSpeed(0.7f);
             }
         }
-        Collider[] colls = Physics.OverlapSphere(transform.position, deterHitRange,playerLayer);
+        Collider[] colls = Physics.OverlapSphere(entity.transform.position, deterHitRange,playerLayer);
         //特效
         if (colls.Length == 0) return;
         foreach(var coll in colls)
         {
-            Vector3 dir = (coll.transform.position - transform.position).normalized;
+            Vector3 dir = (coll.transform.position - entity.transform.position).normalized;
             coll.GetComponent<Rigidbody>().AddForce(dir * deterHitForce, ForceMode.Impulse);
         }
     }

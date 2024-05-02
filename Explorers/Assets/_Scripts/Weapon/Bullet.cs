@@ -46,6 +46,7 @@ public class Bullet : MonoBehaviour
                 Destroy(gameObject);
                 break;
             case "Boss":
+                Debug.Log("Hit boss");
                 GiantRockCrab.Instance.TakeDamage((int)_damage);
                 Instantiate(Resources.Load<GameObject>("Effect/BulletExplosion"), transform.position, Quaternion.identity);
                 Destroy(gameObject);

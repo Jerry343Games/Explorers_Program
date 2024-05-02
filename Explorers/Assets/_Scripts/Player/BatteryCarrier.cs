@@ -55,7 +55,7 @@ public class BatteryCarrier : PlayerController
             EnemyManager.Instance.battery = this.gameObject;
         }
         myPlayerInfo = new PlayerInfo(PlayerType.BatteryCarrier, speed, maxArmor, mainWeapon, secondaryWeapon);
-        PlayerManager.Instance.AddPlayerInfo(myPlayerInfo);
+        PlayerManager.Instance?.AddPlayerInfo(myPlayerInfo);
     }
     void Update()
     {

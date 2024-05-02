@@ -1,51 +1,49 @@
-using BehaviorDesigner.Runtime.Tasks;
-using UnityEngine;
+//using BehaviorDesigner.Runtime.Tasks;
+//using UnityEngine;
 
-//疾行
-public class Rush : Action
-{
-    private GameObject _target;
+////疾行
+//public class Rush : Action
+//{
+//    private GameObject _target;
 
-    private float _rushTimer;
+//    private float _rushTimer;
 
-    private float _rushTime;
-    public override void OnStart()
-    {
-    }
+//    private float _rushTime;
+//    public override void OnStart()
+//    {
+//    }
 
-    public override void OnEnd()
-    {
-        GiantRockCrab.Instance.SetMoveDirection(Vector3.zero);
+//    public override void OnEnd()
+//    {
+//        GiantRockCrab.Instance.SetMoveDirection(Vector3.zero);
 
-        GiantRockCrab.Instance.SetMoveSpeed(GiantRockCrab.Instance.normalSpeed);
+//        GiantRockCrab.Instance.SetMoveSpeed(GiantRockCrab.Instance.normalSpeed);
 
-        GiantRockCrab.Instance.isPatrol = true;
-    }
+//        GiantRockCrab.Instance.isPatrol = true;
+//    }
 
-    public override TaskStatus OnUpdate()
-    {
-        _target = GiantRockCrab.Instance.FindNearestPlayer();
+//    public override TaskStatus OnUpdate()
+//    {
+//        _target = GiantRockCrab.Instance.FindNearestPlayer();
 
-        if(!_target)
-        {
-            return TaskStatus.Running;
-        }
+//        if(!_target)
+//        {
+//            return TaskStatus.Running;
+//        }
 
-        GiantRockCrab.Instance.isPatrol = false;
+//        GiantRockCrab.Instance.isPatrol = false;
 
-        _rushTime = GiantRockCrab.Instance.rushDuration;
+//        _rushTime = GiantRockCrab.Instance.rushDuration;
 
-        _rushTimer = _rushTime;
+//        _rushTimer = _rushTime;
 
-        Vector3 dir = (_target.transform.position - GiantRockCrab.Instance.transform.position).normalized;
+//        Vector3 dir = (_target.transform.position - GiantRockCrab.Instance.transform.position).normalized;
 
-        GiantRockCrab.Instance.SetMoveDirection(dir);
+//        GiantRockCrab.Instance.SetMoveDirection(dir);
 
-        GiantRockCrab.Instance.SetMoveSpeed(GiantRockCrab.Instance.rushSpeed);
+//        GiantRockCrab.Instance.SetMoveSpeed(GiantRockCrab.Instance.rushSpeed);
 
-        //动画？
-
-
+//        //动画？
 
 
 
@@ -54,16 +52,18 @@ public class Rush : Action
 
 
 
-        if (_rushTimer>0)
-        {
-            GiantRockCrab.Instance.Rush();
-            _rushTimer -= Time.deltaTime;
-            return TaskStatus.Running;
-        }
-        else
-        {
-            return TaskStatus.Success;
-        }
-    }
 
-}
+
+//        if (_rushTimer>0)
+//        {
+//            GiantRockCrab.Instance.Rush();
+//            _rushTimer -= Time.deltaTime;
+//            return TaskStatus.Running;
+//        }
+//        else
+//        {
+//            return TaskStatus.Success;
+//        }
+//    }
+
+//}

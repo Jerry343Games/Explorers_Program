@@ -176,12 +176,22 @@ public class PlayerController : MonoBehaviour
             {
                 canMove = true;
                 _vertigoTimer = 0;
-                _rigidbody.velocity = new(0, 0, 0);
+                //_rigidbody.velocity = new(0, 0, 0);
             }
             return;
         }
         //if (isDigging) return;
         MovementCombination();
+
+        //if(!isMoveReverse)
+        //{
+        //    _rigidbody.velocity = _moveDir * speed * _speedFactor * _outSpeedFactor;
+        //}
+        //else
+        //{
+        //    _rigidbody.velocity = -_moveDir * speed * _speedFactor * _outSpeedFactor;
+        //}
+
         if (!isMoveReverse)
         {
             transform.Translate(_moveDir * Time.deltaTime * speed * _speedFactor * _outSpeedFactor, Space.World);
@@ -381,7 +391,7 @@ public class PlayerController : MonoBehaviour
         }
         if (damage>0)
         {
-            CameraTrace.instance.CameraShake(1f,0.2f);
+            CameraTrace.instance?.CameraShake(1f,0.2f);
         }
     }
 

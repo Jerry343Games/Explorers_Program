@@ -59,8 +59,10 @@ namespace Obi{
 			// kinematic rigidbodies are passed to Obi with zero velocity, so we must ignore the new velocities calculated by the solver:
 			if (Application.isPlaying && !(unityRigidbody.isKinematic || kinematicForParticles))
             {
-                unityRigidbody.velocity += linearDelta;
-                unityRigidbody.angularVelocity += angularDelta;
+                if (linearDelta != new Vector3(float.NaN, float.NaN, float.NaN))
+                    unityRigidbody.velocity += linearDelta;
+                if(angularDelta!=new Vector3(float.NaN, float.NaN, float.NaN))
+                    unityRigidbody.angularVelocity += angularDelta;
             }
         }
 	}

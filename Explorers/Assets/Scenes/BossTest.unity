@@ -1082,35 +1082,19 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 311705055754016872, guid: f77570c2c0458ad4d81a4a54420957d4,
-        type: 3}
-      propertyPath: stoneForce
-      value: 5
+    - target: {fileID: 1212006594, guid: f77570c2c0458ad4d81a4a54420957d4, type: 3}
+      propertyPath: m_Radius
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 311705055754016872, guid: f77570c2c0458ad4d81a4a54420957d4,
         type: 3}
-      propertyPath: stoneAmount
-      value: 5
+      propertyPath: strikeForce
+      value: 50
       objectReference: {fileID: 0}
-    - target: {fileID: 311705055754016872, guid: f77570c2c0458ad4d81a4a54420957d4,
+    - target: {fileID: 4989109261430731575, guid: f77570c2c0458ad4d81a4a54420957d4,
         type: 3}
-      propertyPath: stoneDuration
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 311705055754016872, guid: f77570c2c0458ad4d81a4a54420957d4,
-        type: 3}
-      propertyPath: stoneBoomRange
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 311705055754016872, guid: f77570c2c0458ad4d81a4a54420957d4,
-        type: 3}
-      propertyPath: stoneBoomDamage
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 311705055754016872, guid: f77570c2c0458ad4d81a4a54420957d4,
-        type: 3}
-      propertyPath: stoneFlyingDamage
-      value: 5
+      propertyPath: m_UseGravity
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6166637980779412610, guid: f77570c2c0458ad4d81a4a54420957d4,
         type: 3}
