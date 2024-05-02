@@ -27,27 +27,41 @@ public class CharacterBuffPanel : MonoBehaviour
 
     public GameObject[] buffSlots;//展示位
     public RectTransform buffList;//整个展示列表
+    public RectTransform listMask;//整个展示列表的遮罩
 
     public Button refreshBtn;
     public Button confirmBtn;
 
     private Vector2 _listEndValue=new Vector2(-0.716601f, 2.109364f);
-    private Vector2 _listStartValue=new Vector2(-0.716601f,226.7094f);
+    private Vector2 _listStartValue=new Vector2(-0.716601f,-226.7094f);
 
     private bool _isFirst;
+
+    public static event Action OnRefreshBtnClick_Can;
+    public static event Action OnRefreshBtnClick_Cant;
     private void OnEnable()
     {
         _isFirst = true;
         _allowedTypes=new HashSet<BuffType>();
         refreshBtn.onClick.AddListener(ClickRefreshBtn);
         confirmBtn.onClick.AddListener(ClickConfirmBtn);
-        _listStartValue = buffList.anchoredPosition;
+
+        buffList.anchoredPosition = new Vector2(0, -226);
+
+        for (int i = 0; i < buffSlots.Length; i++)
+        {
+            buffSlots[i].GetComponent<BuffItem>().chooseBuff += OnClickBuffBtn;
+        }
     }
 
     private void OnDestroy()
     {
         refreshBtn.onClick.RemoveListener(ClickRefreshBtn);
         confirmBtn.onClick.RemoveListener(ClickConfirmBtn);
+        for (int i = 0; i < buffSlots.Length; i++)
+        {
+            buffSlots[i].GetComponent<BuffItem>().chooseBuff -= OnClickBuffBtn;
+        }
     }
 
     public void Refresh()
@@ -128,18 +142,53 @@ public class CharacterBuffPanel : MonoBehaviour
         {
             buffSlots[i].GetComponent<BuffItem>().myBuff = _displayedBuffs[i];
             buffSlots[i].GetComponent<BuffItem>().EnableRefresh();
+            buffSlots[i].GetComponent<BuffItem>().RefreshNextRound();
         }
     }
 
     private void ClickRefreshBtn()
     {
-        RefreshBuffs(_allowedTypes);
+        if (PlayerManager.Instance.resNum>20)
+        {
+            RefreshBuffs(_allowedTypes);
+            PlayerManager.Instance.ChangeResData(-20);
+            OnRefreshBtnClick_Can?.Invoke();
+        }
+        else
+        {
+            OnRefreshBtnClick_Cant?.Invoke();
+        }
     }
 
+    /// <summary>
+    /// 点击确认事件
+    /// </summary>
     private void ClickConfirmBtn()
     {
-        
+        listMask.DOAnchorPos(Vector2.zero, 0.5f);
+        player.GetComponent<PlayerInput>().SwitchCurrentActionMap("Player");
     }
-    
+
+    private void OnClickBuffBtn()
+    {
+        foreach (GameObject buffslot in buffSlots)
+        {
+            BuffItem buffItem= buffslot.GetComponent<BuffItem>();
+            buffItem.isEndOneRound = true;
+            if (buffItem.isSelected)
+            {
+                buffItem.ShowChooseMask();
+            }
+            else
+            {
+                buffItem.ShowUnChooseMask();
+            }
+        }
+    }
+
+    private void OnConfirm()
+    {
+        listMask.DOAnchorPos(Vector2.zero, 0.5f);
+    }
     
 }

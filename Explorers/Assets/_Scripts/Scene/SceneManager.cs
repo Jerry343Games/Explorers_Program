@@ -40,6 +40,8 @@ public class SceneManager : Singleton<SceneManager>
 
     public List<ResTask> resTasks = new List<ResTask>();//资源收集任务列表
 
+    public int currentResNum = 0;
+
     public GameObject healthPanel;
 
     public List<Vector3> panelPoints = new List<Vector3>();
@@ -180,5 +182,8 @@ public class SceneManager : Singleton<SceneManager>
 
         MusicManager.Instance.PlayBackMusic("海底氛围");
     }
-   
+
+    
+    
+    
 }

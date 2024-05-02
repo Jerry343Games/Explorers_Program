@@ -40,7 +40,8 @@ public class   PlayerManager : SingletonPersistent<PlayerManager>
 
     public List<PlayerInfo> allPlayerInfos = new List<PlayerInfo>();
 
-
+    public int resNum;
+    
     /// <summary>
     /// 通过动画名查找法线贴图
     /// </summary>
@@ -128,7 +129,14 @@ public class   PlayerManager : SingletonPersistent<PlayerManager>
             Debug.Log(playerInfo.ToString());
         }
     }
-
+    /// <summary>
+    /// 改变采矿资源数据
+    /// </summary>
+    /// <param name="addNum"></param>
+    public void ChangeResData(int addNum)
+    {
+        resNum += addNum;
+    }
     
 }
 

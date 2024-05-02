@@ -1,16 +1,23 @@
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 
 public class StorePanel : MonoBehaviour
 {
-    public GameObject characterGrids; 
+    public GameObject characterGrids;
+
+    private Vector2 endPos = new Vector2(0, -15f);
+    private Vector2 startPos = new Vector2(0, -439f);
     
     void Start()
     {
+        characterGrids.GetComponent<RectTransform>().anchoredPosition = startPos;
         List<PlayerInfo> playerInfos = PlayerManager.Instance.allPlayerInfos;
         List<GameObject> players = PlayerManager.Instance.players;
         DisplayStore(players);
+        //出场动画
+        characterGrids.GetComponent<RectTransform>().DOAnchorPos(endPos, 0.5f);
     }
 
     // Update is called once per frame
