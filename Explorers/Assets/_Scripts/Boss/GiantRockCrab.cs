@@ -113,7 +113,7 @@ public class GiantRockCrab : Singleton<GiantRockCrab>
 
     public float acidCorrodeDuration;//腐蚀护盾的时间
 
-    public float acidCorrodeRange;//酸雾范围（圆形半径）
+    public float acidCorrodeRate;
 
     [Header("固化")]
 

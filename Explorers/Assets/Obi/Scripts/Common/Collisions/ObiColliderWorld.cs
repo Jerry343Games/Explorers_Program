@@ -424,21 +424,12 @@ namespace Obi
                         }
                     }
 
-                    Debug.Log(angularDelta);
-                    Debug.Log(linearDelta);
-
                     if (!float.IsNaN(linearDelta.x) && !float.IsNaN(linearDelta.y) && !float.IsNaN(linearDelta.z) && !float.IsNaN(linearDelta.w) &&
     !float.IsNaN(angularDelta.x) && !float.IsNaN(angularDelta.y) && !float.IsNaN(angularDelta.z) && !float.IsNaN(angularDelta.w))
                     {
                         // update rigidbody velocities
                         rigidbodyHandles[i].owner.UpdateVelocities(linearDelta, angularDelta);
                     }
-
-                    //if (angularDelta != Vector4.zero && linearDelta!=Vector4.zero)
-                    //{
-                    //    // update rigidbody velocities
-                    //    rigidbodyHandles[i].owner.UpdateVelocities(linearDelta, angularDelta);
-                    //}
                 }
             }
         }

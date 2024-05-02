@@ -46,8 +46,8 @@ public class PlayerController : MonoBehaviour
     public int maxArmor;//电池护盾量
     public event Action OnShieldDamage;
     [HideInInspector]
-    public int currentArmor;//电池护盾量
-    public int restoreAmount;//单次护盾修复量
+    public float currentArmor;//电池护盾量
+    public float restoreAmount;//单次护盾修复量
     public float restoreCD;//修复冷却
     private float _restoreTimer;
     private float lastHurtTimer;
@@ -385,7 +385,7 @@ public class PlayerController : MonoBehaviour
                 MusicManager.Instance.PlaySound("电能护盾破碎");
             }
 
-            int damageToBattery = damage - currentArmor;
+            int damageToBattery = (int)(damage - currentArmor);
             GetComponent<Battery>().ChangePower(-damageToBattery);
             currentArmor = maxArmor;
         }
@@ -407,7 +407,7 @@ public class PlayerController : MonoBehaviour
             {
                 defenceDownTimer += Time.deltaTime;
                 //掉甲
-                currentArmor -= (int)(downRate * Time.deltaTime*50);
+                currentArmor -= downRate * Time.deltaTime*50;
                 currentArmor = Math.Max(currentArmor, 0);
                 Debug.Log("腐蚀状态，当前护甲值：" + currentArmor);
             }
@@ -432,11 +432,11 @@ public class PlayerController : MonoBehaviour
             {
                 if(_hasConnected)
                 {
-                    SceneManager.Instance.BatteryTransform.GetComponent<MainBattery>().ChangePower(-restoreAmount);//消耗主电池相应电量修复
+                    SceneManager.Instance.BatteryTransform.GetComponent<MainBattery>().ChangePower(-(int)restoreAmount);//消耗主电池相应电量修复
                 }
                 else
                 {
-                    GetComponent<CellBattery>().ChangePower(-restoreAmount);
+                    GetComponent<CellBattery>().ChangePower(-(int)restoreAmount);
                 }
                 currentArmor = Mathf.Min(maxArmor, currentArmor+restoreAmount);
             }

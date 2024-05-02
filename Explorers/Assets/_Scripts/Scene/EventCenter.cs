@@ -13,7 +13,8 @@ public static class EventCenter
     
     //主电池加入事件
     public static event Action BattaryJoined;
-    
+
+
     public static void CallGameStartedEvent()
     {
         GameStartedEvent?.Invoke();
@@ -28,5 +29,7 @@ public static class EventCenter
     {
         BattaryJoined?.Invoke();
     }
+
+
 
 }

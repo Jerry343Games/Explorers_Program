@@ -356,8 +356,8 @@ public class Fighter : PlayerController
         }
         else
         {
-            int damageToBattery = realDamage - currentArmor;
-            GetComponent<Battery>().ChangePower(-damageToBattery);
+            float damageToBattery = realDamage - currentArmor;
+            GetComponent<Battery>().ChangePower(-(int)damageToBattery);
             currentArmor = maxArmor;
         }
     }
