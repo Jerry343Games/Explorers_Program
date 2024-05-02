@@ -36,13 +36,15 @@ public class GiantRockCrab : Singleton<GiantRockCrab>
     [Header("属性")]
     public int maxHealth;
 
-    private int _currentHealth;
+    [HideInInspector]
+    public int _currentHealth;
 
     public float normalSpeed;
 
     public float actionChangeInterval;//两种行为的间隔时间（至少要有一个行为的完整的动画时间 保证动画播完才进行下一个行为）
 
-    private float _currentArmor;
+    [HideInInspector]
+    public float _currentArmor;
 
     public float maxArmor;
 
@@ -179,6 +181,7 @@ public class GiantRockCrab : Singleton<GiantRockCrab>
 
     public void StartPatrol()
     {
+        _coll.enabled = true;
         //激活第一个树
         _firstBehaviorTree.enabled = true;
         currentPatrolIndex = 0;

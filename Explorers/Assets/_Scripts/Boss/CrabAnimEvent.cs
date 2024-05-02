@@ -8,6 +8,8 @@ public class CrabAnimEvent : MonoBehaviour
     public void AwakeAnimEnd()
     {
         GiantRockCrab.Instance.StartPatrol();
+        FindObjectOfType<UIBossPanel>().ShowPanel();
+
     }
 
     public void SpitAcidAction()
