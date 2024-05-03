@@ -187,13 +187,15 @@ public class Enemy : MonoBehaviour
     {
         
         if(aniEvent!=null)
-        
+            
         fasterSpeed = moveSpeed + speedOffset;
+        
         rb = GetComponent<Rigidbody>();
         spawnerPoint = gameObject.transform.position;
         spriteRenderer = gameObject.GetComponentInChildren<SpriteRenderer>();
         isFlipped = spriteRenderer.flipY;
         if (isSleeping) InvokeRepeating(nameof(SleepAwakeCheck), 0, detectThread);
+        originalColor = spriteRenderer.color;
     }
     private void Update()
     {
@@ -272,11 +274,28 @@ public class Enemy : MonoBehaviour
     public virtual void TakeDamage(int damage)
     { 
         HP -= damage;
+        FlashRed();
         if (HP <= 0) Dead();
         if (isSleeping) { 
             StartledFromSleep();
             
         }
+    }
+    //敌人受击闪红相关
+    public Color flashColor = Color.red;
+    public float flashDuration = 0.1f;
+
+    private Color originalColor;
+    public void FlashRed()
+    {
+        StartCoroutine(FlashRoutine());
+    }
+
+    IEnumerator FlashRoutine()
+    {
+        spriteRenderer.color = flashColor;
+        yield return new WaitForSeconds(flashDuration);
+        spriteRenderer.color = originalColor;
     }
     public virtual void Dead()
     {
@@ -286,6 +305,8 @@ public class Enemy : MonoBehaviour
     }
     public virtual void Vertigo(Vector3 force, ForceMode forceMode = ForceMode.Impulse, float vertigoTime = 0.3f)
     {
+        rb.velocity = Vector3.zero;
+        rb.angularVelocity = Vector3.zero;
         this.vertigoTime = vertigoTime;
         canMove = false;
         rb.AddForce(force, forceMode);
