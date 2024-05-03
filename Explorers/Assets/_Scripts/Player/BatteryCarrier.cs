@@ -132,6 +132,7 @@ public class BatteryCarrier : PlayerController
         Instantiate(Resources.Load<GameObject>("Effect/SparkYellow"), transform.position, Quaternion.identity);
         GameObject upEffect = Instantiate(Resources.Load<GameObject>("Effect/PowerUp"), selectedPlayer.transform.position, Quaternion.identity);
         upEffect.transform.SetParent(selectedPlayer.transform);
+        Destroy(upEffect, overloadDuration);
 
         switch (selectedPlayer.myIndex)
         {
