@@ -45,6 +45,7 @@ public class PlayerController : MonoBehaviour
     [Header("护盾")]
     public int maxArmor;//电池护盾量
     public event Action OnShieldDamage;
+    public event Action OnHealthDamage;
     [HideInInspector]
     public float currentArmor;//电池护盾量
     public float restoreAmount;//单次护盾修复量
@@ -387,11 +388,12 @@ public class PlayerController : MonoBehaviour
 
             int damageToBattery = (int)(damage - currentArmor);
             GetComponent<Battery>().ChangePower(-damageToBattery);
+            OnHealthDamage?.Invoke();
             currentArmor = maxArmor;
         }
         if (damage>0)
         {
-            CameraTrace.instance?.CameraShake(1f,0.2f);
+            CameraTrace.instance?.CameraShake(0.5f,0.2f);
         }
     }
 

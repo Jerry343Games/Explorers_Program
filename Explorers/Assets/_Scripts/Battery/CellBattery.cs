@@ -21,7 +21,7 @@ public class CellBattery : Battery
     private void Awake()
     {
         Init();
-        //ÆôÓÃÃ¿ÃëµçÁ¿Ë¥¼õ
+        //å¯ç”¨æ¯ç§’ç”µé‡è¡°å‡
         InvokeRepeating("PowerDecayPreSecond", 1f, 1f);
     }
 
@@ -40,7 +40,7 @@ public class CellBattery : Battery
     }
     
     /// <summary>
-    /// ³õÊ¼»¯·½·¨
+    /// åˆå§‹åŒ–æ–¹æ³•
     /// </summary>
     private void Init()
     {
@@ -59,7 +59,7 @@ public class CellBattery : Battery
     }
 
     /// <summary>
-    /// ÖØĞ´»ùÀàµÄ·½·¨¡£ÔÚ×Óµç³ØÁ¬½Óµ½Ö÷µç³ØÊ±£¬¸Ä±äµÄÊÇÖ÷µç³ØµÄµçÁ¿£»µ±Î´Á¬½ÓÊ±£¬¸Ä±äµÄÊÇ×ÔÉíµçÁ¿¡£
+    /// é‡å†™åŸºç±»çš„æ–¹æ³•ã€‚åœ¨å­ç”µæ± è¿æ¥åˆ°ä¸»ç”µæ± æ—¶ï¼Œæ”¹å˜çš„æ˜¯ä¸»ç”µæ± çš„ç”µé‡ï¼›å½“æœªè¿æ¥æ—¶ï¼Œæ”¹å˜çš„æ˜¯è‡ªèº«ç”µé‡ã€‚
     /// </summary>
     /// <param name="value"></param>
     public override void ChangePower(int value)
@@ -75,7 +75,7 @@ public class CellBattery : Battery
     }
 
     /// <summary>
-    /// ÉèÖÃÁ¬½Ó×´Ì¬
+    /// è®¾ç½®è¿æ¥çŠ¶æ€
     /// </summary>
     /// <param name="newState"></param>
     public void ChangeConnectState(bool newState)
@@ -89,7 +89,7 @@ public class CellBattery : Battery
 
 
     /// <summary>
-    /// ´ÓÖ÷µç³ØÄÇÀï»ñµÃµ±Ç°È±ÉÙµÄµç
+    /// ä»ä¸»ç”µæ± é‚£é‡Œè·å¾—å½“å‰ç¼ºå°‘çš„ç”µ
     /// </summary>
     public void GetLackPowerFromMain()
     {

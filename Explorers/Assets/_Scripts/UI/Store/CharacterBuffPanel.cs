@@ -169,6 +169,7 @@ public class CharacterBuffPanel : MonoBehaviour
     {
         listMask.DOAnchorPos(Vector2.zero, 0.5f);
         player.GetComponent<PlayerInput>().SwitchCurrentActionMap("Player");
+        
         OnConfirmClick?.Invoke();
     }
 

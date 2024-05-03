@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
@@ -12,8 +13,18 @@ public class UIHealthPanel : MonoBehaviour
     private Battery _battery;
     private PlayerController _playerController;
 
-    private bool hasInit;
+    private Image _hitMask;
     
+    //生命值和盾面板
+    public RectTransform healthPanel;
+    public RectTransform armorPanel;
+
+    private bool hasInit;
+
+    private void OnEnable()
+    {
+        _hitMask = GameObject.FindWithTag("HitMask").GetComponent<Image>();
+    }
 
     private void Update()
     {
@@ -73,8 +84,27 @@ public class UIHealthPanel : MonoBehaviour
                 break;
         }
 
+        _playerController.OnShieldDamage += ShakeArmor;
+        _playerController.OnHealthDamage += ShakeHealth;
 
+    }
 
+    public void ShakeArmor()
+    {
+        _hitMask.color = new Color(47, 74, 93);
+        Sequence q = DOTween.Sequence();
+        q.Append(_hitMask.DOFade(1, 0.2f));
+        q.Append(_hitMask.DOFade(0, 0.2f));
+        healthPanel.DOShakeAnchorPos(0.3f, 5f);
+    }
+
+    public void ShakeHealth()
+    {
+        _hitMask.color = new Color(165, 74, 93);
+        Sequence q = DOTween.Sequence();
+        q.Append(_hitMask.DOFade(1, 0.2f));
+        q.Append(_hitMask.DOFade(0, 0.2f));
+        armorPanel.DOShakeAnchorPos(0.3f, 5f);
     }
 
     private void SetHealthUI()

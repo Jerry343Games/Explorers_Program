@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,6 +10,7 @@ public class Battery : MonoBehaviour
     
     //[HideInInspector]
     public int currentPower;
+    
 
     public Battery(int initialPower)
     {

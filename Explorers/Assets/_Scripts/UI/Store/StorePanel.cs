@@ -55,11 +55,12 @@ public class StorePanel : MonoBehaviour
     private void PlayerStateCheck()
     {
         _confirmedPlayerNum++;
-        Debug.Log("Confirmed One"+_confirmedPlayerNum);
 
         if (_confirmedPlayerNum==PlayerManager.Instance.maxPlayerCount)
         {
-            maskShow.DOFade(1,0.5f).OnComplete(()=>UnityEngine.SceneManagement.SceneManager.LoadScene("Scenes/JerryTest_2"));
+            Sequence q = DOTween.Sequence();
+            q.AppendInterval(1f);
+            q.Append(maskShow.DOFade(1,0.5f).OnComplete(()=>UnityEngine.SceneManagement.SceneManager.LoadScene("Scenes/JerryTest_2")));
         }
     }
 }
