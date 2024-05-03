@@ -12,4 +12,9 @@ public class UIMaskShow : MonoBehaviour
         GetComponent<Image>().color=Color.black;
         GetComponent<Image>().DOFade(0, 0.5f);
     }
+
+    public void Close()
+    {
+        GetComponent<Image>().DOFade(1, 0.5f);
+    }
 }

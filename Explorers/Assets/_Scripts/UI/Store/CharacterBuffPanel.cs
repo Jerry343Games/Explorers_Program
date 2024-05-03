@@ -39,6 +39,8 @@ public class CharacterBuffPanel : MonoBehaviour
 
     public static event Action OnRefreshBtnClick_Can;
     public static event Action OnRefreshBtnClick_Cant;
+
+    public event Action OnConfirmClick; 
     private void OnEnable()
     {
         _isFirst = true;
@@ -167,6 +169,7 @@ public class CharacterBuffPanel : MonoBehaviour
     {
         listMask.DOAnchorPos(Vector2.zero, 0.5f);
         player.GetComponent<PlayerInput>().SwitchCurrentActionMap("Player");
+        OnConfirmClick?.Invoke();
     }
 
     private void OnClickBuffBtn()
@@ -189,6 +192,7 @@ public class CharacterBuffPanel : MonoBehaviour
     private void OnConfirm()
     {
         listMask.DOAnchorPos(Vector2.zero, 0.5f);
+        OnConfirmClick?.Invoke();
     }
     
 }

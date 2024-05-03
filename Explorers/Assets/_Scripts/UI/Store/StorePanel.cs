@@ -1,14 +1,21 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Net.Mime;
 using DG.Tweening;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class StorePanel : MonoBehaviour
 {
     public GameObject characterGrids;
 
+    public Image maskShow;
+
     private Vector2 endPos = new Vector2(0, -15f);
     private Vector2 startPos = new Vector2(0, -439f);
+
+    private int _confirmedPlayerNum;
     
     void Start()
     {
@@ -16,15 +23,12 @@ public class StorePanel : MonoBehaviour
         List<PlayerInfo> playerInfos = PlayerManager.Instance.allPlayerInfos;
         List<GameObject> players = PlayerManager.Instance.players;
         DisplayStore(players);
+        
+        
         //出场动画
         characterGrids.GetComponent<RectTransform>().DOAnchorPos(endPos, 0.5f);
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    
 
     private void DisplayStore(List<GameObject> players)
     {
@@ -41,9 +45,21 @@ public class StorePanel : MonoBehaviour
             CharacterBuffPanel characterBuffPanel = item.GetComponentInChildren<CharacterBuffPanel>();
             characterBuffPanel.player = player;
             characterBuffPanel.Refresh();
-            
+
+            characterBuffPanel.OnConfirmClick += PlayerStateCheck;
             //个性化设置
-            
+
+        }
+    }
+
+    private void PlayerStateCheck()
+    {
+        _confirmedPlayerNum++;
+        Debug.Log("Confirmed One"+_confirmedPlayerNum);
+
+        if (_confirmedPlayerNum==PlayerManager.Instance.maxPlayerCount)
+        {
+            maskShow.DOFade(1,0.5f).OnComplete(()=>UnityEngine.SceneManagement.SceneManager.LoadScene("Scenes/JerryTest_2"));
         }
     }
 }
