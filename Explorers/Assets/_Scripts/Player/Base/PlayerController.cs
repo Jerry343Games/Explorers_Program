@@ -643,8 +643,33 @@ public class PlayerController : MonoBehaviour
                     };
                     bubbleManager.CreateBubble(info);
                 }
-
-
+                break;
+            case "Portal":
+                if(!hasDead)
+                {
+                    if(!SceneManager.Instance.isSecondLevel)
+                    {
+                        BubbleInfo info = new BubbleInfo
+                        {
+                            Type = BubbleType.Press,
+                            Obj1 = gameObject,
+                            Obj2 = other.gameObject,
+                            Content = "…Ó»Î"
+                        };
+                        bubbleManager.CreateBubble(info);
+                    }
+                    else
+                    {
+                        BubbleInfo info = new BubbleInfo
+                        {
+                            Type = BubbleType.Press,
+                            Obj1 = gameObject,
+                            Obj2 = other.gameObject,
+                            Content = "–ﬁ∏¥«±Õß"
+                        };
+                        bubbleManager.CreateBubble(info);
+                    }
+                }
                 break;
             default:
                 break;

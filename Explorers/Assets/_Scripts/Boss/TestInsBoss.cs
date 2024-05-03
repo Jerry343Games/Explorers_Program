@@ -8,8 +8,13 @@ public class TestInsBoss : MonoBehaviour
     public Transform bossInsTran;
     public GameObject bossPrefab;
 
-    private void Start()
+
+    private void OnTriggerEnter(Collider other)
     {
-        Instantiate(bossPrefab, bossInsTran.position,Quaternion.identity);
+        if((other.gameObject.tag == "Player" || other.gameObject.tag == "Battery") && SceneManager.Instance.isSecondLevel)
+        {
+            Instantiate(bossPrefab, bossInsTran.position, Quaternion.identity);
+            GetComponent<SphereCollider>().enabled = false;
+        }
     }
 }

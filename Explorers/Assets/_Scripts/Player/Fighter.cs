@@ -182,6 +182,21 @@ public class Fighter : PlayerController
                 }
 
                 break;
+            case "Portal":
+                if (playerInputSetting.GetInteractButtonDown())
+                {
+                    bubbleManager.DestroyBubble();
+                    if (!SceneManager.Instance.isSecondLevel)
+                    {
+                        //载入下一关
+                        UnityEngine.SceneManagement.SceneManager.LoadScene("JerryTest_2");
+                    }
+                    else
+                    {
+                        SceneManager.Instance.GameOver(true);
+                    }
+                }
+                break;
             default:
                 break;
         }

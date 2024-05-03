@@ -218,6 +218,8 @@ public class SceneManager : Singleton<SceneManager>
             if(GiantRockCrab.Instance.hasDead)
             {
                 hasGameEnd = true;
+                GameObject.FindGameObjectWithTag("Portal").GetComponent<SphereCollider>().enabled = true;
+                GameObject.FindGameObjectWithTag("Portal").transform.GetChild(0).gameObject.SetActive(true);//º§ªÓ«±Õß
                 return true;
             }
             else
@@ -228,6 +230,7 @@ public class SceneManager : Singleton<SceneManager>
         else
         {
             hasGameEnd = true;
+            GameObject.FindGameObjectWithTag("Portal").GetComponent<SphereCollider>().enabled = true;
             return true;
         }
     }
