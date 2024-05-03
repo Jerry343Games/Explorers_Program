@@ -205,6 +205,9 @@ public class Fighter : PlayerController
             case "Enemy":
                 _enemyInArea.Add(other.gameObject);
                 break;
+            case "Boss":
+                _enemyInArea.Add(other.gameObject);
+                break;
             default:
                 break;
         }
@@ -234,8 +237,12 @@ public class Fighter : PlayerController
                 break;
             case "ReconnectArea":
                 bubbleManager.DestroyBubble();
-
-
+                break;
+            case "Boss":
+                if (_enemyInArea.Contains(other.gameObject))
+                {
+                    _enemyInArea.Remove(other.gameObject);
+                }
                 break;
             default:
                 break;
@@ -292,6 +299,13 @@ public class Fighter : PlayerController
 
         foreach (GameObject enemyObj in _enemyInArea)
         {
+            if (enemyObj.CompareTag("Boss"))
+            {
+                GiantRockCrab.Instance.TakeDamage((int)mainWeapon.attackDamage);
+                aliveEnemies.Add(enemyObj);
+                continue;
+
+            }
             Enemy enemy = enemyObj.GetComponent<Enemy>();
             if (enemy.HP > 0)
             {
@@ -398,6 +412,10 @@ public class Fighter : PlayerController
     {
         if (isDashing && collision.gameObject.CompareTag("Enemy")){
             collision.gameObject.GetComponent<Enemy>().TakeDamage(dashDamage);
+        }
+        if (isDashing && collision.gameObject.CompareTag("Boss"))
+        {
+            GiantRockCrab.Instance.TakeDamage(dashDamage);
         }
         if (collision.gameObject.tag == "ResToCollecting")
         {
