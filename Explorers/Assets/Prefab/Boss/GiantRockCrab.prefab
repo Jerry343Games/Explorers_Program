@@ -297,6 +297,7 @@ MonoBehaviour:
   _secondBehaviorTree: {fileID: 0}
   entity: {fileID: 8051894133683313459}
   animPlayOver: 0
+  hasDead: 0
   maxHealth: 600
   _currentHealth: 0
   normalSpeed: 2
@@ -331,9 +332,9 @@ MonoBehaviour:
   curingStoneForce: 5
   curingStoneSpeed: 8
   curingStoneDuration: 5
-  deterInterval: 0
+  deterInterval: 5
   deterHitRange: 7
-  deterHitForce: 0
+  deterHitForce: 5
 --- !u!114 &6717706749286797270
 MonoBehaviour:
   m_ObjectHideFlags: 0

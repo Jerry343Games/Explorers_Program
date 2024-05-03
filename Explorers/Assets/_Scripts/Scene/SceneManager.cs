@@ -46,6 +46,11 @@ public class SceneManager : Singleton<SceneManager>
 
     public List<Vector3> panelPoints = new List<Vector3>();
 
+    public bool isSecondLevel;
+
+    public bool matchVictoryCondition;
+
+    public bool hasGameEnd;
     private void OnEnable()
     {
         EventCenter.GameStartedEvent += FindBattery;
@@ -101,6 +106,15 @@ public class SceneManager : Singleton<SceneManager>
         {
             CountPlayer();
         }
+        if(!hasGameEnd)
+        {
+            if(CheckGameWinCondition())
+            {
+                matchVictoryCondition = true;
+                //GameOver(true);
+            }
+        }
+
     }
     private void CountPlayer()
     {
@@ -183,7 +197,46 @@ public class SceneManager : Singleton<SceneManager>
         MusicManager.Instance.PlayBackMusic("海底氛围");
     }
 
+    public bool CheckGameWinCondition()
+    {
+        foreach(var task in collectionTasks)
+        {
+            if(!task.hasFinshed)
+            {
+                return false;
+            }    
+        }
+        foreach (var task in resTasks)
+        {
+            if (!task.hasFinshed)
+            {
+                return false;
+            }
+        }
+        if(isSecondLevel)
+        {
+            if(GiantRockCrab.Instance.hasDead)
+            {
+                hasGameEnd = true;
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        else
+        {
+            hasGameEnd = true;
+            return true;
+        }
+    }
     
-    
-    
+    public void GameOver(bool isWin)
+    {
+        //时间停滞
+        Time.timeScale = 0;
+        //UI显示
+
+    }
 }

@@ -74,9 +74,17 @@ public class Torpedoes : MonoBehaviour
             Collider[] playerColls = Physics.OverlapSphere(transform.position, _range, _playerLayer);
             foreach (var coll in enemyColls)
             {
-                coll.GetComponent<Enemy>().TakeDamage(_damage);
-                //coll.GetComponent<Rigidbody>().AddExplosionForce(_force, transform.position, _range);
-                coll.GetComponent<Rigidbody>().AddForce(Random.insideUnitCircle * _force, ForceMode.Impulse);
+                if(coll.GetComponent<Enemy>())
+                {
+                    coll.GetComponent<Enemy>().TakeDamage(_damage);
+                    //coll.GetComponent<Rigidbody>().AddExplosionForce(_force, transform.position, _range);
+                    coll.GetComponent<Rigidbody>().AddForce(Random.insideUnitCircle * _force, ForceMode.Impulse);
+
+                }
+                else
+                {
+                    GiantRockCrab.Instance.TakeDamage(_damage);
+                }
             }
             foreach (var coll in playerColls)
             {

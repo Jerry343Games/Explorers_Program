@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class MainBattery : Battery
 {
+
+    private bool gameOver;
     public MainBattery(int initialPower) : base(initialPower)
     {
     }
@@ -22,6 +24,12 @@ public class MainBattery : Battery
         {
             GetComponent<PlayerController>().SetDeadState(true);
             //ÅÐ¸º
+            if(!gameOver)
+            {
+                gameOver = true;
+                SceneManager.Instance.GameOver(false);
+            }
+
         }
     }
 

@@ -61,11 +61,20 @@ public class Bomb : MonoBehaviour
                 Debug.Log(character.name);
                 character.GetComponent<Rigidbody>().velocity = Vector3.zero;
                 Vector3 forceDirection = (character.transform.position - transform.position).normalized;
-                character.GetComponent<Enemy>().Vertigo(forceDirection * force);
-                character.GetComponent<Enemy>().TakeDamage(20);
+                if(character.GetComponent<Enemy>())
+                {
+                    character.GetComponent<Enemy>().Vertigo(forceDirection * force);
+                    character.GetComponent<Enemy>().TakeDamage((int)_damage);
+                }
+                else
+                {
+                    GiantRockCrab.Instance.TakeDamage((int)_damage);
+                }
             }
             (_controller as Fighter).hasUseBomb = false;
             MusicManager.Instance.PlaySound("Υπ±¬");
+            GameObject effect = Instantiate(Resources.Load<GameObject>("Effect/RocketExplosion"), transform.position, Quaternion.identity);
+            effect.transform.localScale *= 2;
             Destroy(gameObject);
 
         }

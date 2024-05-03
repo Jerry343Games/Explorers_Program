@@ -1,4 +1,5 @@
 using DG.Tweening;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -18,6 +19,17 @@ public class UIBossPanel : MonoBehaviour
         StartCoroutine(ShowPanelAction());
     }
 
+    public void HidePanel()
+    {
+        StartCoroutine(HidePanelAction());
+
+    }
+    IEnumerator HidePanelAction()
+    {
+        canvasGroup.DOFade(0, 1f);
+        yield return new WaitForSeconds(1f);
+        bossUIShow = false;
+    }
     IEnumerator ShowPanelAction()
     {
         canvasGroup.DOFade(1, 1f);

@@ -46,6 +46,7 @@ public class UICollectionPanel : MonoBehaviour
         if (currentNum >= maxNum)
         {
             _check.SetActive(true);
+            sceneManager.collectionTasks.Find(x => x.type == collectionType).hasFinshed = true;
         }
     }
 }

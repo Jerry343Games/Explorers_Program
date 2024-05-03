@@ -46,5 +46,9 @@ public class UIResPanel : MonoBehaviour
     private void SetResUI()
     {
         _resProcessText.text = currentNum + "/" + maxNum;
+        if (currentNum >= maxNum)
+        {
+            sceneManager.resTasks.Find(x => x.type == resType).hasFinshed = true;
+        }
     }
 }

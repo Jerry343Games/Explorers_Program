@@ -34,6 +34,8 @@ public class GiantRockCrab : Singleton<GiantRockCrab>
     public bool animPlayOver;
 
     [Header(" Ù–‘")]
+    public bool hasDead;
+
     public int maxHealth;
 
     [HideInInspector]
@@ -252,7 +254,7 @@ public class GiantRockCrab : Singleton<GiantRockCrab>
             //UI
             return;
 
-        }else if(_currentArmor<damage && _currentArmor>0)
+        }else if(_currentArmor<=damage && _currentArmor>0)
         {
             _currentArmor = 0;
             //UI
@@ -262,7 +264,16 @@ public class GiantRockCrab : Singleton<GiantRockCrab>
         _currentHealth = Mathf.Clamp(_currentHealth - damage, 0, maxHealth);
 
         //UI
-
+        if(_currentHealth==0 && !hasDead)
+        {
+            hasDead = true;
+            _firstBehaviorTree.enabled = false;
+            _secondBehaviorTree.enabled = false;
+            isPatrol = false;
+            _coll.enabled = false;
+            _anim.Play("Dead");
+            FindObjectOfType<UIBossPanel>().HidePanel();
+        }
 
 
         //πÃªØ≈–∂œ
@@ -370,7 +381,9 @@ public class GiantRockCrab : Singleton<GiantRockCrab>
         Vector3[] path_2 = new Vector3[]
         {
                 target.transform.position,
-                new Vector3( target.transform.position.x+entity.transform.localScale.z,entity.transform.position.y,0)
+                new Vector3( target.transform.position.x+entity.transform.localScale.z/*Mathf.Abs(target.transform.position.x+entity.transform.localScale.z)>12?(entity.transform.localScale.z>0?1:-1)*12:target.transform.position.x+entity.transform.localScale.z*/,
+                entity.transform.position.y,
+                0)
         };
 
 
