@@ -102,7 +102,7 @@ public class Fighter : PlayerController
             MoveAnimationControl(CharacterAnimation.FighterLeft_Run, CharacterAnimation.FighterRight_Run, CharacterAnimation.FighterLeft_Walk, CharacterAnimation.FighterRight_Walk);
 
         }
-        //UseItem();
+        UseItem();
         CheckDistanceToBattery();
         //CheckKeys();
         //≥Â¥Ãœ‡πÿ
