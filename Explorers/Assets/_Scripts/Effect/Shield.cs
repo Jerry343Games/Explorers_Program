@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Shield : MonoBehaviour
 {
-    private PlayerController playerController; // 玩家引用
+    public PlayerController playerController; // 玩家引用
     public GameObject shieldEffect;
     private Coroutine timeoutCoroutine;
 
@@ -16,8 +16,7 @@ public class Shield : MonoBehaviour
         shieldEffect.transform.localScale = Vector3.zero;
         playerController = transform.parent.GetComponent<PlayerController>();
         playerController.OnShieldDamage += ResetShieldTimeout; // 订阅事件
-        shieldEffect.transform.DOScale(new Vector3(1.3f, 1.3f, 1.3f), 0.2f);
-        ResetShieldTimeout();
+        //ResetShieldTimeout();
     }
 
     void OnDisable()
@@ -27,6 +26,7 @@ public class Shield : MonoBehaviour
 
     private void ResetShieldTimeout()
     {
+        ActiveShield();
         if (timeoutCoroutine != null)
         {
             StopCoroutine(timeoutCoroutine);
@@ -40,8 +40,13 @@ public class Shield : MonoBehaviour
         DestroyShield();
     }
 
+    public void ActiveShield()
+    {
+        shieldEffect.transform.DOScale(new Vector3(1.3f, 1.3f, 1.3f), 0.2f);
+    }
+    
     private void DestroyShield()
     {
-        shieldEffect.transform.DOScale(Vector3.zero, 0.2f).OnComplete(() => { Destroy(gameObject); });
+        shieldEffect.transform.DOScale(Vector3.zero, 0.2f);
     }
 }

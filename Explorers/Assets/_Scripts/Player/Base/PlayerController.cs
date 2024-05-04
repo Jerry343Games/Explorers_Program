@@ -376,7 +376,6 @@ public class PlayerController : MonoBehaviour
         if (damage < currentArmor)
         {
             currentArmor -= damage;
-            Instantiate(Resources.Load<GameObject>("Effect/Shield"),transform.position,Quaternion.identity,transform);
             OnShieldDamage?.Invoke();
         }
         else
