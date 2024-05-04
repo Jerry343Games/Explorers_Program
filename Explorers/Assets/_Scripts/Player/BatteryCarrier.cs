@@ -224,7 +224,7 @@ public class BatteryCarrier : PlayerController
         //MusicManager.Instance.PlaySound("超载");
 
         //没有就获得道具 有了就替换原来的道具
-        int randomItem = Random.Range(0, 6);
+        int randomItem = Random.Range(0, 3);
         //最喜欢的swith 获得道具 这样行？
         switch(randomItem)
         {
@@ -235,12 +235,9 @@ public class BatteryCarrier : PlayerController
                 PropelBackpack backpack = Instantiate(Resources.Load<GameObject>("Item/PropelBackpack"), selectedPlayer.transform.position, Quaternion.identity).GetComponent<PropelBackpack>();
                 break;
             case 2:
+                Sonar sonar = Instantiate(Resources.Load<GameObject>("Item/Sonar"), selectedPlayer.transform.position, Quaternion.identity).GetComponent<Sonar>();
                 break;
-            case 3:
-                break;
-            case 4:
-                break;
-            case 5:
+            default:
                 break;
         }
 
