@@ -14,6 +14,7 @@ public class UIHealthPanel : MonoBehaviour
     private PlayerController _playerController;
 
     private Image _hitMask;
+    private Image _hitShieldMask;
     
     //生命值和盾面板
     public RectTransform healthPanel;
@@ -21,9 +22,15 @@ public class UIHealthPanel : MonoBehaviour
 
     private bool hasInit;
 
+    private Vector2 _healthPanelStartPos;
+    private Vector2 _ArmorPanelStartPos;
+
     private void OnEnable()
     {
         _hitMask = GameObject.FindWithTag("HitMask").GetComponent<Image>();
+        _hitShieldMask = GameObject.FindWithTag("HitShieldMask").GetComponent<Image>();
+        _healthPanelStartPos = healthPanel.anchoredPosition;
+        _ArmorPanelStartPos = armorPanel.anchoredPosition;
     }
 
     private void Update()
@@ -91,20 +98,22 @@ public class UIHealthPanel : MonoBehaviour
 
     public void ShakeArmor()
     {
-        _hitMask.color = new Color(47, 74, 93);
+        armorPanel.anchoredPosition = _ArmorPanelStartPos;
         Sequence q = DOTween.Sequence();
-        q.Append(_hitMask.DOFade(1, 0.2f));
-        q.Append(_hitMask.DOFade(0, 0.2f));
-        healthPanel.DOShakeAnchorPos(0.3f, 5f);
+        q.Append(_hitShieldMask.DOFade(1, 0.2f));
+        q.Append(_hitShieldMask.DOFade(0, 0.2f));
+        armorPanel.DOShakeAnchorPos(0.3f, 5f).OnComplete(()=>armorPanel.anchoredPosition = _ArmorPanelStartPos);
+        Debug.Log("HIt armor");
     }
 
     public void ShakeHealth()
     {
-        _hitMask.color = new Color(165, 74, 93);
+        healthPanel.anchoredPosition = _healthPanelStartPos;
         Sequence q = DOTween.Sequence();
         q.Append(_hitMask.DOFade(1, 0.2f));
         q.Append(_hitMask.DOFade(0, 0.2f));
-        armorPanel.DOShakeAnchorPos(0.3f, 5f);
+        healthPanel.DOShakeAnchorPos(0.3f, 5f).OnComplete(()=>healthPanel.anchoredPosition=_healthPanelStartPos);
+        Debug.Log("HIt health");
     }
 
     private void SetHealthUI()

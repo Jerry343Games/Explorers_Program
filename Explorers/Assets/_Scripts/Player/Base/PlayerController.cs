@@ -384,6 +384,7 @@ public class PlayerController : MonoBehaviour
             if (playerInput.playerIndex!=0)
             {
                 MusicManager.Instance.PlaySound("µçÄÜ»¤¶ÜÆÆËé");
+                OnShieldDamage?.Invoke();
             }
 
             int damageToBattery = (int)(damage - currentArmor);
