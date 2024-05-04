@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class Fighter : PlayerController
 {
-    
+    public GameObject gun;
     public float attackAngle = 90f;
     public LayerMask enemyLayer;
     private List<GameObject> _enemyInArea=new();
@@ -70,6 +70,7 @@ public class Fighter : PlayerController
         UpdateFeatureState();
         UpdateSwitchRopeState();
         UpdateHurtSoundState();
+        Aim(gun);
         if (playerInputSetting.inputDir.x != 0)
         {
             if (playerInputSetting.inputDir.x < 0)
@@ -355,8 +356,8 @@ public class Fighter : PlayerController
         }
         if (hasUseBomb) return false; 
         hasUseBomb = true;
-        GameObject bomb = Instantiate(Resources.Load<GameObject>("Bomb"), transform.position, Quaternion.identity);
-        bomb.GetComponent<Bomb>().Init(secondaryWeapon, attackAreaCollider.transform.right,1,this);
+        GameObject bomb = Instantiate(Resources.Load<GameObject>("Bomb"), shootTransform.position, Quaternion.identity);
+        bomb.GetComponent<Bomb>().Init(secondaryWeapon, gun.transform.forward, 1,this);
 
         return true;
     }
