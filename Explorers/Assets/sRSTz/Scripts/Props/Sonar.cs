@@ -5,8 +5,7 @@ using UnityEngine;
 public class Sonar : PropItem
 {
     //public bool hasPicked;//是否被拾取
-
-
+    
     public override void Apply(GameObject user)
     {
         user.GetComponent<PlayerController>().item = this;
@@ -28,8 +27,8 @@ public class Sonar : PropItem
         }
 
         //生成一个指示标的UI
-        Vector3 nearestDir = (nearestItemPos - user.transform.position).normalized;
-        Debug.Log(nearestDir);
+        GameObject mySona = Instantiate(Resources.Load<GameObject>("UI/SonaPanel"),Camera.main.WorldToScreenPoint(user.transform.position), Quaternion.identity, GameObject.FindWithTag("Canvas").transform);
+        mySona.GetComponent<SonaItem>().Init(user.transform,nearestItemPos);
         //销毁声纳道具
         user.GetComponent<PlayerController>().item = null;
         Destroy(gameObject);
