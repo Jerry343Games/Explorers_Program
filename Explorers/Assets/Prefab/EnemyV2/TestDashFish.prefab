@@ -135,7 +135,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &3633893962209165018
 Transform:
   m_ObjectHideFlags: 0
@@ -592,7 +592,7 @@ MonoBehaviour:
   moveSpeed: 5
   force: 8
   HP: 22
-  damage: 10
+  damage: 5
   canMove: 1
   vertigoTime: 0.2
   stayTime: 4
@@ -620,6 +620,8 @@ MonoBehaviour:
   isAttack: 0
   speedOffset: 3
   slowSpeed: 0
+  flashColor: {r: 1, g: 0, b: 0, a: 1}
+  flashDuration: 0.1
   dashDetectionRadius: 12
   prepareTime: 1.5
   dashTime: 0.5
