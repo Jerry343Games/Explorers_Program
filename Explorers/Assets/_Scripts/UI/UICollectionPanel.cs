@@ -6,12 +6,13 @@ using UnityEngine.UI;
 public class UICollectionPanel : MonoBehaviour
 {
     private SceneManager sceneManager;
-    private Image _collectionIconImg;
-    private Text _collectionNumText;
-    private GameObject _check;
     private bool hasInit;
     public CollectionType collectionType;
 
+    public Image _collectionIconImg;
+    public Text _collectionNumText;
+    public GameObject _check;
+    
     [HideInInspector]
     public int currentNum;
     [HideInInspector]
@@ -20,10 +21,7 @@ public class UICollectionPanel : MonoBehaviour
     private void Awake()
     {
         sceneManager = GameObject.FindWithTag("SceneManager").GetComponent<SceneManager>();
-
-        _collectionIconImg = transform.GetChild(0).GetComponent<Image>();
-        _collectionNumText = transform.GetChild(1).GetComponent<Text>();
-        _check = transform.GetChild(2).gameObject;
+        
 
     }
     private void Update()
