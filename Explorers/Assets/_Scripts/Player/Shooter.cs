@@ -102,6 +102,10 @@ public class Shooter : PlayerController
 
                 other.GetComponent<Item>().Apply(gameObject);
                 break;
+            case "ResToCollecting":
+                MusicManager.Instance.PlaySound("收集");
+                other.gameObject.GetComponent<ResToCollecting>().Collecting();
+                break;
             default:
                 break;
         }
@@ -109,11 +113,6 @@ public class Shooter : PlayerController
 
     private void OnCollisionEnter(Collision collision)
     {
-        if(collision.gameObject.tag=="ResToCollecting")
-        {
-            MusicManager.Instance.PlaySound("收集");
-            collision.gameObject.GetComponent<ResToCollecting>().Collecting();
-        }
     }
 
     private void OnTriggerStay(Collider other)

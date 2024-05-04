@@ -472,6 +472,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5338948758665226377, guid: 9644debdbcef5aa4697ef57db70c48dc,
         type: 3}
+      propertyPath: torpedoesRange
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5338948758665226377, guid: 9644debdbcef5aa4697ef57db70c48dc,
+        type: 3}
       propertyPath: hurtSoundPlayInterval
       value: 1
       objectReference: {fileID: 0}
@@ -556,6 +561,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2541206623591261561}
     m_Modifications:
+    - target: {fileID: -9115326595532701369, guid: 3d73830816f1a1647ab4f60936645d49,
+        type: 3}
+      propertyPath: maxPower
+      value: 3000
+      objectReference: {fileID: 0}
     - target: {fileID: 2212072781666433573, guid: 3d73830816f1a1647ab4f60936645d49,
         type: 3}
       propertyPath: hurtSoundPlayInterval

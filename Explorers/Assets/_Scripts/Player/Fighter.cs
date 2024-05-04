@@ -223,6 +223,10 @@ public class Fighter : PlayerController
             case "Boss":
                 _enemyInArea.Add(other.gameObject);
                 break;
+            case "ResToCollecting":
+                MusicManager.Instance.PlaySound("收集");
+                other.gameObject.GetComponent<ResToCollecting>().Collecting();
+                break;
             default:
                 break;
         }
@@ -432,11 +436,11 @@ public class Fighter : PlayerController
         {
             GiantRockCrab.Instance.TakeDamage(dashDamage);
         }
-        if (collision.gameObject.tag == "ResToCollecting")
-        {
-            MusicManager.Instance.PlaySound("收集");
-            collision.gameObject.GetComponent<ResToCollecting>().Collecting();
-        }
+        //if (collision.gameObject.tag == "ResToCollecting")
+        //{
+        //    MusicManager.Instance.PlaySound("收集");
+        //    collision.gameObject.GetComponent<ResToCollecting>().Collecting();
+        //}
     }
 
     public override void Vertigo(Vector3 force, ForceMode forceMode = ForceMode.Impulse, float vertigoTime = 0.3F)

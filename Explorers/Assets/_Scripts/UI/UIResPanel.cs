@@ -24,7 +24,7 @@ public class UIResPanel : MonoBehaviour
 
         _resIconImg = transform.GetChild(0).GetComponent<Image>();
 
-        _resProcessText = transform.GetChild(1).GetComponent<Text>();
+        _resProcessText = transform.GetChild(2).GetComponent<Text>();
     }
     private void Update()
     {

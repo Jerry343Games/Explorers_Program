@@ -108,6 +108,10 @@ public class Healer : PlayerController
 
                 other.GetComponent<Item>().Apply(gameObject);
                 break;
+            case "ResToCollecting":
+                MusicManager.Instance.PlaySound("收集");
+                other.gameObject.GetComponent<ResToCollecting>().Collecting();
+                break;
 
             default:
                 break;
@@ -115,11 +119,11 @@ public class Healer : PlayerController
     }
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.tag == "ResToCollecting")
-        {
-            MusicManager.Instance.PlaySound("收集");
-            collision.gameObject.GetComponent<ResToCollecting>().Collecting();
-        }
+        //if (collision.gameObject.tag == "ResToCollecting")
+        //{
+        //    MusicManager.Instance.PlaySound("收集");
+        //    collision.gameObject.GetComponent<ResToCollecting>().Collecting();
+        //}
     }
     private void OnTriggerStay(Collider other)
     {

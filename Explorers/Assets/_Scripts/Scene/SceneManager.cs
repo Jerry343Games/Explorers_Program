@@ -193,8 +193,14 @@ public class SceneManager : Singleton<SceneManager>
             controller.SetRope(obiRope);
 
         }
-
-        MusicManager.Instance.PlayBackMusic("º£µ×·ÕÎ§");
+        if(!isSecondLevel)
+        {
+            MusicManager.Instance.PlayBackMusic("Level_1");
+        }
+        else
+        {
+            MusicManager.Instance.PlayBackMusic("Level_2");
+        }
     }
 
     public bool CheckGameWinCondition()
@@ -215,12 +221,18 @@ public class SceneManager : Singleton<SceneManager>
         }
         if(isSecondLevel)
         {
-            if(GiantRockCrab.Instance.hasDead)
+            if(GiantRockCrab.Instance)
             {
-                hasGameEnd = true;
-                GameObject.FindGameObjectWithTag("Portal").GetComponent<SphereCollider>().enabled = true;
-                GameObject.FindGameObjectWithTag("Portal").transform.GetChild(0).gameObject.SetActive(true);//¼¤»îÇ±Í§
-                return true;
+                if (GiantRockCrab.Instance.hasDead)
+                {
+                    hasGameEnd = true;
+                    GameObject.FindGameObjectWithTag("Portal").GetComponent<SphereCollider>().enabled = true;
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
             else
             {

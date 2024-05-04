@@ -391,6 +391,7 @@ public class GiantRockCrab : Singleton<GiantRockCrab>
         s.Append(entity.transform.DOPath(path, 1).SetEase(Ease.InExpo));
         s.Append(entity.transform.DOPath(path_2, 1).SetEase(Ease.InOutQuart));
         yield return new WaitForSeconds(2f);
+        CameraTrace.instance.CameraShake(0.2f, 2f);
         strikeCheckObject.SetActive(false);
 
     }
