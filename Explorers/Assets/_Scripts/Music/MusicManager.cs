@@ -110,6 +110,12 @@ public class MusicManager : Singleton<MusicManager>
             case "ÕÊº“ ‹…À":
                 soundAudio.volume = 0.7f;
                 break;
+            case "BossÕ¬À·":
+                soundAudio.volume = 0.7f;
+                break;
+            case "BossÀ’–—":
+                soundAudio.volume = 0.6f;
+                break;
             default:
                 soundAudio.volume = 1;
                 break;

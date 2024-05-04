@@ -46,6 +46,12 @@ public class CrabAnimEvent : MonoBehaviour
                 acidArea.transform.localScale = new Vector3(3, 3, -3);
             }
         }
-        Destroy(acidArea, 3f);
+        MusicManager.Instance.PlaySound("BossÕ¬À·");
+        Destroy(acidArea, 2.5f);
     }
+
+    public void PlayAwakeSound()
+    {
+        MusicManager.Instance.PlaySound("BossÀ’–—");
+    }    
 }

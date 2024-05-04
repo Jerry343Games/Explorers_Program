@@ -372,6 +372,7 @@ public class GiantRockCrab : Singleton<GiantRockCrab>
         GameObject target = FindNearestPlayer();
         //钳击行为
         _anim.Play("NormalAttack");
+
         Vector3[] path = new Vector3[]
         {
                 entity.transform.position,
@@ -386,11 +387,11 @@ public class GiantRockCrab : Singleton<GiantRockCrab>
                 0)
         };
 
-
         Sequence s = DOTween.Sequence();
         s.Append(entity.transform.DOPath(path, 1).SetEase(Ease.InExpo));
         s.Append(entity.transform.DOPath(path_2, 1).SetEase(Ease.InOutQuart));
         yield return new WaitForSeconds(2f);
+        MusicManager.Instance.PlaySound("Boss震地");
         CameraTrace.instance.CameraShake(0.2f, 2f);
         strikeCheckObject.SetActive(false);
 
@@ -425,6 +426,7 @@ public class GiantRockCrab : Singleton<GiantRockCrab>
     public void SpawnFlyingStones()
     {
         //spawning stones in random position 
+        MusicManager.Instance.PlaySound("Boss飞石");
         for(int i=0;i<stoneAmount;i++)
         {
             GameObject stone = Instantiate(Resources.Load<GameObject>("Item/FlyingStone"),
