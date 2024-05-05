@@ -18,6 +18,9 @@ public class UIResPanel : MonoBehaviour
 
     private Text _resProcessText;
 
+    private Vector2 _startPos;
+
+    
     private void Awake()
     {
         sceneManager = GameObject.FindWithTag("SceneManager").GetComponent<SceneManager>();
@@ -25,6 +28,7 @@ public class UIResPanel : MonoBehaviour
         _resIconImg = transform.GetChild(0).GetComponent<Image>();
 
         _resProcessText = transform.GetChild(2).GetComponent<Text>();
+        _startPos = _resIconImg.rectTransform.anchoredPosition;
     }
     private void Update()
     {
@@ -50,5 +54,12 @@ public class UIResPanel : MonoBehaviour
         {
             sceneManager.resTasks.Find(x => x.type == resType).hasFinshed = true;
         }
+    }
+
+    public void AddNum(int num,Transform myTrans)
+    {
+        currentNum += num;
+        GameObject smallUI = Instantiate(Resources.Load<GameObject>("UI/UISmallCollection"),Camera.main.WorldToScreenPoint(myTrans.position),Quaternion.identity,transform);
+        smallUI.GetComponent<SmallCollectionUI>().Init(_resIconImg.rectTransform,_resIconImg.sprite,_startPos);
     }
 }

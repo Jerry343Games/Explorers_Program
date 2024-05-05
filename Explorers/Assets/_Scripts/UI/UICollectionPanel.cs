@@ -19,12 +19,16 @@ public class UICollectionPanel : MonoBehaviour
     public int maxNum;
 
     private Transform _canvas;
+
+    private Vector2 _startPos;
     
     private void Awake()
     {
         sceneManager = GameObject.FindWithTag("SceneManager").GetComponent<SceneManager>();
 
         _canvas = GameObject.FindWithTag("Canvas").transform;
+
+        _startPos = _collectionIconImg.GetComponent<RectTransform>().anchoredPosition;
     }
     private void Update()
     {
@@ -55,7 +59,7 @@ public class UICollectionPanel : MonoBehaviour
     {
         currentNum+=num;
         GameObject smallUI = Instantiate(Resources.Load<GameObject>("UI/UISmallCollection"),Camera.main.WorldToScreenPoint(myTrans.position),Quaternion.identity,transform);
-        smallUI.GetComponent<SmallCollectionUI>().Init(_collectionIconImg.rectTransform,_collectionIconImg.sprite);
+        smallUI.GetComponent<SmallCollectionUI>().Init(_collectionIconImg.rectTransform,_collectionIconImg.sprite,_startPos);
         Debug.Log("收集到");
     }
 }

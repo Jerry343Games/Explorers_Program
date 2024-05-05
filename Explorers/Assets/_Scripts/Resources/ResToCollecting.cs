@@ -18,7 +18,7 @@ public class ResToCollecting : MonoBehaviour
 
     public void Collecting()
     {
-        SceneManager.Instance.resTasks.Find(x => x.type == _resType).taskUI.GetComponent<UIResPanel>().currentNum+= collectingAmount;
+        SceneManager.Instance.resTasks.Find(x => x.type == _resType).taskUI.GetComponent<UIResPanel>().AddNum(1,transform);
         PlayerManager.Instance.ChangeResData(collectingAmount);
         //??งน??งน
         Destroy(gameObject);

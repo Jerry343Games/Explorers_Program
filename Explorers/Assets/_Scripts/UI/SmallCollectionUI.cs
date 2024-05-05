@@ -9,12 +9,16 @@ public class SmallCollectionUI : MonoBehaviour
     private RectTransform _target;
     // Start is called before the first frame update
 
-    public void Init(RectTransform target,Sprite icon)
+    public void Init(RectTransform target,Sprite icon,Vector2 iconStartRec)
     {
         _target = target;
         GetComponent<Image>().sprite = icon;
         Sequence q = DOTween.Sequence();
         q.Append( GetComponent<RectTransform>().DOAnchorPos(target.localPosition, 0.5f).OnComplete(()=>GetComponent<Image>().enabled=false));
-        q.Append(target.DOShakeAnchorPos(0.5f, 7f).OnComplete(()=>Destroy(gameObject)));
+        q.Append(target.DOShakeAnchorPos(0.5f, 7f).OnComplete(()=>
+        {
+            target.anchoredPosition = iconStartRec;
+            Destroy(gameObject);
+        }));
     }
 }
