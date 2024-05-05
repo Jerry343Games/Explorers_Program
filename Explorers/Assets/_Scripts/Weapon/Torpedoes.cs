@@ -67,7 +67,7 @@ public class Torpedoes : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.tag=="Enemy" || other.tag == "Player")
+        if(other.tag=="Enemy" || other.tag == "Player" || other.tag == "Boss")
         {
             Instantiate(Resources.Load<GameObject>("Effect/RocketExplosion"),transform.position,Quaternion.identity);
             Collider[] enemyColls = Physics.OverlapSphere(transform.position, _range, _enemyLayer);
