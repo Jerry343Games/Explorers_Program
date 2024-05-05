@@ -16,6 +16,8 @@ public class Excavator : MonoBehaviour
 
     public Material myMat;
     private float _cutoffHeight;
+
+    public Animator myAni;
     
 
     public void Init(Resource res,float diggingDuration)
@@ -27,11 +29,13 @@ public class Excavator : MonoBehaviour
         _diggingTime = diggingDuration;
 
         _diggingTimer = _diggingTime;
+        myAni.CrossFade("Dig",0.1f);
         
-        DOTween.To(() =>_cutoffHeight, x => _cutoffHeight=x, 1f, 1.5f);
+        DOTween.To(() =>_cutoffHeight, x => _cutoffHeight=x, 8f, 1.5f);
     
     }
 
+    private bool _done;
     void Update()
     {
         myMat.SetFloat("_CutoffHeight",_cutoffHeight);
@@ -42,7 +46,17 @@ public class Excavator : MonoBehaviour
         }
         else
         {
-            //Destroy(gameObject);
+            if (!_done)
+            {
+                DOTween.To(() =>_cutoffHeight, x => _cutoffHeight=x, -1f, 1.5f).OnComplete(DestoryThis);
+                _done = true;
+            }
         }
     }
+
+    private void DestoryThis()
+    {
+        Destroy(gameObject);
+    }
+    
 }

@@ -23,6 +23,8 @@ public class Resource : MonoBehaviour
 
     public BoxCollider entityColl;
 
+    public Animator ani;
+
     private void Awake()
     {
         _coll = GetComponent<BoxCollider>();
@@ -73,8 +75,8 @@ public class Resource : MonoBehaviour
         MusicManager.Instance.PlaySound("²É¿ó");
         if (canMiningTimes == 0)
         {
-            //
-            Destroy(gameObject);
+            ani.CrossFade("Broken",0f);
+            //Destroy(gameObject);
         }
     }
 
