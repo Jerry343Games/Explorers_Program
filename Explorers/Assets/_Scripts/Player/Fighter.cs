@@ -319,6 +319,7 @@ public class Fighter : PlayerController
 
         foreach (GameObject enemyObj in _enemyInArea)
         {
+            if (enemyObj == null) continue;
             if (enemyObj.CompareTag("Boss"))
             {
                 GiantRockCrab.Instance.TakeDamage((int)mainWeapon.attackDamage);
