@@ -128,7 +128,6 @@ MonoBehaviour:
   damage: 10
   canMove: 1
   vertigoTime: 0.2
-  detectionRange: 15
   stayTime: 4
   isReturning: 0
   stayTimer: 0
@@ -145,9 +144,17 @@ MonoBehaviour:
   isDefaultLeft: 0
   enemyType: 2
   isSleeping: 1
-  sleepDetectRadius: 0
+  sleepDetectRadius: 8
   detectThread: 1
   awakeRadius: 1
+  dashToAttackDetectRadius: 1
+  playersInAttackArea: []
+  aniEvent: {fileID: 0}
+  isAttack: 0
+  speedOffset: 0
+  slowSpeed: 3
+  flashColor: {r: 1, g: 0, b: 0, a: 1}
+  flashDuration: 0.1
   shootDetectionRadius: 10
   prepareTime: 1
   shootTime: 2
@@ -245,6 +252,8 @@ MonoBehaviour:
     m_Bits: 0
   enemyDetectionRange: 5
   showGizmos: 0
+  playerColliderList: []
+  alwaysDetectOne: 0
 --- !u!1 &492836548620430070
 GameObject:
   m_ObjectHideFlags: 0
@@ -483,7 +492,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &8847889827325616055
 Transform:
   m_ObjectHideFlags: 0

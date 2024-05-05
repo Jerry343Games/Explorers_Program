@@ -186,7 +186,7 @@ public class Enemy : MonoBehaviour
     protected virtual void Awake()
     {
         
-        if(aniEvent!=null)
+        //if(aniEvent!=null)
             
         fasterSpeed = moveSpeed + speedOffset;
         
