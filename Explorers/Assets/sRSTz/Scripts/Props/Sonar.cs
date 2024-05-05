@@ -15,7 +15,7 @@ public class Sonar : PropItem
     public override void Use(GameObject user)
     {
         CollectionItem[] items = FindObjectsOfType<CollectionItem>();
-        Vector3 nearestItemPos = Vector3.zero;
+        Vector3 nearestItemPos = items[0].transform.position;
         if (items.Length == 0) return;
         float curNearestDis = Vector3.Distance(items[0].transform.position, user.transform.position);
         foreach (var item in items)
@@ -23,9 +23,10 @@ public class Sonar : PropItem
             if(Vector3.Distance(item.transform.position,user.transform.position)< curNearestDis)
             {
                 nearestItemPos = item.transform.position;
+                curNearestDis = Vector3.Distance(item.transform.position, user.transform.position);
             }
         }
-
+        Debug.Log(nearestItemPos);
         //生成一个指示标的UI
         GameObject mySona = Instantiate(Resources.Load<GameObject>("UI/SonaPanel"),Camera.main.WorldToScreenPoint(user.transform.position), Quaternion.identity, GameObject.FindWithTag("Canvas").transform);
         mySona.GetComponent<SonaItem>().Init(user.GetComponent<PlayerController>().playerSprite.transform,nearestItemPos);

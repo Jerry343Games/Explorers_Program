@@ -16,7 +16,8 @@ public class Healer : PlayerController
     private int mainWeaponChargedAmount;
     public int maxChargedAmount;
     public Text chargedAmountText;
-
+    public float attackInterval;
+    private float _attackTimer;
 
     [Header("麻醉枪")]
     public WeaponDataSO tranquilizerWeaponData;
@@ -206,7 +207,6 @@ public class Healer : PlayerController
     {
         if (_mainAttackTimer < 0)
         {
-            canMainAttack = true;
             _mainAttackTimer = mainWeapon.attackCD;
             mainWeaponChargedAmount++;
             mainWeaponChargedAmount = Mathf.Clamp(mainWeaponChargedAmount, 0, maxChargedAmount);
@@ -215,6 +215,15 @@ public class Healer : PlayerController
         else
         {
             _mainAttackTimer -= Time.deltaTime;
+        }
+
+        if(_attackTimer>=0)
+        {
+            _attackTimer -= Time.deltaTime;
+        }
+        else
+        {
+            canMainAttack = true;
         }
         if (_secondaryAttackTimer < 0)
         {
@@ -229,8 +238,10 @@ public class Healer : PlayerController
     public override bool MainAttack()
     {
 
-        if (mainWeaponChargedAmount>0)
+        if (mainWeaponChargedAmount>0 && canMainAttack)
         {
+            canMainAttack = false;
+            _attackTimer = attackInterval;
             MusicManager.Instance.PlaySound("医者");
             mainWeaponChargedAmount--;
             chargedAmountText.text = mainWeaponChargedAmount.ToString();
