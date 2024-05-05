@@ -315,21 +315,21 @@ MonoBehaviour:
   bubbleManager: {fileID: 0}
   gun: {fileID: 4544587966547663270}
   shootTransform: {fileID: 3795479232929037764}
-  salvoCD: 9
+  salvoCD: 6
   salveAmount: 6
   salveMissileDamage: 8
-  salvoRange: 3
-  salvoMissileSpeed: 15
+  salvoRange: 8
+  salvoMissileSpeed: 12
   enemyLayer:
     serializedVersion: 2
     m_Bits: 8
-  torpedoesCD: 1
+  torpedoesCD: 10
   torpedoesRange: 6
   destoryTime: 3
-  torpedoesSpeed: 10
+  torpedoesSpeed: 8
   torpedoesForce: 300
   torpedoesPower: 5
-  torpedoesDamage: 0
+  torpedoesDamage: 15
   playerLayer:
     serializedVersion: 2
     m_Bits: 64
@@ -423,6 +423,85 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bubblePrefab: {fileID: 1487403280404247984, guid: 9ab787e99a8a2c0438ea4ae8ed662f21,
     type: 3}
+--- !u!1001 &478394018994139775
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 3772413408342098716}
+    m_Modifications:
+    - target: {fileID: 1295344979974939215, guid: 59948f058e0679c4fa4330ed0c88235f,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1295344979974939215, guid: 59948f058e0679c4fa4330ed0c88235f,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 11.89055
+      objectReference: {fileID: 0}
+    - target: {fileID: 1295344979974939215, guid: 59948f058e0679c4fa4330ed0c88235f,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1295344979974939215, guid: 59948f058e0679c4fa4330ed0c88235f,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.132
+      objectReference: {fileID: 0}
+    - target: {fileID: 1295344979974939215, guid: 59948f058e0679c4fa4330ed0c88235f,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 6.1943
+      objectReference: {fileID: 0}
+    - target: {fileID: 1295344979974939215, guid: 59948f058e0679c4fa4330ed0c88235f,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1295344979974939215, guid: 59948f058e0679c4fa4330ed0c88235f,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 1295344979974939215, guid: 59948f058e0679c4fa4330ed0c88235f,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1295344979974939215, guid: 59948f058e0679c4fa4330ed0c88235f,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 1295344979974939215, guid: 59948f058e0679c4fa4330ed0c88235f,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1295344979974939215, guid: 59948f058e0679c4fa4330ed0c88235f,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 1295344979974939215, guid: 59948f058e0679c4fa4330ed0c88235f,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 180
+      objectReference: {fileID: 0}
+    - target: {fileID: 4225686064869438186, guid: 59948f058e0679c4fa4330ed0c88235f,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6438414784995906957, guid: 59948f058e0679c4fa4330ed0c88235f,
+        type: 3}
+      propertyPath: m_Name
+      value: LaserAim
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 59948f058e0679c4fa4330ed0c88235f, type: 3}
 --- !u!1001 &3733756205195830519
 PrefabInstance:
   m_ObjectHideFlags: 0

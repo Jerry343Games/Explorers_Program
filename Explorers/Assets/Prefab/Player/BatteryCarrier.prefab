@@ -385,7 +385,7 @@ MonoBehaviour:
   playerSprite: {fileID: 2642180563019275834}
   animator: {fileID: 0}
   myIndex: 0
-  speed: 8
+  speed: 4
   accelerateFactor: 1.5
   vertigoTime: 0.5
   canMove: 1
@@ -410,6 +410,8 @@ MonoBehaviour:
   canUseFeature: 0
   waterMoveSoundPlayInterval: 1
   waterDashSoundPlayInterval: 0.5
+  hurtSoundPlayInterval: 0
+  hurtSoundPlayTimer: 0
   beCatched: 0
   DistanceThreshold: 99999
   _hasConnected: 0
