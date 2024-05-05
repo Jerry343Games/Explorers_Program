@@ -9,7 +9,7 @@ public class SonaItem : MonoBehaviour
     private Transform _player;
     private Vector3 _nearestPos;
     public Image[] directionIndicators;// UI方向指示器数组，按照N, NE, E, SE, S, SW, W, NW排序
-
+    
     
     void Update()
     {
@@ -60,5 +60,11 @@ public class SonaItem : MonoBehaviour
         _player = player;
         _nearestPos = nearestPos;
         hasInit = true;
+        Invoke("DestoryThis",10f);
+    }
+
+    private void DestoryThis()
+    {
+        Destroy(gameObject);
     }
 }
