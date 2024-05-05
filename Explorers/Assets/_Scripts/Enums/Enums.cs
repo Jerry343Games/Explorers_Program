@@ -10,7 +10,7 @@ public enum PlayerType
     BatteryCarrier=0,
     Shooter=1,
     Fighter = 2,
-    Healer =3,
+    Healer = 3,
 }
 
 /// <summary>

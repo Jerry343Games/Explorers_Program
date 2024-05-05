@@ -25,7 +25,6 @@ public class PlayerController : MonoBehaviour
     /// <summary>
     /// 玩家所分配到的唯一序列号,默认类型区分见枚举类
     /// </summary>
-    [HideInInspector]
     public int myIndex;
 
     private Rigidbody _rigidbody;

@@ -21,6 +21,7 @@ public class BatteryCarrier : PlayerController
     private float _overloadTimer;
     private float _overloadCDTimer;
     private PlayerController _overloadPlayer;
+    private int tempIndex;
 
     [Header("电弧打击")]
     public float lightningAttackCD;//电弧打击冷却时间
@@ -134,17 +135,22 @@ public class BatteryCarrier : PlayerController
         upEffect.transform.SetParent(selectedPlayer.transform);
         Destroy(upEffect, overloadDuration);
 
+        tempIndex = selectedPlayer.myIndex;
         switch (selectedPlayer.myIndex)
         {
             case 1://射手
                 selectedPlayer.mainWeapon.attackDamage *= 1.5f;
                 selectedPlayer.secondaryWeapon.attackDamage *= 1.5f;
+                Debug.Log("强化了射手");
                 break;
             case 2://战士
                 (selectedPlayer as Fighter).tempArmor = selectedPlayer.maxArmor;
+                Debug.Log("强化了战士");
                 break;
             case 3://医疗
                 selectedPlayer.mainWeapon.attackDamage *= 2;
+                Debug.Log("强化了医疗");
+
                 break;
             default:
                 break;
@@ -152,7 +158,7 @@ public class BatteryCarrier : PlayerController
     }
     public void BackFormOverload()
     {
-        switch (selectedPlayer.myIndex)
+        switch (tempIndex)
         {
             case 1://射手
                 selectedPlayer.mainWeapon.attackDamage /= 1.5f;

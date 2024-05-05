@@ -374,16 +374,22 @@ public class Fighter : PlayerController
             hurtSoundPlayTimer = hurtSoundPlayInterval;
         }
         int realDamage = damage;
-        if(damage<=tempArmor)
+        if(tempArmor>0)
         {
-            tempArmor-=damage;
+            if (damage <= tempArmor)
+            {
+                tempArmor -= damage;
+                return;
+            }
+            else
+            {
+                realDamage = damage - tempArmor;
+                tempArmor = 0;
+                return;
 
+            }
         }
-        else
-        {
-            realDamage = damage - tempArmor;
-            tempArmor = 0;
-        }
+
 
         if (realDamage < currentArmor)
         {
