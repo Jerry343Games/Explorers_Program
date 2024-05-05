@@ -144,7 +144,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 5
   force: 15
-  HP: 5
+  HP: 12
   damage: 1
   canMove: 1
   vertigoTime: 0.2
@@ -173,6 +173,8 @@ MonoBehaviour:
   isAttack: 0
   speedOffset: 3
   slowSpeed: 0
+  flashColor: {r: 1, g: 0, b: 0, a: 1}
+  flashDuration: 0.1
 --- !u!136 &3778295219695722161
 CapsuleCollider:
   m_ObjectHideFlags: 0

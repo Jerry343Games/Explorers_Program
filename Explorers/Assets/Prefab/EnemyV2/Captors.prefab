@@ -171,7 +171,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 8
   force: 15
-  HP: 20
+  HP: 12
   damage: 1
   canMove: 1
   vertigoTime: 0.2
@@ -200,6 +200,8 @@ MonoBehaviour:
   isAttack: 0
   speedOffset: 1
   slowSpeed: 0
+  flashColor: {r: 1, g: 0, b: 0, a: 1}
+  flashDuration: 0.1
   damageToBattery: 30
   damageToPlayer: 50
   killTime: 4

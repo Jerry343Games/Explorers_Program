@@ -139,6 +139,8 @@ MonoBehaviour:
     m_Bits: 0
   enemyDetectionRange: 5
   showGizmos: 0
+  playerColliderList: []
+  alwaysDetectOne: 0
 --- !u!1 &902359331782052849
 GameObject:
   m_ObjectHideFlags: 0
@@ -471,11 +473,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 5
   force: 10
-  HP: 10
+  HP: 28
   damage: 10
   canMove: 1
   vertigoTime: 0.2
-  detectionRange: 5
   stayTime: 4
   isReturning: 0
   stayTimer: 0
@@ -500,6 +501,9 @@ MonoBehaviour:
   aniEvent: {fileID: 2457974746571506634}
   isAttack: 0
   speedOffset: 2
+  slowSpeed: 0
+  flashColor: {r: 1, g: 0, b: 0, a: 1}
+  flashDuration: 0.1
   reverseTime: 5
 --- !u!136 &1243618604428997425
 CapsuleCollider:
