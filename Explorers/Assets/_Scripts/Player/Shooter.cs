@@ -99,7 +99,7 @@ public class Shooter : PlayerController
         {
             case "Item":
                 MusicManager.Instance.PlaySound("收集");
-
+                Instantiate(Resources.Load<GameObject>("Effect/PickupTaskitem"), other.transform.position, Quaternion.Euler(-90, 0, 0));
                 other.GetComponent<Item>().Apply(gameObject);
                 break;
             case "ResToCollecting":

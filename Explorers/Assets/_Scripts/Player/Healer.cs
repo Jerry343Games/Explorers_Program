@@ -106,12 +106,13 @@ public class Healer : PlayerController
         {
             case "Item":
                 MusicManager.Instance.PlaySound("收集");
-
+                Instantiate(Resources.Load<GameObject>("Effect/PickupTaskitem"), transform.position, Quaternion.Euler(-90, 0, 0));
                 other.GetComponent<Item>().Apply(gameObject);
                 break;
             case "ResToCollecting":
                 MusicManager.Instance.PlaySound("收集");
                 other.gameObject.GetComponent<ResToCollecting>().Collecting();
+
                 break;
 
             default:
@@ -243,6 +244,7 @@ public class Healer : PlayerController
             canMainAttack = false;
             _attackTimer = attackInterval;
             MusicManager.Instance.PlaySound("医者");
+            Instantiate(Resources.Load<GameObject>("Effect/Heal"), transform.position, Quaternion.identity);
             mainWeaponChargedAmount--;
             chargedAmountText.text = mainWeaponChargedAmount.ToString();
 

@@ -70,6 +70,7 @@ public class Resource : MonoBehaviour
             }, 0, 1, 2f);
 
         }
+        MusicManager.Instance.PlaySound("²É¿ó");
         if (canMiningTimes == 0)
         {
             //
