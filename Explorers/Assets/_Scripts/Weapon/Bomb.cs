@@ -74,7 +74,7 @@ public class Bomb : MonoBehaviour
             (_controller as Fighter).hasUseBomb = false;
             MusicManager.Instance.PlaySound("Υπ±¬");
             GameObject effect = Instantiate(Resources.Load<GameObject>("Effect/RocketExplosion"), transform.position, Quaternion.identity);
-            effect.transform.localScale *= 2;
+            effect.transform.localScale *= 1;
             Destroy(gameObject);
 
         }
