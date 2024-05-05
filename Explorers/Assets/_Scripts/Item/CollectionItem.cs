@@ -9,7 +9,7 @@ public class CollectionItem : Item
     public override void Apply(GameObject user)
     {
         //增加收集物数量
-        SceneManager.Instance.collectionTasks.Find(x => x.type == collectionType).taskUI.GetComponent<UICollectionPanel>().currentNum++;
+        SceneManager.Instance.collectionTasks.Find(x => x.type == collectionType).taskUI.GetComponent<UICollectionPanel>().AddNum(1,transform);
         Instantiate(Resources.Load<GameObject>("Effect/PickupTaskitem"));
         Destroy(gameObject);
 

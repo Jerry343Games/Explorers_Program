@@ -18,11 +18,13 @@ public class UICollectionPanel : MonoBehaviour
     [HideInInspector]
     public int maxNum;
 
+    private Transform _canvas;
+    
     private void Awake()
     {
         sceneManager = GameObject.FindWithTag("SceneManager").GetComponent<SceneManager>();
-        
 
+        _canvas = GameObject.FindWithTag("Canvas").transform;
     }
     private void Update()
     {
@@ -46,5 +48,14 @@ public class UICollectionPanel : MonoBehaviour
             _check.SetActive(true);
             sceneManager.collectionTasks.Find(x => x.type == collectionType).hasFinshed = true;
         }
+    }
+
+    
+    public void AddNum(int num,Transform myTrans)
+    {
+        currentNum+=num;
+        GameObject smallUI = Instantiate(Resources.Load<GameObject>("UI/UISmallCollection"),Camera.main.WorldToScreenPoint(myTrans.position),Quaternion.identity,transform);
+        smallUI.GetComponent<SmallCollectionUI>().Init(_collectionIconImg.rectTransform,_collectionIconImg.sprite);
+        Debug.Log("收集到");
     }
 }
