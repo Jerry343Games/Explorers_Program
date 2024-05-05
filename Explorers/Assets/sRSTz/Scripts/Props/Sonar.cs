@@ -28,7 +28,7 @@ public class Sonar : PropItem
 
         //生成一个指示标的UI
         GameObject mySona = Instantiate(Resources.Load<GameObject>("UI/SonaPanel"),Camera.main.WorldToScreenPoint(user.transform.position), Quaternion.identity, GameObject.FindWithTag("Canvas").transform);
-        mySona.GetComponent<SonaItem>().Init(user.transform,nearestItemPos);
+        mySona.GetComponent<SonaItem>().Init(user.GetComponent<PlayerController>().playerSprite.transform,nearestItemPos);
         //销毁声纳道具
         user.GetComponent<PlayerController>().item = null;
         Destroy(gameObject);
