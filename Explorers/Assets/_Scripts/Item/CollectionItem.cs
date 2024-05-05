@@ -10,6 +10,7 @@ public class CollectionItem : Item
     {
         //增加收集物数量
         SceneManager.Instance.collectionTasks.Find(x => x.type == collectionType).taskUI.GetComponent<UICollectionPanel>().currentNum++;
+        Instantiate(Resources.Load<GameObject>("Effect/PickupTaskitem"));
         Destroy(gameObject);
 
     }
