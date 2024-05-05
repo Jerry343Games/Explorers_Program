@@ -19,7 +19,7 @@ public class UIStory : MonoBehaviour
     public Image warningMas;
 
     public RectTransform pages;
-    
+
     private void Start()
     {
         Sequence _sequence = DOTween.Sequence();
@@ -30,20 +30,33 @@ public class UIStory : MonoBehaviour
         _sequence.Append(objectsToEnable[0].GetComponent<Image>().DOFade(0, 0.5f));
         _sequence.AppendInterval(timeBetweenObjects);
         //第二张图滑入
-        _sequence.Append(objectsToEnable[2].GetComponent<RectTransform>().DOAnchorPos(targetPos[1].anchoredPosition, 0.5f)); 
+        _sequence.Append(objectsToEnable[2].GetComponent<RectTransform>().DOAnchorPos(targetPos[1].anchoredPosition, 0.5f));
         _sequence.AppendInterval(timeBetweenObjects);
         //第三张图滑入
-        _sequence.Append(objectsToEnable[1].GetComponent<RectTransform>().DOAnchorPos(targetPos[0].anchoredPosition, 0.5f).OnComplete(()=>objectsToEnable[1].GetComponent<RectTransform>().DOShakeAnchorPos(0.5f,10f))); 
+        _sequence.Append(objectsToEnable[1].GetComponent<RectTransform>().DOAnchorPos(targetPos[0].anchoredPosition, 0.5f).OnComplete(() =>
+        {
+            MusicManager.Instance.PlaySound("潜艇爆炸");
+            objectsToEnable[1].GetComponent<RectTransform>().DOShakeAnchorPos(0.5f, 10f); 
+        })); 
         _sequence.AppendInterval(timeBetweenObjects);
         //第四张图滑入，警告闪烁
-        _sequence.Append(objectsToEnable[3].GetComponent<RectTransform>().DOAnchorPos(targetPos[2].anchoredPosition, 0.5f).OnComplete(()=>warningMas.DOFade(0.05f, 0.3f).SetLoops(10,LoopType.Yoyo))); 
+        _sequence.Append(objectsToEnable[3].GetComponent<RectTransform>().DOAnchorPos(targetPos[2].anchoredPosition, 0.5f).OnComplete(()=>
+        {
+            MusicManager.Instance.PlaySound("潜艇警报");
+
+            warningMas.DOFade(0.05f, 0.3f).SetLoops(10, LoopType.Yoyo); 
+        })); 
         _sequence.AppendInterval(timeBetweenObjects);
         //第五张图滑入
         _sequence.Append(objectsToEnable[4].GetComponent<RectTransform>().DOAnchorPos(targetPos[3].anchoredPosition, 0.5f));
         _sequence.AppendInterval(timeBetweenObjects+0.5f);
         //整体撤出
         _sequence.Append(pages.DOAnchorPos(new Vector2(0, 600f), 1f));
-        _sequence.Append(GetComponent<Image>().DOFade(0, 0.5f)).OnComplete(()=>Destroy(gameObject));
+        _sequence.Append(GetComponent<Image>().DOFade(0, 0.5f)).OnComplete(()=> 
+        {
+            MusicManager.Instance.PlayBackMusic("Select");
+            Destroy(gameObject); 
+        });
     }
 
     // void Start()

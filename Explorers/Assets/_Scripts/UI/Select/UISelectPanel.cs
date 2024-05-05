@@ -131,6 +131,7 @@ public class UISelectPanel : MonoBehaviour
                     .DOAnchorPos(new Vector2(fighterBtn.GetComponent<RectTransform>().anchoredPosition.x, _btnEndAnchorPosY), _btnAniDuration));
                 q.Append(healerBtn.GetComponent<RectTransform>()
                     .DOAnchorPos(new Vector2(healerBtn.GetComponent<RectTransform>().anchoredPosition.x, _btnEndAnchorPosY), _btnAniDuration));
+                MusicManager.Instance.musicAudio.DOFade(0, 2f);
                 q.AppendInterval(2f);
                 q.Append(mask.DOFade(1, _btnAniDuration)).OnComplete(() =>
                 {

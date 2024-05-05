@@ -30,6 +30,9 @@ public class FloatingFort : MonoBehaviour
 
     private void Update()
     {
+        
+
+
         transform.position = Vector3.Lerp(transform.position, _followPoint.position, 0.9f);
 
         Collider[] colls = Physics.OverlapSphere(transform.position, _data.attackRange, enemyLayer);
@@ -37,10 +40,10 @@ public class FloatingFort : MonoBehaviour
         {
             return;
         }
-        if(attackTimer<0)
+        int randomIndex = Random.Range(0, colls.Length);
+        if (attackTimer<0)
         {
             attackTimer = _data.attackCD;
-            int randomIndex = Random.Range(0, colls.Length);
             GameObject bullet = Instantiate(Resources.Load<GameObject>("Bullet"), transform.position, Quaternion.identity);
             bullet.GetComponent<Bullet>().Init(_data, (colls[randomIndex].transform.position - transform.position).normalized);
 
@@ -50,6 +53,17 @@ public class FloatingFort : MonoBehaviour
         else
         {
             attackTimer -= Time.deltaTime;
+            float angle = Vector3.Angle(Vector3.left, (colls[randomIndex].transform.position - transform.position).normalized);
+            if(angle<20) return;
+            //Ðý×ª·½Ïò
+            if (colls[randomIndex].transform.position.y < transform.position.y)
+            {
+                transform.rotation = Quaternion.Euler(0, 0, angle);
+            }
+            else
+            {
+                transform.rotation = Quaternion.Euler(0, 0, -angle);
+            }
         }
     }
 
