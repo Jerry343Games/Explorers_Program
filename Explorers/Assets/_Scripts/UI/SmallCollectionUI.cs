@@ -15,7 +15,7 @@ public class SmallCollectionUI : MonoBehaviour
         GetComponent<Image>().sprite = icon;
         Sequence q = DOTween.Sequence();
         q.Append( GetComponent<RectTransform>().DOAnchorPos(target.localPosition, 0.5f).OnComplete(()=>GetComponent<Image>().enabled=false));
-        q.Append(target.DOShakeAnchorPos(0.5f, 7f).OnComplete(()=>
+        q.Append(target.DOShakeAnchorPos(0.5f, 5f).OnComplete(()=>
         {
             target.anchoredPosition = iconStartRec;
             Destroy(gameObject);
