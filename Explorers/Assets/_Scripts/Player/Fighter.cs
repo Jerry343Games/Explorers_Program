@@ -433,8 +433,10 @@ public class Fighter : PlayerController
 
         canUseFeature = false;
         _featureCDTimer = featureCD;
+        GameObject sonic = Instantiate(Resources.Load<GameObject>("Effect/Sonic"), transform.position, Quaternion.identity);
+        Destroy(sonic, 0.2f);
         GameObject sonicEffect = Instantiate(Resources.Load<GameObject>("Effect/WaterDistortion"), transform.position,Quaternion.identity);
-        Destroy(sonicEffect, 1f);
+        Destroy(sonicEffect, 3f);
         sonicWaveAttack.AttactStart(this,startRadius, targetRadius, enemyVertigoTime,transitionDuration);
         GetComponent<CellBattery>().ChangePower(-sonicPower);
     }
