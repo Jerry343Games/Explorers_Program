@@ -42,7 +42,7 @@ public class Torpedoes : MonoBehaviour
         else
         {
             //±¬Υ¨ΜΨΠ§
-            Instantiate(Resources.Load<GameObject>("Effect/RocketExplosion"),transform.position,Quaternion.identity);
+            GameObject effect = Instantiate(Resources.Load<GameObject>("Effect/RocketExplosion"),transform.position,Quaternion.identity);
             Collider[] enemyColls = Physics.OverlapSphere(transform.position, _range,_enemyLayer);
             Collider[] playerColls = Physics.OverlapSphere(transform.position, _range, _playerLayer);
             foreach(var coll in enemyColls)
@@ -56,6 +56,7 @@ public class Torpedoes : MonoBehaviour
                 coll.GetComponent<Rigidbody>().AddForce(Random.insideUnitCircle * _force * 0.01f, ForceMode.Impulse);
             }
             MusicManager.Instance.PlaySound("Υπ±¬");
+            effect.transform.localScale *= 2;
             Destroy(gameObject);
         }
     }
