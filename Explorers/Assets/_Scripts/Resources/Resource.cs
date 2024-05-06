@@ -53,12 +53,12 @@ public class Resource : MonoBehaviour
     public void SpawnMinerals()
     {
         canMiningTimes--;
-        Vector3 startPos = transform.position;
+        Vector3 startPos = transform.position+ new Vector3(0, 0.5f, 0);
         for (int i = 0; i < spawnMineralAmount; i++)
         {
 
             //±¬³ö¿ó
-            GameObject mineral = Instantiate(Resources.Load<GameObject>("Item/" + resType.ToString()), transform.position, Quaternion.identity);
+            GameObject mineral = Instantiate(Resources.Load<GameObject>("Item/" + resType.ToString()), startPos, Quaternion.identity);
             mineral.GetComponent<ResToCollecting>().Init(resType);
 
 

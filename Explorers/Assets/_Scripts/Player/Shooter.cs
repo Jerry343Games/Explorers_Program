@@ -250,15 +250,9 @@ public class Shooter : PlayerController
 
     #region 自选功能
     //齐射 发射六枚微型导弹锁定最近的敌人
-    public void Salvo()
-    {
-        if (!canUseFeature) return;
-        Collider[] colliders = Physics.OverlapSphere(transform.position, salvoRange, enemyLayer);
-        if (colliders.Length == 0) return;
-        MusicManager.Instance.PlaySound("齐射");
 
-        canUseFeature = false;
-        _featureCDTimer = featureCD;
+    public Collider FindNearestEnemy(Collider[] colliders)
+    {
         //找最近的敌人
         Collider nearest = colliders[0];
         foreach (var coll in colliders)
@@ -268,6 +262,18 @@ public class Shooter : PlayerController
                 nearest = coll;
             }
         }
+        return nearest;
+    }
+    public void Salvo()
+    {
+        if (!canUseFeature) return;
+        Collider[] colliders = Physics.OverlapSphere(transform.position, salvoRange, enemyLayer);
+        if (colliders.Length == 0) return;
+        Collider nearest = FindNearestEnemy(colliders);
+        MusicManager.Instance.PlaySound("齐射");
+
+        canUseFeature = false;
+        _featureCDTimer = featureCD;
 
 
         GameObject missileCollection = Instantiate(Resources.Load<GameObject>("RocketMissileCollection"), transform.position + new Vector3(1, 0, 0), Quaternion.identity);
@@ -276,14 +282,6 @@ public class Shooter : PlayerController
         missileCollection.GetComponent<MissileControl>().singleMissileDamage  = salveMissileDamage;
 
         GetComponent<CellBattery>().ChangePower(-salvoPower);
-
-        //for (int i = 0;i<salveAmount;i++)
-        //{
-        //    GameObject missile = Instantiate(Resources.Load<GameObject>("Item/RocketTrail"),
-        //        transform.position + new Vector3(-2 + (4f / salveAmount) * i, 2,0),
-        //        Quaternion.Euler(new Vector3(0, 0, -45 - (90f / salveAmount) * i)));
-
-        //}
     }
 
 
