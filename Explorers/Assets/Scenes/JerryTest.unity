@@ -23366,6 +23366,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Mask
       objectReference: {fileID: 0}
+    - target: {fileID: 495503724092171822, guid: 3244c066ff00ccc43a559dbec3851b85,
+        type: 3}
+      propertyPath: m_Color.a
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 495503724092171823, guid: 3244c066ff00ccc43a559dbec3851b85,
         type: 3}
       propertyPath: m_Pivot.x
@@ -23478,6 +23483,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3244c066ff00ccc43a559dbec3851b85, type: 3}
+--- !u!114 &1387618154 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 495503724092171822, guid: 3244c066ff00ccc43a559dbec3851b85,
+    type: 3}
+  m_PrefabInstance: {fileID: 1387618153}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1399230506
 GameObject:
   m_ObjectHideFlags: 0
@@ -36614,6 +36631,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2112194313047903266, guid: f7f52291abdcffd43ad8e4304222f9fe,
+        type: 3}
+      propertyPath: mask
+      value: 
+      objectReference: {fileID: 1387618154}
     - target: {fileID: 2112194313047903266, guid: f7f52291abdcffd43ad8e4304222f9fe,
         type: 3}
       propertyPath: healthPanel

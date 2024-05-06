@@ -6,6 +6,7 @@ using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 [Serializable]
 public class CollectionTask//收集物任务
@@ -50,6 +51,8 @@ public class SceneManager : Singleton<SceneManager>
     public bool matchVictoryCondition;
 
     public bool hasGameEnd;
+
+    public Image mask;
     private void OnEnable()
     {
         //EventCenter.GameStartedEvent += FindBattery;

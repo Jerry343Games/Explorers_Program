@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System.Linq;
 using System.Reflection;
 using Unity.Mathematics;
@@ -159,6 +160,7 @@ public class Shooter : PlayerController
                     if (!SceneManager.Instance.isSecondLevel)
                     {
                         //载入下一关
+                        SceneManager.Instance.mask.DOFade(1, 1f);
                         UnityEngine.SceneManagement.SceneManager.LoadScene("StoreScene");
                     }
                     else

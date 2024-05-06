@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -169,6 +170,7 @@ public class Healer : PlayerController
                     if (!SceneManager.Instance.isSecondLevel)
                     {
                         //载入下一关
+                        SceneManager.Instance.mask.DOFade(1, 1f);
                         UnityEngine.SceneManagement.SceneManager.LoadScene("StoreScene");
                     }
                     else
