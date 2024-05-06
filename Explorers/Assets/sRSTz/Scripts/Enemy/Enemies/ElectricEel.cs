@@ -6,6 +6,7 @@ public class ElectricEel : Enemy
 {
     private PlayerController reversedPlayer=null;
     public float reverseTime = 5f;
+    public GameObject playerBeAttackedEffect;
     protected override void Awake()
     {
         base.Awake();
@@ -19,40 +20,12 @@ public class ElectricEel : Enemy
             Move();
         else rb.velocity = Vector3.zero;
     }
-    /*
-    private void OnCollisionEnter(Collision collision)
-    {
-
-        if (collision.gameObject.CompareTag("Player") || collision.gameObject.CompareTag("Battery"))
-        {
-
-            touchedCollision = collision;
-            //Attack();
-            animator.Play("Attack");
-            Invoke(nameof(Attack), GetAnimatorLength(animator, "Attack")/1.5f);
-        }
-    }*/
+    
     public  void Attack()
     {
-        /*
-        if (touchedCollision != null && canAttack)
-        {
-
-            // 计算弹飞的方向
-            Vector2 direction = (touchedCollision.transform.position - transform.position).normalized;
-            reversedPlayer = touchedCollision.gameObject.GetComponent<PlayerController>();
-            // 给玩家一个弹飞的力
-            reversedPlayer.Vertigo(direction * force);
-            reversedPlayer.TakeDamage(damage);
-
-            Vertigo(-transform.forward * 5f, ForceMode.Impulse, 0.3f);
-            reversedPlayer.MoveReverse(reverseTime);
-
-            
-        }
-        */
+       
         if (playersInAttackArea.Count == 0) return;
-        MusicManager.Instance.PlaySound("怪物撕咬");
+       // MusicManager.Instance.PlaySound("怪物撕咬");
 
         foreach (var player in playersInAttackArea)
         {
@@ -68,7 +41,10 @@ public class ElectricEel : Enemy
 
                 //Vertigo(-transform.forward * 5f, ForceMode.Impulse, 0.3f);
                 player.GetComponent<PlayerController>().MoveReverse(reverseTime);
-
+                GameObject playerEffect = Instantiate(playerBeAttackedEffect);
+                playerEffect.transform.position = player.transform.position;
+                playerEffect.transform.SetParent(player.transform);
+                playerEffect.GetComponent<DestoryByLifeTime>().lifeTime = reverseTime;
             }
         }
     }
