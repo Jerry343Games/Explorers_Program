@@ -126,7 +126,7 @@ public class MusicManager : Singleton<MusicManager>
                 soundAudio.volume = 0.6f;
                 break;
             case "ÍÚ¾ò»ú":
-                soundAudio.volume = 0.7f;
+                soundAudio.volume = 0.3f;
                 break;
             default:
                 soundAudio.volume = 1;
