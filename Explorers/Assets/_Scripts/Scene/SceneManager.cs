@@ -3,7 +3,6 @@ using Obi;
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Diagnostics.Tracing;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -280,6 +279,7 @@ public class SceneManager : Singleton<SceneManager>
         //时间停滞
         Time.timeScale = 0;
 
+        MusicManager.Instance.musicAudio.Pause();
         //foreach(var player in PlayerManager.Instance.players)
         //{
         //    Destroy(player.gameObject);
@@ -323,9 +323,12 @@ public class SceneManager : Singleton<SceneManager>
 
             s.Append(mask.DOFade(1, 1f));
             s.Append(loseImg.DOFade(1, 1f));
-            s.AppendInterval(5f);
+            s.AppendInterval(5f).OnComplete(() =>
+            {
+                UnityEngine.SceneManagement.SceneManager.LoadScene("StartScene");
+            });
             //重开
-
+            
             yield return null;
 
         }

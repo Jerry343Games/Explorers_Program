@@ -61,7 +61,13 @@ public class BatteryCarrier : PlayerController
     void Update()
     {
         if (hasDead) return;
-        if (SceneManager.Instance.hasGameOver) return;
+        if (SceneManager.Instance)
+        {
+            if(SceneManager.Instance.hasGameOver)
+            {
+                return;
+            }
+        }
 
         CharacterMove();
         //CheckKeys();
