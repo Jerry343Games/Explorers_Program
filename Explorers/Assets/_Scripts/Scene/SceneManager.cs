@@ -301,8 +301,6 @@ public class SceneManager : Singleton<SceneManager>
             Sequence s = DOTween.Sequence();
             s.SetUpdate(UpdateType.Normal, true);
             s.Append(mask.DOFade(1, 2f));
-            s.Append(winImg.DOFade(1, 3f));
-            s.Append(winImg.DOFade(0, 3f));
             winImg.transform.GetChild(0).gameObject.SetActive(true);
             s.Append(winImg.transform.GetChild(0).GetComponent<RectTransform>().DOAnchorPos(winCGPoints[0].anchoredPosition, 0.5f).OnStart(() =>
             {
@@ -328,10 +326,19 @@ public class SceneManager : Singleton<SceneManager>
             s.Append(winImg.transform.GetChild(0).GetComponent<Image>().DOFade(0, 0.5f));
             s.Append(winImg.transform.GetChild(1).GetComponent<Image>().DOFade(0, 0.5f));
             s.Append(winImg.transform.GetChild(2).GetComponent<Image>().DOFade(0, 0.5f));
-
-            //制作人员滚动
-
-
+            s.Append(winImg.DOFade(1, 3f));
+            s.Append(winImg.DOFade(0, 3f).OnComplete(() =>
+            {
+                winImg.transform.GetChild(6).gameObject.SetActive(true);
+                MusicManager.Instance.PlayBackMusic("Select");
+            }));
+            s.Append(winImg.transform.GetChild(6).GetComponent<RectTransform>().DOAnchorPos(
+                new Vector2(winImg.transform.GetChild(6).GetComponent<RectTransform>().anchoredPosition.x, -winImg.transform.GetChild(6).GetComponent<RectTransform>().anchoredPosition.y),50f));
+            s.AppendInterval(2f).OnComplete(() =>
+            {
+                Time.timeScale = 1;
+                UnityEngine.SceneManagement.SceneManager.LoadScene("StartScene");
+            });
 
             yield return null;
 
