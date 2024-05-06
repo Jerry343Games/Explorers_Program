@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8667609187247183415}
   - component: {fileID: 8667609187247183408}
   - component: {fileID: 8667609187247183414}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: GravityWell
   m_TagString: Item
   m_Icon: {fileID: 0}
@@ -97,7 +97,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8667609188522925393}
   - component: {fileID: 86528528591083691}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: GravityWell
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -178,6 +178,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8667609187247183409}
     m_Modifications:
+    - target: {fileID: 2424419175746717257, guid: d6785b4e7f1ebc84ba4132512fb3bd13,
+        type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 3064826766059796233, guid: d6785b4e7f1ebc84ba4132512fb3bd13,
+        type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
     - target: {fileID: 4085881614033516910, guid: d6785b4e7f1ebc84ba4132512fb3bd13,
         type: 3}
       propertyPath: m_RootOrder
@@ -248,10 +258,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4087032684676196202, guid: d6785b4e7f1ebc84ba4132512fb3bd13,
+        type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 4087332520759330442, guid: d6785b4e7f1ebc84ba4132512fb3bd13,
+        type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
     - target: {fileID: 4088921237727480460, guid: d6785b4e7f1ebc84ba4132512fb3bd13,
         type: 3}
       propertyPath: m_Name
       value: BlackHole
+      objectReference: {fileID: 0}
+    - target: {fileID: 4088921237727480460, guid: d6785b4e7f1ebc84ba4132512fb3bd13,
+        type: 3}
+      propertyPath: m_Layer
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 4088921237727480460, guid: d6785b4e7f1ebc84ba4132512fb3bd13,
         type: 3}

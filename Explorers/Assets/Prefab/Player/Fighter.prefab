@@ -117,7 +117,7 @@ GameObject:
   - component: {fileID: 8221443135605128328}
   - component: {fileID: 8262377926533620765}
   - component: {fileID: 4876235531597637956}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: AttackArea
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -328,6 +328,7 @@ MonoBehaviour:
   dashCheckObj: {fileID: 96661504}
   attcakAreaSprite: {fileID: 5981240992430992209}
   attackAreaCollider: {fileID: 2273660413524713186}
+  attackEffectAni: {fileID: 1456818301351345294}
 --- !u!114 &5846404614376303450
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -509,6 +510,7 @@ GameObject:
   - component: {fileID: 6661104474548825209}
   - component: {fileID: 229611316679921572}
   - component: {fileID: 4564052146910434648}
+  - component: {fileID: 1456818301351345294}
   m_Layer: 6
   m_Name: Sprite
   m_TagString: Untagged
@@ -603,6 +605,18 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &1456818301351345294
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6154685687231705113}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41f3f670e9171634294212ca3f360e24, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6469838307280056464
 GameObject:
   m_ObjectHideFlags: 0

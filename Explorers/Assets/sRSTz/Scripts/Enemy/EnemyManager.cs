@@ -29,19 +29,25 @@ public class EnemyManager : SingletonPersistent<EnemyManager>
     public List<GameObject> turbulenceSpawners;//所有的湍流喷射，随机启用其中一部分
     
     public EnemySpawnPanel spawnPanel;
-    private void Start()
+    private void OnEnable()
     {
         InvokeRepeating("CheckEnemySpwan", 0, 1f);
         InvokeRepeating(nameof(UpdateEnemySpawnPanel), 0, enemySpwanTime);
     }
-    
+    private void OnDisable()
+    {
+        spawners.Clear();
+        spwanersNearToFar.Clear();
+        turbulenceSpawners.Clear();
+    }
     public void CheckEnemySpwan()//开局刷怪和湍流
     {
         Debug.Log(GameObject.FindGameObjectsWithTag("Enemy").Length);
         if (GameObject.FindGameObjectsWithTag("Enemy").Length > maxEnemisCount) canSpwanEnemy = false;
         else canSpwanEnemy = true;
         if (!canSpwanEnemy || spawners == null || spawners.Count == 0 || battery == null) return;
-        if (!UnityEngine.SceneManagement.SceneManager.GetActiveScene().name.Equals("SelectScene") && spawners.Count != 0)
+        if (!UnityEngine.SceneManagement.SceneManager.GetActiveScene().name.Equals("SelectScene")&&
+            !UnityEngine.SceneManagement.SceneManager.GetActiveScene().name.Equals("StartScene") && spawners.Count != 0)
         { SpawnEnemyStart(); TurbulenceStart(); CancelInvoke(nameof(CheckEnemySpwan)); }
 
     }

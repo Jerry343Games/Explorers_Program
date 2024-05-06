@@ -47,6 +47,7 @@ public class Fighter : PlayerController
     public GameObject dashCheckObj;
     public GameObject attcakAreaSprite;
     public GameObject attackAreaCollider;
+    public AniEventControl attackEffectAni;
     void Start()
     {
         _rb = GetComponent<Rigidbody>();
@@ -58,6 +59,7 @@ public class Fighter : PlayerController
 
         myPlayerInfo = new PlayerInfo(PlayerType.Fighter, speed, maxArmor, mainWeapon, secondaryWeapon);
         PlayerManager.Instance.AddPlayerInfo(myPlayerInfo);
+        attackEffectAni.EndFighterAttackEffectEvent += AttackEffectDisable;
     }
 
     private void OnDestroy()
@@ -297,7 +299,7 @@ public class Fighter : PlayerController
         
         _isAttack = true;
         attcakAreaSprite.SetActive(true);
-        Invoke(nameof(AttackEffectDisable), Enemy.GetAnimatorLength(attcakAreaSprite.GetComponentInChildren<Animator>(), "FighterAttack"));
+       // Invoke(nameof(AttackEffectDisable), Enemy.GetAnimatorLength(attcakAreaSprite.GetComponentInChildren<Animator>(), "FighterAttack"));
         //动画控制
         animator.CrossFade("FighterAttack",0);
         playerSprite.GetComponent<SpriteRenderer>().material.SetTexture("_Normal",
@@ -352,12 +354,12 @@ public class Fighter : PlayerController
                 enemy.TakeDamage((int)mainWeapon.attackDamage);
                 // 对敌人造成伤害后震慑它们
                 enemy.Vertigo(attackAreaCollider.transform.right * force,ForceMode.VelocityChange,attackVertigoTime);
-                aliveEnemies.Add(enemy.gameObject);
+                //aliveEnemies.Add(enemy.gameObject);
             }
         }
 
         // 更新列表，剔除已被消灭的敌人
-        _enemyInArea = aliveEnemies;
+        //_enemyInArea = aliveEnemies;
 
         
     }

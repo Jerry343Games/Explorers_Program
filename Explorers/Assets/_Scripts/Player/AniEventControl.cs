@@ -14,6 +14,7 @@ public class AniEventControl : MonoBehaviour
 
     public event AniEventHandler OnEnemyAttackEvent;
     public event AniEventHandler EndEnemyAttackEvent;
+    public event AniEventHandler EndFighterAttackEffectEvent;
     /// <summary>
     /// 触发OnAttack动画事件时
     /// </summary>
@@ -38,5 +39,8 @@ public class AniEventControl : MonoBehaviour
     {
         EndEnemyAttackEvent?.Invoke();
     }
-
+    public void EndFighterAttackEffect()
+    {
+        EndFighterAttackEffectEvent?.Invoke();
+    }
 }

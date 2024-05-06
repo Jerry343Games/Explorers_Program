@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 1880407180692464408}
   - component: {fileID: 1880407180692464411}
   - component: {fileID: 6594025092614917332}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: MineralCusters
   m_TagString: ResToCollecting
   m_Icon: {fileID: 0}
@@ -142,7 +142,7 @@ GameObject:
   - component: {fileID: 8709689922758536068}
   - component: {fileID: 3222075293336784125}
   - component: {fileID: 8250563522121902159}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Point Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -256,6 +256,14 @@ PrefabInstance:
     - target: {fileID: 140802, guid: 17e177a00123a844ab8b4913cb52a32d, type: 3}
       propertyPath: m_Name
       value: SparklePurple
+      objectReference: {fileID: 0}
+    - target: {fileID: 140802, guid: 17e177a00123a844ab8b4913cb52a32d, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 157622, guid: 17e177a00123a844ab8b4913cb52a32d, type: 3}
+      propertyPath: m_Layer
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 439298, guid: 17e177a00123a844ab8b4913cb52a32d, type: 3}
       propertyPath: m_RootOrder
