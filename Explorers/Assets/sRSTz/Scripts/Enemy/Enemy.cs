@@ -224,7 +224,7 @@ public class Enemy : MonoBehaviour
 
             }
         }
-        if (playersInAttackArea.Count != 0&&!isAttack)
+        if (playersInAttackArea.Count != 0&&!isAttack&&canAttack)
         {
             animator.Play("Attack");
             moveSpeed = slowSpeed;
