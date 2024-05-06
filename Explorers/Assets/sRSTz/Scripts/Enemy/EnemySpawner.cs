@@ -67,6 +67,8 @@ public class EnemySpawner : MonoBehaviour
                 enemy.StartledFromSleep();
                 //enemy.ChangeDetectRadius(30f);
                 enemy.gameObject.GetComponentInChildren<TargetDetector>().AlwaysDetectOne(EnemyManager.Instance.battery);
+                enemy.gameObject.GetComponentInChildren<SeekBehaviour>().defaulttarget = EnemyManager.Instance.battery;
+                enemy.gameObject.GetComponentInChildren<EnemyAI>().aiData.currentTarget = EnemyManager.Instance.battery.transform;
             }
         }
             
@@ -110,5 +112,9 @@ public class EnemySpawner : MonoBehaviour
 
 
         return closestDistance;
+    }
+    public void Test()
+    {
+        Debug.Log(transform.position+"  "+name);
     }
 }

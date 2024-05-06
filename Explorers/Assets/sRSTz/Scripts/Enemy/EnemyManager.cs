@@ -67,6 +67,7 @@ public class EnemyManager : SingletonPersistent<EnemyManager>
             spwanersNearToFar[i].GetComponent<EnemySpawner>().SpawnOnce(SelectRandomMonster(),false);
             spwanersNearToFar[i].GetComponent<EnemySpawner>().SpawnOnce(SelectRandomMonster(), false);
             spwanersNearToFar[i].GetComponent<EnemySpawner>().SpawnOnce(SelectRandomMonster(), false);
+           // spwanersNearToFar[i].GetComponent<EnemySpawner>().Test();
         }
         Debug.Log("after" + GameObject.FindGameObjectsWithTag("Enemy").Length);
     }
@@ -80,7 +81,7 @@ public class EnemyManager : SingletonPersistent<EnemyManager>
     {
         if (turbulenceSpawners.Count != 0) return;
         turbulenceSpawners.AddRange(GameObject.FindGameObjectsWithTag("TurbulenceSpawner"));
-        Debug.Log("12131" + turbulenceSpawners.Count);
+        
         // 随机选择四分之一的turbulenceSpawner
         int quarterCount = Mathf.CeilToInt(turbulenceSpawners.Count / 2.5f);
         List<GameObject> selectedSpawners = new List<GameObject>();

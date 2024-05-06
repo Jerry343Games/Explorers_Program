@@ -20,16 +20,23 @@ public class SeekBehaviour : SteeringBehaviour
     private float[] interestsTemp;
 
     public bool isSeekBatteryFirst = false;
-    
+    public GameObject defaulttarget = null;
     public override (float[] danger, float[] interest) GetSteering(float[] danger, float[] interest, AIData aiData)
     {
-        //if we don't have a target stop seeking
+        //if we don't have a target stop seeking  如果找不到目标并且有默认目标，就先找默认目标
         //else set a new target
+        if (aiData.currentTarget == null && defaulttarget != null)
+        {
+            aiData.currentTarget = defaulttarget.transform; targetPositionCached = aiData.currentTarget.position;
+            Debug.Log(aiData.currentTarget + "##" + transform.position);
+        }
         if (reachedLastTarget)
         {
-            if (aiData.targets == null || aiData.targets.Count <= 0)
+            if (defaulttarget == null&&(aiData.targets == null || aiData.targets.Count <= 0))
             {
+                
                 aiData.currentTarget = null;
+
                 return (danger, interest);
             }
             else
@@ -61,8 +68,12 @@ public class SeekBehaviour : SteeringBehaviour
             }
 
         }
-
-        //cache the last position only if we still see the target (if the targets collection is not empty)
+        if (aiData.currentTarget == null && defaulttarget != null)
+        {
+            aiData.currentTarget = defaulttarget.transform; targetPositionCached = aiData.currentTarget.position;
+            Debug.Log(aiData.currentTarget + "##" + transform.position);
+        }
+        //cache the last position only if we still see the target (if the targets collection is not empty)除非有默认目标
         if (aiData.currentTarget != null && aiData.targets != null && aiData.targets.Contains(aiData.currentTarget))
         {
             if (!isSeekBatteryFirst)
@@ -86,18 +97,24 @@ public class SeekBehaviour : SteeringBehaviour
                 else aiData.currentTarget = aiData.targets.OrderBy
                 (target => Vector2.Distance(target.position, transform.position)).FirstOrDefault();
             }
-            targetPositionCached = targetPositionCached = aiData.currentTarget.position;
-        }
             
-
+            targetPositionCached = aiData.currentTarget.position;
+        }
+        //if (aiData.currentTarget == null && defaulttarget != null) aiData.currentTarget = defaulttarget;
+        if (aiData.currentTarget == null && defaulttarget != null)
+        {
+            aiData.currentTarget = defaulttarget.transform; targetPositionCached = aiData.currentTarget.position;
+            Debug.Log(aiData.currentTarget + "##" + transform.position);
+        }
         //First check if we have reached the target
-        if (Vector2.Distance(transform.position, targetPositionCached) < targetRechedThreshold)
+        if (Vector2.Distance(transform.position, targetPositionCached) < targetRechedThreshold&&defaulttarget==null)
         {
             reachedLastTarget = true;
             aiData.currentTarget = null;
             return (danger, interest);
         }
-
+        if (aiData.currentTarget == null && defaulttarget != null) { aiData.currentTarget = defaulttarget.transform; targetPositionCached = aiData.currentTarget.position;
+            Debug.Log(aiData.currentTarget + "##" + transform.position); }
         //If we havent yet reached the target do the main logic of finding the interest directions
         Vector2 directionToTarget = (targetPositionCached - (Vector2)transform.position);
         for (int i = 0; i < interest.Length; i++)

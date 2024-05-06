@@ -43,6 +43,8 @@ public class EnemySpawnPanel : MonoBehaviour
                 countdownText.text = "0";
                 HideWarning();
                 // 倒计时结束后执行的操作
+                EnemyManager.Instance.SpawnEnemyAfter();
+
             });
     }
 

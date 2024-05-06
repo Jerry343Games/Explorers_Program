@@ -146,7 +146,7 @@ public class Enemy : MonoBehaviour
     public bool isReturning = false;
     [HideInInspector]
     public float stayTimer = 0;
-    [HideInInspector]
+    
     public GameObject target=null;
     [HideInInspector]
     public Rigidbody rb;
@@ -266,6 +266,7 @@ public class Enemy : MonoBehaviour
                 character.GetComponent<GamePlayerController>().TakeDamage(chaState.damageData);
             }*/
         }
+        if(closestPlayer!=null)
         target = closestPlayer;
 
         return closestPlayer;
