@@ -15,6 +15,7 @@ public class Shooter : PlayerController
     public int salveMissileDamage;//单枚导弹伤害
     public float salvoRange;//齐射检测范围
     public float salvoMissileSpeed;//单枚导弹速度
+    public int salvoPower;//齐射耗电量
     //private bool canSalvo;
     public LayerMask enemyLayer;
 
@@ -268,6 +269,8 @@ public class Shooter : PlayerController
 
         missileCollection.GetComponent<MissileControl>().target = nearest.gameObject;
         missileCollection.GetComponent<MissileControl>().singleMissileDamage  = salveMissileDamage;
+
+        GetComponent<CellBattery>().ChangePower(-salvoPower);
 
         //for (int i = 0;i<salveAmount;i++)
         //{
