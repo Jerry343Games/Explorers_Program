@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class UIStartPage : MonoBehaviour
@@ -19,10 +20,13 @@ public class UIStartPage : MonoBehaviour
     public float intensity;
 
     private bool _isReady;
+    [FormerlySerializedAs("_isOpenPanel")] public bool isOpenPanel;
     public Image maskImage;
 
     public GameObject defaultPanel;
     public GameObject playerNumPanel;
+
+    public GameObject optionalPanel;
 
     private void Awake()
     {
@@ -38,7 +42,10 @@ public class UIStartPage : MonoBehaviour
     {
         if (!_isReady)
         {
-            MouseActions();    
+            if (!isOpenPanel)
+            {
+                MouseActions();  
+            }
         }
     }
 
@@ -122,8 +129,11 @@ public class UIStartPage : MonoBehaviour
                     });
                 break;
             case "options":
+                optionalPanel.GetComponent<CanvasGroup>().DOFade(1, 0.5f);
+                isOpenPanel = true;
                 break;
             case "exit":
+                Application.Quit();
                 break;
             case "2PBtn":
                 _isReady = true;
