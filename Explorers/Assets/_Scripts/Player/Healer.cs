@@ -50,6 +50,8 @@ public class Healer : PlayerController
     void Update()
     {
         if (hasDead) return;
+        if (SceneManager.Instance.hasGameOver) return;
+
         UpdateAttackState();
         UpdateFeatureState();
         UpdateSwitchRopeState();

@@ -1,9 +1,10 @@
+using DG.Tweening;
 using Obi;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics.Tracing;
 using System.Linq;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
@@ -53,6 +54,15 @@ public class SceneManager : Singleton<SceneManager>
     public bool hasGameEnd;
 
     public Image mask;
+
+    public Image loseImg;
+
+    public Image winImg;
+
+    public RectTransform[] winCGPoints;
+
+    public bool hasGameOver;
+
     private void OnEnable()
     {
         //EventCenter.GameStartedEvent += FindBattery;
@@ -266,9 +276,58 @@ public class SceneManager : Singleton<SceneManager>
     
     public void GameOver(bool isWin)
     {
+        hasGameOver = true;
         //时间停滞
         Time.timeScale = 0;
+
+        //foreach(var player in PlayerManager.Instance.players)
+        //{
+        //    Destroy(player.gameObject);
+        //}
+        //PlayerManager.Instance.players.Clear();
+        //PlayerManager.Instance.gamePlayers.Clear();
+
+        StartCoroutine(GameOverAction(isWin));
         //UI显示
 
+    }
+    IEnumerator GameOverAction(bool isWin)
+    {
+        if(isWin)
+        {
+            Sequence s = DOTween.Sequence();
+            s.SetUpdate(UpdateType.Normal, true);
+            s.Append(mask.DOFade(1, 1f));
+            s.Append(winImg.DOFade(1, 1f));
+            winImg.transform.GetChild(0).gameObject.SetActive(true);
+            s.Append(winImg.transform.GetChild(0).GetComponent<RectTransform>().DOAnchorPos(winCGPoints[0].anchoredPosition, 0.5f));
+            s.AppendInterval(0.5f);
+            winImg.transform.GetChild(1).gameObject.SetActive(true);
+            s.Append(winImg.transform.GetChild(1).GetComponent<RectTransform>().DOAnchorPos(winCGPoints[1].anchoredPosition, 0.5f));
+            s.AppendInterval(0.5f);
+            winImg.transform.GetChild(2).gameObject.SetActive(true);
+            s.Append(winImg.transform.GetChild(2).GetComponent<RectTransform>().DOAnchorPos(winCGPoints[2].anchoredPosition, 0.5f));
+            s.AppendInterval(2f);
+
+            //制作人员滚动
+
+
+
+            yield return null;
+
+        }
+        else
+        {
+            Sequence s = DOTween.Sequence();
+            s.SetUpdate(UpdateType.Normal, true);
+
+            s.Append(mask.DOFade(1, 1f));
+            s.Append(loseImg.DOFade(1, 1f));
+            s.AppendInterval(5f);
+            //重开
+
+            yield return null;
+
+        }
     }
 }
