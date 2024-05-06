@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8113586407788554773}
   - component: {fileID: 2362149977001315126}
   - component: {fileID: 1637417578331322809}
-  m_Layer: 3
+  m_Layer: 0
   m_Name: AttackArea
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -93,7 +93,7 @@ GameObject:
   m_Component:
   - component: {fileID: 902359331691677933}
   - component: {fileID: 902359331691677934}
-  m_Layer: 3
+  m_Layer: 0
   m_Name: TargetDetector
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -151,7 +151,7 @@ GameObject:
   m_Component:
   - component: {fileID: 902359331782052848}
   - component: {fileID: 902359331782052847}
-  m_Layer: 3
+  m_Layer: 0
   m_Name: SeekBehavior
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -198,7 +198,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 902359331804815187}
-  m_Layer: 3
+  m_Layer: 0
   m_Name: Detectors
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -232,7 +232,7 @@ GameObject:
   m_Component:
   - component: {fileID: 902359331864263736}
   - component: {fileID: 902359331864263735}
-  m_Layer: 3
+  m_Layer: 0
   m_Name: ContextSolver
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -277,7 +277,7 @@ GameObject:
   m_Component:
   - component: {fileID: 902359332377314879}
   - component: {fileID: 902359332377314878}
-  m_Layer: 3
+  m_Layer: 0
   m_Name: ObstacleDetector
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -326,7 +326,7 @@ GameObject:
   m_Component:
   - component: {fileID: 902359332495822820}
   - component: {fileID: 902359332495822821}
-  m_Layer: 3
+  m_Layer: 0
   m_Name: ObstacleAvoidBehavior
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -377,7 +377,6 @@ GameObject:
   - component: {fileID: 902359332785826793}
   - component: {fileID: 8600731019605596107}
   - component: {fileID: 1243618604428997425}
-  - component: {fileID: 2945793410133831746}
   m_Layer: 3
   m_Name: ElectricEel
   m_TagString: Enemy
@@ -473,7 +472,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c5824606b7edbf4681b3d0140a8d08b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 5
+  moveSpeed: 4
   force: 10
   HP: 28
   damage: 9
@@ -509,6 +508,8 @@ MonoBehaviour:
   reverseTime: 5
   playerBeAttackedEffect: {fileID: 140802, guid: 18d9f51afebd775479c3342b107e0c58,
     type: 3}
+  electricEffect: {fileID: 125690, guid: 3bb104f9d85b5224b95f4f1f632daa8a, type: 3}
+  attackDelay: 3
 --- !u!136 &1243618604428997425
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -523,19 +524,6 @@ CapsuleCollider:
   m_Height: 2.35
   m_Direction: 0
   m_Center: {x: -0.1, y: 0, z: 0}
---- !u!135 &2945793410133831746
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 902359332785826801}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 0
-  serializedVersion: 2
-  m_Radius: 5.5
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &902359333741147090
 GameObject:
   m_ObjectHideFlags: 0
@@ -545,7 +533,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 902359333741147089}
-  m_Layer: 3
+  m_Layer: 0
   m_Name: SteeringBehaviors
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -582,7 +570,7 @@ GameObject:
   - component: {fileID: 6838584531539212232}
   - component: {fileID: 2088409268705304300}
   - component: {fileID: 2457974746571506634}
-  m_Layer: 3
+  m_Layer: 0
   m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -7,6 +7,8 @@ public class ElectricEel : Enemy
     private PlayerController reversedPlayer=null;
     public float reverseTime = 5f;
     public GameObject playerBeAttackedEffect;
+    public GameObject electricEffect;
+    public float attackDelay = 3f;
     protected override void Awake()
     {
         base.Awake();
@@ -31,7 +33,9 @@ public class ElectricEel : Enemy
         {
             if (player != null && canAttack)
             {
-
+                GameObject effect = Instantiate(electricEffect);
+                effect.transform.position = transform.position;
+                effect.transform.SetParent(transform);
                 // 计算弹飞的方向
                 Vector2 direction = (player.transform.position - transform.position).normalized;
 
@@ -47,6 +51,8 @@ public class ElectricEel : Enemy
                 playerEffect.GetComponent<DestoryByLifeTime>().lifeTime = reverseTime;
             }
         }
+        canAttack = false;
+        Invoke(nameof(RefreshAttack), attackDelay);
     }
 
     public void Move()
@@ -68,7 +74,10 @@ public class ElectricEel : Enemy
             ReturnSpawnpoint();
         }*/
     }
-    
+    public void RefreshAttack()
+    {
+        canAttack = true;
+    }
 
 
 }
