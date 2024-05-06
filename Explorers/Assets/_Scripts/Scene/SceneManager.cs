@@ -219,6 +219,8 @@ public class SceneManager : Singleton<SceneManager>
 
         Invoke("ChangeActionMap", 0.5f);
 
+        //GameOver(true);
+
     }
 
     public void ChangeActionMap()
@@ -281,12 +283,6 @@ public class SceneManager : Singleton<SceneManager>
         Time.timeScale = 0;
 
         MusicManager.Instance.musicAudio.Pause();
-        //foreach(var player in PlayerManager.Instance.players)
-        //{
-        //    Destroy(player.gameObject);
-        //}
-        //PlayerManager.Instance.players.Clear();
-        //PlayerManager.Instance.gamePlayers.Clear();
 
         StartCoroutine(GameOverAction(isWin));
         //UIÏÔÊ¾
@@ -338,7 +334,6 @@ public class SceneManager : Singleton<SceneManager>
                 UnityEngine.SceneManagement.SceneManager.LoadScene("StartScene");
             });
 
-            yield return null;
 
         }
         else
@@ -356,8 +351,16 @@ public class SceneManager : Singleton<SceneManager>
             });
             //ÖØ¿ª
             
-            yield return null;
 
         }
+        foreach (var player in PlayerManager.Instance.players)
+        {
+            Destroy(player.gameObject);
+        }
+        PlayerManager.Instance.players.Clear();
+        PlayerManager.Instance.gamePlayers.Clear();
+        PlayerManager.Instance.resNum = 0;
+
+        yield return null;  
     }
 }

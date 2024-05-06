@@ -244,7 +244,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &7477862984688049902
 Transform:
   m_ObjectHideFlags: 0
@@ -308,6 +308,7 @@ MonoBehaviour:
   hurtSoundPlayInterval: 1
   hurtSoundPlayTimer: 0
   beCatched: 0
+  _dashParticleSystem: {fileID: 0}
   DistanceThreshold: 14.5
   _hasConnected: 0
   _obiRope: {fileID: 0}
@@ -425,6 +426,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bubblePrefab: {fileID: 1487403280404247984, guid: 9ab787e99a8a2c0438ea4ae8ed662f21,
     type: 3}
+  F: {fileID: -1941413184, guid: 1694f1675ad86254bb145674cb85db67, type: 3}
+  E: {fileID: 1646130826, guid: 1694f1675ad86254bb145674cb85db67, type: 3}
+  A: {fileID: -819851489, guid: 1694f1675ad86254bb145674cb85db67, type: 3}
+  Y: {fileID: 212110237, guid: 1694f1675ad86254bb145674cb85db67, type: 3}
 --- !u!1001 &478394018994139775
 PrefabInstance:
   m_ObjectHideFlags: 0

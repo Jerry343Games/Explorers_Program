@@ -6,6 +6,7 @@ using UnityEngine.Serialization;
 
 public class BubbleInfo
 {
+    public string myControlType;
     public BubbleType Type { get; set; }//∆¯≈›¿‡–Õ
     public GameObject Obj1 { get; set; }
     public GameObject Obj2 { get; set; }
