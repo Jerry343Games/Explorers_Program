@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class CameraTrace : MonoBehaviour
 {
@@ -31,8 +32,22 @@ public class CameraTrace : MonoBehaviour
             Destroy(gameObject);
         }
         _defaultView = Camera.main.fieldOfView;
+        UnityEngine.SceneManagement.SceneManager.sceneLoaded += OnSceneChanged;
     }
 
+    private void OnDestroy()
+    {
+        UnityEngine.SceneManagement.SceneManager.sceneLoaded -= OnSceneChanged;
+    }
+
+    private void OnSceneChanged(Scene scene,LoadSceneMode mode)
+    {
+        if (scene.name=="StartScene")
+        {
+            Destroy(gameObject);
+        }
+    }
+    
     public void SetOriginalPos()
     {
         transform.position = new Vector3(SceneManager.Instance.bornTransform.position.x, SceneManager.Instance.bornTransform.position.y, transform.position.z);

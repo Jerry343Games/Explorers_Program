@@ -62,7 +62,7 @@ public class Healer : PlayerController
         UpdateFeatureState();
         UpdateSwitchRopeState();
         UpdateHurtSoundState();
-
+        PressPause();
         Aim(gun);
         TimeTick();
         if (playerInputSetting.GetAttackButtonDown())

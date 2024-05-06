@@ -83,6 +83,7 @@ public class Fighter : PlayerController
         UpdateFeatureState();
         UpdateSwitchRopeState();
         UpdateHurtSoundState();
+        PressPause();
         Aim(gun);
         if (playerInputSetting.inputDir.x != 0)
         {

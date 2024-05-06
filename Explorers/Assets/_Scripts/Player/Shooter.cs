@@ -53,7 +53,7 @@ public class Shooter : PlayerController
         UpdateFeatureState();
         UpdateSwitchRopeState();
         UpdateHurtSoundState();
-
+        PressPause();
         Aim(gun);
         if (playerInputSetting.GetAttackButtonDown())
         {

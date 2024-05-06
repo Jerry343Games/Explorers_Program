@@ -73,6 +73,7 @@ public class BatteryCarrier : PlayerController
         //CheckKeys();
         TickTime();
         UpdateFeatureState();
+        PressPause();
         if(playerInputSetting.GetAttackButtonDown())
         {
             Overload();

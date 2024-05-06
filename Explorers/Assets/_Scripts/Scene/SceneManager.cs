@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.UI;
 using UnityEngine.UI;
 
 [Serializable]
@@ -62,6 +63,8 @@ public class SceneManager : Singleton<SceneManager>
 
     public bool hasGameOver;
 
+    public bool isPaused;
+    
     private void OnEnable()
     {
         //EventCenter.GameStartedEvent += FindBattery;
@@ -362,5 +365,47 @@ public class SceneManager : Singleton<SceneManager>
         PlayerManager.Instance.resNum = 0;
 
         yield return null;  
+    }
+
+    public void StopGame()
+    {
+        if (!isPaused)
+        {
+            isPaused = true;
+            Time.timeScale = 0;
+            GameObject panel= Instantiate(Resources.Load<GameObject>("UI/PausePanel"), GameObject.FindWithTag("Canvas").transform);
+            
+            //µ¼º½Ëø¶¨
+            
+            foreach (var player in PlayerManager.Instance.players)
+            {
+                player.GetComponent<MultiplayerEventSystem>().SetSelectedGameObject(panel.GetComponent<UIPausePanel>().continueBtn.gameObject);
+            }
+        }
+        
+    }
+
+    public void ContinueGame()
+    {
+        foreach (var player in PlayerManager.Instance.players)
+        {
+            player.GetComponent<PlayerInputSetting>().SwitchToPlayerScheme();
+        }
+        isPaused = false;
+        Time.timeScale = 1;
+    }
+
+    public void BackToMenu()
+    {
+        isPaused = false;
+        Time.timeScale = 1;
+        foreach (var player in PlayerManager.Instance.players)
+        {
+            Destroy(player.gameObject);
+        }
+        PlayerManager.Instance.players.Clear();
+        PlayerManager.Instance.gamePlayers.Clear();
+        PlayerManager.Instance.resNum = 0;
+        UnityEngine.SceneManagement.SceneManager.LoadScene("StartScene");
     }
 }

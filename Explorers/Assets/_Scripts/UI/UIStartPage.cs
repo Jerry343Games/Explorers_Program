@@ -36,6 +36,7 @@ public class UIStartPage : MonoBehaviour
     private void Start()
     {
         MusicManager.Instance.PlayBackMusic("Start");
+        _isReady = false;
     }
 
     void Update()

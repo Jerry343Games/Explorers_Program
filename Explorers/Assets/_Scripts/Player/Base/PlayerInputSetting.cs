@@ -122,6 +122,11 @@ public class PlayerInputSetting : MonoBehaviour
             }
         }
     }
+
+    public void SwitchToPlayerScheme()
+    {
+        _playerInput.SwitchCurrentActionMap("Player");
+    }
     
     /// <summary>
     /// 游戏开始时统一进行自选功能分配
@@ -270,6 +275,22 @@ public class PlayerInputSetting : MonoBehaviour
         }
     }
     public bool GetUseItem() => _isUseItem;
+    
+    /// <summary>
+    /// 道具使用
+    /// </summary>
+    private bool _isPressPause;
+    public void OnPauseDown(InputAction.CallbackContext context)
+    {
+        if (context.started)
+        {
+            _isPressPause = true;
+        }else if (context.canceled)
+        {
+            _isPressPause = false;
+        }
+    }
+    public bool GetPressPause() => _isPressPause;
 
     /// <summary>
     /// 获取选择的向量

@@ -316,6 +316,22 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 73bca980-d2f4-49a6-b39c-e708f66e57fb
     m_ActionName: New action map/New action
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7042558557124252667}
+        m_TargetAssemblyTypeName: PlayerInputSetting, Assembly-CSharp
+        m_MethodName: OnPauseDown
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: c01600c8-c541-4871-8879-b465b28cf07d
+    m_ActionName: Player/Pause[/Keyboard/escape,/XInputControllerWindows/start]
   m_NeverAutoSwitchControlSchemes: 1
   m_DefaultControlScheme: 
   m_DefaultActionMap: UI

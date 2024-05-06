@@ -735,6 +735,15 @@ public class PlayerController : MonoBehaviour
             
         }
     }
+
+    public void PressPause()
+    {
+        if (playerInputSetting.GetPressPause())
+        {
+            SceneManager.Instance.StopGame();
+            playerInput.SwitchCurrentActionMap("UI");
+        }
+    }
     
     public virtual void SetFeatureCD()
     {
