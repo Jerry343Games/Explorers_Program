@@ -136,12 +136,6 @@ public class UISelectPanel : MonoBehaviour
                 q.Append(mask.DOFade(1, _btnAniDuration)).OnComplete(() =>
                 {
                     //完成动画回调
-                    //更改映射表由UI到Player
-                    foreach (var player in PlayerManager.Instance.players)
-                    {
-                        player.GetComponent<PlayerInput>().SwitchCurrentActionMap("Player");
-                    }
-                    //载入下一关
                     UnityEngine.SceneManagement.SceneManager.LoadScene("JerryTest");
                     
                 });

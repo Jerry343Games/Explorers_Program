@@ -187,6 +187,11 @@ public class Shooter : PlayerController
             case "ReconnectArea":
                 bubbleManager.DestroyBubble();
                 break;
+            case "Chest":
+                bubbleManager.DestroyBubble();
+                break;
+            default:
+                break;
         }
 
     }

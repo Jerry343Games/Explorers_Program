@@ -81,6 +81,8 @@ public class PlayerController : MonoBehaviour
     public float hurtSoundPlayTimer;
 
     public bool beCatched = false;
+    [HideInInspector]
+    public GameObject _dashParticleSystem;
 
 
     [Header("绳子")]
@@ -131,10 +133,11 @@ public class PlayerController : MonoBehaviour
         //动画相关
         animator = playerSprite.GetComponent<Animator>();
         _spriteRenderer = playerSprite.GetComponent<SpriteRenderer>();
-        
-        
+
+        _dashParticleSystem = Instantiate(Resources.Load<GameObject>("Effect/SpeedupTrail"), transform.position, Quaternion.identity);
+        _dashParticleSystem.transform.SetParent(transform);
         //bubblePanel = GameObject.Find("BubblePanel").GetComponents<UIBubblePanel>()[0];
-        
+
         //选择关卡时使用UI键位映射，反之则用Player映射
         if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name=="SelectScene")
         {
@@ -218,7 +221,9 @@ public class PlayerController : MonoBehaviour
         if (playerInputSetting.GetAccelerateButtonDown())
         {
             _speedFactor = accelerateFactor;
-            if(waterDashSoundPlayTimer<0)
+            _dashParticleSystem.SetActive(true) ;
+
+            if (waterDashSoundPlayTimer<0)
             {
                 MusicManager.Instance.PlaySound("水下快速移动");
                 waterDashSoundPlayTimer = waterDashSoundPlayInterval;
@@ -228,6 +233,7 @@ public class PlayerController : MonoBehaviour
         else
         {
             _speedFactor = 1;
+            _dashParticleSystem.SetActive(false);
         }
     }
     public void MoveReverse(float reversedTime)

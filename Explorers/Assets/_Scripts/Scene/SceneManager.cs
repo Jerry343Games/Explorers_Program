@@ -5,8 +5,7 @@ using System.Diagnostics.Tracing;
 using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
-
-
+using UnityEngine.InputSystem;
 
 [Serializable]
 public class CollectionTask//收集物任务
@@ -53,13 +52,13 @@ public class SceneManager : Singleton<SceneManager>
     public bool hasGameEnd;
     private void OnEnable()
     {
-        EventCenter.GameStartedEvent += FindBattery;
+        //EventCenter.GameStartedEvent += FindBattery;
         EventCenter.GameStartedEvent += GameInit;
     }
 
     private void OnDisable()
     {
-        EventCenter.GameStartedEvent -= FindBattery;
+        //EventCenter.GameStartedEvent -= FindBattery;
         EventCenter.GameStartedEvent -= GameInit;
     }
     protected override void Awake()
@@ -68,6 +67,8 @@ public class SceneManager : Singleton<SceneManager>
         maxPlayer = PlayerManager.Instance.players.Count;
         Slover = GameObject.Find("Solver");
         _players = GameObject.FindGameObjectsWithTag("BasePlayer");
+
+        FindBattery();
     }
 
     private void Start()
@@ -193,13 +194,26 @@ public class SceneManager : Singleton<SceneManager>
             controller.SetRope(obiRope);
 
         }
-        if(!isSecondLevel)
+
+        //载入下一关
+        if (!isSecondLevel)
         {
             MusicManager.Instance.PlayBackMusic("Level_1");
         }
         else
         {
             MusicManager.Instance.PlayBackMusic("Level_2");
+        }
+
+        Invoke("ChangeActionMap", 0.5f);
+    }
+
+    public void ChangeActionMap()
+    {
+        //更改映射表由UI到Player
+        foreach (var player in PlayerManager.Instance.players)
+        {
+            player.GetComponent<PlayerInput>().SwitchCurrentActionMap("Player");
         }
     }
 

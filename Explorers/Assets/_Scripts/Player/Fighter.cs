@@ -35,15 +35,15 @@ public class Fighter : PlayerController
     //private bool canSonicWave;
 
     [Header("³å×²")]
-
-    private bool isDashing = false;
     public float dashTime = 3f;
+    private bool isDashing = false;
     private float _dashTimer = 0;
     public float dashForce = 1f;
     public int dashDamage = 15;
     //private bool canDash;
     public float dashCD;
     public int dashPower;//³å×²ºÄµçÁ¿
+    public GameObject dashCheckObj;
     public GameObject attcakAreaSprite;
     public GameObject attackAreaCollider;
     void Start()
@@ -114,6 +114,7 @@ public class Fighter : PlayerController
             if (_dashTimer < dashTime&&_rb.velocity.magnitude>1f)
             {
                 _dashTimer += Time.deltaTime;
+                _dashParticleSystem.SetActive(true);
             }
             else
             {
@@ -121,7 +122,9 @@ public class Fighter : PlayerController
                 isDashing = false;
                 _rb.mass = 1f;
                 _rb.velocity = Vector3.zero;
-                
+                _dashParticleSystem.SetActive(false);
+                dashCheckObj.SetActive(false);
+
             }
         }
         
@@ -266,6 +269,9 @@ public class Fighter : PlayerController
                 {
                     _enemyInArea.Remove(other.gameObject);
                 }
+                break;
+            case "Chest":
+                bubbleManager.DestroyBubble();
                 break;
             default:
                 break;
@@ -413,6 +419,8 @@ public class Fighter : PlayerController
         canUseFeature = false;
         _featureCDTimer = featureCD;
         MusicManager.Instance.PlaySound("³å·æ");
+        dashCheckObj.SetActive(true);
+        dashCheckObj.GetComponent<DashDamageCheck>().Init(dashDamage, dashForce);
         Vector3 moveDir = new Vector3(playerInputSetting.inputDir.x, playerInputSetting.inputDir.y, 0).normalized;
         if (moveDir.Equals(Vector3.zero)) return;
         isDashing = true;

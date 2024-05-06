@@ -56,7 +56,7 @@ public class PropelBackpack : PropItem
         {
             activeTimer += Time.deltaTime;
             transform.position = user.transform.position;
-
+            user.GetComponent<PlayerController>()._dashParticleSystem.SetActive(true);
 
             if (activeTimer >= activeTime)
             {
@@ -67,6 +67,7 @@ public class PropelBackpack : PropItem
     public void Exit()
     {
         isUsing = false;
+        user.GetComponent<PlayerController>()._dashParticleSystem.SetActive(false);
         activeTimer = 0;
         user.GetComponent<PlayerController>().speed = userSpeed;
         user.layer = LayerMask.NameToLayer("Player");

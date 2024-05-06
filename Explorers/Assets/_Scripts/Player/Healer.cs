@@ -198,7 +198,11 @@ public class Healer : PlayerController
                 break;
             case "ReconnectArea":
                 bubbleManager.DestroyBubble();
-
+                break;
+            case "Chest":
+                bubbleManager.DestroyBubble();
+                break;
+            default:
                 break;
         }
         
