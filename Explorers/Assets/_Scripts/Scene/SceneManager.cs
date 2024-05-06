@@ -218,6 +218,9 @@ public class SceneManager : Singleton<SceneManager>
         }
 
         Invoke("ChangeActionMap", 0.5f);
+
+
+        GameOver(true);
     }
 
     public void ChangeActionMap()
@@ -297,17 +300,34 @@ public class SceneManager : Singleton<SceneManager>
         {
             Sequence s = DOTween.Sequence();
             s.SetUpdate(UpdateType.Normal, true);
-            s.Append(mask.DOFade(1, 1f));
-            s.Append(winImg.DOFade(1, 1f));
+            s.Append(mask.DOFade(1, 2f));
+            s.Append(winImg.DOFade(1, 3f));
+            s.Append(winImg.DOFade(0, 3f));
             winImg.transform.GetChild(0).gameObject.SetActive(true);
-            s.Append(winImg.transform.GetChild(0).GetComponent<RectTransform>().DOAnchorPos(winCGPoints[0].anchoredPosition, 0.5f));
+            s.Append(winImg.transform.GetChild(0).GetComponent<RectTransform>().DOAnchorPos(winCGPoints[0].anchoredPosition, 0.5f).OnStart(() =>
+            {
+                MusicManager.Instance.PlaySound("漫画滑入");
+
+            }));
             s.AppendInterval(0.5f);
             winImg.transform.GetChild(1).gameObject.SetActive(true);
-            s.Append(winImg.transform.GetChild(1).GetComponent<RectTransform>().DOAnchorPos(winCGPoints[1].anchoredPosition, 0.5f));
+            s.Append(winImg.transform.GetChild(1).GetComponent<RectTransform>().DOAnchorPos(winCGPoints[1].anchoredPosition, 0.5f).OnStart(() =>
+            {
+                MusicManager.Instance.PlaySound("漫画滑入");
+
+            }));
             s.AppendInterval(0.5f);
             winImg.transform.GetChild(2).gameObject.SetActive(true);
-            s.Append(winImg.transform.GetChild(2).GetComponent<RectTransform>().DOAnchorPos(winCGPoints[2].anchoredPosition, 0.5f));
+            s.Append(winImg.transform.GetChild(2).GetComponent<RectTransform>().DOAnchorPos(winCGPoints[2].anchoredPosition, 0.5f).OnStart(() =>
+            {
+                MusicManager.Instance.PlaySound("漫画滑入");
+
+            }));
             s.AppendInterval(2f);
+            s.Append(winImg.DOFade(0, 0.5f));
+            s.Append(winImg.transform.GetChild(0).GetComponent<Image>().DOFade(0, 0.5f));
+            s.Append(winImg.transform.GetChild(1).GetComponent<Image>().DOFade(0, 0.5f));
+            s.Append(winImg.transform.GetChild(2).GetComponent<Image>().DOFade(0, 0.5f));
 
             //制作人员滚动
 
@@ -323,8 +343,10 @@ public class SceneManager : Singleton<SceneManager>
 
             s.Append(mask.DOFade(1, 1f));
             s.Append(loseImg.DOFade(1, 1f));
+            s.Append(loseImg.transform.GetChild(0).GetComponent<Image>().DOFade(1, 1f));
             s.AppendInterval(5f).OnComplete(() =>
             {
+                Time.timeScale = 1;
                 UnityEngine.SceneManagement.SceneManager.LoadScene("StartScene");
             });
             //重开
