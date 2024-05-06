@@ -185,7 +185,7 @@ public class SceneManager : Singleton<SceneManager>
             Quaternion rotation = Quaternion.Euler(new Vector3(0, 0, rotationZ));
             GameObject hanger = Instantiate(Resources.Load<GameObject>("Hanger"), (player.transform.GetChild(index).position + BatteryTransform.position) / 2 , rotation);
             //暂定0.2f 以后希望玩家一开始都不能动全到齐之后生成绳子
-            hanger.transform.localScale = new Vector3(0.15f, 1, 1);
+            hanger.transform.localScale = new Vector3(0.05f, 1, 1);
             //设置父物体以实现绳子功能
             hanger.transform.SetParent(Slover.transform);
             GameObject rope = hanger.transform.GetChild(0).gameObject;

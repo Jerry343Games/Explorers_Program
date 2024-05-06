@@ -34,6 +34,7 @@ public class Resource : MonoBehaviour
     {
         _coll.enabled = false;
         entityColl.enabled = false;
+        MusicManager.Instance.PlaySound("ÍÚ¾ò»ú");
         foreach (var tran in excavatorTrans)
         {
 
