@@ -15,6 +15,7 @@ public class PlayerInputSetting : MonoBehaviour
     private PlayerInput _playerInput;
     public InputActionAsset inputActionAsset;
     private InputAction _aim;
+    public string myControlScheme;
     
     [Header("玩家模块")]
     public GameObject batteryCarrier;
@@ -40,6 +41,7 @@ public class PlayerInputSetting : MonoBehaviour
         Init();
         DontDestroyOnLoad(gameObject);
         TestScenePlayerSelect();//当不是从选择关卡开始时分配默认玩家
+        myControlScheme = _playerInput.currentControlScheme;
     }
 
     private void Start()

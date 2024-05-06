@@ -4,10 +4,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 using TMPro;
+using UnityEngine.UI;
 
 public class UIBubbleItem : MonoBehaviour
 {
     public TMP_Text contentText;
+    public Image myImage;
     
     [HideInInspector]
     public GameObject gameObject1;

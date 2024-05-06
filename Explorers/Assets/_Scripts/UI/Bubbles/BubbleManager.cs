@@ -1,12 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class BubbleManager:MonoBehaviour
 {
     public GameObject bubblePrefab; // 气泡的预制体
 
     private GameObject currentBubble;
+
+    public Sprite F;
+    public Sprite E;
+    public Sprite A;
+    public Sprite Y;
     public delegate void BubbleCreateHandler(BubbleInfo info);
     public event BubbleCreateHandler OnBubbleCreate;
     private void Awake()
@@ -27,6 +33,44 @@ public class BubbleManager:MonoBehaviour
         
         if (bubbleItem != null)
         {
+            if (info.myControlType=="Keyboard")
+            {
+                //键盘
+                switch (info.Type)
+                {
+                    case BubbleType.Interact:
+                        bubbleItem.myImage.sprite = E;
+                        break;
+                    case BubbleType.Reconnect:
+                        bubbleItem.myImage.sprite = F;
+                        break;
+                }
+            }
+            else if (info.myControlType=="Controller")
+            {
+                switch (info.Type)
+                {
+                    case BubbleType.Interact:
+                        bubbleItem.myImage.sprite = Y;
+                        break;
+                    case BubbleType.Reconnect:
+                        bubbleItem.myImage.sprite = A;
+                        break;
+                }
+            }
+            else
+            {
+                switch (info.Type)
+                {
+                    case BubbleType.Interact:
+                        bubbleItem.myImage.sprite = E;
+                        break;
+                    case BubbleType.Reconnect:
+                        bubbleItem.myImage.sprite = F;
+                        break;
+                }
+            }
+            
             // 设置气泡信息
             bubbleItem.gameObject1 = info.Obj1;
             bubbleItem.gameObject2 = info.Obj2;

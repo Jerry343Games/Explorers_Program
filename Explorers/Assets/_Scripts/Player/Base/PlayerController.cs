@@ -618,7 +618,8 @@ public class PlayerController : MonoBehaviour
                 {
                     BubbleInfo info = new BubbleInfo
                     {
-                        Type = BubbleType.Press,
+                        myControlType = playerInputSetting.myControlScheme,
+                        Type = BubbleType.Interact,
                         Obj1 = gameObject,
                         Obj2 = other.gameObject,
                         Content = "采集"
@@ -630,7 +631,8 @@ public class PlayerController : MonoBehaviour
                 if (!_hasConnected&&!hasDead){
                 BubbleInfo info = new BubbleInfo
                 {
-                    Type = BubbleType.Hold,
+                    myControlType = playerInputSetting.myControlScheme,
+                    Type = BubbleType.Reconnect,
                     Obj1 = gameObject,
                     Obj2= other.gameObject,
                     Content = "重新连接"
@@ -643,7 +645,8 @@ public class PlayerController : MonoBehaviour
                 {
                     BubbleInfo info = new BubbleInfo
                     {
-                        Type = BubbleType.Press,
+                        myControlType = playerInputSetting.myControlScheme,
+                        Type = BubbleType.Interact,
                         Obj1 = gameObject,
                         Obj2 = other.gameObject,
                         Content = "打开"
@@ -658,7 +661,8 @@ public class PlayerController : MonoBehaviour
                     {
                         BubbleInfo info = new BubbleInfo
                         {
-                            Type = BubbleType.Press,
+                            myControlType = playerInputSetting.myControlScheme,
+                            Type = BubbleType.Interact,
                             Obj1 = gameObject,
                             Obj2 = other.gameObject,
                             Content = "深入"
@@ -669,7 +673,8 @@ public class PlayerController : MonoBehaviour
                     {
                         BubbleInfo info = new BubbleInfo
                         {
-                            Type = BubbleType.Press,
+                            myControlType = playerInputSetting.myControlScheme,
+                            Type = BubbleType.Interact,
                             Obj1 = gameObject,
                             Obj2 = other.gameObject,
                             Content = "修复潜艇"

@@ -18,8 +18,8 @@ public enum PlayerType
 /// </summary>
 public enum BubbleType
 {
-    Press,
-    Hold
+    Interact,
+    Reconnect
 }
 
 public enum CharacterAnimation
