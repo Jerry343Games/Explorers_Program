@@ -31,7 +31,7 @@ public class UIStartPage : MonoBehaviour
 
     private void Start()
     {
-        MusicManager.Instance.PlayBackMusic("Level_2");
+        MusicManager.Instance.PlayBackMusic("Start");
     }
 
     void Update()

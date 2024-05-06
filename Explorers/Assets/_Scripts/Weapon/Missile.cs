@@ -11,6 +11,8 @@ public class Missile : MonoBehaviour
     public float _rotateSpeed;
     private Rigidbody _rb;
 
+    public LayerMask enemyLayer;
+    public float attackRangeWhenFlying;
 
     private void Awake()
     {
@@ -26,7 +28,7 @@ public class Missile : MonoBehaviour
         _damage = salveMissileDamage;
         _target = target;
 
-        Invoke("Boom", 2f);
+        Invoke("Boom", 3f);
     }
 
     private void FixedUpdate()
@@ -38,13 +40,32 @@ public class Missile : MonoBehaviour
         }
         else
         {
+            _target = FindNearestEnemy().gameObject;
+            if (_target) return;
             Instantiate(Resources.Load<GameObject>("Effect/SmallRocketExplosion"), transform.position, Quaternion.identity);
             MusicManager.Instance.PlaySound("震爆");
 
             Destroy(gameObject);
         }
     }
-
+    public Collider FindNearestEnemy()
+    {
+        //找最近的敌人
+        Collider[] colliders = Physics.OverlapSphere(transform.position, attackRangeWhenFlying, enemyLayer);
+        if(colliders.Length==0)
+        {
+            return null;
+        }
+        Collider nearest = colliders[0];
+        foreach (var coll in colliders)
+        {
+            if (Vector3.Distance(coll.transform.position, transform.position) < Vector3.Distance(nearest.transform.position, transform.position))
+            {
+                nearest = coll;
+            }
+        }
+        return nearest;
+    }
     private void OnTriggerEnter(Collider other)
     {
         switch (other.tag)
