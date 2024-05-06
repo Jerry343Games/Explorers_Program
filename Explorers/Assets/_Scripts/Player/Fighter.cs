@@ -236,10 +236,12 @@ public class Fighter : PlayerController
                 other.GetComponent<Item>().Apply(gameObject);
                 break;
             case "Enemy":
+                if(!_enemyInArea.Contains(other.gameObject))
                 _enemyInArea.Add(other.gameObject);
                 break;
             case "Boss":
-                _enemyInArea.Add(other.gameObject);
+                if (!_enemyInArea.Contains(other.gameObject))
+                    _enemyInArea.Add(other.gameObject);
                 break;
             case "ResToCollecting":
                 MusicManager.Instance.PlaySound("收集");
@@ -343,6 +345,7 @@ public class Fighter : PlayerController
             if (enemyObj == null) continue;
             if (enemyObj.CompareTag("Boss"))
             {
+                
                 GiantRockCrab.Instance.TakeDamage((int)mainWeapon.attackDamage);
                 aliveEnemies.Add(enemyObj);
                 continue;
@@ -351,6 +354,7 @@ public class Fighter : PlayerController
             Enemy enemy = enemyObj.GetComponent<Enemy>();
             if (enemy.HP > 0)
             {
+                
                 enemy.TakeDamage((int)mainWeapon.attackDamage);
                 // 对敌人造成伤害后震慑它们
                 enemy.Vertigo(attackAreaCollider.transform.right * force,ForceMode.VelocityChange,attackVertigoTime);
