@@ -31,6 +31,7 @@ public class Fighter : PlayerController
     public float enemyVertigoTime = 2f;
     public float transitionDuration = 3f;
     public float sonicWaveCD;
+    public int sonicPower;//次声波耗电量
     //private bool canSonicWave;
 
     [Header("冲撞")]
@@ -42,6 +43,7 @@ public class Fighter : PlayerController
     public int dashDamage = 15;
     //private bool canDash;
     public float dashCD;
+    public int dashPower;//冲撞耗电量
     public GameObject attcakAreaSprite;
     public GameObject attackAreaCollider;
     void Start()
@@ -419,6 +421,7 @@ public class Fighter : PlayerController
         //_rb.isKinematic = true;
         _rb.mass = 5;
         _rb .AddForce(moveDir * dashForce, ForceMode.VelocityChange);
+        GetComponent<CellBattery>().ChangePower(-dashPower);
         
     }
 
@@ -433,6 +436,7 @@ public class Fighter : PlayerController
         GameObject sonicEffect = Instantiate(Resources.Load<GameObject>("Effect/WaterDistortion"), transform.position,Quaternion.identity);
         Destroy(sonicEffect, 1f);
         sonicWaveAttack.AttactStart(this,startRadius, targetRadius, enemyVertigoTime,transitionDuration);
+        GetComponent<CellBattery>().ChangePower(-sonicPower);
     }
 
 
