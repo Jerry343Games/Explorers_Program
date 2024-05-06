@@ -61,6 +61,8 @@ public class SceneManager : Singleton<SceneManager>
 
     public RectTransform[] winCGPoints;
 
+    public bool hasGameOver;
+
     private void OnEnable()
     {
         //EventCenter.GameStartedEvent += FindBattery;
@@ -274,6 +276,7 @@ public class SceneManager : Singleton<SceneManager>
     
     public void GameOver(bool isWin)
     {
+        hasGameOver = true;
         // ±º‰Õ£÷Õ
         Time.timeScale = 0;
 
