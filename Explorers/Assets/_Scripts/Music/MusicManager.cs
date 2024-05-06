@@ -54,7 +54,7 @@ public class MusicManager : Singleton<MusicManager>
     IEnumerator LoadMusic(float fadeSpeed)
     {
         musicAudio.Play();
-        while (musicAudio.volume < 0.5f*musicVolumnMultiplier)
+        while (musicAudio.volume < 0.3f*musicVolumnMultiplier)
         {
             musicAudio.volume += fadeSpeed;
             yield return new WaitForSecondsRealtime(.1f);
@@ -114,6 +114,15 @@ public class MusicManager : Singleton<MusicManager>
                 soundAudio.volume = 0.7f;
                 break;
             case "BossËÕÐÑ":
+                soundAudio.volume = 0.6f;
+                break;
+            case "Ç±Í§±¬Õ¨":
+                soundAudio.volume = 0.5f;
+                break;
+            case "Ç±Í§¾¯±¨":
+                soundAudio.volume = 0.6f;
+                break;
+            case "Õð±¬":
                 soundAudio.volume = 0.6f;
                 break;
             default:

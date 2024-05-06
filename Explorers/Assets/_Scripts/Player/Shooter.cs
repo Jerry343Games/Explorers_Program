@@ -224,7 +224,7 @@ public class Shooter : PlayerController
         {
             return false;
         }
-        GameObject bullet = Instantiate(Resources.Load<GameObject>("Bullet"), transform.position, Quaternion.identity);
+        GameObject bullet = Instantiate(Resources.Load<GameObject>("Harpoon"), transform.position, Quaternion.identity);
         bullet.GetComponent<Bullet>().Init(secondaryWeapon,gun.transform.forward);
 
         MusicManager.Instance.PlaySound("鱼叉发射");

@@ -41,9 +41,15 @@ public class Resource : MonoBehaviour
 
             excavator.transform.GetChild(0).GetComponent<Excavator>().Init(this, miningDuration);
         }
-        Invoke("SpawnMinerals", 2f);
+
+        Invoke("CallBrokenAni", 2f);
     }
 
+
+    private void CallBrokenAni()
+    {
+        ani.CrossFade("Broken", 0f);
+    }
     public void SpawnMinerals()
     {
         canMiningTimes--;
@@ -75,7 +81,6 @@ public class Resource : MonoBehaviour
         MusicManager.Instance.PlaySound("²É¿ó");
         if (canMiningTimes == 0)
         {
-            ani.CrossFade("Broken",0f);
             //Destroy(gameObject);
         }
     }

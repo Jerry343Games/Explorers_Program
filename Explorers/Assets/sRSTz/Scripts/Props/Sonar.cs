@@ -27,6 +27,7 @@ public class Sonar : PropItem
             }
         }
         Debug.Log(nearestItemPos);
+        MusicManager.Instance.PlaySound("声呐");
         //生成一个指示标的UI
         GameObject mySona = Instantiate(Resources.Load<GameObject>("UI/SonaPanel"),Camera.main.WorldToScreenPoint(user.transform.position), Quaternion.identity, GameObject.FindWithTag("Canvas").transform);
         mySona.GetComponent<SonaItem>().Init(user.GetComponent<PlayerController>().playerSprite.transform,nearestItemPos);

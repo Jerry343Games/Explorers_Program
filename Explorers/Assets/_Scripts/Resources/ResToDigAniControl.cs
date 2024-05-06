@@ -18,6 +18,7 @@ public class ResToDigAniControl : MonoBehaviour
      public void Broken()
      {
           Instantiate(Resources.Load<GameObject>("Effect/RocketExplosion"),transform.position,Quaternion.identity);
+          transform.parent.GetComponent<Resource>().SpawnMinerals();
           CameraTrace.instance.CameraShake(0.2f,0.7f);
      }
 
