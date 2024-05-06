@@ -219,8 +219,6 @@ public class SceneManager : Singleton<SceneManager>
 
         Invoke("ChangeActionMap", 0.5f);
 
-
-        GameOver(true);
     }
 
     public void ChangeActionMap()
