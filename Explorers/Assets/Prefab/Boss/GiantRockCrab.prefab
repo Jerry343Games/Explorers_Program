@@ -298,13 +298,13 @@ MonoBehaviour:
   entity: {fileID: 8051894133683313459}
   animPlayOver: 0
   hasDead: 0
-  maxHealth: 600
+  maxHealth: 1000
   _currentHealth: 0
   normalSpeed: 2
   actionChangeInterval: 150
   _currentArmor: 0
   maxArmor: 50
-  curingTriggerHealth: 150
+  curingTriggerHealth: 200
   playerLayer:
     serializedVersion: 2
     m_Bits: 64
@@ -333,8 +333,8 @@ MonoBehaviour:
   curingStoneSpeed: 8
   curingStoneDuration: 5
   deterInterval: 5
-  deterHitRange: 7
-  deterHitForce: 15
+  deterHitRange: 10
+  deterHitForce: 25
 --- !u!114 &6717706749286797270
 MonoBehaviour:
   m_ObjectHideFlags: 0
