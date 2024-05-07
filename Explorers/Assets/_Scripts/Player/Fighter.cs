@@ -420,6 +420,7 @@ public class Fighter : PlayerController
         if (realDamage < currentArmor)
         {
             currentArmor -= realDamage;
+            HitShield();
         }
         else
         {
