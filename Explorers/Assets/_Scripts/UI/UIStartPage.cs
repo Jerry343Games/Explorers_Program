@@ -109,6 +109,16 @@ public class UIStartPage : MonoBehaviour
         gameObject.GetComponent<MeshRenderer>().material.SetColor("_EmissionColor",defaultColor*factor);
         
     }
+    
+    public void ShowLearnPanel()
+    {
+        GameObject panel = Instantiate(Resources.Load<GameObject>("UI/LearningPanel"),GameObject.FindWithTag("Canvas").transform);
+        GameObject firstSelected = panel.GetComponent<UILearningPanel>().learnGroup[0].featureBtn.gameObject;
+        foreach (var player in PlayerManager.Instance.players)
+        {
+            player.GetComponent<PlayerInputSetting>().SwitchToUIScheme(firstSelected);
+        }
+    }
 
     private void OnClick(GameObject gameObject)
     {
@@ -175,4 +185,5 @@ public class UIStartPage : MonoBehaviour
         }
         
     }
+    
 }

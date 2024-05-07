@@ -385,6 +385,16 @@ public class SceneManager : Singleton<SceneManager>
         
     }
 
+    public void ShowLearnPanel()
+    {
+        GameObject panel = Instantiate(Resources.Load<GameObject>("UI/LearningPanel"));
+        GameObject firstSelected = panel.GetComponent<UILearningPanel>().learnGroup[0].featureBtn.gameObject;
+        foreach (var player in PlayerManager.Instance.players)
+        {
+            player.GetComponent<PlayerInputSetting>().SwitchToUIScheme(firstSelected);
+        }
+    }
+
     public void ContinueGame()
     {
         foreach (var player in PlayerManager.Instance.players)
