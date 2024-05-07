@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
 
 public enum OptionalFeature
@@ -41,6 +42,24 @@ public class   PlayerManager : SingletonPersistent<PlayerManager>
     public List<PlayerInfo> allPlayerInfos = new List<PlayerInfo>();
 
     public int resNum;
+
+    private void OnEnable()
+    {
+        UnityEngine.SceneManagement.SceneManager.sceneLoaded += OnLoadScene;
+    }
+
+    private void OnDestroy()
+    {
+        UnityEngine.SceneManagement.SceneManager.sceneLoaded -= OnLoadScene;
+    }
+
+    private void OnLoadScene(Scene scene, LoadSceneMode mode)
+    {
+        if (scene.name=="StartScene")
+        {
+            playerFeaturesDic.Clear();
+        }
+    }
     
     /// <summary>
     /// 通过动画名查找法线贴图
