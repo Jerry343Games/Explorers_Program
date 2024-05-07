@@ -302,6 +302,17 @@ public class Shooter : PlayerController
         canUseFeature = false;
         _featureCDTimer = featureCD;
         GameObject bullet = Instantiate(Resources.Load<GameObject>("Torpedoes"), gun.transform.position + gun.transform.forward*2, Quaternion.identity);
+
+        float angle = Vector3.Angle(Vector3.right, gun.transform.forward);
+        if(gun.transform.forward.y>=0)
+        {
+            bullet.transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
+        }
+        else
+        {
+            bullet.transform.rotation = Quaternion.Euler(new Vector3(0, 0, -angle));
+        }
+
         bullet.GetComponent<Torpedoes>().Init(enemyLayer,playerLayer,torpedoesSpeed,destoryTime,
             torpedoesRange,torpedoesForce,torpedoesDamage, gun.transform.forward);
         GetComponent<CellBattery>().ChangePower(-torpedoesPower);
