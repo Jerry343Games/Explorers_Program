@@ -402,6 +402,11 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    public void HitShield()
+    {
+        OnShieldDamage?.Invoke();
+    }
+    
     /// <summary>
     /// 电量护盾修复方法
     /// </summary>
