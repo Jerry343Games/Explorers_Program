@@ -379,7 +379,8 @@ public class SceneManager : Singleton<SceneManager>
             
             foreach (var player in PlayerManager.Instance.players)
             {
-                player.GetComponent<MultiplayerEventSystem>().SetSelectedGameObject(panel.GetComponent<UIPausePanel>().continueBtn.gameObject);
+                player.GetComponent<PlayerInputSetting>().SwitchToUISchemeAndSelect(panel.GetComponent<UIPausePanel>().continueBtn.gameObject);
+                //player.GetComponent<MultiplayerEventSystem>().SetSelectedGameObject(panel.GetComponent<UIPausePanel>().continueBtn.gameObject);
             }
         }
         
@@ -391,7 +392,7 @@ public class SceneManager : Singleton<SceneManager>
         GameObject firstSelected = panel.GetComponent<UILearningPanel>().learnGroup[0].featureBtn.gameObject;
         foreach (var player in PlayerManager.Instance.players)
         {
-            player.GetComponent<PlayerInputSetting>().SwitchToUIScheme(firstSelected);
+            player.GetComponent<PlayerInputSetting>().SwitchToUISchemeAndSelect(firstSelected);
         }
     }
 

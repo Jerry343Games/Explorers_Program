@@ -116,7 +116,7 @@ public class UIStartPage : MonoBehaviour
         GameObject firstSelected = panel.GetComponent<UILearningPanel>().learnGroup[0].featureBtn.gameObject;
         foreach (var player in PlayerManager.Instance.players)
         {
-            player.GetComponent<PlayerInputSetting>().SwitchToUIScheme(firstSelected);
+            player.GetComponent<PlayerInputSetting>().SwitchToUISchemeAndSelect(firstSelected);
         }
     }
 

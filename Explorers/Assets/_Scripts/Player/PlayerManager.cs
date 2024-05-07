@@ -60,6 +60,22 @@ public class   PlayerManager : SingletonPersistent<PlayerManager>
             playerFeaturesDic.Clear();
         }
     }
+
+    public void SwitchEveryPlayerTo(string name)
+    {
+        foreach (GameObject player in players)
+        {
+            player.GetComponent<PlayerInputSetting>().SwitchToScheme(name);
+        }
+    }
+
+    public void SwitchAndSelect(GameObject selectObject)
+    {
+        foreach (GameObject player in players)
+        {
+            player.GetComponent<PlayerInputSetting>().SwitchToUISchemeAndSelect(selectObject);
+        }
+    }
     
     /// <summary>
     /// 通过动画名查找法线贴图

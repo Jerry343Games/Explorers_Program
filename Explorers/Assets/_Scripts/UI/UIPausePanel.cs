@@ -12,6 +12,7 @@ public class UIPausePanel : MonoBehaviour
 
     public Button continueBtn;
     public Button backToMenuBtn;
+    public Button learnBtn;
     
     private void Awake()
     {
@@ -21,6 +22,7 @@ public class UIPausePanel : MonoBehaviour
         
         continueBtn.onClick.AddListener(ClickContinue);
         backToMenuBtn.onClick.AddListener(ClickBackMenu);
+        learnBtn.onClick.AddListener(ClickLearnBtn);
     }
 
     private void ClickContinue()
@@ -40,6 +42,17 @@ public class UIPausePanel : MonoBehaviour
             SceneManager.Instance.BackToMenu();
         });
         _maskImage.DOFade(1, 0.1f).SetUpdate(true);
+    }
 
+    private void ClickLearnBtn()
+    {
+        GameObject panel = Instantiate(Resources.Load<GameObject>("UI/LearningPanel"),GameObject.FindWithTag("Canvas").transform);
+        GameObject firstSelected = panel.GetComponent<UILearningPanel>().learnGroup[0].featureBtn.gameObject;
+        panel.GetComponent<UILearningPanel>().isPause = true;
+        panel.GetComponent<UILearningPanel>().otherPanelFirst = continueBtn;
+        foreach (var player in PlayerManager.Instance.players)
+        {
+            player.GetComponent<PlayerInputSetting>().SwitchToUISchemeAndSelect(firstSelected);
+        }
     }
 }

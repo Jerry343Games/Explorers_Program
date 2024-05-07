@@ -129,10 +129,15 @@ public class PlayerInputSetting : MonoBehaviour
         _playerInput.SwitchCurrentActionMap("Player");
     }
 
-    public void SwitchToUIScheme(GameObject gameObject)
+    public void SwitchToUISchemeAndSelect(GameObject gameObject)
     {
-        _playerInput.SwitchCurrentActionMap("Player");
+        _playerInput.SwitchCurrentActionMap("UI");
         GetComponent<MultiplayerEventSystem>().SetSelectedGameObject(gameObject);
+    }
+
+    public void SwitchToScheme(string name)
+    {
+        _playerInput.SwitchCurrentActionMap(name);
     }
     
     /// <summary>
