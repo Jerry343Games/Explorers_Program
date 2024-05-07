@@ -303,12 +303,20 @@ public class SceneManager : Singleton<SceneManager>
             {
                 MusicManager.Instance.PlaySound("Âþ»­»¬Èë");
 
+            }).OnComplete(() =>
+            {
+                MusicManager.Instance.PlaySound("»úÆ÷Æô¶¯");
+
             }));
-            s.AppendInterval(0.5f);
+            s.AppendInterval(1f);
             winImg.transform.GetChild(1).gameObject.SetActive(true);
             s.Append(winImg.transform.GetChild(1).GetComponent<RectTransform>().DOAnchorPos(winCGPoints[1].anchoredPosition, 0.5f).OnStart(() =>
             {
                 MusicManager.Instance.PlaySound("Âþ»­»¬Èë");
+
+            }).OnComplete(() =>
+            {
+                MusicManager.Instance.PlaySound("ÆÁÄ»ÁÁÆð");
 
             }));
             s.AppendInterval(0.5f);

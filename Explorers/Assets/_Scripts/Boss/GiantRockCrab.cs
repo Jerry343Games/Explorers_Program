@@ -273,6 +273,7 @@ public class GiantRockCrab : Singleton<GiantRockCrab>
             _coll.enabled = false;
             _anim.Play("Dead");
             FindObjectOfType<UIBossPanel>().HidePanel();
+            MusicManager.Instance.PlayBackMusic("Level_2");
         }
 
 
