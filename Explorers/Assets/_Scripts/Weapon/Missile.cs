@@ -71,9 +71,12 @@ public class Missile : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
+        //Debug.Log(other.name+"  "+ other.tag);
         switch (other.tag)
         {
+            
             case "Enemy":
+                //Debug.Log(other.name + "  " + other.tag+"111111111111111111111");
                 Instantiate(Resources.Load<GameObject>("Effect/SmallRocketExplosion"), transform.position, Quaternion.identity);
                 other.GetComponent<Enemy>().TakeDamage(_damage);
                 MusicManager.Instance.PlaySound("Υπ±¬");
