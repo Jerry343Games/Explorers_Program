@@ -14,6 +14,11 @@ public class TestInsBoss : MonoBehaviour
         {
             GameObject.FindGameObjectWithTag("Portal").transform.GetChild(0).gameObject.SetActive(true);//激活潜艇
         }
+        else
+        {
+            GameObject.FindGameObjectWithTag("Portal").transform.GetChild(1).gameObject.SetActive(true);//激活游戏机
+
+        }
     }
 
     private void OnTriggerEnter(Collider other)
