@@ -22,7 +22,12 @@ public class MainBattery : Battery
     {
         if(currentPower<=0 && !GetComponent<PlayerController>().hasDead)
         {
-            GetComponent<PlayerController>().SetDeadState(true);
+            foreach(var player in PlayerManager.Instance.gamePlayers)
+            {
+                player.GetComponent<Battery>().currentPower = 0;
+                player.GetComponent<PlayerController>().SetDeadState(true);
+            }
+
             //ÅÐ¸º
             if(!gameOver)
             {

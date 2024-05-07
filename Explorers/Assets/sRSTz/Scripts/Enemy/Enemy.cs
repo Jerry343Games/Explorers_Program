@@ -200,10 +200,13 @@ public class Enemy : MonoBehaviour
     private void Update()
     {
         //在这里检测距离，并改变速度  如果还没攻击，那么进入加速范围就加速，没进入就是正常速度
-        if (!isAttack&& Vector2.Distance(GetClosestPlayer().transform.position, transform.position) < dashToAttackDetectRadius)
+        if (!isAttack && GetClosestPlayer())
         {
-            moveSpeed = fasterSpeed;
-            ChangeDetectRadius(10f);
+            if(Vector2.Distance(GetClosestPlayer().transform.position, transform.position) < dashToAttackDetectRadius)
+            {
+                moveSpeed = fasterSpeed;
+                ChangeDetectRadius(10f);
+            }
         }
         else if(!isAttack)
         {
