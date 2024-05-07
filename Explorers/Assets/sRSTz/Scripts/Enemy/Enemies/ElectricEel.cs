@@ -13,7 +13,7 @@ public class ElectricEel : Enemy
     {
         base.Awake();
         aniEvent.OnEnemyAttackEvent += Attack;
-        aniEvent.EndEnemyAttackEvent += () => { isAttack = false; };
+        aniEvent.EndEnemyAttackEvent += () => { isAttack = false; moveSpeed = defaultSpeed; };
     }
     private void FixedUpdate()
     {

@@ -165,6 +165,7 @@ MonoBehaviour:
   targetRechedThreshold: 1
   showGizmo: 0
   isSeekBatteryFirst: 1
+  defaulttarget: {fileID: 0}
 --- !u!1 &3059179246726900401
 GameObject:
   m_ObjectHideFlags: 0
@@ -548,7 +549,7 @@ MonoBehaviour:
   playersInAttackArea: []
   aniEvent: {fileID: 9174217250409818097}
   isAttack: 0
-  speedOffset: 2
+  fasterSpeed: 7
   slowSpeed: 0
   flashColor: {r: 1, g: 0, b: 0, a: 1}
   flashDuration: 0.1

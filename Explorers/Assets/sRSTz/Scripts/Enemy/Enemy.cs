@@ -179,17 +179,17 @@ public class Enemy : MonoBehaviour
     public List<GameObject> playersInAttackArea;
     public AniEventControl aniEvent;
     public bool isAttack = false;
-    private float fasterSpeed;
-    public float speedOffset = 3f;
-    
+    public float fasterSpeed;
+    //public float speedOffset = 3f;
+    protected float defaultSpeed;
     public float slowSpeed;
     protected virtual void Awake()
     {
-        
+
         //if(aniEvent!=null)
-            
-        fasterSpeed = moveSpeed + speedOffset;
-        
+
+
+        defaultSpeed = moveSpeed;
         rb = GetComponent<Rigidbody>();
         spawnerPoint = gameObject.transform.position;
         spriteRenderer = gameObject.GetComponentInChildren<SpriteRenderer>();
@@ -210,7 +210,7 @@ public class Enemy : MonoBehaviour
         }
         else if(!isAttack)
         {
-            moveSpeed = fasterSpeed - speedOffset;
+            moveSpeed = defaultSpeed;
         }
 
 
