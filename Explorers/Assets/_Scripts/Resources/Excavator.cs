@@ -31,7 +31,7 @@ public class Excavator : MonoBehaviour
         _diggingTimer = _diggingTime;
         myAni.CrossFade("Dig",0.1f);
         
-        DOTween.To(() =>_cutoffHeight, x => _cutoffHeight=x, 8f, 1.5f);
+        DOTween.To(() =>_cutoffHeight, x => _cutoffHeight=x, 9f, 1.5f);
     
     }
 

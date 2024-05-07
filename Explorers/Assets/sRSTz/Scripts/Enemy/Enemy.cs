@@ -307,7 +307,7 @@ public class Enemy : MonoBehaviour
     }
     public virtual void Dead()
     {
-        Instantiate(Resources.Load<GameObject>("Effect/BloodExplosion"), transform.position, Quaternion.identity);
+        Instantiate(Resources.Load<GameObject>("Effect/DeadSmoke"), transform.position, Quaternion.identity);
         MusicManager.Instance.PlaySound("¹ÖÎïËÀÍö");
         gameObject.SetActive(false);
     }
