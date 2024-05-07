@@ -335,7 +335,7 @@ public class SceneManager : Singleton<SceneManager>
             s.Append(winImg.DOFade(0, 3f).OnComplete(() =>
             {
                 winImg.transform.GetChild(6).gameObject.SetActive(true);
-                MusicManager.Instance.PlayBackMusic("Select");
+                MusicManager.Instance.PlayBackMusic("End");
             }));
             s.Append(winImg.transform.GetChild(6).GetComponent<RectTransform>().DOAnchorPos(
                 new Vector2(winImg.transform.GetChild(6).GetComponent<RectTransform>().anchoredPosition.x, -winImg.transform.GetChild(6).GetComponent<RectTransform>().anchoredPosition.y),50f));
