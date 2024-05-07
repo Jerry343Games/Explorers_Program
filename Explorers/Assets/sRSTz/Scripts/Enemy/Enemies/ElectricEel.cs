@@ -51,6 +51,7 @@ public class ElectricEel : Enemy
                 playerEffect.GetComponent<DestoryByLifeTime>().lifeTime = reverseTime;
             }
         }
+        MusicManager.Instance.PlaySound("µçÓã¹¥»÷");
         canAttack = false;
         Invoke(nameof(RefreshAttack), attackDelay);
     }

@@ -9,7 +9,7 @@ public class MissileControl : MonoBehaviour
     public float rotateSpeed = 200.0f; // 所有导弹的统一旋转速度
     public int singleMissileDamage;
 
-    void Start()
+    public void Init()
     {
         // 获取所有子物体上的MissileTracker组件
         Missile[] missiles = GetComponentsInChildren<Missile>();

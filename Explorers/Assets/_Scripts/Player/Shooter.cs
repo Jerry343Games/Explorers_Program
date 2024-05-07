@@ -289,7 +289,7 @@ public class Shooter : PlayerController
 
         missileCollection.GetComponent<MissileControl>().target = nearest.gameObject;
         missileCollection.GetComponent<MissileControl>().singleMissileDamage  = salveMissileDamage;
-
+        missileCollection.GetComponent<MissileControl>().Init();
         GetComponent<CellBattery>().ChangePower(-salvoPower);
     }
 

@@ -61,7 +61,10 @@ public class Missile : MonoBehaviour
         {
             if (Vector3.Distance(coll.transform.position, transform.position) < Vector3.Distance(nearest.transform.position, transform.position))
             {
-                nearest = coll;
+                if(coll.gameObject.activeInHierarchy)
+                {
+                    nearest = coll;
+                }
             }
         }
         return nearest;
