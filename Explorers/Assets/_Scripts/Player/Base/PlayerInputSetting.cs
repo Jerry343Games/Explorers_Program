@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.UI;
 using UnityEngine.Serialization;
 using Vector2 = UnityEngine.Vector2;
 
@@ -126,6 +127,12 @@ public class PlayerInputSetting : MonoBehaviour
     public void SwitchToPlayerScheme()
     {
         _playerInput.SwitchCurrentActionMap("Player");
+    }
+
+    public void SwitchToUIScheme(GameObject gameObject)
+    {
+        _playerInput.SwitchCurrentActionMap("Player");
+        GetComponent<MultiplayerEventSystem>().SetSelectedGameObject(gameObject);
     }
     
     /// <summary>
