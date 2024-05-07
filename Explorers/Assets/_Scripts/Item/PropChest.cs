@@ -40,10 +40,9 @@ public class PropChest : MonoBehaviour
             Sequence s = DOTween.Sequence();
 
             s.Append(item.transform.DOMoveY(transform.position.y + 1, 0.5f));
-            s.Append(item.transform.DOMoveY(transform.position.y -0.5f, 0.5f).OnComplete(() =>
+            s.Append(item.transform.DOMoveY(transform.position.y, 0.5f).OnComplete(() =>
             {
                 item.GetComponent<Collider>().enabled = true;
-
             }));
 
 
