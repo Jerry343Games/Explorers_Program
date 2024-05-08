@@ -157,7 +157,7 @@ public class SceneManager : Singleton<SceneManager>
 
     public void GameInit()
     {
-        //int uiIndex = 0;
+        int uiIndex = 1;
         foreach (var player in _players)
         {
             PlayerController controller = null;
@@ -168,6 +168,12 @@ public class SceneManager : Singleton<SceneManager>
                 if(character.gameObject.name== "BatteryCarrier")
                 {
                     character.transform.position = bornTransform.position;
+                    //角色UI面板生成
+                    GameObject battryPanel = Instantiate(Resources.Load<GameObject>("UI/BatteryCarrier"  + "Panel"));
+
+                    battryPanel.transform.SetParent(healthPanel.transform, false);
+
+                    battryPanel.GetComponent<RectTransform>().anchoredPosition = panelPoints[0];
                 }
             }
             for (int i = 0; i < player.transform.childCount; i++)
@@ -176,7 +182,6 @@ public class SceneManager : Singleton<SceneManager>
                 {
                     controller = player.transform.GetChild(i).GetComponent<PlayerController>();
                     index = i;
-                    //uiIndex = i;
                     break;
 
                 }
@@ -188,12 +193,12 @@ public class SceneManager : Singleton<SceneManager>
             controller.transform.position = bornTransform.position;
 
 
-            //角色UI面板生成
-            GameObject playerHealthPanel = Instantiate(Resources.Load<GameObject>("UI/" + controller.gameObject.name + "Panel"));
+            ////角色UI面板生成
+            //GameObject playerHealthPanel = Instantiate(Resources.Load<GameObject>("UI/" + controller.gameObject.name + "Panel"));
 
-            playerHealthPanel.transform.SetParent(healthPanel.transform, false);
+            //playerHealthPanel.transform.SetParent(healthPanel.transform, false);
 
-            playerHealthPanel.GetComponent<RectTransform>().anchoredPosition = panelPoints[index];
+            //playerHealthPanel.GetComponent<RectTransform>().anchoredPosition = panelPoints[index];
             
             //电池不连电池
             if (player == BatteryTransform.parent.gameObject)
@@ -201,6 +206,15 @@ public class SceneManager : Singleton<SceneManager>
                 EnemyManager.Instance.battery = controller.gameObject;
                 continue;
             }
+
+            //角色UI面板生成
+            GameObject playerHealthPanel = Instantiate(Resources.Load<GameObject>("UI/" + controller.gameObject.name + "Panel"));
+
+            playerHealthPanel.transform.SetParent(healthPanel.transform, false);
+
+            playerHealthPanel.GetComponent<RectTransform>().anchoredPosition = panelPoints[uiIndex];
+            uiIndex++;
+
             float rotationZ = Vector3.Angle((player.transform.GetChild(index).position - BatteryTransform.position).normalized, Vector3.right) *
                 (player.transform.GetChild(index).position.y < BatteryTransform.position.y ? -1 : 1);
             Quaternion rotation = Quaternion.Euler(new Vector3(0, 0, rotationZ));
