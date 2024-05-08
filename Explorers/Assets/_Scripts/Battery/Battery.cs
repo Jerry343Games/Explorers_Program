@@ -29,6 +29,9 @@ public class Battery : MonoBehaviour
     /// </summary>
     private void PowerDecayPreSecond()
     {
-        ChangePower(-1);
+        if(SceneManager.Instance)
+        {
+            ChangePower(-1);
+        }
     }
 }

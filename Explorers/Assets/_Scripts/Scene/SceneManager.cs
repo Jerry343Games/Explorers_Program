@@ -157,17 +157,26 @@ public class SceneManager : Singleton<SceneManager>
 
     public void GameInit()
     {
-        int uiIndex = 0;
+        //int uiIndex = 0;
         foreach (var player in _players)
         {
             PlayerController controller = null;
             int index = 0;
+
+            foreach(var character in PlayerManager.Instance.gamePlayers)
+            {
+                if(character.gameObject.name== "BatteryCarrier")
+                {
+                    character.transform.position = bornTransform.position;
+                }
+            }
             for (int i = 0; i < player.transform.childCount; i++)
             {
                 if (player.transform.GetChild(i).gameObject.activeInHierarchy)
                 {
                     controller = player.transform.GetChild(i).GetComponent<PlayerController>();
                     index = i;
+                    //uiIndex = i;
                     break;
 
                 }
@@ -184,8 +193,8 @@ public class SceneManager : Singleton<SceneManager>
 
             playerHealthPanel.transform.SetParent(healthPanel.transform, false);
 
-            playerHealthPanel.GetComponent<RectTransform>().anchoredPosition = panelPoints[uiIndex];
-            uiIndex++;
+            playerHealthPanel.GetComponent<RectTransform>().anchoredPosition = panelPoints[index];
+            
             //电池不连电池
             if (player == BatteryTransform.parent.gameObject)
             {
