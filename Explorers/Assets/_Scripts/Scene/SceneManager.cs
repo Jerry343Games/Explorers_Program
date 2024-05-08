@@ -158,24 +158,24 @@ public class SceneManager : Singleton<SceneManager>
     public void GameInit()
     {
         int uiIndex = 1;
+
+        foreach (var character in PlayerManager.Instance.gamePlayers)
+        {
+            if (character.gameObject.name == "BatteryCarrier")
+            {
+                character.transform.position = bornTransform.position;
+                //角色UI面板生成
+                GameObject battryPanel = Instantiate(Resources.Load<GameObject>("UI/BatteryCarrier" + "Panel"));
+
+                battryPanel.transform.SetParent(healthPanel.transform, false);
+
+                battryPanel.GetComponent<RectTransform>().anchoredPosition = panelPoints[0];
+            }
+        }
         foreach (var player in _players)
         {
             PlayerController controller = null;
             int index = 0;
-
-            foreach(var character in PlayerManager.Instance.gamePlayers)
-            {
-                if(character.gameObject.name== "BatteryCarrier")
-                {
-                    character.transform.position = bornTransform.position;
-                    //角色UI面板生成
-                    GameObject battryPanel = Instantiate(Resources.Load<GameObject>("UI/BatteryCarrier"  + "Panel"));
-
-                    battryPanel.transform.SetParent(healthPanel.transform, false);
-
-                    battryPanel.GetComponent<RectTransform>().anchoredPosition = panelPoints[0];
-                }
-            }
             for (int i = 0; i < player.transform.childCount; i++)
             {
                 if (player.transform.GetChild(i).gameObject.activeInHierarchy)
@@ -192,13 +192,6 @@ public class SceneManager : Singleton<SceneManager>
 
             controller.transform.position = bornTransform.position;
 
-
-            ////角色UI面板生成
-            //GameObject playerHealthPanel = Instantiate(Resources.Load<GameObject>("UI/" + controller.gameObject.name + "Panel"));
-
-            //playerHealthPanel.transform.SetParent(healthPanel.transform, false);
-
-            //playerHealthPanel.GetComponent<RectTransform>().anchoredPosition = panelPoints[index];
             
             //电池不连电池
             if (player == BatteryTransform.parent.gameObject)
