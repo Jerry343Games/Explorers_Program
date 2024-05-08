@@ -42,7 +42,7 @@ public class EnemyManager : SingletonPersistent<EnemyManager>
     }
     public void CheckEnemySpwan()//开局刷怪和湍流
     {
-        Debug.Log(GameObject.FindGameObjectsWithTag("Enemy").Length);
+       // Debug.Log(GameObject.FindGameObjectsWithTag("Enemy").Length);
         if (GameObject.FindGameObjectsWithTag("Enemy").Length > maxEnemisCount) canSpwanEnemy = false;
         else canSpwanEnemy = true;
         if (!canSpwanEnemy || spawners == null || spawners.Count == 0 || battery == null) return;

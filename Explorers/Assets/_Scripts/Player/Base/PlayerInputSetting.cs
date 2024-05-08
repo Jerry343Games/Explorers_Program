@@ -41,7 +41,7 @@ public class PlayerInputSetting : MonoBehaviour
     {
         Init();
         DontDestroyOnLoad(gameObject);
-        TestScenePlayerSelect();//当不是从选择关卡开始时分配默认玩家
+        //TestScenePlayerSelect();//当不是从选择关卡开始时分配默认玩家
         myControlScheme = _playerInput.currentControlScheme;
     }
 
@@ -60,7 +60,13 @@ public class PlayerInputSetting : MonoBehaviour
         CharacterItem.OnPlayerTypeChanged += HandlePlayerTypeChanged;
         EventCenter.GameStartedEvent += FeatureAssignment;
     }
+    private void OnDestroy()
+    {
+        CharacterItem.OnPlayerTypeChanged -= HandlePlayerTypeChanged;
 
+        EventCenter.GameStartedEvent -= FeatureAssignment;
+
+    }
     /// <summary>
     /// 外部获取选择的玩家职业
     /// </summary>
@@ -98,31 +104,31 @@ public class PlayerInputSetting : MonoBehaviour
     /// <summary>
     /// 用于在不经过选人关卡时分配角色
     /// </summary>
-    private void TestScenePlayerSelect()
-    {
-        if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name != "SelectScene")
-        {
-            switch (_playerInput.playerIndex)
-            {
-                case (int)PlayerType.BatteryCarrier:
-                    batteryCarrier.SetActive(true);
-                    _player = batteryCarrier;
-                    break;
-                case (int)PlayerType.Shooter:
-                    shooter.SetActive(true);
-                    _player = shooter;
-                    break;
-                case (int)PlayerType.Healer:
-                    healer.SetActive(true);
-                    _player = healer;
-                    break;
-                case (int)PlayerType.Fighter:
-                    fighter.SetActive(true);
-                    _player = fighter;
-                    break;
-            }
-        }
-    }
+    //private void TestScenePlayerSelect()
+    //{
+    //    if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name != "SelectScene")
+    //    {
+    //        switch (_playerInput.playerIndex)
+    //        {
+    //            case (int)PlayerType.BatteryCarrier:
+    //                batteryCarrier.SetActive(true);
+    //                _player = batteryCarrier;
+    //                break;
+    //            case (int)PlayerType.Shooter:
+    //                shooter.SetActive(true);
+    //                _player = shooter;
+    //                break;
+    //            case (int)PlayerType.Healer:
+    //                healer.SetActive(true);
+    //                _player = healer;
+    //                break;
+    //            case (int)PlayerType.Fighter:
+    //                fighter.SetActive(true);
+    //                _player = fighter;
+    //                break;
+    //        }
+    //    }
+    //}
 
     public void SwitchToPlayerScheme()
     {
@@ -145,6 +151,7 @@ public class PlayerInputSetting : MonoBehaviour
     /// </summary>
     private void FeatureAssignment()
     {
+        Debug.Log(characterType);
         feature = PlayerManager.Instance.playerFeaturesDic[(int)characterType];
     }
     
