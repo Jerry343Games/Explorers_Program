@@ -200,6 +200,7 @@ public class GiantRockCrab : Singleton<GiantRockCrab>
 
     private void Update()
     {
+        if (hasDead) return;
         //¶ş½×¶ÎÕğÉå¼ÆÊ±
         if(isSecondStage)
         {
