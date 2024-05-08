@@ -137,7 +137,7 @@ public class UISelectPanel : MonoBehaviour
                 q.Append(mask.DOFade(1, _btnAniDuration)).OnComplete(() =>
                 {
                     //完成动画回调
-                    UnityEngine.SceneManagement.SceneManager.LoadScene("JerryTest");
+                    UnityEngine.SceneManagement.SceneManager.LoadScene("JerryTest_2");
                     
                 });
             }
