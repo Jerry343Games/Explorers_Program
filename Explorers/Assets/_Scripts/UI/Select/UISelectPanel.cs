@@ -111,6 +111,7 @@ public class UISelectPanel : MonoBehaviour
                 infoLine1.rectTransform.DOScale(_line1EndValue, 0.2f);
                 infoLine1.text = "未选择电池单元，即将重新载入";
                 infoLine2.text = null;
+                PlayerManager.Instance.gamePlayers.Clear();
                 Invoke("ReloadScene",1f);
             }
             else
