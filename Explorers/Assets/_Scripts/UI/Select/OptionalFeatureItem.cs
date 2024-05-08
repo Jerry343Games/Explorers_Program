@@ -140,10 +140,13 @@ public class OptionalFeatureItem : MonoBehaviour
     /// </summary>
     private void ClickFeature1()
     {
-        SetOptionalFeature(feature1);
-        FeatureConfirmEvent?.Invoke();//这个事件是给面板收起和锁定用的，所有信息传递必须在此之前完成
-        optionalFeatureSelectImg.color = _unSelectColor;
-        _hasConfirmed = true;
+        if (!_hasConfirmed)
+        {
+            SetOptionalFeature(feature1);
+            FeatureConfirmEvent?.Invoke(); //这个事件是给面板收起和锁定用的，所有信息传递必须在此之前完成
+            optionalFeatureSelectImg.color = _unSelectColor;
+            _hasConfirmed = true;
+        }
     }
 
     /// <summary>
@@ -151,10 +154,13 @@ public class OptionalFeatureItem : MonoBehaviour
     /// </summary>
     private void ClickFeature2()
     {
-        SetOptionalFeature(feature2);
-        FeatureConfirmEvent?.Invoke();//这个事件是给面板收起和锁定用的，所有信息传递必须在此之前完成
-        optionalFeatureSelectImg.color = _unSelectColor;
-        _hasConfirmed = true;
+        if (!_hasConfirmed)
+        {
+            SetOptionalFeature(feature2);
+            FeatureConfirmEvent?.Invoke(); //这个事件是给面板收起和锁定用的，所有信息传递必须在此之前完成
+            optionalFeatureSelectImg.color = _unSelectColor;
+            _hasConfirmed = true;
+        }
     }
 
     private void SetOptionalFeature(OptionalFeature feature)

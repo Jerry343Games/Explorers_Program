@@ -55,9 +55,10 @@ public class   PlayerManager : SingletonPersistent<PlayerManager>
 
     private void OnLoadScene(Scene scene, LoadSceneMode mode)
     {
-        if (scene.name=="StartScene")
+        if (scene.name=="StartScene"|| scene.name=="SelectScene")
         {
             playerFeaturesDic.Clear();
+            Debug.Log("clear Dic");
         }
     }
 
@@ -151,6 +152,7 @@ public class   PlayerManager : SingletonPersistent<PlayerManager>
         {
             Destroy(player);
         }
+        playerFeaturesDic.Clear();
         players.Clear();
     }
     

@@ -438,6 +438,7 @@ public class SceneManager : Singleton<SceneManager>
         {
             Destroy(player.gameObject);
         }
+        PlayerManager.Instance.playerFeaturesDic.Clear();
         PlayerManager.Instance.players.Clear();
         PlayerManager.Instance.gamePlayers.Clear();
         PlayerManager.Instance.resNum = 0;

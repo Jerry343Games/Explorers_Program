@@ -183,7 +183,11 @@ public class UISelectPanel : MonoBehaviour
     private void ReloadScene()
     {
         //手动销毁玩家
+        PlayerManager.Instance.playerFeaturesDic.Clear();
         PlayerManager.Instance.DestoryAllPlayers();
+        PlayerManager.Instance.players.Clear();
+        PlayerManager.Instance.gamePlayers.Clear();
+        PlayerManager.Instance.resNum = 0;
         UnityEngine.SceneManagement.SceneManager.LoadScene("SelectScene");
     }
 }
