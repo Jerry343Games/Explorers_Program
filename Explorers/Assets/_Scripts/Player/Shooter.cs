@@ -161,18 +161,21 @@ public class Shooter : PlayerController
 
                 break;
             case "Portal":
-                if (playerInputSetting.GetInteractButtonDown())
+                if (SceneManager.Instance.matchVictoryCondition)
                 {
-                    bubbleManager.DestroyBubble();
-                    if (!SceneManager.Instance.isSecondLevel)
+                    if (playerInputSetting.GetInteractButtonDown())
                     {
-                        //载入下一关
-                        SceneManager.Instance.mask.DOFade(1, 1f);
-                        UnityEngine.SceneManagement.SceneManager.LoadScene("StoreScene");
-                    }
-                    else
-                    {
-                        SceneManager.Instance.GameOver(true);
+                        bubbleManager.DestroyBubble();
+                        if (!SceneManager.Instance.isSecondLevel)
+                        {
+                            //载入下一关
+                            SceneManager.Instance.mask.DOFade(1, 1f);
+                            UnityEngine.SceneManagement.SceneManager.LoadScene("StoreScene");
+                        }
+                        else
+                        {
+                            SceneManager.Instance.GameOver(true);
+                        }
                     }
                 }
                 break;
