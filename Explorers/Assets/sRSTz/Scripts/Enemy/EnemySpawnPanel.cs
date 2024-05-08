@@ -12,9 +12,12 @@ public class EnemySpawnPanel : MonoBehaviour
     public RectTransform banner;
     public TMP_Text countdownText;
     private bool isCounting = false;
+    public GameObject warningFinalPoint;
+    private Vector2 warningFinalPosition;
     private void Awake()
     {
         EnemyManager.Instance.spawnPanel = this;
+        warningFinalPosition = warningFinalPoint.transform.position;
     }
     public void StartCountdown(float time)
     {
@@ -22,7 +25,7 @@ public class EnemySpawnPanel : MonoBehaviour
         if (!isCounting)
         {
             Sequence q = DOTween.Sequence();
-            q.Append(warning.DOAnchorPos(new Vector2(0,177), 0.5f));
+            q.Append(warning.DOAnchorPos(new Vector2(2,-66), 0.5f));
             q.Append(clockImg.DOAnchorPos(new Vector2(-109.6f, -57f), 0.25f));
             q.Append(banner.DOAnchorPos(new Vector2(-125f, -0), 0.25f)).OnComplete(()=>StartCountdownText(time));
             isCounting = true;

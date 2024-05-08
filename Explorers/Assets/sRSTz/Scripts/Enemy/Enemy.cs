@@ -425,7 +425,7 @@ public class Enemy : MonoBehaviour
 
         isSleeping = false;
         //TODO 短暂显示被惊动的图标
-        Debug.Log("被惊动");
+        
         CancelInvoke(nameof(SleepAwakeCheck));
         rb = GetComponent<Rigidbody>();
         rb.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY|RigidbodyConstraints.FreezePositionZ|RigidbodyConstraints.FreezeRotationZ;

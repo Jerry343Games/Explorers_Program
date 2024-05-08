@@ -71,7 +71,7 @@ public class SeekBehaviour : SteeringBehaviour
         if (aiData.currentTarget == null && defaulttarget != null)
         {
             aiData.currentTarget = defaulttarget.transform; targetPositionCached = aiData.currentTarget.position;
-            Debug.Log(aiData.currentTarget + "##" + transform.position);
+            
         }
         //cache the last position only if we still see the target (if the targets collection is not empty)除非有默认目标
         if (aiData.currentTarget != null && aiData.targets != null && aiData.targets.Contains(aiData.currentTarget))

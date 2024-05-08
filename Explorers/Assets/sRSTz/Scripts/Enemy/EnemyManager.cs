@@ -63,19 +63,19 @@ public class EnemyManager : SingletonPersistent<EnemyManager>
     //刷一波虫潮 TODO：随机选同一边，然后再从这一边的角度随机选三个方向刷怪（暂定），直接刷墙里应该是可以的（注意把敌人与墙的碰撞取消）
     public void SpawnEnemyAfter()
     {
-        Debug.Log("before" + GameObject.FindGameObjectsWithTag("Enemy").Length);
+        //Debug.Log("before" + GameObject.FindGameObjectsWithTag("Enemy").Length);
         //if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name.Equals("SelectScene")) return;
         spwanersNearToFar = GetFilteredAndSortedGeneratorsInWall (spwanerDistanceToBattery);
         for (int i = 0; i < 3; i++)
         {
-            Debug.Log("aaaaaaaaaa" + GameObject.FindGameObjectsWithTag("Enemy").Length+"aa"+i);
+            //Debug.Log("aaaaaaaaaa" + GameObject.FindGameObjectsWithTag("Enemy").Length+"aa"+i);
             if (i > spwanersNearToFar.Count - 1) break;
             spwanersNearToFar[i].GetComponent<EnemySpawner>().SpawnOnce(SelectRandomMonster(),false);
             spwanersNearToFar[i].GetComponent<EnemySpawner>().SpawnOnce(SelectRandomMonster(), false);
             spwanersNearToFar[i].GetComponent<EnemySpawner>().SpawnOnce(SelectRandomMonster(), false);
            // spwanersNearToFar[i].GetComponent<EnemySpawner>().Test();
         }
-        Debug.Log("after" + GameObject.FindGameObjectsWithTag("Enemy").Length);
+        //Debug.Log("after" + GameObject.FindGameObjectsWithTag("Enemy").Length);
     }
     private void UpdateEnemySpawnPanel()
     {
