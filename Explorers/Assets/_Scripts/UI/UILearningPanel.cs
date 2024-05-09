@@ -37,7 +37,11 @@ public class UILearningPanel : MonoBehaviour
     {
         foreach (var group in learnGroup)
         {
-            group.featureBtn.onClick.AddListener(()=>OnclickFeatureBtn(group.spriteToShow,group.illustrateText));
+            group.featureBtn.onClick.AddListener(()=>
+            {
+                MusicManager.Instance.PlaySound("½Ì³Ì°´Å¥");
+                OnclickFeatureBtn(group.spriteToShow, group.illustrateText);
+            });
         }
         backBtn.onClick.AddListener(OnClickBackBtn);
 

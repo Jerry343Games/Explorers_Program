@@ -128,6 +128,9 @@ public class MusicManager : Singleton<MusicManager>
             case "挖掘机":
                 soundAudio.volume = 0.3f;
                 break;
+            case "教程按钮":
+                soundAudio.volume = 0.2f;
+                break;
             default:
                 soundAudio.volume = 1;
                 break;
