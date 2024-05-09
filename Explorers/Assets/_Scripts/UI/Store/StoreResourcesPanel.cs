@@ -15,7 +15,6 @@ public class StoreResourcesPanel : MonoBehaviour
     
     public Color endColor = Color.red;  // 结束颜色
     public float duration = 0.01f;  // 持续时间
-    // Start is called before the first frame update
     private void OnEnable()
     {
         numText.text = PlayerManager.Instance.resNum.ToString();

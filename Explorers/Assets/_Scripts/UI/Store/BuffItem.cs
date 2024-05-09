@@ -34,6 +34,9 @@ public class BuffItem : MonoBehaviour
         _myBtn.onClick.AddListener(OnClickThisBuff);
     }
     
+    /// <summary>
+    /// 开始时刷新
+    /// </summary>
     public void EnableRefresh()
     {
         name.text = myBuff.buffName;
@@ -41,6 +44,7 @@ public class BuffItem : MonoBehaviour
         icon.sprite = myBuff.buffIcon;
     }
 
+    
     /// <summary>
     /// 点击buff事件
     /// </summary>
@@ -73,7 +77,9 @@ public class BuffItem : MonoBehaviour
         unChooseMask.GetComponent<RectTransform>().DOAnchorPos(_maskEndPos, 0.2f);
     }
 
-    
+    /// <summary>
+    /// 刷新下一轮
+    /// </summary>
     public void RefreshNextRound()
     {
         chooseMask.GetComponent<RectTransform>().anchoredPosition = _maskStartPos;

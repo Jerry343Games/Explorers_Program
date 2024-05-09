@@ -60,6 +60,8 @@ public class CharacterBuffPanel : MonoBehaviour
     {
         refreshBtn.onClick.RemoveListener(ClickRefreshBtn);
         confirmBtn.onClick.RemoveListener(ClickConfirmBtn);
+        
+        //对全部子级UI组件设置监听
         for (int i = 0; i < buffSlots.Length; i++)
         {
             buffSlots[i].GetComponent<BuffItem>().chooseBuff -= OnClickBuffBtn;
@@ -136,7 +138,7 @@ public class CharacterBuffPanel : MonoBehaviour
     }
 
     /// <summary>
-    /// 从缓存读取并分发给子级UI组件
+    /// 从写入buffSlots的读取并分发给子级UI组件
     /// </summary>
     public void ShowSlotsOnUI()
     {
@@ -173,6 +175,9 @@ public class CharacterBuffPanel : MonoBehaviour
         OnConfirmClick?.Invoke();
     }
 
+    /// <summary>
+    /// 监听子级UIBuff选择的事件，执行锁定操作
+    /// </summary>
     private void OnClickBuffBtn()
     {
         foreach (GameObject buffslot in buffSlots)
