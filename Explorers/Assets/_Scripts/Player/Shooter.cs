@@ -324,5 +324,31 @@ public class Shooter : PlayerController
     #endregion
 
 
-
+    public override void AddBuff(UpgradeBuff buff)
+    {
+        base.AddBuff(buff);
+        switch (buff.buffName)
+        {
+            case "高效修复":
+                //脱战后提前一秒维修护盾
+                timeToRepairArmor -= 1;
+                break;
+            case "电磁放大":
+                maxArmor += 5;
+                break;
+            case "追猎":
+                secondaryWeapon.attackDamage += 2;
+                secondaryWeapon.attackCD -= 2;
+                break;
+            case "制导":
+                salveMissileDamage += 2;
+                break;
+            case "刀尖舔血":
+                speed += 2;
+                maxArmor += 5;
+                break;
+            default:
+                break;
+        }
+    }
 }

@@ -38,7 +38,7 @@ public class Piranha:Enemy
     {
         
         if (playersInAttackArea.Count == 0) return;
-        MusicManager.Instance.PlaySound("¹ÖÎïËºÒ§");
+        //MusicManager.Instance.PlaySound("¹ÖÎïËºÒ§");
 
         foreach (var player in playersInAttackArea)
         {

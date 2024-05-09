@@ -502,4 +502,32 @@ public class Fighter : PlayerController
         };
     }
 
+    public override void AddBuff(UpgradeBuff buff)
+    {
+        base.AddBuff(buff);
+        switch (buff.buffName)
+        {
+            case "高效修复":
+                //脱战后提前一秒维修护盾
+                timeToRepairArmor -= 1;
+                break;
+            case "电磁放大":
+                maxArmor += 5;
+                break;
+            case "爆反":
+                timeToRepairArmor -= 1;
+                restoreCD -= 1;
+                break;
+            case "收割":
+                mainWeapon.attackDamage += 2;
+                mainWeapon.attackRange += 2;
+                break;
+            case "余震打击":
+                secondaryWeapon.attackDamage += 2;
+                break;
+            default:
+                break;
+        }
+    }
+
 }

@@ -53,6 +53,8 @@ public class CharacterBuffPanel : MonoBehaviour
         for (int i = 0; i < buffSlots.Length; i++)
         {
             buffSlots[i].GetComponent<BuffItem>().chooseBuff += OnClickBuffBtn;
+
+
         }
     }
 
@@ -60,9 +62,20 @@ public class CharacterBuffPanel : MonoBehaviour
     {
         refreshBtn.onClick.RemoveListener(ClickRefreshBtn);
         confirmBtn.onClick.RemoveListener(ClickConfirmBtn);
+        
+        //对全部子级UI组件设置监听
         for (int i = 0; i < buffSlots.Length; i++)
         {
             buffSlots[i].GetComponent<BuffItem>().chooseBuff -= OnClickBuffBtn;
+        }
+    }
+
+    public void SetPlayerToItems()
+    {
+
+        for (int i = 0; i < buffSlots.Length; i++)
+        {
+            buffSlots[i].GetComponent<BuffItem>().player = player.GetComponentInChildren<PlayerController>() ;
         }
     }
 
@@ -74,7 +87,7 @@ public class CharacterBuffPanel : MonoBehaviour
         {
             case PlayerType.BatteryCarrier:
                 playerImg.sprite = Resources.Load<Sprite>("UI/Image/Battery - Copy");
-                _allowedTypes=new HashSet<BuffType> { BuffType.Battery, BuffType.General };
+                _allowedTypes=new HashSet<BuffType> { BuffType.BatteryCarrier, BuffType.General };
                 RefreshBuffs(_allowedTypes);
                 break;
             case PlayerType.Shooter:
@@ -136,7 +149,7 @@ public class CharacterBuffPanel : MonoBehaviour
     }
 
     /// <summary>
-    /// 从缓存读取并分发给子级UI组件
+    /// 从写入buffSlots的读取并分发给子级UI组件
     /// </summary>
     public void ShowSlotsOnUI()
     {
@@ -171,8 +184,13 @@ public class CharacterBuffPanel : MonoBehaviour
         player.GetComponent<PlayerInput>().SwitchCurrentActionMap("Player");
         
         OnConfirmClick?.Invoke();
+
+        
     }
 
+    /// <summary>
+    /// 监听子级UIBuff选择的事件，执行锁定操作
+    /// </summary>
     private void OnClickBuffBtn()
     {
         foreach (GameObject buffslot in buffSlots)

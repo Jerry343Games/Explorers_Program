@@ -44,6 +44,8 @@ public class StorePanel : MonoBehaviour
             GameObject item = Instantiate(Resources.Load<GameObject>("UI/Store/CharacterBuffPanel"),characterGrids.transform);
             CharacterBuffPanel characterBuffPanel = item.GetComponentInChildren<CharacterBuffPanel>();
             characterBuffPanel.player = player;
+            //7Chords
+            characterBuffPanel.SetPlayerToItems();
             characterBuffPanel.Refresh();
 
             characterBuffPanel.OnConfirmClick += PlayerStateCheck;

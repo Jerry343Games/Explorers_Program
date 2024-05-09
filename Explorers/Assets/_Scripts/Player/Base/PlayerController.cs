@@ -335,7 +335,7 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     public void CheckDistanceToBattery()
     {
-        if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name == "SelectScene") return;
+        if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name == "SelectScene"|| UnityEngine.SceneManagement.SceneManager.GetActiveScene().name == "StoreScene") return;
         if (!SceneManager.Instance.BatteryTransform) return;
         if (Vector3.Distance(SceneManager.Instance.BatteryTransform.position, transform.position) > DistanceThreshold && _hasConnected)
         {
@@ -753,5 +753,21 @@ public class PlayerController : MonoBehaviour
     public virtual void SetFeatureCD()
     {
 
+    }
+
+
+
+    public virtual void AddBuff(UpgradeBuff buff)
+    {
+        //基类里面只要写全部人通用的buff就行
+        switch(buff.buffName)
+        {
+            case "动力引擎":
+                speed += 1;
+                break;
+            case "节能装置":
+                GetComponent<Battery>().decayPowerPreSecond = 0.8f;
+                break;
+        }
     }
 }

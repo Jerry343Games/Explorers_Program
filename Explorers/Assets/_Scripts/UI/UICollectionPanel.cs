@@ -15,7 +15,7 @@ public class UICollectionPanel : MonoBehaviour
     
     [HideInInspector]
     public int currentNum;
-    [HideInInspector]
+
     public int maxNum;
 
     private Transform _canvas;

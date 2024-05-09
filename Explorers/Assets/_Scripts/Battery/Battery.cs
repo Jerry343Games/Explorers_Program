@@ -5,12 +5,13 @@ using UnityEngine;
 
 public class Battery : MonoBehaviour
 {
-    public int maxPower=10;
-    public int decayValue = 1;
+    public float maxPower=10;
+    //public float decayValue = 1;
     
     //[HideInInspector]
-    public int currentPower;
-    
+    public float currentPower;
+
+    public float decayPowerPreSecond = 1;
 
     public Battery(int initialPower)
     {
@@ -19,7 +20,7 @@ public class Battery : MonoBehaviour
     /// <summary>
     /// 电量修改方法
     /// </summary>
-    public virtual void ChangePower(int value)
+    public virtual void ChangePower(float value)
     {
         currentPower = Mathf.Clamp(currentPower+value,0, maxPower);
     }
@@ -31,7 +32,7 @@ public class Battery : MonoBehaviour
     {
         if(SceneManager.Instance)
         {
-            ChangePower(-1);
+            ChangePower(-decayPowerPreSecond);
         }
     }
 }

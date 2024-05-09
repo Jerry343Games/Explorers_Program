@@ -246,7 +246,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 120
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!136 &7415683426959137689
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -302,8 +302,10 @@ MonoBehaviour:
   playersInAttackArea: []
   aniEvent: {fileID: 2230106812588453106}
   isAttack: 0
-  speedOffset: 3
+  fasterSpeed: 0
   slowSpeed: 0
+  flashColor: {r: 1, g: 0, b: 0, a: 1}
+  flashDuration: 0.1
   canJump: 1
   jumpForce: 18
   waitTime: 2
@@ -452,6 +454,7 @@ MonoBehaviour:
   targetRechedThreshold: 1
   showGizmo: 0
   isSeekBatteryFirst: 0
+  defaulttarget: {fileID: 0}
 --- !u!1 &8028272514344451684
 GameObject:
   m_ObjectHideFlags: 0

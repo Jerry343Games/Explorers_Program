@@ -1,7 +1,5 @@
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -303,5 +301,32 @@ public class BatteryCarrier : PlayerController
     {
         selectPlayerImage.color = Color.white;
         selectPlayerImage.sprite = Resources.Load<Sprite>("UI/Image/"+type.ToString());
+    }
+
+
+    public override void AddBuff(UpgradeBuff buff)
+    {
+        base.AddBuff(buff);
+        switch(buff.buffName)
+        {
+            case "扩容电池":
+                GetComponent<MainBattery>().maxPower += 500;
+                GetComponent<MainBattery>().currentPower += 500;
+                break;
+            case "号令":
+                overloadCD -= 2f;
+                overloadPower -= 5;
+                break;
+            case "多线程":
+                targetNumber += 2;
+                break;
+            case "导电":
+                lightningAttackDamage += 2;
+                lightningAttackRange += 2;
+                break;
+            default:
+                break;
+
+        }
     }
 }

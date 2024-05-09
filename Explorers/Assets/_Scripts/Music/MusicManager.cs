@@ -49,7 +49,7 @@ public class MusicManager : Singleton<MusicManager>
     }
     public void MusicLoadIn(float fadeSpeed)
     {
-        StartCoroutine(LoadMusic(.1f));
+        StartCoroutine(LoadMusic(.05f));
     }
     IEnumerator LoadMusic(float fadeSpeed)
     {

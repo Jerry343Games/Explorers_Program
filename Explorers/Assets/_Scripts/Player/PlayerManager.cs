@@ -24,7 +24,7 @@ public class AnimationTextureMapping
     public Texture2D NormalMap;
     public Texture2D EmissionMap;
 }
-public class   PlayerManager : SingletonPersistent<PlayerManager>
+public class  PlayerManager : SingletonPersistent<PlayerManager>
 {
     public int maxPlayerCount;
     //游玩的玩家列表 是父物体
@@ -175,5 +175,17 @@ public class   PlayerManager : SingletonPersistent<PlayerManager>
         resNum += addNum;
     }
     
+
+
+    //public void ApplyBuffToPlayer(UpgradeBuff buffData,PlayerController player)
+    //{
+    //    switch(buffData.buffType)
+    //    {
+    //        case BuffType.General:
+    //            player.AddBuff(buffData);
+    //            break;
+
+    //    }
+    //}
 }
 

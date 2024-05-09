@@ -364,4 +364,33 @@ public class Healer : PlayerController
         }
     }
 
+    public override void AddBuff(UpgradeBuff buff)
+    {
+        base.AddBuff(buff);
+        switch (buff.buffName)
+        {
+            case "高效修复":
+                //脱战后提前一秒维修护盾
+                timeToRepairArmor -= 1;
+                break;
+            case "电磁放大":
+                maxArmor += 5;
+                break;
+            case "浓缩":
+                mainWeapon.attackDamage += 2;
+                mainWeapon.attackCD -= 1;
+                break;
+            case "拓展模组":
+                fortWeaponData.attackDamage += 2;
+                fortWeaponData.attackCD -= 1;
+                break;
+            case "改装手枪":
+                secondaryWeapon.attackDamage += 2;
+                secondaryWeapon.attackRange += 1;
+                break;
+            default:
+                break;
+        }
+    }
+
 }

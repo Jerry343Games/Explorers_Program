@@ -62,7 +62,7 @@ public class CellBattery : Battery
     /// 重写基类的方法。在子电池连接到主电池时，改变的是主电池的电量；当未连接时，改变的是自身电量。
     /// </summary>
     /// <param name="value"></param>
-    public override void ChangePower(int value)
+    public override void ChangePower(float value)
     {
         if (this.isConnected&&this._mainBattery)
         {
@@ -93,7 +93,7 @@ public class CellBattery : Battery
     /// </summary>
     public void GetLackPowerFromMain()
     {
-        int power = maxPower - currentPower;
+        float power = maxPower - currentPower;
         currentPower = maxPower;
         this._mainBattery.ChangePower(-power);
     }
