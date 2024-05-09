@@ -39,7 +39,6 @@ public class BuffItem : MonoBehaviour
         //7Chords
         chooseBuff += ApplyBuffToPlayerInfo;
     }
-<<<<<<< HEAD
 
     private void OnDisable()
     {
@@ -56,12 +55,10 @@ public class BuffItem : MonoBehaviour
     }
 
 
-=======
     
     /// <summary>
     /// 开始时刷新
     /// </summary>
->>>>>>> 42be27a3e030ece9fb7463318bd8de433ba39fd3
     public void EnableRefresh()
     {
         name.text = myBuff.buffName;
