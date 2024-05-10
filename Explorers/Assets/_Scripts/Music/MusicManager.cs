@@ -54,7 +54,13 @@ public class MusicManager : Singleton<MusicManager>
     IEnumerator LoadMusic(float fadeSpeed)
     {
         musicAudio.Play();
-        while (musicAudio.volume < 0.3f*musicVolumnMultiplier)
+
+        float defaultVolumn = 0.3f;
+        if(musicAudio.clip.name=="Boss"|| musicAudio.clip.name == "Boss_2")
+        {
+            defaultVolumn = 0.6f;
+        }
+        while (musicAudio.volume < defaultVolumn * musicVolumnMultiplier)
         {
             musicAudio.volume += fadeSpeed;
             yield return new WaitForSecondsRealtime(.1f);
