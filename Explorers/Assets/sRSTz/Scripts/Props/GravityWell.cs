@@ -28,6 +28,7 @@ public class GravityWell : PropItem
         
         
         user.GetComponent<PlayerController>().item = this;
+        gameObject.tag = "Untagged";
         //Use(user);
     }
     public override void Use(GameObject user)

@@ -41,6 +41,7 @@ public class PropelBackpack : PropItem
     }
     public override void Use(GameObject user)
     {
+        user.GetComponent<PlayerController>().DisconnectRope();
         user.layer = LayerMask.NameToLayer("PropelBackpackUser");
         
         user.GetComponent<PlayerController>().item = null;

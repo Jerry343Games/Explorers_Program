@@ -10,6 +10,7 @@ public class Sonar : PropItem
     {
         user.GetComponent<PlayerController>().item = this;
         gameObject.SetActive(false);
+        
     }
 
     public override void Use(GameObject user)
