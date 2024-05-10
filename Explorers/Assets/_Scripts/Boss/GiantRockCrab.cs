@@ -3,6 +3,7 @@ using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 //巨岩蟹	
 public class GiantRockCrab : Singleton<GiantRockCrab>
@@ -318,6 +319,12 @@ public class GiantRockCrab : Singleton<GiantRockCrab>
             s.SetUpdate(UpdateType.Normal, true);
             s.AppendInterval(0.2f).OnStart(() =>
             {
+
+                //更改映射表由UI到Player
+                foreach (var player in PlayerManager.Instance.players)
+                {
+                    player.GetComponent<PlayerInput>().SwitchCurrentActionMap("UI");
+                }
                 MusicManager.Instance.PlayBackMusic("Boss_2");
                 //二阶段强化
                 strikeDamage += 10;
@@ -328,6 +335,11 @@ public class GiantRockCrab : Singleton<GiantRockCrab>
             }).OnComplete(() =>
             {
                 Time.timeScale = 1;
+                //更改映射表由UI到Player
+                foreach (var player in PlayerManager.Instance.players)
+                {
+                    player.GetComponent<PlayerInput>().SwitchCurrentActionMap("Player");
+                }
 
             });
         }

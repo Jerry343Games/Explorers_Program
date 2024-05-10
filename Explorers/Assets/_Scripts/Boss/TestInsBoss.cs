@@ -1,5 +1,6 @@
 using DG.Tweening;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class TestInsBoss : MonoBehaviour
 {
@@ -29,18 +30,31 @@ public class TestInsBoss : MonoBehaviour
             s.SetUpdate(UpdateType.Normal, true);
             s.AppendInterval(0.2f).OnStart(()=> 
             {
+                //更改映射表由UI到Player
+                foreach (var player in PlayerManager.Instance.players)
+                {
+                    player.GetComponent<PlayerInput>().SwitchCurrentActionMap("UI");
+                }
                 CameraTrace.instance.CameraShake(1f, 2f);
                 MusicManager.Instance.PlaySound("Boss飞石");
                 MusicManager.Instance.PlaySound("潜艇警报");
 
             }).OnComplete(() =>
             {
+                Instantiate(bossPrefab, bossInsTran.position, Quaternion.identity);
+                MusicManager.Instance.PlayBackMusic("Boss");
+                GetComponent<SphereCollider>().enabled = false;
                 Time.timeScale = 1;
+                //更改映射表由UI到Player
+                foreach (var player in PlayerManager.Instance.players)
+                {
+                    player.GetComponent<PlayerInput>().SwitchCurrentActionMap("Player");
+                }
             });
 
-            Instantiate(bossPrefab, bossInsTran.position, Quaternion.identity);
-            MusicManager.Instance.PlayBackMusic("Boss");
-            GetComponent<SphereCollider>().enabled = false;
+            //Instantiate(bossPrefab, bossInsTran.position, Quaternion.identity);
+            //MusicManager.Instance.PlayBackMusic("Boss");
+            //GetComponent<SphereCollider>().enabled = false;
         }
     }
 }
