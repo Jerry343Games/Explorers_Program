@@ -765,10 +765,10 @@ public class PlayerController : MonoBehaviour
         switch(buff.buffName)
         {
             case "动力引擎":
-                speed += 1;
+                speed += 0.2f;
                 break;
             case "节能装置":
-                GetComponent<Battery>().decayPowerPreSecond = 0.8f;
+                GetComponent<Battery>().decayPowerPreSecond -= 0.1f;
                 break;
         }
     }
