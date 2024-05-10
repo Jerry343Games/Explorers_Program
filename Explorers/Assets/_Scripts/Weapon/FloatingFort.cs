@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -54,15 +55,14 @@ public class FloatingFort : MonoBehaviour
         {
             attackTimer -= Time.deltaTime;
             float angle = Vector3.Angle(Vector3.left, (colls[randomIndex].transform.position - transform.position).normalized);
-            if(angle<20) return;
             //Ðý×ª·½Ïò
             if (colls[randomIndex].transform.position.y < transform.position.y)
             {
-                transform.rotation = Quaternion.Euler(0, 0, angle);
+                transform.DORotate(new Vector3(0, 0, angle),0.5f);
             }
             else
             {
-                transform.rotation = Quaternion.Euler(0, 0, -angle);
+                transform.DORotate(new Vector3(0, 0, -angle), 0.5f);
             }
         }
     }
