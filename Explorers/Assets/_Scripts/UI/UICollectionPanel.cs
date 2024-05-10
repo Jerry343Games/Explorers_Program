@@ -39,6 +39,8 @@ public class UICollectionPanel : MonoBehaviour
     {
         currentNum = 0;
         maxNum = sceneManager.collectionTasks.Find(x => x.type == collectionType).amount;
+        //测试
+        maxNum = 0;
         _collectionIconImg.sprite = Resources.Load<Sprite>("UI/Image/" + collectionType.ToString());
         _collectionNumText.text = currentNum.ToString()+"/"+ maxNum.ToString();
         _check.SetActive(false);

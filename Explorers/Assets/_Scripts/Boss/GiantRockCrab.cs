@@ -306,6 +306,14 @@ public class GiantRockCrab : Singleton<GiantRockCrab>
             isSecondStage = true;
             _firstBehaviorTree.enabled = false;
             _secondBehaviorTree.enabled = true;
+
+            MusicManager.Instance.PlayBackMusic("Boss_2");
+            //¶þ½×¶ÎÇ¿»¯
+            strikeDamage += 10;
+            strikeForce += 5;
+
+            acidDamage += 10;
+            acidCorrodeDuration += 2;
         }
     }
 
@@ -434,7 +442,7 @@ public class GiantRockCrab : Singleton<GiantRockCrab>
             GameObject stone = Instantiate(Resources.Load<GameObject>("Item/FlyingStone"),
                 stoneSpawnCenterPoint.position+new Vector3(Random.Range(-20f,20f),0,0), 
                 Quaternion.identity);
-            stone.transform.localScale *= Random.Range(0.5f, 0.7f);
+            stone.transform.localScale *= Random.Range(0.7f, 0.9f);
 
             stone.GetComponent<Stone>().Init(stoneSpeed, stoneFlyingDamage, stoneForce, stoneDuration, stoneBoomDamage, stoneBoomRange);
         }
@@ -468,6 +476,7 @@ public class GiantRockCrab : Singleton<GiantRockCrab>
             float x = Mathf.Cos(Mathf.Deg2Rad * angle)*6;
             float y = Mathf.Sin(Mathf.Deg2Rad * angle)*6;
             GameObject brokenStone = Instantiate(Resources.Load<GameObject>("Item/BrokenStone"),entity.transform.position + new Vector3(x, y, 0), Quaternion.identity);
+            brokenStone.transform.localScale *= 2;
             Vector3 dir = (brokenStone.transform.position - entity.transform.position).normalized;
             brokenStone.GetComponent<BrokenStone>().Init(dir, curingStoneDamage, curingStoneForce, curingStoneSpeed, curingStoneDuration);
         }

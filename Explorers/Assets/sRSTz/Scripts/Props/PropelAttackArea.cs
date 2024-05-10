@@ -15,13 +15,13 @@ public class PropelAttackArea : MonoBehaviour
             collision.gameObject.GetComponent<Enemy>().Vertigo(direction * backpack.attackForce);
             collision.gameObject.GetComponent<Enemy>().TakeDamage(backpack.damage);
         }
-        if (collision.gameObject.CompareTag("Player") || collision.gameObject.CompareTag("Battery"))
-        {
-            // 计算弹飞的方向
-            Vector2 direction = (collision.transform.position - transform.position).normalized;
-            collision.gameObject.GetComponent<PlayerController>().Vertigo(direction * backpack.attackForce);
-            backpack.user.GetComponent<PlayerController>().TakeDamage(backpack.damage);
-            backpack.Exit();
-        }
+        //if (collision.gameObject.CompareTag("Player") || collision.gameObject.CompareTag("Battery"))
+        //{
+        //    // 计算弹飞的方向
+        //    Vector2 direction = (collision.transform.position - transform.position).normalized;
+        //    collision.gameObject.GetComponent<PlayerController>().Vertigo(direction * backpack.attackForce);
+        //    backpack.user.GetComponent<PlayerController>().TakeDamage(backpack.damage);
+        //    backpack.Exit();
+        //}
     }
 }

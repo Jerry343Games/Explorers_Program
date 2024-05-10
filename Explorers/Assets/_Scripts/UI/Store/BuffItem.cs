@@ -75,6 +75,7 @@ public class BuffItem : MonoBehaviour
         if (!isEndOneRound)
         {
             isSelected = true;
+            MusicManager.Instance.PlaySound("商店购买");
             chooseBuff?.Invoke();
         }
     }

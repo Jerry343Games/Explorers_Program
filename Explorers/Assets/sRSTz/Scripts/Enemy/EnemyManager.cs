@@ -65,6 +65,9 @@ public class EnemyManager : SingletonPersistent<EnemyManager>
     {
         //Debug.Log("before" + GameObject.FindGameObjectsWithTag("Enemy").Length);
         //if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name.Equals("SelectScene")) return;
+
+
+
         spwanersNearToFar = GetFilteredAndSortedGeneratorsInWall (spwanerDistanceToBattery);
         for (int i = 0; i < 3; i++)
         {

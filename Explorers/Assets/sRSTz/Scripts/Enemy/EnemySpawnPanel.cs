@@ -47,6 +47,7 @@ public class EnemySpawnPanel : MonoBehaviour
                 HideWarning();
                 // 倒计时结束后执行的操作
                 EnemyManager.Instance.SpawnEnemyAfter();
+                //MusicManager.Instance.PlayBackMusic("Select");
 
             });
     }

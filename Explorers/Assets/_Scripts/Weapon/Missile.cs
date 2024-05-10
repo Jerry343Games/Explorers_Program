@@ -35,18 +35,42 @@ public class Missile : MonoBehaviour
     {
         if(_target)
         {
+            if (!_target.activeInHierarchy)
+            {
+                _target = FindNearestEnemy()? FindNearestEnemy().gameObject:null;
+                if (!_target)
+                {
+                    Instantiate(Resources.Load<GameObject>("Effect/SmallRocketExplosion"), transform.position, Quaternion.identity);
+                    MusicManager.Instance.PlaySound("Υπ±¬");
+                    Destroy(gameObject);
+                    return;
+                }
+            }
             MoveForward();
             RotateRocket();
         }
         else
         {
-            _target = FindNearestEnemy().gameObject;
-            if (_target) return;
             Instantiate(Resources.Load<GameObject>("Effect/SmallRocketExplosion"), transform.position, Quaternion.identity);
             MusicManager.Instance.PlaySound("Υπ±¬");
-
             Destroy(gameObject);
+            return;
         }
+
+        //if (_target.activeInHierarchy)
+        //{
+        //    MoveForward();
+        //    RotateRocket();
+        //}
+        //else
+        //{
+        //    _target = FindNearestEnemy().gameObject;
+        //    if (!_target) return;
+        //    Instantiate(Resources.Load<GameObject>("Effect/SmallRocketExplosion"), transform.position, Quaternion.identity);
+        //    MusicManager.Instance.PlaySound("Υπ±¬");
+
+        //    Destroy(gameObject);
+        //}
     }
     public Collider FindNearestEnemy()
     {
