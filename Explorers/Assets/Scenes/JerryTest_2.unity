@@ -8573,6 +8573,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1754431430841722058, guid: 0d622bc15209ebf4cbb4c233579dcf6e,
+        type: 3}
+      propertyPath: parameters.continuousCollisionDetection
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1754431430841722058, guid: 0d622bc15209ebf4cbb4c233579dcf6e,
+        type: 3}
+      propertyPath: collisionConstraintParameters.iterations
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1754431430841722058, guid: 0d622bc15209ebf4cbb4c233579dcf6e,
+        type: 3}
+      propertyPath: collisionConstraintParameters.evaluationOrder
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1754431430841722059, guid: 0d622bc15209ebf4cbb4c233579dcf6e,
         type: 3}
       propertyPath: m_RootOrder

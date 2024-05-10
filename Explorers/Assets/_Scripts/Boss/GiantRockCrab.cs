@@ -60,6 +60,8 @@ public class GiantRockCrab : Singleton<GiantRockCrab>
 
     public LayerMask playerLayer;
 
+    private float originalY;
+
     [Header("巡逻")]
     public bool isPatrol;
 
@@ -164,7 +166,10 @@ public class GiantRockCrab : Singleton<GiantRockCrab>
 
         _coll = entity.GetComponent<BoxCollider>();
 
+
         _anim = entity.GetComponent<Animator>();
+
+        originalY = entity.transform.position.y;
 
     }
 
@@ -307,15 +312,27 @@ public class GiantRockCrab : Singleton<GiantRockCrab>
             _firstBehaviorTree.enabled = false;
             _secondBehaviorTree.enabled = true;
 
-            MusicManager.Instance.PlayBackMusic("Boss_2");
-            //二阶段强化
-            strikeDamage += 10;
-            strikeForce += 5;
 
-            acidDamage += 10;
-            acidCorrodeDuration += 2;
+            Time.timeScale = 0;
+            Sequence s = DOTween.Sequence();
+            s.SetUpdate(UpdateType.Normal, true);
+            s.AppendInterval(0.2f).OnStart(() =>
+            {
+                MusicManager.Instance.PlayBackMusic("Boss_2");
+                //二阶段强化
+                strikeDamage += 10;
+                strikeForce += 5;
+
+                acidDamage += 10;
+                acidCorrodeDuration += 2;
+            }).OnComplete(() =>
+            {
+                Time.timeScale = 1;
+
+            });
         }
     }
+
 
     public GameObject FindNearestPlayer()
     {
@@ -385,7 +402,7 @@ public class GiantRockCrab : Singleton<GiantRockCrab>
 
         Vector3[] path = new Vector3[]
         {
-                entity.transform.position,
+                new Vector3(entity.transform.position.x,originalY,0),
                 target.transform.position,
         };
 
@@ -393,7 +410,7 @@ public class GiantRockCrab : Singleton<GiantRockCrab>
         {
                 target.transform.position,
                 new Vector3( target.transform.position.x+entity.transform.localScale.z/*Mathf.Abs(target.transform.position.x+entity.transform.localScale.z)>12?(entity.transform.localScale.z>0?1:-1)*12:target.transform.position.x+entity.transform.localScale.z*/,
-                entity.transform.position.y,
+                originalY,
                 0)
         };
 
