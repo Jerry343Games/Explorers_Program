@@ -55,6 +55,7 @@ public class PlayerController : MonoBehaviour
 
 
     [Header("武器")]
+    public GameObject gun;
     public WeaponDataSO mainWeapon;//主武器
     public WeaponDataSO secondaryWeapon;//副武器
     private int _currentMainAmmunition, _currentSecondaryAmmunition;//主副武器当前子弹数
@@ -515,6 +516,7 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     public virtual void Vertigo(Vector3 force,ForceMode forceMode=ForceMode.Impulse,float vertigoTime = 0.3f)
     {
+        Debug.Log("vertigo");
         this.vertigoTime = vertigoTime;
         canMove = false;
         _rigidbody.AddForce(force, forceMode);

@@ -7,7 +7,7 @@ using UnityEngine;
 
 public class Fighter : PlayerController
 {
-    public GameObject gun;
+    //public GameObject gun;
     public float attackAngle = 90f;
     public LayerMask enemyLayer;
     private List<GameObject> _enemyInArea=new();

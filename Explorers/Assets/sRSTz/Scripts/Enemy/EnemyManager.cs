@@ -48,7 +48,7 @@ public class EnemyManager : SingletonPersistent<EnemyManager>
         if (!canSpwanEnemy || spawners == null || spawners.Count == 0 || battery == null) return;
         if (!UnityEngine.SceneManagement.SceneManager.GetActiveScene().name.Equals("SelectScene")&&
             !UnityEngine.SceneManagement.SceneManager.GetActiveScene().name.Equals("StartScene") && spawners.Count != 0)
-        { SpawnEnemyStart(); TurbulenceStart(); CancelInvoke(nameof(CheckEnemySpwan)); }
+        { SpawnEnemyStart(); TurbulenceStart(); if(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name.Equals("JerryTest_2")) CancelInvoke(nameof(CheckEnemySpwan)); }
 
     }
     //先刷新一波原生怪

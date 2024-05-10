@@ -5,6 +5,12 @@ using UnityEngine;
 public class PropelAttackArea : MonoBehaviour
 {
     public PropelBackpack backpack;
+    private void Awake()
+    {
+        // Á¢¼´Ö´ÐÐÅö×²¼ì²â
+        Physics.SyncTransforms();
+        Physics.Simulate(Time.fixedDeltaTime);
+    }
     private void OnCollisionEnter(Collision collision)
     {
         Debug.Log(collision.gameObject.name);

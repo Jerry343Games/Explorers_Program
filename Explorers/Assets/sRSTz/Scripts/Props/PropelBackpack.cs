@@ -8,15 +8,17 @@ public class PropelBackpack : PropItem
     public float activeTime = 2f;
     private float activeTimer = 0;
     public bool isUsing = false;
-    public float targetSpeed = 15f;
+    //public float targetSpeed = 15f;
     public SphereCollider sphereCollider;
     public GameObject sprite;
     public GameObject attackArea;
     public bool isPicked =false;
-    private float userSpeed;
+    //private float userSpeed;
     public float attackForce = 5f;
     public GameObject user;
     public int damage = 3;
+    public float dashForce = 10f;
+    public float dashTime = 1.5f;
     public override void Apply(GameObject user)
     {
         if (isPicked) return;
@@ -24,7 +26,7 @@ public class PropelBackpack : PropItem
         isPicked = true;
         sprite.SetActive(false);
         this.user = user;
-        userSpeed = user.GetComponent<PlayerController>().speed;
+        
         sphereCollider.enabled = false;
         user.GetComponent<PlayerController>().item = this;
         
@@ -43,11 +45,12 @@ public class PropelBackpack : PropItem
         
         user.GetComponent<PlayerController>().item = null;
         isUsing = true;
-        user.GetComponent<PlayerController>().speed = targetSpeed;
+        //user.GetComponent<PlayerController>().speed = targetSpeed;
+        PlayerController player = user.GetComponent<PlayerController>();
+        user.GetComponent<Rigidbody>().mass = 1.2f;
+        player.Vertigo(player.gun.transform.forward * dashForce, ForceMode.VelocityChange, dashTime);
         attackArea.SetActive(true);
-        // Á¢¼´Ö´ÐÐÅö×²¼ì²â
-        Physics.SyncTransforms();
-        Physics.Simulate(Time.fixedDeltaTime);
+        
 
     }
     private void Update()
@@ -69,7 +72,8 @@ public class PropelBackpack : PropItem
         isUsing = false;
         user.GetComponent<PlayerController>()._dashParticleSystem.SetActive(false);
         activeTimer = 0;
-        user.GetComponent<PlayerController>().speed = userSpeed;
+        user.GetComponent<Rigidbody>().mass = 1;
+        //user.GetComponent<PlayerController>().speed = userSpeed;
         user.layer = LayerMask.NameToLayer("Player");
         user = null;
         Destroy(gameObject);

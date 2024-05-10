@@ -7,7 +7,7 @@ using UnityEngine;
 public class Shooter : PlayerController
 {
     private bool isLeft;
-    public GameObject gun;
+    
     public Transform shootTransform;
     [Header("齐射")]
     public float salvoCD;//齐射冷却时间

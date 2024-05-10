@@ -8,7 +8,7 @@ using UnityEngine.UI;
 public class Healer : PlayerController
 {
     private bool isLeft = false;
-    public GameObject gun;
+    //public GameObject gun;
     public Transform shootTransform;
 
 
