@@ -96,6 +96,12 @@ public class UIHealthPanel : MonoBehaviour
 
     }
 
+    private void OnDestroy()
+    {
+        _playerController.OnShieldDamage -= ShakeArmor;
+        _playerController.OnHealthDamage -= ShakeHealth;
+    }
+
     public void ShakeArmor()
     {
         armorPanel.anchoredPosition = _ArmorPanelStartPos;

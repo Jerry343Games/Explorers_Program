@@ -532,6 +532,7 @@ public class PlayerController : MonoBehaviour
         if(hasDead)
         {
             MusicManager.Instance.PlaySound("½ÇÉ«µçÁ¦ºÄ¾¡");
+            bubbleManager.DestroyBubble();
         }
     }
 

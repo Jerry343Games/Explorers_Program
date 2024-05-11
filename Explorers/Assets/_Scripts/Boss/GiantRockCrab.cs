@@ -313,35 +313,42 @@ public class GiantRockCrab : Singleton<GiantRockCrab>
             _firstBehaviorTree.enabled = false;
             _secondBehaviorTree.enabled = true;
 
+            MusicManager.Instance.PlayBackMusic("Boss_2");
+            //二阶段强化
+            strikeDamage += 10;
+            strikeForce += 5;
 
-            Time.timeScale = 0;
-            Sequence s = DOTween.Sequence();
-            s.SetUpdate(UpdateType.Normal, true);
-            s.AppendInterval(0.2f).OnStart(() =>
-            {
+            acidDamage += 10;
+            acidCorrodeDuration += 2;
 
-                //更改映射表由UI到Player
-                foreach (var player in PlayerManager.Instance.players)
-                {
-                    player.GetComponent<PlayerInput>().SwitchCurrentActionMap("UI");
-                }
-                MusicManager.Instance.PlayBackMusic("Boss_2");
-                //二阶段强化
-                strikeDamage += 10;
-                strikeForce += 5;
+            //Time.timeScale = 0;
+            //Sequence s = DOTween.Sequence();
+            //s.SetUpdate(UpdateType.Normal, true);
+            //s.AppendInterval(0.2f).OnStart(() =>
+            //{
 
-                acidDamage += 10;
-                acidCorrodeDuration += 2;
-            }).OnComplete(() =>
-            {
-                Time.timeScale = 1;
-                //更改映射表由UI到Player
-                foreach (var player in PlayerManager.Instance.players)
-                {
-                    player.GetComponent<PlayerInput>().SwitchCurrentActionMap("Player");
-                }
+            //    //更改映射表由UI到Player
+            //    foreach (var player in PlayerManager.Instance.players)
+            //    {
+            //        player.GetComponent<PlayerInput>().SwitchCurrentActionMap("UI");
+            //    }
+            //    MusicManager.Instance.PlayBackMusic("Boss_2");
+            //    //二阶段强化
+            //    strikeDamage += 10;
+            //    strikeForce += 5;
 
-            });
+            //    acidDamage += 10;
+            //    acidCorrodeDuration += 2;
+            //}).OnComplete(() =>
+            //{
+            //    Time.timeScale = 1;
+            //    //更改映射表由UI到Player
+            //    foreach (var player in PlayerManager.Instance.players)
+            //    {
+            //        player.GetComponent<PlayerInput>().SwitchCurrentActionMap("Player");
+            //    }
+
+            //});
         }
     }
 

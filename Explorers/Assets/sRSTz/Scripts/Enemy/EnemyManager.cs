@@ -47,18 +47,21 @@ public class EnemyManager : SingletonPersistent<EnemyManager>
         else canSpwanEnemy = true;
         if (!canSpwanEnemy || spawners == null || spawners.Count == 0 || battery == null) return;
         if (!UnityEngine.SceneManagement.SceneManager.GetActiveScene().name.Equals("SelectScene")&&
-            !UnityEngine.SceneManagement.SceneManager.GetActiveScene().name.Equals("StartScene") && spawners.Count != 0)
+            !UnityEngine.SceneManagement.SceneManager.GetActiveScene().name.Equals("StartScene") && !UnityEngine.SceneManagement.SceneManager.GetActiveScene().name.Equals("StoreScene") && spawners.Count != 0)
         { SpawnEnemyStart(); TurbulenceStart(); if(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name.Equals("JerryTest_2")) CancelInvoke(nameof(CheckEnemySpwan)); }
 
     }
     //先刷新一波原生怪
     public void SpawnEnemyStart()
-    {                  
-            foreach(var spwaner in spawners)
+    {
+        foreach (var spwaner in spawners)
+        {
+            if (spwaner)
             {
-               spwaner.SpawnOnce(SelectRandomMonster());
-               
+                spwaner.SpawnOnce(SelectRandomMonster());
             }
+               
+        }
     }
     //刷一波虫潮 TODO：随机选同一边，然后再从这一边的角度随机选三个方向刷怪（暂定），直接刷墙里应该是可以的（注意把敌人与墙的碰撞取消）
     public void SpawnEnemyAfter()
