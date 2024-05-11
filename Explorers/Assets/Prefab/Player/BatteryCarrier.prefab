@@ -397,6 +397,7 @@ MonoBehaviour:
   restoreAmount: 0
   restoreCD: 0
   timeToRepairArmor: 0
+  gun: {fileID: 0}
   mainWeapon: {fileID: 11400000, guid: fe7b4ae7510e5334d8dd901dab5e27cc, type: 2}
   secondaryWeapon: {fileID: 11400000, guid: fe7b4ae7510e5334d8dd901dab5e27cc, type: 2}
   _mainAttackTimer: 0
@@ -430,7 +431,7 @@ MonoBehaviour:
   targetNumber: 4
   lightningAttackDamage: 7
   lightningAttackRange: 6
-  lightningAttackPower: 3
+  lightningAttackPower: 6
   enemyLayer:
     serializedVersion: 2
     m_Bits: 8
@@ -452,8 +453,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxPower: 3000
-  decayValue: 1
   currentPower: 0
+  decayPowerPreSecond: 0
 --- !u!54 &8306476347045371623
 Rigidbody:
   m_ObjectHideFlags: 0

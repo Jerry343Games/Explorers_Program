@@ -278,6 +278,7 @@ MonoBehaviour:
   restoreAmount: 1
   restoreCD: 1
   timeToRepairArmor: 7
+  gun: {fileID: 7751492450117835623}
   mainWeapon: {fileID: 11400000, guid: e619acaa6d7b194419d154af202ddefd, type: 2}
   secondaryWeapon: {fileID: 11400000, guid: 19e482ec8dcc115479a7ad3a26d79d83, type: 2}
   _mainAttackTimer: 0.5
@@ -302,7 +303,6 @@ MonoBehaviour:
   switchStateBufferTime: 0.5
   item: {fileID: 0}
   bubbleManager: {fileID: 0}
-  gun: {fileID: 7751492450117835623}
   attackAngle: 90
   enemyLayer:
     serializedVersion: 2
@@ -342,8 +342,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxPower: 10
-  decayValue: 1
   currentPower: 0
+  decayPowerPreSecond: 0
   isConnected: 0
 --- !u!54 &3522222548290628291
 Rigidbody:

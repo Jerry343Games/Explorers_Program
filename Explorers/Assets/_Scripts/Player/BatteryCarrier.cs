@@ -310,19 +310,20 @@ public class BatteryCarrier : PlayerController
         switch(buff.buffName)
         {
             case "扩容电池":
-                GetComponent<MainBattery>().maxPower += 500;
-                GetComponent<MainBattery>().currentPower += 500;
+                GetComponent<MainBattery>().maxPower += 200;
+                GetComponent<MainBattery>().currentPower += 200;
                 break;
             case "号令":
-                overloadCD -= 2f;
-                overloadPower -= 5;
+                overloadDuration += 1.5f;
+                overloadPower += 2;
                 break;
             case "多线程":
-                targetNumber += 2;
+                targetNumber += 1;
                 break;
-            case "导电":
+            case "混乱变压器":
                 lightningAttackDamage += 2;
-                lightningAttackRange += 2;
+                lightningAttackRange -= 0.5f;
+                lightningAttackPower -= 1;
                 break;
             default:
                 break;

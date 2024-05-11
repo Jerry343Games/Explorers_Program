@@ -504,7 +504,8 @@ MonoBehaviour:
   currentArmor: 0
   restoreAmount: 1
   restoreCD: 2
-  timeToRepairArmor: 7
+  timeToRepairArmor: 8
+  gun: {fileID: 3869163117434988212}
   mainWeapon: {fileID: 11400000, guid: fe7b4ae7510e5334d8dd901dab5e27cc, type: 2}
   secondaryWeapon: {fileID: 11400000, guid: d446be3765078364ab2d44f0af5e3988, type: 2}
   _mainAttackTimer: 0
@@ -529,7 +530,6 @@ MonoBehaviour:
   switchStateBufferTime: 0.5
   item: {fileID: 0}
   bubbleManager: {fileID: 0}
-  gun: {fileID: 3869163117434988212}
   shootTransform: {fileID: 438821560621673804}
   maxChargedAmount: 3
   chargedAmountText: {fileID: 1828379428}
@@ -556,8 +556,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxPower: 10
-  decayValue: 1
   currentPower: 0
+  decayPowerPreSecond: 0
   isConnected: 0
 --- !u!54 &1563091077241915775
 Rigidbody:

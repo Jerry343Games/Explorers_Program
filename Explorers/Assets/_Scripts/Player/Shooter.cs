@@ -331,21 +331,24 @@ public class Shooter : PlayerController
         {
             case "高效修复":
                 //脱战后提前一秒维修护盾
-                timeToRepairArmor -= 1;
+                timeToRepairArmor -= 0.5f;
                 break;
             case "电磁放大":
-                maxArmor += 5;
+                maxArmor += 2;
                 break;
             case "追猎":
-                secondaryWeapon.attackDamage += 2;
+                secondaryWeapon.attackDamage += 4;
                 secondaryWeapon.attackCD -= 2;
                 break;
             case "制导":
-                salveMissileDamage += 2;
+                salveMissileDamage += 5;
+                salveAmount -= 2;
+                salvoCD -= 1;
                 break;
             case "刀尖舔血":
-                speed += 2;
-                maxArmor += 5;
+                speed += 1;
+                maxArmor += 6;
+                restoreAmount = 0;
                 break;
             default:
                 break;
