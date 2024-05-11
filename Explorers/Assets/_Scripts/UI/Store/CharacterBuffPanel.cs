@@ -36,6 +36,8 @@ public class CharacterBuffPanel : MonoBehaviour
     private Vector2 _listStartValue=new Vector2(-0.716601f,-226.7094f);
 
     private bool _isFirst;
+    
+    //private  List<UpgradeBuff> _tempBuffs= new List<UpgradeBuff>();
 
     public static event Action OnRefreshBtnClick_Can;
     public static event Action OnRefreshBtnClick_Cant;
