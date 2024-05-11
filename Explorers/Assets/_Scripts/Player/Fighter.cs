@@ -509,21 +509,21 @@ public class Fighter : PlayerController
         {
             case "高效修复":
                 //脱战后提前一秒维修护盾
-                timeToRepairArmor -= 1;
+                timeToRepairArmor -= 0.5f;
                 break;
             case "电磁放大":
-                maxArmor += 5;
+                maxArmor += 2;
                 break;
             case "爆反":
                 timeToRepairArmor -= 1;
-                restoreCD -= 1;
+                restoreAmount += 0.5f;
                 break;
             case "收割":
                 mainWeapon.attackDamage += 2;
-                mainWeapon.attackRange += 2;
+                mainWeapon.attackRange += 1;
                 break;
             case "余震打击":
-                secondaryWeapon.attackDamage += 2;
+                secondaryWeapon.attackDamage += 5;
                 break;
             default:
                 break;
