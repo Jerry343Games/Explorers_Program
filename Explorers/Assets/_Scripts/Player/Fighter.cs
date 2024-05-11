@@ -519,11 +519,12 @@ public class Fighter : PlayerController
                 restoreAmount += 0.5f;
                 break;
             case "ÊÕ¸î":
-                mainWeapon.attackDamage += 2;
-                mainWeapon.attackRange += 1;
+                mainWeapon.attackDamage += 1;
+                mainWeapon.attackRange += 0.4f;
                 break;
             case "ÓàÕð´ò»÷":
-                secondaryWeapon.attackDamage += 5;
+                secondaryWeapon.attackDamage += 2;
+                secondaryWeapon.attackCD -= 0.5f;
                 break;
             default:
                 break;

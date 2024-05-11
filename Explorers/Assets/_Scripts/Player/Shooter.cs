@@ -337,17 +337,17 @@ public class Shooter : PlayerController
                 maxArmor += 2;
                 break;
             case "追猎":
-                secondaryWeapon.attackDamage += 4;
-                secondaryWeapon.attackCD -= 2;
+                secondaryWeapon.attackDamage += 2;
+                secondaryWeapon.attackCD -= 0.5f;
                 break;
             case "制导":
-                salveMissileDamage += 5;
-                salveAmount -= 2;
+                salveMissileDamage += 2;
+                salveAmount -= 1;
                 salvoCD -= 1;
                 break;
             case "刀尖舔血":
-                speed += 1;
-                maxArmor += 6;
+                speed += 0.5f;
+                maxArmor += 3;
                 restoreAmount = 0;
                 break;
             default:

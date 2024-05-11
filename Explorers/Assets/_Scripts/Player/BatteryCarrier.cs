@@ -321,8 +321,8 @@ public class BatteryCarrier : PlayerController
                 targetNumber += 1;
                 break;
             case "»ìÂÒ±äÑ¹Æ÷":
-                lightningAttackDamage += 2;
-                lightningAttackRange -= 0.5f;
+                lightningAttackDamage += 1;
+                lightningAttackRange -= 0.4f;
                 lightningAttackPower -= 1;
                 break;
             default:
