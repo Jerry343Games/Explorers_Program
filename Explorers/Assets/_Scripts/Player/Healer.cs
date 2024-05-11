@@ -377,8 +377,8 @@ public class Healer : PlayerController
                 maxArmor += 2;
                 break;
             case "浓缩":
-                mainWeapon.attackDamage += 5;
-                mainWeapon.attackCD -= 2;
+                mainWeapon.attackDamage += 2;
+                mainWeapon.attackCD -= 0.5f;
                 maxChargedAmount = 1;
                 break;
             case "拓展模组":
