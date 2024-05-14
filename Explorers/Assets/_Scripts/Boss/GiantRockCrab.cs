@@ -313,6 +313,8 @@ public class GiantRockCrab : Singleton<GiantRockCrab>
             _firstBehaviorTree.enabled = false;
             _secondBehaviorTree.enabled = true;
 
+            CameraTrace.instance.CameraShake(1f, 2f);
+            MusicManager.Instance.PlaySound("潜艇警报");
             MusicManager.Instance.PlayBackMusic("Boss_2");
             //二阶段强化
             strikeDamage += 10;
@@ -320,6 +322,13 @@ public class GiantRockCrab : Singleton<GiantRockCrab>
 
             acidDamage += 10;
             acidCorrodeDuration += 2;
+
+
+            foreach (var player in PlayerManager.Instance.gamePlayers)
+            {
+                player.GetComponent<PlayerController>().DisconnectRope();
+            }
+
 
             //Time.timeScale = 0;
             //Sequence s = DOTween.Sequence();
@@ -535,6 +544,9 @@ public class GiantRockCrab : Singleton<GiantRockCrab>
         Collider[] colls = Physics.OverlapSphere(entity.transform.position, deterHitRange,playerLayer);
         //特效
         if (colls.Length == 0) return;
+
+        GameObject effect = Instantiate(Resources.Load<GameObject>("Effect/ScaryGreen"),entity.transform.position, Quaternion.Euler(-90, 0, 0));
+        Destroy(effect, 0.5f);
         foreach(var coll in colls)
         {
             Vector3 dir = (coll.transform.position - entity.transform.position).normalized;
