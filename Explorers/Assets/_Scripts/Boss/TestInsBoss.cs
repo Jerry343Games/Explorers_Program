@@ -35,6 +35,14 @@ public class TestInsBoss : MonoBehaviour
             MusicManager.Instance.PlayBackMusic("Boss");
             GetComponent<SphereCollider>().enabled = false;
 
+
+
+
+            foreach(var player in PlayerManager.Instance.gamePlayers)
+            {
+                player.GetComponent<PlayerController>().DisconnectRope();
+            }
+
             //Time.timeScale = 0;
             //Sequence s = DOTween.Sequence();
             //s.SetUpdate(UpdateType.Normal, true);
