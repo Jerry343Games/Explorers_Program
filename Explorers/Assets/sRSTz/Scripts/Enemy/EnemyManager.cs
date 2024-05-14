@@ -78,7 +78,7 @@ public class EnemyManager : SingletonPersistent<EnemyManager>
             if (i > spwanersNearToFar.Count - 1) break;
             spwanersNearToFar[i].GetComponent<EnemySpawner>().SpawnOnce(SelectRandomMonster(),false);
             spwanersNearToFar[i].GetComponent<EnemySpawner>().SpawnOnce(SelectRandomMonster(), false);
-            spwanersNearToFar[i].GetComponent<EnemySpawner>().SpawnOnce(SelectRandomMonster(), false);
+            //spwanersNearToFar[i].GetComponent<EnemySpawner>().SpawnOnce(SelectRandomMonster(), false);
            // spwanersNearToFar[i].GetComponent<EnemySpawner>().Test();
         }
         //Debug.Log("after" + GameObject.FindGameObjectsWithTag("Enemy").Length);
