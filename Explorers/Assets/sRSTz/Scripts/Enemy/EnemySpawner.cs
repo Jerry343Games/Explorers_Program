@@ -66,7 +66,7 @@ public class EnemySpawner : MonoBehaviour
             {
                 enemy.StartledFromSleep();
                 //enemy.ChangeDetectRadius(30f);
-                enemy.gameObject.GetComponentInChildren<TargetDetector>().AlwaysDetectOne(EnemyManager.Instance.battery);
+                //enemy.gameObject.GetComponentInChildren<TargetDetector>().AlwaysDetectOne(EnemyManager.Instance.battery);
                 enemy.gameObject.GetComponentInChildren<SeekBehaviour>().defaulttarget = EnemyManager.Instance.battery;
                 enemy.gameObject.GetComponentInChildren<EnemyAI>().aiData.currentTarget = EnemyManager.Instance.battery.transform;
             }

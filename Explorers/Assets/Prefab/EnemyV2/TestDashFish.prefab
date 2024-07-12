@@ -552,7 +552,6 @@ MonoBehaviour:
   steeringBehaviours:
   - {fileID: 5652795572602904352}
   - {fileID: 5652795572846418730}
-  - {fileID: 8552767658407702950}
   detectors:
   - {fileID: 5652795572929598193}
   - {fileID: 5652795572578982945}
@@ -720,6 +719,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: EnemyAvoidBehavior
       objectReference: {fileID: 0}
+    - target: {fileID: 5257375083237227238, guid: 7ced856a4c5fee94c8631b1b23deddb5,
+        type: 3}
+      propertyPath: enemySpectors.Array.data[0].spector
+      value: 0.02
+      objectReference: {fileID: 0}
+    - target: {fileID: 5257375083237227238, guid: 7ced856a4c5fee94c8631b1b23deddb5,
+        type: 3}
+      propertyPath: enemySpectors.Array.data[1].spector
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5257375083237227238, guid: 7ced856a4c5fee94c8631b1b23deddb5,
+        type: 3}
+      propertyPath: enemySpectors.Array.data[2].spector
+      value: 0.1
+      objectReference: {fileID: 0}
     - target: {fileID: 7482065729316625968, guid: 7ced856a4c5fee94c8631b1b23deddb5,
         type: 3}
       propertyPath: m_RootOrder
@@ -783,15 +797,3 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 4486845365329267520}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &8552767658407702950 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5257375083237227238, guid: 7ced856a4c5fee94c8631b1b23deddb5,
-    type: 3}
-  m_PrefabInstance: {fileID: 4486845365329267520}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 88895a1856623ac428619d9c6a09b8ce, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
