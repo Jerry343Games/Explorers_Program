@@ -5,7 +5,7 @@ using UnityEngine;
 public class ElectricEel : Enemy
 {
     private PlayerController reversedPlayer=null;
-    public float reverseTime = 5f;
+    public float moveSlowTime = 5f;
     public GameObject playerBeAttackedEffect;
     public GameObject electricEffect;
     public float attackDelay = 3f;
@@ -44,11 +44,11 @@ public class ElectricEel : Enemy
                 player.gameObject.GetComponent<PlayerController>().TakeDamage(damage);
 
                 //Vertigo(-transform.forward * 5f, ForceMode.Impulse, 0.3f);
-                player.GetComponent<PlayerController>().MoveReverse(reverseTime);
+                player.GetComponent<PlayerController>().MoveSlow(moveSlowTime);
                 GameObject playerEffect = Instantiate(playerBeAttackedEffect);
                 playerEffect.transform.position = player.transform.position;
                 playerEffect.transform.SetParent(player.transform);
-                playerEffect.GetComponent<DestoryByLifeTime>().lifeTime = reverseTime;
+                playerEffect.GetComponent<DestoryByLifeTime>().lifeTime = moveSlowTime;
             }
         }
         MusicManager.Instance.PlaySound("µçÓã¹¥»÷");

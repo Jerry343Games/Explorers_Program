@@ -41,6 +41,7 @@ public class PlayerController : MonoBehaviour
     public bool canMove = true;//是否能移动
     public bool isMoveReverse = false;
     public bool _isAniLeft = false;//动画向左
+    public bool isMoveSlow = false;
     [Header("护盾")]
     public int maxArmor;//电池护盾量
     public event Action OnShieldDamage;
@@ -245,6 +246,17 @@ public class PlayerController : MonoBehaviour
     private void MoveReverseReturnNormal()
     {
         isMoveReverse = false;
+    }
+    public void MoveSlow(float slowTime)
+    {
+        isMoveSlow = true;
+        speed *= 2;
+        Invoke(nameof(MoveSlowReturnNoremal), slowTime);
+    }
+    public void MoveSlowReturnNoremal()
+    {
+        speed /= 2;
+        isMoveSlow = false;
     }
     
     public void MoveAnimationControl(CharacterAnimation run_left,CharacterAnimation run_right,CharacterAnimation idle_left,CharacterAnimation idle_right)

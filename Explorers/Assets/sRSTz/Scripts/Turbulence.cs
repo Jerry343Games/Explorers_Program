@@ -8,6 +8,7 @@ public class Turbulence : MonoBehaviour
     //public Vector3 forceDirection; // 力的方向
     public bool isBeShooted = false;
     public float shootForce;
+    
     private void Update()
     {
         if (!isBeShooted) return;
